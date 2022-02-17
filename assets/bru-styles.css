@@ -80,7 +80,6 @@
 }
 
 .top-header {
-    position: relative;
     width: 100%;
 
 }
@@ -93,6 +92,21 @@
 }
 
 /**** HEADER - MENU ***/
+header-drawer {
+    justify-self: start;
+    margin-left: -1.2rem;
+  }
+
+  @media screen and (min-width: 990px) {
+    header-drawer {
+      display: none;
+    }
+  }
+
+  .menu-drawer-container {
+    display: flex;
+  }
+
   .list-menu {
     list-style: none;
     padding: 0;
@@ -126,6 +140,10 @@
       padding-bottom: 0.5rem;
       padding-top: 0.5rem;
     }
+  }
+
+  .rps_trademark{
+      display: none !important;
   }
 
 /**** 
