@@ -1,0 +1,116 @@
+ /*** Home - Bru Slider ***/
+
+ .bru-slider {
+     position: relative;
+     overflow: hidden;
+     background-color: #000000;
+ }
+
+ #bru-slides {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     overflow: hidden;
+ }
+
+ .home-main-slider .slide {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     background-position: center center;
+     padding: 40px 120px;
+     background-size: 150%;
+
+ }
+
+ .home-main-slider .active {
+     z-index: 10;
+     animation: zoomin 20s infinite;
+ }
+
+ @keyframes zoomin {
+     from {
+         background-size: 150%;
+     }
+
+     to {
+         background-size: 100%;
+     }
+ }
+ .home-main-slider .slide-overlay{
+    position: absolute;
+    display: inherit;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #000000;
+ }
+ .home-main-slider .slide-content{
+    flex-direction: column;
+    max-width: 54.5rem;
+    color: #FFFFFF;
+    padding: 4rem 3.5rem;
+    position: relative;
+    height: fit-content;
+    text-align: center;
+    width: 100%;
+    word-wrap: break-word;
+    z-index: 1;
+}
+.content-left .slide-content{
+    text-align: left;
+}
+
+.content-right .slide-content{
+    text-align: right;
+}
+ .home-main-slider .slide-title {
+     font-size: 36px;
+     margin: 0;
+ }
+ .home-main-slider .slide-descr {
+     font-size: 24px;
+     margin: 0;
+ }
+
+ .home-main-slider .slide-button {
+     position: relative;
+     padding: 15px 20px;
+     margin-top: 10px;
+     z-index: 999;
+ }
+
+ .bru-slider-nav {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    left: 0;
+    z-index: 15;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+ }
+ .bru-slider-nav li{
+ position: relative;
+ -webkit-box-flex: 0;
+ -ms-flex: 0 1 auto;
+ flex: 0 1 auto;
+ width: 30px;
+ height: 3px;
+ margin-right: 3px;
+ margin-left: 3px;
+ text-indent: -999px;
+ background-color: rgba(255,255,255,.5);
+}
+
+.bru-slider-nav li.active{
+    background-color: #fff;
+}

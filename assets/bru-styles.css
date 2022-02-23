@@ -48,6 +48,11 @@
 
 }
 
+.content-top {
+    display: flex;
+    align-items: flex-start;
+
+}
 .content-middle {
     display: flex;
     align-items: center;
@@ -56,10 +61,14 @@
 
 .content-bottom {
     display: flex;
-    align-items: bottom;
+    align-items: flex-end;
 
 }
 
+.content-left {
+    display: flex;
+    justify-content: left;
+}
 .content-center {
     display: flex;
     justify-content: center;

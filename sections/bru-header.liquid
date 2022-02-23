@@ -42,8 +42,8 @@
 <header class="{{ _sectioncss }}" style=" background-color: {{ _sectiongb }}">
   <div class="container">
     <div class="top-header col inline-row pad-20-y">
-      <div class="lang-switch-section">
-        LANG
+      <div class="etrans-lang-switch-section">
+        {% render 'etranslate-language-switch-control' %}
       </div>
 
       <div class="logo-section content-center">
@@ -340,7 +340,7 @@
     "name": {{ shop.name | json }},
     {% if section.settings.logo %}
       {% assign image_size = section.settings.logo.width | append: 'x' %}
-      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+      "logo": {{ section.settings.logo | image_url: width: image_size | prepend: "https:" | json }},
     {% endif %}
     "sameAs": [
       {{ settings.social_twitter_link | json }},
