@@ -6,47 +6,61 @@
         "1645401041651ae1d7-0": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/arton21.jpg",
+            "image": "shopify:\/\/shop_images\/Slides-Arts-Kalima-A.jpg",
             "overlay_opacity": 0.3,
             "content_vertical_alignment": "content-middle",
             "content_horizontal_alignment": "content-center",
-            "heading": "Kid Paint",
-            "subheading": "Amazing description",
-            "button_label": "Product Info",
-            "link": "shopify:\/\/products\/old-soul-021"
+            "heading": "",
+            "subheading": "Our History gives birth to creativity",
+            "button_label": "",
+            "link": ""
           }
         },
         "1645401041651ae1d7-1": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/arton19.jpg",
+            "image": "shopify:\/\/shop_images\/Slides-Arts-Kalima-B.jpg",
             "overlay_opacity": 0.3,
-            "content_vertical_alignment": "content-bottom",
-            "content_horizontal_alignment": "content-right",
-            "heading": "Old Soul",
-            "subheading": "Music is meditation",
+            "content_vertical_alignment": "content-middle",
+            "content_horizontal_alignment": "content-center",
+            "heading": "",
+            "subheading": "Every connection is an inspiration",
             "button_label": "Product Info",
-            "link": "shopify:\/\/products\/old-soul-011"
+            "link": ""
           }
         },
         "bebf0b2b-aaa4-4ea9-92de-c71c00733f5f": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/arton39.jpg",
+            "image": "shopify:\/\/shop_images\/Slides-Arts-Kalima-C.jpg",
             "overlay_opacity": 0.3,
-            "content_vertical_alignment": "content-top",
-            "content_horizontal_alignment": "content-left",
-            "heading": "Arton 39",
-            "subheading": "A Story oh a Hero",
-            "button_label": "Product Info",
-            "link": "shopify:\/\/products\/the-whole"
+            "content_vertical_alignment": "content-middle",
+            "content_horizontal_alignment": "content-center",
+            "heading": "",
+            "subheading": "Beauty comes in all shapes and sizes",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "09bc019e-0ed8-4fb3-b60a-ea1dc94f9ce1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Slides-Arts-Kalima-D.jpg",
+            "overlay_opacity": 0.3,
+            "content_vertical_alignment": "content-middle",
+            "content_horizontal_alignment": "content-center",
+            "heading": "",
+            "subheading": "How Far will you go for what you believe?",
+            "button_label": "",
+            "link": ""
           }
         }
       },
       "block_order": [
         "1645401041651ae1d7-0",
         "1645401041651ae1d7-1",
-        "bebf0b2b-aaa4-4ea9-92de-c71c00733f5f"
+        "bebf0b2b-aaa4-4ea9-92de-c71c00733f5f",
+        "09bc019e-0ed8-4fb3-b60a-ea1dc94f9ce1"
       ],
       "settings": {
         "cssclass": "home-main-slider",

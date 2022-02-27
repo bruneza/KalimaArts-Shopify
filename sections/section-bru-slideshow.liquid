@@ -11,6 +11,7 @@
     <div id="bru-slides">
     {% assign count = 0 %}
     {%- for block in section.blocks -%}
+        
         {%- liquid
             assign _slideimg = block.settings.image
             assign _slideheading = block.settings.heading
@@ -23,9 +24,9 @@
             assign _slideHAlign = block.settings.content_horizontal_alignment
             -%}
 
-        <div class="slide slide-{{ count }} {{ _slideVAlign }} {{ _slideHAlign }} {% if count == 1 %}active{% endif %}" style="background-image:url({{ _slideimg | image_url: width: 1200 }});">
+        <div class="slide slide-{{ count }} {{ _slideVAlign }} {{ _slideHAlign }}" style="background-image:url({{ _slideimg | image_url: width: 1200 }});">
             <div class="slide-overlay" style=" Opacity:{{ _slideoverlay }}"></div>
-            <div class="slide-content">
+            <div class="slide-content ">
                 <p class="slide-title">{{ _slideheading }}</p>
                 {% if _slidesubheading%}
                 <p class="slide-descr">{{ _slidesubheading }}</p>
@@ -35,14 +36,17 @@
             {% endif %}
             </div>
         </div>
-        {% assign count = count | plus: 1 %}
 
+        {% assign count = count | plus: 1 %}
     {% endfor %}
+
+    {% assign count = count | minus: 1 %}
+
     </div>
     <div class="slide-nav">
         <ol class="bru-slider-nav">
-            {% for i in (1..count) %}
-            <li data-slide-to="{{i}}" class="{% if i == 1 %}active{% endif %}"></li>
+            {% for i in (0..count) %}
+            <li class="{% if i == 0 %}active{% endif %}"></li>
             {% endfor %}
           </ol>
     </div>

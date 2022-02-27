@@ -15,16 +15,20 @@
 
  .home-main-slider .slide {
      position: absolute;
+     display: none;
      width: 100%;
      height: 100%;
      background-position: center center;
      padding: 40px 120px;
      background-size: 150%;
+     z-index: 1;
 
  }
 
  .home-main-slider .active {
+     /* position: relative; */
      z-index: 10;
+     display: flex;
      animation: zoomin 20s infinite;
  }
 
@@ -104,13 +108,13 @@
  -ms-flex: 0 1 auto;
  flex: 0 1 auto;
  width: 30px;
- height: 3px;
+ height: 5px;
  margin-right: 3px;
  margin-left: 3px;
- text-indent: -999px;
+ color:#000000; /**/
  background-color: rgba(255,255,255,.5);
 }
 
 .bru-slider-nav li.active{
-    background-color: #fff;
+    background-color: #FFFFFF;
 }
