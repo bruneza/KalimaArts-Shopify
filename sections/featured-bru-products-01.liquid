@@ -66,6 +66,7 @@
 
     assign _alignHeading = section.settings.heading_alignment
     assign _gridHeading = section.settings.grid-heading
+    assign _gridHeadImg = section.settings.header_image
     assign _gridSubHeading = section.settings.grid-subheading
 
   
@@ -77,8 +78,19 @@
 
 <div class="{{ section.settings.cssclass }} isolate gradient">
     <div class="collection page-width{% if section.settings.swipe_on_mobile == true and section.settings.collection.all_products_count > 2 and section.settings.products_to_show > 2 %} page-width-desktop{% endif %} section-{{ section.id }}-padding">
-        <div class="grid-header" style="text-align: {{_alignHeading}}">
+        <div class="grid-header" style="text-align: {{ _alignHeading }};">
             {% comment %} Header and Description {% endcomment %}
+            {% unless _gridHeadImg == blank %}
+              <div class="product-heading-img">
+                <img srcset="{{ _gridHeadImg | image_url }} 1x, {{ _gridHeadImg | image_url }} 2x"
+              src="{{ _gridHeadImg | image_url }}"
+              loading="lazy"
+              class="bru-logo"
+              width="200"
+              height="200"
+              alt="{{ _gridHeadImg.alt | default: shop.name | escape }}">
+                </div>
+            {% endunless %}
             {% unless _gridHeading == blank %}
                 <div class="product-grid-title">
                 <h2 class="title">{{ _gridHeading }}</h2>
@@ -176,6 +188,11 @@
             ],
             "default": "center"
         },
+       {
+         "type": "image_picker",
+         "id": "header_image",
+         "label": "Header Image"
+       },
         {
             "type": "text",
             "id": "grid-heading",

@@ -24,7 +24,7 @@
         "59ce73bc-4e04-45f7-b9ac-107e5545e3a1"
       ],
       "settings": {
-        "products_per_page": 8,
+        "products_per_page": 12,
         "column_number": "3",
         "image_ratio": "square",
         "show_secondary_image": false,
@@ -42,13 +42,13 @@
       "settings": {
         "cssclass": "imboni-featured-grid",
         "heading_alignment": "center",
-        "grid-heading": "Checkout More From <b>Imboni Creative<\/b>",
-        "grid-heading-color": "#0D627D",
+        "grid-heading": "Checkout More From Imboni Creative",
+        "grid-heading-color": "#0d627d",
         "grid-heading-fontsize": "24px",
         "grid-subheading": "",
         "grid-subheading-color": "#183945",
         "grid-subheading-fontsize": "24x",
-        "collection": "view-canvas-boards-prints",
+        "collection": "imboni-creative",
         "products_to_show": 8,
         "swipe_on_mobile": false,
         "image_ratio": "adapt",
@@ -57,7 +57,7 @@
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "section-background": "#FFFFFF",
+        "section-background": "#ffffff",
         "padding_top": 36,
         "padding_bottom": 36
       }

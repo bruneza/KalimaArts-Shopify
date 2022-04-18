@@ -41,6 +41,11 @@ line-height: 1.4;
     padding-bottom: 15px;
 }
 
+.pad-40-y {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 /**** GENERAL - GRID **/
 .inline-row {
     display: flex;
@@ -440,7 +445,15 @@ grid-area: 2 / auto / auto / auto;
     font-size: 56px;
 }
 
-
+/**** 
+* Clothing Page
+*** */ 
+.imboni-featured-grid{
+background-color: rgba(var(--color-foreground), 0.04);
+}
+.imboni-featured-grid .product-grid-title{
+margin: 0 0 40px;
+}
 /**** 
 * Footer
 *** */
