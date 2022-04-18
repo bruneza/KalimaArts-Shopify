@@ -210,6 +210,18 @@
         "error_heading": "Please adjust the following:"
       }
     },
+    "kcaf": {
+      "form": {
+        "name": "Enter Full Name",
+        "email": "Enter Email Address",
+        "description": "Artwork Description",
+        "size": "Choose Size",
+        "material": "Choose Material",
+        "send": "Send",
+        "post_success": "Thanks for contacting us with your Custom Artwork Request. We'll get back to you as soon as possible.",
+        "error_heading": "Please adjust the following:"
+      }
+    },
     "404": {
       "title": "Page not found",
       "subtext": "404"

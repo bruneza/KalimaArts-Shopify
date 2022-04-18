@@ -22,6 +22,8 @@
             assign _slideoverlay = block.settings.overlay_opacity
             assign _slideVAlign = block.settings.content_vertical_alignment
             assign _slideHAlign = block.settings.content_horizontal_alignment
+            assign _slideBtnColor = block.settings.color_btn
+            assign _slideBtnTxtColor = block.settings.color_textbtn
             -%}
 
         <div class="slide slide-{{ count }} {{ _slideVAlign }} {{ _slideHAlign }}" style="background-image:url({{ _slideimg | image_url: width: 1200 }});">
@@ -32,7 +34,7 @@
                 <p class="slide-descr">{{ _slidesubheading }}</p>
                 {% endif %}
                 {% if _slidelink %}
-                <a class="button button--primary slide-button" href="{{ _slidelink }}">{{ _slidebtntext }}</a>
+                <a class="button button--primary slide-button" href="{{ _slidelink }}" style="background-color:{{ _slideBtnColor }}; color: {{ _slideBtnTxtColor }}">{{ _slidebtntext }}</a>
             {% endif %}
             </div>
         </div>
@@ -164,7 +166,19 @@
                     "type": "url",
                     "id": "link",
                     "label": "Slide Button Link"
-                }
+                },
+				{
+     				"type": "color",
+     				"id": "color_btn",
+     				"label": "CHoose Button Color",
+     				"default": "#FFFFFF"
+  		 		},
+				{
+     				"type": "color",
+     				"id": "color_textbtn",
+     				"label": "CHoose Button Text Color",
+     				"default": "#000000"
+  		 		}
             ],
             "limit": 5
         }

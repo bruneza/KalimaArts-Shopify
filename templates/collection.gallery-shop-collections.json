@@ -5,12 +5,32 @@
       "settings": {
         "cssclass": "collection-grid-section container-800",
         "heading_alignment": "center",
-        "page_heading": "",
+        "page_heading": "Canvas Prints",
         "page_subheading": "<p>There's a deep story within every art that bound Souls by a visualized rope to seize their every fear into hope and happiness with kalima arts you' II feel the art and inspire others.<\/p>"
       }
     },
     "product-grid": {
       "type": "bru-collection-product-grid",
+      "blocks": {
+        "ceecbe5d-64ad-4322-a141-9e62df7fa35a": {
+          "type": "products",
+          "settings": {
+            "product_1": "the-whole",
+            "product_2": "old-soul-007"
+          }
+        },
+        "78f25b13-0816-451e-b999-5aaff9ad3d99": {
+          "type": "products",
+          "settings": {
+            "product_1": "black-lives-matter",
+            "product_2": "kobe-and-gigi-44"
+          }
+        }
+      },
+      "block_order": [
+        "ceecbe5d-64ad-4322-a141-9e62df7fa35a",
+        "78f25b13-0816-451e-b999-5aaff9ad3d99"
+      ],
       "settings": {
         "products_per_page": 12,
         "column_number": "4",

@@ -118,3 +118,25 @@
 .bru-slider-nav li.active{
     background-color: #FFFFFF;
 }
+
+/**** 
+*
+*
+* DEVICE RESPONSIVENESS
+*
+*
+*** */
+
+/**** Container  ***/
+
+/* RESPONSIVE - SMALL  */
+@media (max-width: 576px) {
+    .home-main-slider .slide {
+        padding: 40px 20px;
+        background-size: 150%;
+   
+    }
+    #bru-slider {
+        height: 400px !important;
+    }
+}

@@ -1,5 +1,16 @@
 {
   "current": {
+    "colors_accent_1": "#183945",
+    "colors_accent_2": "#0d627d",
+    "colors_text": "#0d627d",
+    "colors_outline_button_labels": "#183945",
+    "page_width": 1400,
+    "spacing_grid_horizontal": 32,
+    "spacing_grid_vertical": 20,
+    "card_style": "standard",
+    "social_twitter_link": "https:\/\/www.artskalima.rw\/#",
+    "social_instagram_link": "https:\/\/www.instagram.com\/kalimaalain\/",
+    "social_youtube_link": "https:\/\/m.youtube.com\/channel\/UCg2Wwys7N51JDJmunrE5kYg",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -77,9 +88,25 @@
         "settings": {
           "cssclass": "header-container",
           "background": "#FFFFFF",
-          "logo": "shopify:\/\/shop_images\/kalima_logo.png",
           "logo_height": 80,
           "menu": "main-menu"
+        }
+      },
+      "bru-footer": {
+        "type": "bru-footer",
+        "settings": {
+          "logo_height": 80,
+          "newsletter_enable": true,
+          "newsletter_heading": "SUBSCRIBE",
+          "newsletter_descr": "Subscribe to Arts Kalima website and receive early sales alerts. artwork updates, early access to merch restocks more.",
+          "show_social": true,
+          "enable_country_selector": true,
+          "enable_language_selector": true,
+          "payment_enable": true,
+          "margin_top": 24,
+          "padding_top": 60,
+          "padding_bottom": 40,
+          "cssclass": "bru-footer"
         }
       }
     },

@@ -9,18 +9,18 @@
         "show_thumbnail": false
       }
     },
-    "form": {
-      "type": "contact-form",
+    "about-page": {
+      "type": "about-page-section",
       "settings": {
-        "heading": "",
-        "color_scheme": "background-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "page": "about",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "cssclass": "about-page-content"
       }
     }
   },
   "order": [
     "main",
-    "form"
+    "about-page"
   ]
 }

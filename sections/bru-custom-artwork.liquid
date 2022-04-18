@@ -1,0 +1,66 @@
+
+{%- liquid
+    assign _css = section.settings.cssclass
+    assign _title = section.settings.form_title
+    assign _descr = section.settings.form_descr
+    assign _notice = section.settings.form_notice
+-%}
+
+<div id="kcaf-home-section" class="{{ _css }} content-center gradient isolate">
+    <div class="page-width">
+        <div class="kcaf-container">
+            <h2 class="bru-custom-title">{{ _title }}</span></h2>
+            <h4 class='bru-custom-descr'>{{ _descr }}</h4>
+
+            {% for block in section.blocks %}
+                {% case block.type %}
+                    {% when '@app' %}
+                        {% render block %}
+                {% endcase %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Bru Custom Artwork Form",
+    "class": "bru-kcaf",
+    "settings": [
+        {
+            "type": "text",
+            "id": "cssclass",
+            "label": "EXTRA CSS Class",
+            "default": "kcaf-section"
+        },
+        {
+            "type": "html",
+            "id": "form_title",
+            "label": "Custom Artwork Form Title",
+            "default": "Want <span class='kalima-yellow mark-bold'>a customized artwork?"
+        },
+        {
+            "type": "textarea",
+            "id": "form_descr",
+            "label": "Custom Artwork Form Description",
+            "default": "Fill this form accordingly"
+        },
+        {
+            "type": "textarea",
+            "id": "form_notice",
+            "label": "Custom Artwork Form Notice",
+            "default": "Note that customized artworks has the uniqueprices based on the concept. You will have more in your email after you upload all required details."
+        }
+    ],
+    "blocks": [
+        {
+          "type": "@app"
+        }
+      ],
+    "presets": [
+        {
+            "name": "Bru Custom Artwork Form"
+        }
+    ]
+}
+{% endschema %}

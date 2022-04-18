@@ -1,0 +1,327 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- liquid
+    assign _sectionCss = section.settings.cssclass
+    assign _bgColor = section.settings.section-background
+
+    assign _gridHeadingColor = section.settings.grid-heading-color
+    assign _gridHeadingSize = section.settings.grid-heading-fontsize
+    assign _gridSubHeadingColor = section.settings.grid-subheading-color
+    assign _gridSubHeadingSize = section.settings.grid-subheading-fontsize
+-%}
+
+{%- style -%}
+
+
+
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+    .{{ _sectionCss }}{
+        background-color: #{{ _bgColor }};
+    }
+
+    .product-grid-title h2.title{
+        display: block;
+        color: {{_gridHeadingColor }};
+        font-size: {{ _gridHeadingSize }};
+        font-weight:400;
+		line-height: 10px;
+    }
+    .product-grid-descr  h3.title{
+        display: block;
+        color: {{ _gridSubHeadingColor }};
+        font-size: {{ _gridSubHeadingSize }};
+        font-weight: 700;
+		line-height: 1.5;
+	}
+
+	.product-grid-descr
+		margin-botton:20px;
+	}
+
+    }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+{%- endstyle -%}
+
+{%- liquid
+    assign products_to_display = section.settings.collection.all_products_count
+    assign products_to_display = section.settings.collection.all_products_count
+
+    assign _alignHeading = section.settings.heading_alignment
+    assign _gridHeading = section.settings.grid-heading
+    assign _gridSubHeading = section.settings.grid-subheading
+
+  
+    if section.settings.collection.all_products_count > section.settings.products_to_show
+      assign products_to_display = section.settings.products_to_show
+      assign more_in_collection = true
+    endif
+  -%}
+
+<div class="{{ section.settings.cssclass }} isolate gradient">
+    <div class="collection page-width{% if section.settings.swipe_on_mobile == true and section.settings.collection.all_products_count > 2 and section.settings.products_to_show > 2 %} page-width-desktop{% endif %} section-{{ section.id }}-padding">
+        <div class="grid-header" style="text-align: {{_alignHeading}}">
+            {% comment %} Header and Description {% endcomment %}
+            {% unless _gridHeading == blank %}
+                <div class="product-grid-title">
+                <h2 class="title">{{ _gridHeading }}</h2>
+                </div>
+            {% endunless %}
+            {% unless _gridSubHeading == blank %}
+                <div class="product-grid-descr">
+                <h3 class="title">{{ _gridSubHeading }}</h3>
+                </div>
+            {% endunless %}
+            {% comment %} End Header and Description {% endcomment %}
+
+            {% comment %} Product Grid {% endcomment %}
+            <slider-component class="slider-mobile-gutter">
+                <ul id="Slider-{{ section.id }}" class="grid grid--2-col product-grid{% if products_to_display == 4 or section.settings.collection == blank %} grid--2-col-tablet grid--4-col-desktop{% else %} grid--3-col-tablet{% endif %}{% if products_to_display > 5 %} grid--one-third-max grid--4-col-desktop grid--quarter-max{% endif %}{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider slider--tablet grid--peek{% endif %}" role="list">
+                  {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+                    <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="grid__item{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider__slide{% endif %}">
+                      {% render 'card-bru-product',
+                        card_product: product,
+                        media_aspect_ratio: section.settings.image_ratio,
+                        show_secondary_image: section.settings.show_secondary_image,
+                        show_vendor: section.settings.show_vendor,
+                        show_rating: section.settings.show_rating
+                      %}
+                    </li>
+                  {%- else -%}
+                    {%- for i in (1..4) -%}
+                      <li class="grid__item">
+                        {% render 'card-product', show_vendor: section.settings.show_vendor %}
+                      </li>
+                    {%- endfor -%}
+                  {%- endfor -%}
+                </ul>
+                {%- if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 -%}
+                  <div class="slider-buttons no-js-hidden{% if section.settings.collection.all_products_count < 4 %} medium-hide{% endif %}{% if section.settings.collection.all_products_count < 3 %} small-hide{% endif %}">
+                    <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
+                    <div class="slider-counter caption">
+                      <span class="slider-counter--current">1</span>
+                      <span aria-hidden="true"> / </span>
+                      <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+                      <span class="slider-counter--total">{{ products_to_display }}</span>
+                    </div>
+                    <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
+                  </div>
+                {%- endif -%}
+              </slider-component>
+              
+              {% comment %} View All Button {% endcomment %}
+              {%- if section.settings.show_view_all and more_in_collection -%}
+                <div class="center collection__view-all{% if section.settings.swipe_on_mobile %} small-hide medium-hide{% endif %}">
+                  <a href="{{ section.settings.collection.url }}"
+                    class="button"
+                    aria-label="{{ section.settings.view-all-text }}"
+                  >
+                    {{ section.settings.view-all-text }}
+                  </a>
+                </div>
+              {%- endif -%}
+              {% comment %} END View All Button {% endcomment %}
+
+            {% comment %} End Product Grid {% endcomment %}
+        </div>    
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Featured Product Grids",
+    "class": "product-grid-section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "cssclass",
+            "label": "Extra CSS Class",
+            "default": "featured-grid"
+        },
+        {
+            "type": "select",
+            "id": "heading_alignment",
+            "label": "Heading alignment",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ],
+            "default": "center"
+        },
+        {
+            "type": "text",
+            "id": "grid-heading",
+            "default": "Product Grid Title",
+            "label": "Product Grid Title"
+        },
+        {
+            "type": "color",
+            "id": "grid-heading-color",
+            "label": "Product Grid Title Color",
+            "default": "#0D627D"
+        },
+        {
+            "type": "text",
+            "id": "grid-heading-fontsize",
+            "label": "Product Grid Title font size",
+            "default": "20px"
+        },
+        {
+            "type": "richtext",
+            "id": "grid-subheading",
+            "default": "<p>Product grid description</p>",
+            "label": "Product grid description"
+        },
+        {
+            "type": "color",
+            "id": "grid-subheading-color",
+            "label": "Product Grid Description Color",
+            "default": "#183945"
+        },
+        {
+            "type": "text",
+            "id": "grid-subheading-fontsize",
+            "label": "Product Grid Description font size",
+            "default": "24x"
+        },
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Featured Product Collection"
+        },
+        {
+            "type": "range",
+            "id": "products_to_show",
+            "min": 2,
+            "max": 12,
+            "step": 2,
+            "default": 4,
+            "label": "Maximum products to show"
+        },
+        {
+            "type": "checkbox",
+            "id": "swipe_on_mobile",
+            "default": false,
+            "label": "Enable Swipe on mobile"
+        },
+        {
+            "type": "header",
+            "content": "Product Card Setting"
+        },
+        {
+            "type": "select",
+            "id": "image_ratio",
+            "options": [
+                {
+                    "value": "adapt",
+                    "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
+                },
+                {
+                    "value": "portrait",
+                    "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
+                },
+                {
+                    "value": "square",
+                    "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
+                }
+            ],
+            "default": "adapt",
+            "label": "t:sections.featured-collection.settings.image_ratio.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_view_all",
+            "default": true,
+            "label": "t:sections.featured-collection.settings.show_view_all.label"
+          },
+        {
+            "type": "text",
+            "id": "view-all-text",
+            "default": "View All",
+            "label": "View All Text"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_secondary_image",
+            "default": false,
+            "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_vendor",
+            "default": false,
+            "label": "t:sections.featured-collection.settings.show_vendor.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_rating",
+            "default": false,
+            "label": "t:sections.featured-collection.settings.show_rating.label",
+            "info": "t:sections.featured-collection.settings.show_rating.info"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.all.padding.section_padding_heading"
+        },
+        {
+            "type": "color",
+            "id": "section-background",
+            "label": "Section Background",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 36
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 36
+        }
+    ],
+    "presets": [
+        {
+            "name": "Bru Product Grid 01"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,137 @@
+
+{%- liquid
+    assign _css = section.settings.cssclass
+    assign _title = section.settings.form_title
+    assign _descr = section.settings.form_descr
+    assign _notice = section.settings.form_notice
+-%}
+
+<div class="{{ _css }} content-center gradient isolate">
+    <div class="page-width">
+        <div class="kcaf-container">
+            <h2 class="bru-custom-title">{{ _title }}</span></h2>
+            <h4 class='bru-custom-descr'>{{ _descr }}</h4>
+
+
+            {%- form 'contact', id: 'kcaForm', class: 'isolate kcaf-form' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="form-status form-status-list form__message" tabindex="-1" autofocus>{% render 'icon-success' %} {{ 'templates.kcaf.form.post_success' | t }}</div>
+      {%- elsif form.errors -%}
+        <div class="form__message">
+          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.kcaf.form.error_heading' | t }}</h2>
+        </div>
+        <ul class="form-status-list caption-large" role="list">
+          <li>
+            <a href="#kcaForm-email" class="link">
+              {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+            </a>
+          </li>
+        </ul>
+      {%- endif -%}
+                <div class="row kcaf-form-context">
+                    <div class="col col-1">
+                        <div class="field field--with-error">
+                            <input
+                              autocomplete="email"
+                              type="email"
+                              id="kcaForm-email"
+                              class="kcaf-form-email"
+                              name="contact[email]"
+                              spellcheck="false"
+                              autocapitalize="off"
+                              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                              aria-required="true"
+                              {% if form.errors contains 'email' %}
+                                aria-invalid="true"
+                                aria-describedby="kcaForm-email-error"
+                              {% endif %}
+                              placeholder="{{ 'templates.kcaf.form.email' | t }}"
+                            >
+                            {%- if form.errors contains 'email' -%}
+                              <small class="contact__field-error" id="kcaForm-email-error">
+                                <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                                <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+                              </small>
+                            {%- endif -%}
+                        </div>
+                        <textarea name="kcaf-form-message" id="custom-message" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="col col-2">
+                        <input type="text" class="kcaf-form-name" autocomplete="name" id="kcaForm-name" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'templates.kcaf.form.name' | t }}">
+                        <div class="inner-row">
+                            <select class="kcaf-form-moreinfo kcaf-size" name="contact[artwork_size]">
+                                <option value="SM">SM</option>
+                                <option value="XL">XL</option>
+                            </select>
+                            <select name="kcaf-form-moreinfo kcaf-material" name="contact[artwork_material]">
+                                <option value="material1">material 2</option>
+                                <option value="material2">material 2</option>
+                            </select>
+                        </div>
+                        
+                        <div class="kcaf-form-moreinfo custom-file">
+                            <div class="inner-row">
+                                <input type="file" class="kcaf-file" id="customFile" name="contact[file]">
+                                <button type="submit" class="btn btn-primary kcaf-form-submit">Send</button>
+                            </div>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <span class="kcf-note">{{ _notice }}</span>
+
+                        </div>
+                    </div>
+                </div>
+                
+            {% endform %}
+
+            {% for block in section.blocks %}
+                {% case block.type %}
+                    {% when '@app' %}
+                        {% render block %}
+                {% endcase %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Bru Custom Artwork Form",
+    "class": "bru-kcaf",
+    "settings": [
+        {
+            "type": "text",
+            "id": "cssclass",
+            "label": "EXTRA CSS Class",
+            "default": "kcaf-section"
+        },
+        {
+            "type": "html",
+            "id": "form_title",
+            "label": "Custom Artwork Form Title",
+            "default": "Want <span class='kalima-yellow mark-bold'>a customized artwork?"
+        },
+        {
+            "type": "textarea",
+            "id": "form_descr",
+            "label": "Custom Artwork Form Description",
+            "default": "Fill this form accordingly"
+        },
+        {
+            "type": "textarea",
+            "id": "form_notice",
+            "label": "Custom Artwork Form Notice",
+            "default": "Note that customized artworks has the uniqueprices based on the concept. You will have more in your email after you upload all required details."
+        }
+    ],
+    "blocks": [
+        {
+          "type": "@app"
+        }
+      ],
+    "presets": [
+        {
+            "name": "Bru Custom Artwork Form"
+        }
+    ]
+}
+{% endschema %}
