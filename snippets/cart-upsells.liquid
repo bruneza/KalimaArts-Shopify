@@ -1,0 +1,174 @@
+<div class="upsell-products">
+
+    {% assign _case = section.settings.cart_upsell_data %}
+    {% assign _operators = " OR " %}
+    {% assign _querry = "" %}
+    {% assign _match_all_tags = false %}
+    {% assign _search_uri = shop.secure_url | append:"/search?type=product&q=" %}
+
+    {% assign _all_tags = "" %}
+    {% assign _all_vendors = "" %}
+    {% assign _all_handle = "" %}
+
+    {% if _match_all_tags == true %}
+      {% assign _operators = " AND " %}
+    {% endif %}
+
+    {% for _line_item in cart.items %}
+
+      {% if _line_item.product.vendor != blank %}
+        {% unless _all_vendors contains _line_item.product.vendor %}
+          {% assign _all_vendors = _all_vendors | append:_line_item.product.vendor | append:"|"  %}
+        {% endunless %} 
+      {% endif %}
+
+      {% unless _all_handle contains _line_item.product.handle %}
+          {% assign _all_handle = _all_handle | append:_line_item.product.handle | append:"|"  %}
+      {% endunless %} 
+
+      {% for _tag in _line_item.product.tags %}
+        {% unless _all_tags contains _tag %}
+          {% assign _all_tags = _all_tags | append:_tag | append:"|" %}
+        {% endunless %} 
+      {% endfor %}
+
+    {% endfor %}
+
+    {% assign _tags_array = _all_tags | split: '|' %}
+    {% assign _vendor_array = _all_vendors | split: '|' %}
+    {% assign _handle_array = _all_handle | split: '|' %}
+
+    {% if _case == "tags" or _case == "nest" %}
+      {% if _tags_array.size > 0 %}
+        {% for _tag in _tags_array %}
+
+            {%if _querry != "" %}
+              {% assign _querry = _querry | append:_operators | append:"tag:" | append:_tag  %}
+            {% else %} 
+              {% assign _querry = _querry | append:" tag:" | append:_tag  %}
+            {% endif %}  
+
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+
+    {% if _case == "vendors" or _case == "nest" %}
+
+      {% if _vendor_array.size > 0 %}
+        {% for _vendor in _vendor_array %}
+
+          {%if _querry == "" %}
+              {% assign _querry = _querry | append:" vendor:" | append: _vendor  %}
+          {% else %} 
+              {% assign _querry = _querry | append:" OR vendor:" | append:_vendor  %}
+          {% endif %}  
+
+        {% endfor %}
+      {% endif %}
+
+    {% endif %}
+
+    {% unless _tags_array.size < 1 and _vendor_array.size < 1 %}
+
+    {% for _handle in _handle_array %}
+      {% assign _querry = _querry | append:" NOT handle:" | append:_handle  %}
+    {% endfor %}
+
+    {% assign _search_uri = _search_uri | append:_querry  %} 
+
+    {% unless section.settings.cart_upsell_heading == blank %}
+      <div class="title-wrapper"><h3 class="upsell-title hidden">{{ section.settings.cart_upsell_heading }}</h3></div>
+    {% endunless %}
+    
+    <div class="upsell-items loading"></div>
+
+    <script>
+    //<![CDATA[
+      jQuery(document).ready(function($) {
+
+        jQuery(document).on('bc-cart-load',function(){
+
+          if( !jQuery(".upsell-items").hasClass("datas-loaded") ){
+              var _callback_uri = "{{_search_uri}}";
+              if (location.protocol !== 'https:') {
+                 _callback_uri = _callback_uri.replace("https:", "http:");
+              }
+
+              jQuery.ajax({
+                type: 'GET',     
+                url: _callback_uri,
+                complete:function(){
+                  jQuery(".upsell-items").removeClass("loading").addClass("datas-loaded");
+                },
+                success: function ( json_reponse ) {
+                  var _result_wrapper = jQuery(json_reponse).find(".page-search .cata-product")
+                       ,_is_found      = _result_wrapper.length > 0 ? true : false;;
+
+                  if( _is_found ){
+                    jQuery(".upsell-items").html( _result_wrapper.html() );
+                    jQuery(".upsell-title").removeClass("hidden");
+                    if( !jQuery(".upsell-items").hasClass("owl-loaded") ){
+                      
+                      {% if settings.currency_type == '2' %}
+                        currenciesCallbackSpecial('.upsell-items span.money');
+                      {% endif %}
+                      
+                      setTimeout(function(){ 
+                        jQuery(".upsell-items").on('initialize.owl.carousel initialized.owl.carousel change.owl.carousel changed.owl.carousel', function(e) {
+                          var current = e.relatedTarget.current()
+                          var items = $(this).find('.owl-stage').children()
+                          var add = e.type == 'changed' || e.type == 'initialized'
+
+                          items.eq(e.relatedTarget.normalize(current )).toggleClass('current', add)
+                        }).owlCarousel({
+                          nav		: true
+                          ,dots 	: false
+                          ,items	: 4
+                          ,rtl		: jQuery('body').data('rtl')
+                          ,margin		: 0
+                          ,responsive : {
+                            0:{
+                              items: 1
+                            }
+                            ,320:{
+                              items: 2
+                            }
+                            ,768:{
+                              items: 3
+                            }
+                            ,992:{
+                              items: 4
+                            }
+                            ,1024:{
+                              items: 5
+                            }
+                            ,1180:{
+                              items: 6
+                            }
+                          }
+                          ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+                        });
+                      }, 200);
+                    }
+                  }else{
+                    jQuery(".upsell-title").addClass("hidden");
+                    console.log('no realted result found');
+                  }
+                }     
+              });
+
+           }        
+        });
+
+        jQuery(document).trigger('bc-cart-load');
+        jQuery(document).on('cart.requestComplete', function(event, cart) {
+          jQuery(document).trigger('bc-cart-load');
+        });      
+
+      });
+    //]]>
+    </script> 
+    
+    {% endunless %}
+    
+</div>

@@ -1,0 +1,36 @@
+{% assign meta_shortdes = product.metafields.c_f %}
+{% assign key = 'countdown_timer' %}
+
+{% unless meta_shortdes.countdown_timer == blank %}
+  {% include 'check-shop-url' %}
+
+  {% if _shop_url == _check_shop_url %}
+    {%- assign seconds = 34 | times: 60 | times: 60 -%}
+    {%- assign _expire = 'today' | date: "%s" | plus: seconds | date: "%m/%d/%Y" -%}
+  {% else %}
+    {%- assign _expire = meta_shortdes.countdown_timer -%}
+  {% endif %}
+
+  {%- assign _dueDate = _expire | split: '/' -%}
+
+  <div class="wrapper-countdown">
+    <span class="offer-text">{{ 'products.big_product.text_countdown' | t }}</span>
+    <div class="countdown_{{ block.id }}"></div>
+  </div> 
+
+  <script type="text/javascript">
+    jQuery(document).ready(function($){
+
+      var currentDate = new Date();
+      var dueDate = new Date( {{ _dueDate[2] }}, {{ _dueDate[0] | plus:0 }} - 1, {{ _dueDate[1] | plus:0 }} );
+
+      if(currentDate < dueDate){
+        $('.countdown_{{ block.id }}').countdown({until: dueDate, format: 'HMS', padZeroes: true });
+      }
+      else{
+        $('.countdown_{{ block.id }}').parents('.wrapper-countdown').hide();
+      }
+
+    });
+  </script>
+{% endunless %}

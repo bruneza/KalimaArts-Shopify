@@ -1,0 +1,36 @@
+{%- assign _video = block.settings.video -%}
+<div class="swiper-slide has-video swiper-slide-{{ block.id }}">
+
+  {% if _has_text %}
+    <div class="swiper-content {{ textAlign }} slide-{{ forloop.index }} container">
+      <div class="container-box" style="top: {{ position }}%; left: {{ horizontal_position }}%;transform: translate(-{{ horizontal_position }}%, -{{ position }}%);">
+
+        {% unless headingText == blank %}<div class="heading bold-{{ headingBoldText }}">{{ headingText }}</div>{% endunless %}
+
+        {% unless subheadingText == blank %}<div class="subheading bold-{{ subheadingBoldText }}">{{ subheadingText }}</div>{% endunless %}
+
+        {% unless captionText == blank %}<div class="cation bold-{{ captionBoldText }}">{{ captionText }}</div>{% endunless %}
+
+        {% unless buttonText == blank %}
+        <div class="caption-link">
+          <a class="slider-button btn btn-1" href="{{ link }}">{{ buttonText }}</a>                
+        </div>
+        {% endunless %}
+
+        {% include 'slideshow-css' %}
+
+      </div> 
+    </div>
+  {% endif %}
+  
+  {% if block.settings.use_embed %}
+    {{ _video }}
+  {% else %}
+    <div class="video-slide" style="display: none;" data-full-height="{{ _full_height }}">
+      <video controls class="video" autoplay muted loop playsinline preload="auto" data-width="0" data-height="0">
+        <source src="{{ _video }}" type="video/mp4">
+      </video>
+    </div>
+  {% endif %}
+
+</div>

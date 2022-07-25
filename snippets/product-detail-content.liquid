@@ -1,0 +1,24 @@
+<div class="col-lg-4 col-md-6 col-sm-6 col-12">
+  <div class="product-content"> 
+
+    {%- include 'product-detail-snippet', type: 'discount-popup' -%}
+    {%- include 'product-detail-snippet', type: 'vendor' -%}
+
+    <h1 itemprop="name" content="{{ product.title }}" class="page-heading">{{ product.title }} </h1>
+
+    {%- include 'product-detail-snippet', type: 'review' -%}
+
+    {% if settings.show_social_sharing_product %}
+        {%- include 'product-detail-snippet', type: 'social-sharing' -%}
+    {% endif %}
+
+    {%- include 'product-detail-snippet', type: 'short-description' -%}
+    {%- include 'product-detail-snippet', type: 'size-chart' -%}
+    {%- include 'product-detail-snippet', type: 'deals' -%}
+    {%- include 'product-detail-snippet', type: 'sku' -%}
+    {%- include 'layout-people-in-cart' -%}
+    {%- include 'product-detail-snippet', type: 'order-shipping' -%}
+    {%- include 'product-detail-snippet', type: 'secure-image' -%}
+
+  </div>
+</div>

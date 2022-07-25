@@ -1,0 +1,15 @@
+{% assign submenu = l.title | handleize %}
+{% if linklists[submenu].links.size > 0 %}
+  <li class="dropdown sb-dropdown-submenu{% if l.active or l.child_active %} s-open active{% endif %}">
+    <a href="{{ l.url }}" class="dropdown-link"><span>{{ l.title }}</span></a>
+    <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+    
+    <ul class="dropdown-menu">
+      {% for l in linklists[submenu].links %}
+        {% include 'sb-nav-sub-link' %}
+      {% endfor %}
+    </ul>
+  </li>
+{% else %}
+  <li{% if l.active %} class="active"{% endif %}><a href="{{ l.url }}"><span>{{ l.title }}</span></a></li>
+{% endif %}

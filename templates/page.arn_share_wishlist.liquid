@@ -1,0 +1,33 @@
+{% assign _header = content_for_header | split: "," %}
+{% assign page_url = '' %}
+
+{% assign _headerLen = _header.size | minus: 1 %}
+{% for i in (0.._headerLen) %}
+	{% if _header[i] contains 'pageurl'%}
+		{% assign page_url = _header[i] %}
+	{% endif %}
+{% endfor%}
+{% assign page_url = page_url | replace:'"','' %}
+
+{% assign wishlist_enable = shop.metafields.arena.wl_cp_settings.wishlist_settings.wishlist_enable %}
+{% assign number_visible = shop.metafields.arena.wl_cp_settings.wishlist_settings.records_per_page %}
+<!--json-->
+{% assign UserWL = customer.metafields.arena.customer_wishlist %}
+{% assign WLLimit = shop.metafields.arena.wl_cp_settings.wishlist_settings.wishlist_product_number %}
+
+{% assign UserWL = UserWL | slice: 0,WLLimit %}
+{% assign total_page = UserWL.size | times: 1.0 | divided_by: number_visible | ceil %}
+<div class="page-arn-wishlist container">
+    <h1 class="page-title">Shared Wishlist</h1>
+    {% if wishlist_enable == false %}
+        <p>{{ shop.metafields.arena.wl_cp_settings.general_settings.text.wishlist_settings.wishlist_disable_msg }}</p>
+    {% else %}
+          <div class="arn-custom-list-share arn_pending">
+    <table class="wishlist-table-share arn_pending"></table>
+    </div>
+    <svg width="64" height="64" class="arn_icon arn_icon-preloader"><use xlink:href="#arn_icon-preloader"></use></svg>
+	{% endif %}
+	<script type="text/javascript">
+		document.getElementsByTagName("body")[0].classList.add("arn-wishlist-page");
+	</script>
+</div>

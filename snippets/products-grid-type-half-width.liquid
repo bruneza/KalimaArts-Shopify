@@ -1,0 +1,53 @@
+{%- assign _bg_style = block.settings.bg_style -%}
+{%- assign _bg_color = block.settings.bg_color -%}
+{%- assign _bg_image = block.settings.bg_image -%}
+
+{% capture background_section %}
+  {% if _bg_style == 'color' %}
+    style="background: {{ _bg_color }};"
+  {% else %}
+    {% unless _bg_image == blank %}
+      {% if _lazyload %}
+        data-bgset = "{{ _bg_image | img_url: '1920x' }} 1920w"
+      {% else %}
+        style="background: url({{ _bg_image | img_url: '1920x'}});"
+      {% endif %}
+    {% endunless %}
+  {% endif %}
+{% endcapture %}
+
+<div class="product-grid-content block-type-{{ block.type }} {% if _lazyload and _bg_style == 'image' %} lazyload{% endif %}" {{ background_section | strip }}>
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+
+  <div class="product-grid-inner">
+
+    {% include 'heading-snippet' %}
+
+    {% unless block_collection == blank or collection.products_count == 0 %}
+      <div class="wrap-product-slider">
+        <div class="product-grid-{{ _type }}{% if _type == 'row' %} row{% endif %}">
+
+          {% for product in collection.products limit: _limit %}
+            <div class="product-grid-item{% if _type == 'row' %} {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}{% endif %}">
+              {% include 'product-item' %}
+            </div>
+          {% endfor %} 
+
+        </div>  
+      </div>
+
+    {% else %}
+
+      <div class="wrap-product-slider">
+        <div class="product-grid-row">
+          <div class="row"> 
+            {{ emptyProductTypeHalfWidth }}
+          </div>
+        </div>  
+      </div>
+    {% endunless %}
+
+  </div>
+
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

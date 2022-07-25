@@ -1,0 +1,46 @@
+{%- assign stockSold = block.settings.product_sold -%}
+
+{% if stockSold > 0 %}
+  <div class="deal-progress">
+    <div class="deal-stock">
+
+      <span class="stock-sold">{{ 'products.big_product.text_sold' | t }}: <strong>{{ stockSold }}</strong></span>
+
+      {%- assign available = 0 -%}
+      
+      {% for variant in product.variants %} 
+        {% if variant.inventory_management == 'shopify' and variant.inventory_policy == 'deny' %}
+          {% capture i %}{{ available | plus: variant.inventory_quantity }}{% endcapture %}
+        {% else %}
+          {%- assign i = 30 -%}
+        {% endif%}
+
+        {%- assign available = i | plus: 0 -%}
+      {% endfor %}
+
+      {% if available > 0 %} 
+        {%- assign total = available | plus: stockSold -%} 
+        <span class="stock-available">{{ 'products.big_product.text_available' | t }}: <strong>{{ available }}</strong></span>
+      {% else %}
+      	<span class="stock-available">{{ 'products.big_product.text_available' | t }}: <strong>0</strong></span>
+      {% endif %}
+    </div>
+
+    {% if available > 0 %}
+      {% capture progress %}{{ stockSold | times:100 | divided_by: total }}{% endcapture %}
+      {%- assign progressNumber = progress | plus: 0 -%}
+
+      <div class="progress">
+        <span class="progress-bar" style="width:{{ progress }}%"></span>
+      </div>
+    
+    {% else %}
+      {% capture progress %}{{ stockSold | times:100 | divided_by: total }}{% endcapture %}
+      {%- assign progressNumber = progress | plus: 0 -%}
+
+      <div class="progress">
+        <span class="progress-bar" style="width:100%"></span>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

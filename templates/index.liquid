@@ -1,0 +1,29 @@
+{% unless settings.left_column_style == 'none' %}
+  {% assign _have_left_column = true %}
+  {% assign _home_class = "col-lg-9 col-md-12" %}
+  {% assign _left_class = "col-lg-3 d-none d-lg-block" %}
+{% else %}
+  {% assign _have_left_column = false %}
+{% endunless %}
+
+{% if settings.left_column_style == 'full-slideshow' %}
+  {% section 'section-slideshow' %}
+{% endif %}
+
+{% if _have_left_column %}<div class="container"><div class="row">{% endif %}
+
+  {% if _have_left_column %}
+    <div id="home-left-column" class="{{ _left_class }}">
+      {% section 'homepage-left-column' %}
+    </div>
+  {% endif %}
+  
+  <div id="home-main-content" class="{% if _have_left_column %}{{ _home_class }}{% endif %}">
+    {{ content_for_index }}
+  </div>
+
+{% if _have_left_column %}</div></div>{% endif %}
+
+{% if settings.enable_notify_home_page %}
+  {% include 'layout-notify' %}
+{% endif %}

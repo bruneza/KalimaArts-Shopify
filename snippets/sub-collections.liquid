@@ -1,0 +1,82 @@
+{% assign _subcategory_type = block.settings.type %}
+{% assign _subcategory_metafield = collection.metafields.c_f.sub_collection %}
+{% assign _subcategory_menu = block.settings.subcategory_menu %}
+
+{% unless _subcategory_metafield == blank and _subcategory_menu == blank %}
+  {% assign _subcollection_per_row = block.settings.subcollection_per_row %}
+  {% if _subcollection_per_row == 2 %}
+    {% assign _class = 'col-lg-6 col-md-6 col-sm-6 col-6' %}
+    {% assign image_size = '570x' %}
+  {% elsif _subcollection_per_row == 3 %}
+    {% assign _class = 'col-lg-4 col-md-4 col-sm-4 col-4' %}
+    {% assign image_size = '480x' %}
+  {% else %}
+    {% assign _class = 'col-lg-3 col-md-3 col-sm-3 col-3' %}
+    {% assign image_size = '370x' %}
+  {% endif %}
+
+  {% if _subcategory_type == 'metafield' %}
+    {% unless _subcategory_metafield == blank %}
+      {% assign _collection_sub = _subcategory_metafield | split: "|" %}
+      <h2 class="subcategory">{{ collection.title }} {{ block.settings.subcategory_title }}</h2>
+
+      <div class="row subcategory-list">
+        {% for _sub_col in _collection_sub %}
+
+          <div class="category {{ _class }} text-center">
+            <div class="category-image">
+                <a href="{{ collections[_sub_col].url }}">   
+
+                  {% if collections[_sub_col].image %}
+                    <img src="{{ collections[_sub_col].image.src | img_url: image_size }}" alt="{{ collections[_sub_col].title | escape }}">
+                  {% else %}
+                    {% assign product = collections[_sub_col].products.first %}
+                    <img src="{{ product | img_url: image_size }}" alt="{{ collections[_sub_col].title | escape }}">
+                  {% endif %}  
+                </a>
+            </div>
+            <a class="category-name" href="{{ collections[_sub_col].url }}" title="{{ collections[_sub_col].title | escape }}">{{ collections[_sub_col].title }}</a>
+          </div>
+
+        {% endfor %}
+      </div>
+    {% endunless %}
+
+  {% else %}
+    {% for _link in linklists[_subcategory_menu].links %} 
+      {% assign _submenu = _link.title | handleize %}
+      {% assign _url = _link.url %}
+
+      {% if linklists[_submenu].links.size > 0 and _url == _collectionurl %}
+        <h2 class="subcategory">{{ collection.title }} {{ block.settings.subcategory_title }}</h2>
+        <div class="row subcategory-list">
+
+          {% for link in linklists[_submenu].links %}
+            {% if link.type == 'collection_link' %}
+              {% assign _collection = link.object %}
+
+              <div class="category {{ _class }} text-center">
+                <div class="category-image">
+                    <a href="{{ link.url }}">   
+
+                      {% if _collection.image %}
+                        <img src="{{ _collection.image | img_url: image_size }}" alt="{{ link.title | escape }}">
+                      {% else %}
+                        {% assign product = _collection.products.first %}
+                        <img src="{{ product | img_url: image_size }}" alt="{{ link.title | escape }}">
+                      {% endif %}  
+                    </a>
+                </div>
+                <a class="category-name" href="{{ link.url }}" title="{{ link.title | escape }}">{{ link.title }}</a>
+              </div>
+
+            {% endif %}
+          {% endfor %}
+
+        </div>
+      {% endif %}
+
+    {% endfor %}
+  {% endif %}
+
+{% endunless %}

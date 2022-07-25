@@ -1,0 +1,127 @@
+<style type="text/css">
+    :root {
+      --arn-add-wishlist-icon-color: {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon.icon_color }};
+      --arn-add-wishlist-icon-active-color: {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon.icon_active_color }};
+      --arn-add-wishlist-icon-color-product: {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon_product.icon_color }};
+      --arn-add-wishlist-icon-active-color-product: {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon_product.icon_active_color }};
+
+      --arn-show-wishlist-icon-color: {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.show_class_icon.icon_color }};
+      --arn-show-wishlist-icon-active-color: {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.show_class_icon.icon_active_color }};
+      --arn-remove-wishlist-icon-color: {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.remove_class_icon.icon_color }};
+
+      --arn-add-compare-icon-color: {{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon.icon_color }};
+      --arn-add-compare-icon-active-color: {{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon.icon_active_color }};
+      --arn-add-compare-icon-color-product: {{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon_product.icon_color }};
+      --arn-add-compare-icon-active-color-product: {{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon_product.icon_active_color }};
+      --arn-show-compare-icon-color: {{ shop.metafields.arena.wl_cp_settings.compare_settings.show_class_icon.icon_color }};
+      --arn-show-compare-icon-active-color: {{ shop.metafields.arena.wl_cp_settings.compare_settings.show_class_icon.icon_active_color }};
+      --arn-remove-compare-icon-color: {{ shop.metafields.arena.wl_cp_settings.compare_settings.remove_class_icon.icon_color }};
+      --arn-preloader-icon-color: {{ shop.metafields.arena.wl_cp_settings.general_settings.preloader_icon.icon_color}};
+
+      --arn-outstock-color: #ff0000;
+      --arn-instock-color: #2D882D;
+      --arn-table-heading-bkg: {{ shop.metafields.arena.wl_cp_settings.general_settings.background_color }};
+      --arn-table-text-color-1: #000000;
+      --arn-table-text-color-2: {{ shop.metafields.arena.wl_cp_settings.general_settings.text_color }};
+      --arn-table-btn-border-color: #000000;
+      --arn-table-btn-color: #ffffff;
+      --arn-table-btn-active-color: #000000;
+
+      --arn-table-product-heading: "{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.table_product_heading }}";
+      --arn-table-price-heading: "{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.table_price_heading }}";
+      --arn-table-image-heading: "{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.table_image_heading }}";
+      --arn-table-price-heading: "{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.table_price_heading }}";
+      --arn-table-available-heading: "{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.table_available_heading }}";
+      --arn-table-delete-heading: "{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.table_delete_heading }}";
+
+      --bg-sidenav: #fff;
+      --link-color: #000;
+      --font-size-title: 15px;
+      --button-add-bg: #fed700;
+      --button-add-cl: #fff;
+      --button-add-br: #fed700;
+      --button-add-hover-bg: #fed700;
+      --button-add-hover-cl: #fff;
+      --button-add-hover-br: #fed700;
+      --button-remove-bg: #000;
+      --button-remove-cl: #fff;
+      --button-remove-br: #000;
+      --button-remove-hover-bg: #000;
+      --button-remove-hover-cl: #fff;
+      --button-remove-hover-br: #000;
+      --button-border-radius: 20px;
+
+      --arn-wishlist-page-bg: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.background_color}};
+      --arn-wishlist-page-text: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.text_color}};
+
+      --arn-show-wishlist-fl-min-height: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.minHeight}};
+      --arn-show-wishlist-fl-min-width: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.minWidth}};
+      --arn-show-wishlist-fl-height: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.height}}px;
+      --arn-show-wishlist-fl-width: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.width}}px;
+      --arn-show-wishlist-fl-bottom: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.bottom}};
+      --arn-show-wishlist-fl-top: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.top}};
+      --arn-show-wishlist-fl-left: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.left}};
+      --arn-show-wishlist-fl-right: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.right}};
+      --arn-show-wishlist-fl-boxShadow: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.boxShadow}};
+      --arn-show-wishlist-fl-backgroundColor: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.background_color}};
+      --arn-show-wishlist-fl-color: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.text_color}};
+      --arn-show-wishlist-fl-borderRadius: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_show.position_button.borderRadius}}px;
+
+      --arn-add-wishlist-bg: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add.background_color}};
+      --arn-add-wishlist-bg-actived: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add.background_color_actived}};
+      --arn-add-wishlist-bg-product: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add_product_page.background_color}};
+      --arn-add-wishlist-bg-actived-product: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add_product_page.background_color_actived}};
+      --arn-add-wishlist-color: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add.text_color}};
+      --arn-add-wishlist-color-actived: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add.text_color_actived}};
+      --arn-add-wishlist-color-product: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add_product_page.text_color}};
+      --arn-add-wishlist-color-actived-product: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add_product_page.text_color_actived}};
+      --arn-add-wishlist-width: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add.width}}px;
+      --arn-add-wishlist-height: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add.height}}px;
+      --arn-add-wishlist-borderRadius: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add.borderRadius}}px;
+      --arn-add-wishlist-borderRadius-product: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.launch_add_product_page.borderRadius}}px;
+      
+      --arn-add-wishlist-noti-bg: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.added_wl_notifications_bg}};
+      --arn-add-wishlist-noti-color: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.added_wl_notifications_color}};
+
+      --arn-add-multiple-settings-add-background: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.add_multiple_settings.add_background_color}};
+      --arn-add-multiple-settings-add-border: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.add_multiple_settings.add_border_color}};
+      --arn-add-multiple-settings-add-text: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.add_multiple_settings.add_text_color}};
+      --arn-add-multiple-settings-create-background: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.add_multiple_settings.create_background_color}};
+      --arn-add-multiple-settings-create-border: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.add_multiple_settings.create_border_color}};
+      --arn-add-multiple-settings-create-text: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.add_multiple_settings.create_text_color}};
+      --arn-add-multiple-settings-radio-button-background: {{shop.metafields.arena.wl_cp_settings.wishlist_settings.add_multiple_settings.radio_button_background_color}};
+
+      --arn-compare-page-bg: {{shop.metafields.arena.wl_cp_settings.compare_settings.background_color}};
+      --arn-compare-page-text: {{shop.metafields.arena.wl_cp_settings.compare_settings.text_color}};
+
+      --arn-show-compare-fl-min-height: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.minHeight}};
+      --arn-show-compare-fl-min-width: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.minWidth}};
+      --arn-show-compare-fl-height: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.height}}px;
+      --arn-show-compare-fl-width: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.width}}px;
+      --arn-show-compare-fl-bottom: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.bottom}};
+      --arn-show-compare-fl-top: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.top}};
+      --arn-show-compare-fl-left: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.left}};
+      --arn-show-compare-fl-right: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.right}};
+      --arn-show-compare-fl-boxShadow: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.boxShadow}};
+      --arn-show-compare-fl-backgroundColor: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.background_color}};
+      --arn-show-compare-fl-color: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.text_color}};
+      --arn-show-compare-fl-borderRadius: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_show.position_button.borderRadius}}px;
+
+      --arn-add-compare-bg: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add.background_color}};
+      --arn-add-compare-bg-product: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add_product_page.background_color}};
+      --arn-add-compare-color: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add.text_color}};
+      --arn-add-compare-color-product: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add_product_page.text_color}};
+      --arn-add-compare-bg-actived: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add.background_color_actived}};
+      --arn-add-compare-bg-actived-product: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add_product_page.background_color_actived}};
+      --arn-add-compare-color-actived: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add.text_color_actived}};
+      --arn-add-compare-color-actived-product: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add_product_page.text_color_actived}};
+      --arn-add-compare-width: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add.width}}px;
+      --arn-add-compare-height: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add.height}}px;
+      --arn-add-compare-borderRadius: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add.borderRadius}}px;
+      --arn-add-compare-borderRadius-product: {{shop.metafields.arena.wl_cp_settings.compare_settings.launch_add_product_page.borderRadius}}px;
+    
+      --arn-add-compare-noti-bg: {{shop.metafields.arena.wl_cp_settings.compare_settings.added_cp_notifications_bg}};
+      --arn-add-compare-noti-color: {{shop.metafields.arena.wl_cp_settings.compare_settings.added_cp_notifications_color}};
+    }
+    {{ shop.metafields.arena.wl_cp_styles }}
+</style>

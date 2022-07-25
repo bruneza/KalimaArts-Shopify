@@ -1,0 +1,12 @@
+<div class="top-bar multi-store-{{ section.settings.enable_multi_store }} border-top-{{ section.settings.border_top }} d-none d-lg-block">
+	<div class="{{ _layout_class }}">
+		{% assign _multi_store_text = section.settings.multi_store_text %}
+		{% if section.settings.enable_multi_store and _multi_store_text != blank %}
+			<div class="multi-store-text">{{ _multi_store_text }}<span class="icon"></span></div>
+		{% endif %}
+		<div class="table-row">
+			{% include 'header-top-bar-left' %}
+			{% include 'header-top-bar-right' %}
+		</div>
+	</div>
+</div>

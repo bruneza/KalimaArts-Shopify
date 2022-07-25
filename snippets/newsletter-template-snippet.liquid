@@ -1,0 +1,21 @@
+{% include 'newsletter-template-config' %}  
+
+<div id="newsletter-popup" style="display:none;" data-style="{{ _style }}" data-scroll="{{ _scroll_position }}" data-expires="{{ _expires }}" data-delay="{{ _delay_time | times: 1000 }}" data-section-type="reload_newsletter" data-section-id="{{section.id}}">    
+  <div class="newsletter-popup-content block-image-{{ _block_image }}" data-image="{{_block_image}}" style="background-color: #ffffff">
+      <span class="np-close" title="Close" data-dismiss="modal"></span>
+      <div class="text-box-image">
+        {% if _text_box_position == 'bottom' %}
+          {% include 'newsletter-block-image' %}
+        {% endif %}
+        
+        {% include 'newsletter-block-textbox' %}
+
+        {% unless _text_box_position == 'bottom' %}
+          {% include 'newsletter-block-image' %}
+        {% endunless %}
+      </div>
+      
+      {% include 'newsletter-block-subscribe-result' %}
+      
+  </div>   
+</div>

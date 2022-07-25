@@ -1,0 +1,14 @@
+<li class="dropdown{% if l.active %} active{% endif %}{% if _highlight_item and _highlight_menu contains l.title %} highlight{% endif %}">
+  <div class="dropdown-inner">
+    <a href="{{ l.url }}" class="dropdown-link">
+      <span>{{ l.title }}</span>
+      {% include 'menu-label' %}
+    </a>
+    <span class="expand">{%- render 'theme-icon', type: 'angle-down' -%}</span>
+  </div>
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+      {% include 'nav-sub-link' %}
+    {% endfor %}
+  </ul>
+</li>

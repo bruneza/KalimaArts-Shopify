@@ -1,0 +1,266 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+
+<div class="page-contact">
+  <div class="container">
+    
+    <div id="col-main" class="page-contact-content">
+      <div class="row">
+
+        <div class="contact-form-wrapper col-md-6 col-sm-12">
+
+          {% unless section.settings.contact_form_title == blank %}
+            <div class="title-wrapper">
+              <h3>{{ section.settings.contact_form_title }}</h3>
+            </div>
+          {% endunless %}
+          
+          {% unless section.settings.contact_form_description == blank %}
+            <div class="contact-description">{{ section.settings.contact_form_description }}</div>
+          {% endunless %}
+
+          <div class="contact-form">
+            {% form 'contact' %}
+
+              {% if form.posted_successfully? %}
+                <div class="alert alert-success">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  {{'contact.form.post_success' | t }}
+                </div>
+              {% endif %}
+
+              {% if form.errors %}
+                <div class="alert alert-error">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  {{ form.errors | default_errors }}
+                </div>
+              {% endif %}
+
+              <div id="contact-form">
+                <div class="row">
+                  <div class="form-group col-lg-6 col-md-12">
+                    <label for="name">{{ 'contact.form.name' | t }}<span class="req">*</span></label>
+                    <input type="text" id="name" class="form-control" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.first_name }} {{ customer.last_name }}{% endif %}" name="contact[name]" />
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12{% if form.errors contains 'email' %} error{% endif %}">
+                    <label for="email">{{ 'contact.form.email' | t }}<span class="req">*</span></label>
+                    <input required type="email" id="email" class="form-control" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" name="contact[email]" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">{{'contact.form.phone' | t }}</label>
+                  <input type="text" id="phone" class="form-control" value="{{ form.phone }}" name="contact[phone]" />
+                </div>
+
+                <div class="form-group{% if form.errors contains 'body' %} error{% endif %}">
+                  <label for="message">{{ 'contact.form.message' | t }}</label>
+                  <textarea required id="message" class="form-control" cols="40" rows="7" name="contact[body]">{{ form.body }}</textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-1">{{'contact.form.submit_button' | t }}</button>
+                </div>
+              </div>
+
+            {% endform %}
+          </div>
+          
+        </div>
+        
+        {% if section.settings.enable_contact_map or  section.settings.enable_contact_address %}
+          <div class="map-wrapper col-md-6 col-sm-12">
+            {% if section.settings.enable_contact_map and section.settings.contact_map_location != blank %}
+                <div id="page-contact-map" class="map">
+                  <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                    src="https://maps.google.com/maps?q={{ section.settings.contact_map_location }}&amp;z={{ section.settings.contact_zoom_lv }}&amp;output=embed&amp;iwloc=near" title="{{ section.settings.contact_map_location }}"
+                    aria-label="{{ section.settings.contact_map_location }}" style="height: 300px; width: 100%;"></iframe>
+                </div>
+            {% endif %}
+            {% if section.settings.enable_contact_address %}
+                <div id="page-contact-address" class="contact-address">
+                    <div class="title-wrapper">
+                        <h3> Our Address </h3>
+                    </div>
+                    <div class="contact-address-info">
+                    {{ section.settings.address_html }}
+                    </div>
+                </div>
+            {% endif %}
+            
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Contact Page",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "breadcrumb_image",
+        "label": "Breadcrumb image"
+      },
+      {
+        "type": "header",
+        "content": "Contact form"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_contact_form",
+        "label": "Enable Contact form",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "contact_form_title",
+        "label": "Heading",
+        "default": "get in touch"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_form_description",
+        "label": "Description",
+        "default": "If you need any help, please contact us or send us an email"
+      },
+      {
+        "type": "header",
+        "content": "Map settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_contact_map",
+        "label": "Enable Map",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "contact_map_location",
+        "label": "Location",
+        "default": "Kigali,rwanda"
+      },
+      {
+        "type": "select",
+        "id": "contact_zoom_lv",
+        "label": "Select Zoom Level",
+        "options": [
+          {
+            "value": "0",
+            "label": "0"
+          },
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "7",
+            "label": "7"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          },
+          {
+            "value": "9",
+            "label": "9"
+          },
+          {
+            "value": "10",
+            "label": "10"
+          },
+          {
+            "value": "11",
+            "label": "11"
+          },
+          {
+            "value": "12",
+            "label": "12"
+          },
+          {
+            "value": "13",
+            "label": "13"
+          },
+          {
+            "value": "14",
+            "label": "14"
+          },
+          {
+            "value": "15",
+            "label": "15"
+          },
+          {
+            "value": "16",
+            "label": "16"
+          },
+          {
+            "value": "17",
+            "label": "17"
+          },
+          {
+            "value": "18",
+            "label": "18"
+          },
+          {
+            "value": "19",
+            "label": "19"
+          },
+          {
+            "value": "20",
+            "label": "20"
+          },
+          {
+            "value": "21",
+            "label": "21"
+          }
+        ],
+        "default": "17"
+      },
+      {
+        "type": "checkbox",
+        "id": "contact_scroll",
+        "label": "Scroll Wheel"
+      },
+      {
+        "type": "header",
+        "content": "Our Address"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_contact_address",
+        "label": "Enable Address",
+        "default": true
+      },
+      {
+        "type": "html",
+        "id": "address_html",
+        "label": "Address HTML",
+        "default": "<p> address </p>"
+      }
+    ]
+  }
+{% endschema %}

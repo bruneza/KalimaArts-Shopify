@@ -1,0 +1,174 @@
+{% comment %}
+=================
+  Mega Menu Tab
+=================
+{% endcomment %}
+
+{% assign min_height = block.settings.mega_menu_min_height %}
+{% assign menu_bg_color = block.settings.mega_menu_bg_color %}
+
+<div class="dropdown-menu dropdown-menu-tabs column-4" style="background: {{ menu_bg_color }};">
+  <div class="row">
+
+    <div class="mm-tab-col-title col-lg-3">
+      <ul class="tab-title">
+        {% assign _index = forloop.index %}
+        {% assign j = 0 %}
+        
+        {% for block in section.blocks offset: _index %}
+          {% case  block.type %}
+
+            {% when 'tab-menu' %}
+              {% assign _tab_title = block.settings.tab_title %} 
+              {% assign _index = _index | plus: 1 %}
+              {% assign j = j | plus: 1 %}
+
+              <li data-id="mm-tabs-{{ j }}" class="title-item{% if j == 1 %} active{% endif %} title-item-{{ j }}"{{ block.shopify_attributes }}>
+                <span>{{ _tab_title }}</span>
+                {%- render 'theme-icon', type: 'angle-right' -%}
+              </li>       
+
+            {% when 'tab-menu-row' or 'tab-menu-column' %}
+            {% else %}
+              {% break %}
+
+          {% endcase %}          
+        {% endfor %}
+
+      </ul>
+    </div>
+
+    <div class="mm-tab-col-content col-lg-9" style="min-height: {{ min_height }}px;">
+      {% assign _index = forloop.index %}
+      {% assign _i = 0 %}
+      {% assign j = 0 %}
+
+      {% for block in section.blocks offset: _index %}
+        {% case  block.type %}
+
+        {% when 'tab-menu' %}
+          {% assign _index = _index | plus: 1 %}
+          {% assign j = j | plus: 1 %}
+
+          <div class="tab-content-inner{% if j == 1 %} active{% endif %} mm-tabs-{{ j }}" id="mm-tabs-{{ j }}"{{ block.shopify_attributes }}>
+
+            {% for block in section.blocks offset: _index %}
+
+              {% if block.type == 'tab-menu-row' and _i < 3 %}
+                {% assign _index = _index | plus: 1 %}
+                {% assign _i = _i | plus: 1 %}
+
+                <div class="row row-{{ _i }}"{{ block.shopify_attributes }}>
+                  {% for block in section.blocks offset: _index %}
+
+                    {% if block.type == 'tab-menu-column' %}
+                      {% assign _index = _index | plus: 1 %}
+                      {% assign _colTab = block.settings.mega_menu_tab_col %}
+                      {% assign _colTabWidth = block.settings.mega_menu_tab_width_col %}
+                      {% assign _colTabTitle = block.settings.mega_menu_tab_title_col %}
+                      {% assign _enableColTabTitle = block.settings.mega_menu_tab_image_title_col %}
+                      {% assign _colTabLink = block.settings.mega_menu_tab_link_col %}
+
+                      {% unless _colTab == 'none' %}
+                        <div class="col-item {% if _colTabWidth == 0 %}col{% else %}col-lg-{{ _colTabWidth }}{% endif %}"{{ block.shopify_attributes }}>
+
+                          {% case _colTab %}
+                            {% when 'menu' %}
+                              {% assign _colTabLL = block.settings.mega_menu_tab_ll_col %}
+
+                              <div class="dropdown mega-sub-link{% if _colTabTitle == blank %} no-title-0{% endif %}">
+                                <a href="{{ _colTabLink }}"{% if _enableColTabTitle %} class="d-lg-none"{% endif %}>
+                                  <span>{{ _colTabTitle }}</span>
+                                </a>
+
+                                <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+
+                                <ul class="m-list dropdown-menu dropdown-menu-sub">
+                                  {% for ml in linklists[_colTabLL].links %}
+                                    <li><a href="{{ ml.url }}">{{ ml.title }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </div>
+
+                            {% when 'multi-menu' %}
+                              {% assign _colTabLL = block.settings.mega_menu_tab_ll_col %}
+
+                              {% for ml in linklists[_colTabLL].links %}
+                                {% assign submenu = ml.title | handleize %}
+
+                                {% if linklists[submenu].links.size > 0 %}
+                                  <div class="dropdown mega-sub-link">
+                                    <a href="{{ ml.url }}" class="dropdown-link">
+                                      <span>{{ ml.title }}</span>
+                                    </a>
+                                    <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+
+                                    <ul class="dropdown-menu dropdown-menu-sub">
+                                      {% for l in linklists[submenu].links %}
+                                        <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+                                      {% endfor %}
+                                    </ul>
+                                  </div>
+                          
+                                {% else %}
+                                  <div class="mega-sub-link"><a href="{{ ml.url }}"><span>{{ ml.title }}</span></a></div>
+                                {% endif %}
+
+                              {% endfor %}
+                          
+                            {% else %}
+                              <div class="dropdown banners mega-sub-link{% if _colTabTitle == blank %} no-title-0{% endif %}">
+                                <a href="{{ _colTabLink }}"{% if _enableColTabTitle %} class="d-lg-none"{% endif %}>
+                                  <span>{{ _colTabTitle }}</span>
+                                </a>
+
+                                <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+
+                                <ul class="dropdown-menu dropdown-menu-sub">
+                                  {% assign _colTabImage = block.settings.mega_menu_tab_image_col %}
+                                  {% assign _colTabImageSize = block.settings.mega_menu_tab_image_size_col %}
+                                  {% assign _colTabImageLink = block.settings.mega_menu_tab_image_link_col %}
+
+                                  <li>
+                                    <a href="{{ block.settings[_colTabImageLink] }}">
+                                      {% include 'image-lazysize' with image: _colTabImage, image_size: _colTabImageSize, image_class: '', image_alt: 'Banner' %}
+                                    </a>
+                                  </li>
+                                </ul>
+
+                              </div>
+
+                          {% endcase %}
+
+                        </div>
+                      {% endunless %}
+
+                    {% else %}
+                      {% break %}
+                    {% endif %}
+
+                  {% endfor %}
+                </div>
+
+                {% if _i == 2 %}{% assign _i = 0 %}{% endif %}
+              {% elsif block.type == 'tab-menu-column' %}
+              {% else %}
+                {% break %}
+              {% endif %}
+
+            {% endfor %}
+
+          </div>
+
+        {% when 'tab-menu-row' or 'tab-menu-column' %}
+        {% else %}
+          {% break %}
+
+        {% endcase %}
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+</div>

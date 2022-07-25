@@ -1,0 +1,70 @@
+{%- assign _bg_style = block.settings.bg_style -%}
+{%- assign _bg_color = block.settings.bg_color -%}
+{%- assign _bg_image = block.settings.bg_image -%}
+
+{%- assign _carousel_style = block.settings.carousel_style -%}
+
+{% capture background_section %}
+  {% if _bg_style == 'color' %}
+    style="background: {{ _bg_color }};"
+  {% else %}
+    {% unless _bg_image == blank %}
+      {% if _lazyload %}
+        data-bgset = "{{ _bg_image | img_url: '1920x' }} 1920w"
+      {% else %}
+        style="background: url({{ _bg_image | img_url: '1920x'}});"
+      {% endif %}
+    {% endunless %}
+  {% endif %}
+{% endcapture %}
+
+{%- assign _block_item_per_row = '2' -%}
+{%- assign _class = "col-lg-6 col-md-6 col-sm-6 col-12" -%}
+
+<div class="product-grid-content block-type-{{ block.type }}{% if _lazyload and _bg_style == 'image' %} lazyload{% endif %}" {{ background_section | strip }}>
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+
+    <div class="product-grid-inner">
+
+        {% include 'heading-snippet' %}
+
+        <div class="wrap-product-slider">
+          
+          {% unless block_collection == blank or collection.products_count == 0 %}
+            <div class="product-grid-{{ _type }}{% if _type == 'row' %} row{% endif %}">
+
+              {% for product in collection.products limit: _limit %}
+
+                {% if _type == 'carousel' and _carousel_style == '2' %}
+                  {% capture _mod %}{{ forloop.index | modulo: 2 }}{% endcapture %}
+                  {% if _mod == '1' %}<div class="product-grid-item">{% endif %}
+
+                  {% include 'product-owl-item' %}
+
+                  {% if _mod == '0' or forloop.last %}</div>{% endif %}
+
+                {% else %}
+                  <div class="product-grid-item{% if _type == 'row' %} {{ _class }}{% endif %}">
+                    {% include 'product-owl-item' %}
+                  </div>
+
+                {% endif %}
+
+              {% endfor %} 
+
+            </div> 
+          
+          {% else %}
+          
+            <div class="product-grid-row row">
+              {{ emptyProductListing }}
+            </div>
+          
+          {% endunless %}
+          
+        </div>
+
+    </div>
+
+ {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

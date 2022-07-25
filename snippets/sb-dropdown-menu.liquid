@@ -1,0 +1,23 @@
+<li class="dropdown{% if l.active or l.child_active %} s-open active{% endif %}">
+  
+  {% unless block.settings.icon == 'none' %}
+    {% unless template contains 'article' or template contains 'blog' %}
+      <span class="icon{% if _lazyload %} lazyload waiting{% endif %}">
+        {% if block.settings.icon == 'upload-svg' %}
+          <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ submenu | append: '.svg' | asset_url }}" alt="" />
+        {% elsif block.settings.icon == 'upload' %}
+          <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ submenu | append: '.png' | asset_url }}" alt="" />
+        {% endif %}
+      </span>
+    {% endunless %}
+  {% endunless %}
+  
+  <a href="{{ l.url }}" class="dropdown-link"><span>{{ l.title }}</span></a>
+  <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+      {% include 'sb-nav-sub-link' %}
+    {% endfor %}
+  </ul>
+</li>

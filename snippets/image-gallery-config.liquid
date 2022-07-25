@@ -1,0 +1,65 @@
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _layout = section.settings.layout -%}
+{%- assign _type = section.settings.type -%}
+{%- assign _padding = section.settings.padding_section -%}
+{%- assign _effect = section.settings.effect -%}
+
+{%- assign _item_per_row = section.settings.item_per_row -%}
+{%- assign _item_per_row_tablet = section.settings.item_per_row_tablet -%}
+{%- assign _item_per_row_mobile = section.settings.item_per_row_mobile -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+{% if _type == 'row' %}
+  {%- assign _class= 'row justify-content-center' -%}
+{% elsif _type == 'carousel' %}
+  {%- assign _class= 'home-banner-carousel home-banner-carousel-' | append: section.id -%}
+{% else %}
+  {%- assign _class= 'bc-masonry bc-masonry-' | append: section.id -%}
+{% endif %}
+
+{% case _item_per_row %}
+  {% when 1 %}
+    {%- assign _desktop_class = "col-xl-12 col-lg-12" -%}
+  {% when 2 %}
+    {%- assign _desktop_class = "col-xl-6 col-lg-6" -%}
+  {% when 3 %}
+    {%- assign _desktop_class = "col-xl-4 col-lg-4" -%}
+  {% else %}
+    {%- assign _desktop_class = "col-xl-3 col-lg-3" -%}
+{% endcase %}
+
+{% case _item_per_row_tablet %}
+  {% when 1 %}
+    {%- assign _tablet_class = "col-md-12" -%}
+  {% when 2 %}
+    {%- assign _tablet_class = "col-md-6" -%}
+  {% when 3 %}
+    {%- assign _tablet_class = "col-md-4" -%}
+  {% else %}
+    {%- assign _tablet_class = "col-md-3" -%}
+{% endcase %}
+
+{% case _item_per_row_mobile %}
+  {% when 1 %}
+    {%- assign _mobile_class = "col-sm-12 col-12" -%}
+  {% when 2 %}
+    {%- assign _mobile_class = "col-sm-6 col-6" -%}
+  {% else%}
+    {%- assign _mobile_class = "col-sm-4 col-6" -%}
+{% endcase %}
+
+{% capture emptyImage %}
+  <div class="image no-image">
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  </div>
+
+  <div class="text">
+    <div class="title h5" style="color: #000000;">{{ 'homepage.onboarding.banner_title' | t }}</div>
+  </div>
+{% endcapture %}

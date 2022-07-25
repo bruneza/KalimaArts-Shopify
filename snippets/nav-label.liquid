@@ -1,0 +1,58 @@
+{% assign _highlight_item = section.settings.enable_highlight_item %}
+{% assign _sale_menu_html = "" %}
+{% assign _new_menu_html = "" %}
+{% assign _hot_menu_html = "" %}
+
+{% capture _sale_label %}<span class="menu-label label-sale"><span class="sale-text">{{ 'general.header.menus.labels.sale' | t }}</span></span>{% endcapture %} 
+{% capture _new_label %}<span class="menu-label label-new"><span class="new-text">{{ 'general.header.menus.labels.new' | t }}</span></span>{% endcapture %} 
+{% capture _hot_label %}<span class="menu-label label-hot"><span class="hot-text">{{ 'general.header.menus.labels.hot' | t }}</span></span>{% endcapture %} 
+
+{% if section.settings.enable_menu_sale_label %}
+    {% assign _sale_menu_html = _sale_label %}
+{% endif %}
+{% if section.settings.enable_menu_hot_label %}
+    {% assign _hot_menu_html = _hot_label %}
+{% endif %}
+{% if section.settings.enable_menu_new_label %}
+    {% assign _new_menu_html = _new_label %}
+{% endif %}
+
+{% assign _sale_handles = section.settings.menu_sale_label_handle | split: ';' | uniq %}
+{% assign _new_handles = section.settings.menu_new_label_handle | split: ';' | uniq %}
+{% assign _hot_handles = section.settings.menu_hot_label_handle | split: ';' | uniq %}
+
+{% assign _work_handles = "" %}
+
+{% for _handle in _sale_handles %}
+	{% capture _striped_handle %}{{  _handle }}{% endcapture %}
+    {% if _work_handles == blank %}
+		{% assign _work_handles = _striped_handle %}
+	{% else %}
+		{% assign _work_handles = _work_handles | append: '[|||]' | append: _striped_handle %}
+	{% endif %}
+{% endfor %}
+{% assign _sale_handles = _work_handles | split: '[|||]' %}
+
+{% assign _work_handles = "" %}
+
+{% for _handle in _new_handles %}
+	{% capture _striped_handle %}{{  _handle }}{% endcapture %}
+    {% if _work_handles == blank %}
+		{% assign _work_handles = _striped_handle %}
+	{% else %}
+		{% assign _work_handles = _work_handles | append: '[|||]' | append: _striped_handle %}
+	{% endif %}
+{% endfor %}
+{% assign _new_handles = _work_handles | split: '[|||]' %}
+
+{% assign _work_handles = "" %}
+
+{% for _handle in _hot_handles %}
+	{% capture _striped_handle %}{{  _handle }}{% endcapture %}
+    {% if _work_handles == blank %}
+		{% assign _work_handles = _striped_handle %}
+	{% else %}
+		{% assign _work_handles = _work_handles | append: '[|||]' | append: _striped_handle %}
+	{% endif %}
+{% endfor %}
+{% assign _hot_handles = _work_handles | split: '[|||]' %}

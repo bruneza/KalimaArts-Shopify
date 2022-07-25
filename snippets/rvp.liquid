@@ -1,0 +1,6 @@
+{% unless product == empty %}
+  <script type="application/json" data-rvpproduct-json>
+    {{product | json}}
+  </script>
+{% endunless %}
+<div class="rvp-container page-width" data-page="{{template}}" data-money-format="{{shop.money_format}}"></div>

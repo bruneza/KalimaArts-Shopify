@@ -1,0 +1,224 @@
+{% include 'image-gallery-config' %}
+
+<div id="home-banner-{{ section.id }}" class="home-banner effect-{{ _effect }}{% if _hide_mobile %} d-none d-md-block{% endif %} layout-{{_layout }}" data-section-type="image-gallery" data-section-id="{{ section.id }}">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+    
+  <div class="home-banner-items" data-type="{{ _type }}" {% include 'data-attr' %}>
+      {% if section.blocks.size > 0 %}
+      
+        {%  if _type == 'masonry'  %}<div class="home-banner-masonry">{% endif %}
+          <div class="{{ _class }}">
+
+            {% for block in section.blocks %} 
+              {%- assign _image = block.settings.image -%}
+              {%- assign _link = block.settings.button_link -%}
+            
+              {% if block.settings.image_size == balnk %}
+                {%- assign _image_size = '370x' -%}
+              {% else %}
+                {%- assign _image_size = block.settings.image_size -%}
+              {% endif %}
+            
+              {%- assign _image_width = block.settings.image_width  %}
+              {%- assign _image_width_tablet = block.settings.image_width_tablet  %}
+              {%- assign _image_width_mobile = block.settings.image_width_mobile  %}
+            
+              {%- assign _text_align = block.settings.text_align -%}
+              {%- assign _text_box_overlay = block.settings.text_box_overlay -%}
+            
+              {%- assign _title = block.settings.image_title -%}
+              {%- assign _title_color = block.settings.title_color -%}
+              {%- assign _title_size = block.settings.title_size -%}
+              {%- assign _title_text_bold = block.settings.title_text_bold -%}
+            
+              {%- assign _subtitle = block.settings.subtitle -%}
+              {%- assign _subtitle_color = block.settings.subtitle_color -%}
+              {%- assign _subtitle_size = block.settings.subtitle_size -%}
+              {%- assign _subtitle_text_bold = block.settings.subtitle_text_bold -%}
+            
+              {%- assign _offer = block.settings.offer -%}
+              {%- assign _offer_color = block.settings.offer_color -%}
+              {%- assign _offer_size = block.settings.offer_size -%}
+              {%- assign _expire = block.settings.expire -%}
+            
+              {%- assign _button_text = block.settings.button_text -%}
+              {%- assign _button_color = block.settings.button_text_color -%}
+              {%- assign _button_bg = block.settings.button_text_bg_color -%}   
+
+              {% if _type == 'row' %}<div class="{{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}">{% endif %}
+                <div class="banner-item{% unless _text_box_overlay %} text-box-overlay {{ _text_align }}{% endunless %}{%  if _type == 'masonry'  %} masonry-width-{{ _image_width }} masonry-tabletwidth-{{ _image_width_tablet }} masonry-mobilewidth-{{ _image_width_mobile }}{% endif %}">
+
+                  {% unless _image == blank %}
+                  	{%  if _type == 'masonry'  %}<div class="masonry-item">{% endif %}
+            
+                    <div class="image">
+                      <a href="{{ _link }}">
+                        {% include 'image-lazysize' with image: _image, image_size: _image_size, image_class: '', image_alt: 'Banner' %}        
+                      </a>
+                    </div>
+
+                    <div class="text">
+                      {% unless _title == blank %}<div class="title {{ _title_size }}{% if _title_text_bold %} bold-text{% endif %}" style="color: {{ _title_color }};">{{ _title }}</div>{% endunless %}
+                      {% unless _subtitle == blank %}<div class="subtitle {{ _subtitle_size }} {% if _subtitle_text_bold %} bold-text{% endif %}" style="color: {{ _subtitle_color }};">{{ _subtitle }}</div>{% endunless %}
+                      
+                      {% unless _expire == blank %}
+                        <div class="offer {{ _offer_size }}" style="color: {{ _offer_color }};">
+                          
+                          {% unless _expire == blank %}<span class="text">{{ _offer }}</span>{% endunless %}
+                          
+                          {% assign _dueDate = _expire | split: '/' %}  
+                          <div class="countdown_{{ block.id }}"></div>
+                          
+                          <script type="text/javascript">
+                            jQuery(document).ready(function($){
+                              var currentDate = new Date();
+                              var dueDate = new Date( {{ _dueDate[2] }}, {{ _dueDate[0] | plus:0 }} - 1, {{ _dueDate[1] | plus:0 }} );
+
+                              if(currentDate < dueDate){
+                                $('.countdown_{{ block.id }}').countdown({until: dueDate, format: 'DHMS', padZeroes: true});
+                              }
+
+                              else{
+                                  $('.countdown_{{ block.id }}').parent().hide();
+                              }
+                            });
+                          </script>
+                          
+                        </div>
+                      {% endunless %}
+                      
+                      {% unless _button_text == blank %}<a class="btn btn-banner" href="{{ _link }}" style="color: {{ _button_color }}; background: {{ _button_bg }}; ">{{ _button_text }}</a>{% endunless %}
+                    </div>
+            
+                    {%  if _type == 'masonry'  %}</div>{% endif %}
+
+                  {% else %}
+                    {{ emptyImage }}
+
+                  {% endunless %}
+
+                </div>
+              {% if _type == 'row' %}</div>{% endif %}
+
+            {% endfor %}
+
+          </div>
+        {%  if _type == 'masonry'  %}</div>{% endif %}
+      
+      {% else %}
+      
+        <div class="row">
+          {% for i in (1.._item_per_row) %}
+            <div class="{{ _desktop_class }} {{ _tablet_class }} {{ mobile_class }}">
+              <div class="banner-item">
+                {{ emptyImage }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+      {% endif %}
+  </div>
+  
+  {% if _type == 'row' %}
+    <style>
+      #home-banner-{{ section.id }} .home-banner-items .row{
+        margin:-{{ _padding }}px;
+      }
+      #home-banner-{{ section.id }} .home-banner-items .row>div{
+        padding:{{ _padding }}px;
+      }  
+    </style>
+  
+  {% elsif _type == 'masonry' %}
+  	<style>
+      #home-banner-{{ section.id }} .home-banner-masonry .bc-masonry{
+        margin: -{{ _padding }}px;
+      }
+      #home-banner-{{ section.id }} .home-banner-masonry .bc-masonry .banner-item{
+        padding: {{ _padding }}px;
+      }  
+    </style>
+  
+  {% endif %}
+  
+  <script>
+      jQuery(document).ready(function($) {
+        
+        var _sections = new theme.Sections();
+        _sections.register('image-gallery',function(){
+          
+          var _type = $('#home-banner-{{ section.id }} .home-banner-items').attr('data-type');           
+                        
+          if(_type == 'carousel'){
+            var _item_desk = $('#home-banner-{{ section.id }} .home-banner-items').attr('data-item-desk'),
+          	_item_tab = $('#home-banner-{{ section.id }} .home-banner-items').attr('data-item-tab'),
+          	_item_mob = $('#home-banner-{{ section.id }} .home-banner-items').attr('data-item-mob'),
+            _pad = Number($('#home-banner-{{ section.id }} .home-banner-items').attr('data-pad')),
+            _nav = $('#home-banner-{{ section.id }} .home-banner-items').attr('data-nav'),
+            _bullet = $('#home-banner-{{ section.id }} .home-banner-items').attr('data-bullet'),
+            _nav_carousel = false,
+            _bul_carousel = false;
+                               
+            if(_bullet == 'true'){ var _bul_carousel = true;}   
+            if(_nav == 'true'){ var _nav_carousel = true;}
+            
+            jQuery(".home-banner-carousel-{{ section.id }}").length && jQuery('.home-banner-carousel-{{ section.id }}').owlCarousel({
+                nav			: _nav_carousel
+                ,dots 		: _bul_carousel
+               	,items		: _item_desk
+               	,rtl		: jQuery('body').data('rtl')
+            	,margin		: _pad
+                ,responsive : {
+                  0:{
+                    items: 1
+                  }
+                  ,375:{
+                     items: _item_mob
+                  }
+                  ,768:{
+                     items: _item_tab
+                  }
+                  ,1024:{
+                    items: _item_desk
+                  }
+                }
+                ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+            });
+          }
+                  
+          else if(_type == 'masonry'){
+            let muuri_{{section.id}} = (e,grid)=>{
+              e = new Muuri(grid, {
+                items: '.banner-item'
+                ,visibleStyles: {}
+                ,layout: {
+                  fillGaps: true,
+                  rounding: false
+                }
+              })
+            }
+
+            jQuery(document).ready(function($) {
+              $('.bc-masonry').each(function(){
+                 let $module = $(this);
+                 let update = function(){
+                    muuri_{{section.id}}($module,'.bc-masonry-{{section.id}}');
+                 }
+                 this.addEventListener('load', update, true);
+
+                 muuri_{{section.id}}($module,'.bc-masonry-{{section.id}}');
+              })
+            });
+          }
+          
+          else{
+            return;
+          }
+              
+        })
+      })
+  </script>
+    
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

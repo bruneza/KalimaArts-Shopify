@@ -1,0 +1,90 @@
+{%- assign _background = block.settings.bg_color -%}
+{% include 'check-shop-url' %}
+
+<div class="product-grid-content block-type-{{ block.type }}" style="background-color: {{ _background }};">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+            
+    {% include 'heading-snippet' %}
+
+    {% unless block_collection == blank or collection.products_count == 0 %}
+
+      <div class="product-grid-inner deal-position-{{ block.settings.position }}">
+          {% if section.settings.heading == blank %}
+            {%- assign _position = block.settings.position -%}
+            {%- assign _expire = block.settings.expire -%}
+          {% endif %}
+
+          {% if _position == '2' and _expire != blank %}
+            <div class="product-type-item">
+
+              {% if _shop_url == _check_shop_url %}
+                {%- assign seconds = 34 | times: 60 | times: 60 -%}
+                {%- assign _expire = 'now' | date: "%s" | plus: seconds | date: "%m/%d/%Y" -%}
+              {% else %}
+                {%- assign _expire = block.settings.expire -%}
+              {% endif %}
+
+              {%- assign _dueDate = _expire | split: '/' %}
+              {%- assign _text_1 = block.settings.text_1 -%}
+              {%- assign _text_2 = block.settings.text_2 -%}
+              {%- assign _image = block.settings.image -%}
+              {%- assign _image_size = block.settings.image_size -%}
+
+              <div class="header-countdown">
+                  {% unless _text_1 == blank %}<span class="countdown-title">{{ _text_1 }}</span>{% endunless %}
+
+                  {% unless _image == blank %}
+                    <div class="block-image">
+                      {% include 'image-lazysize' with image: _image, image_size: _image_size, image_class: '', image_alt: 'Deals' %}
+                    </div>
+                  {% endunless %}
+
+                  {% unless _text_2 == blank %}<span class="countdown-text">{{ _text_2 }}</span>{% endunless %}
+
+                  <div class="wrapper-countdown">
+                    <div class="countdown_{{ section.id }}"></div>
+                  </div>
+
+                  <script type="text/javascript">
+                    jQuery(document).ready(function($){
+
+                      var currentDate = new Date();
+                      var dueDate = new Date( {{ _dueDate[2] }}, {{ _dueDate[0] | plus:0 }} - 1, {{ _dueDate[1] | plus:0 }} );
+                      if(currentDate < dueDate){
+                        $('.countdown_{{ section.id }}').countdown({until: dueDate, format: 'DHMS', padZeroes: true});
+                      }
+                      else{
+                        $('.countdown_{{ section.id }}').parents('.header-countdown').hide();
+                      }
+
+                    });
+                  </script>
+
+              </div>
+
+            </div>
+          {% endif %}
+
+          <div class="product-grid-wrapper">
+            <div class="product-grid-{{ _type }}{% if _type == 'row' %} row{% endif %}">
+              {% for product in collection.products limit: _limit %}
+                <div class="product-grid-item{% if _type == 'row' %} {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}{% endif %}">
+                  {% include 'product-item' %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+      </div>
+
+    {% else %}
+
+      <div class="product-grid-row">
+        <div class="row"> 
+          {{ emptyProduct }}
+        </div>
+      </div>
+
+    {% endunless %}
+  
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

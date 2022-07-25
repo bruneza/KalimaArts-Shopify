@@ -1,0 +1,51 @@
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _layout = section.settings.layout -%}
+
+{%- if _layout == 'boxed' -%}
+  {%- assign _layout_class = 'container' -%}
+{%- else -%}
+  {%- assign _layout_class = 'container-fluid' -%}
+{%- endif -%}
+
+<footer id="footer-content">
+  
+  <div class="footer-container layout-{{ _layout }}">
+      {%- include 'footer-widget-snippet', type: 'newsletter' -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="footer-widget">
+          <div class="footer-inner {{ _layout_class }}">
+            
+            <div class="table-row">
+              <div class="row">   
+
+                {%- for block in section.blocks -%}
+                  {%- assign _width = block.settings.width -%}
+
+                  {%- if block.type == 'logo' -%}
+                    {%- include 'footer-widget-snippet', type: 'logo' -%}
+                  {%- else -%}
+                    {%- include 'footer-widget-snippet', type: 'menu' -%}
+                  {%- endif -%}
+
+                {%- endfor -%}    
+
+              </div>
+            </div>
+            
+          </div>            
+        </div>
+        {% endif %}
+      
+      {%- include 'footer-widget-snippet', type: 'copyright' -%}
+  </div>
+
+  <div id="checkLayout">
+    <span class="d-block d-sm-none"></span>
+    <span class="d-none d-sm-block d-md-none"></span>
+    <span class="d-none d-md-block d-lg-none"></span>
+    <span class="d-none d-lg-block d-xl-none"></span>
+    <span class="d-none d-xl-block"></span>
+  </div>
+  
+</footer>

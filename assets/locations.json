@@ -1,0 +1,5791 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9494469,
+          52.13549
+        ]
+      },
+      "properties": {
+        "Store Name": "The Rusty Bucket",
+        "Address": "293 Likely Rd, 150 Mile House, BC",
+        "City": "150 Mile House",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "293 Likely Rd, 150 Mile House, BC 150 Mile House British Columbia Canada ",
+        "Latitude": 52.13549,
+        "Longitude": -121.9494469
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2809162,
+          49.0445462
+        ]
+      },
+      "properties": {
+        "Store Name": "Ambition Salon",
+        "Address": "#210 - 34077 Gladys Avenue",
+        "City": "Abbotsford",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "#210 - 34077 Gladys Avenue Abbotsford British Columbia Canada ",
+        "Latitude": 49.0445462,
+        "Longitude": -122.2809162
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3204674,
+          49.0521016999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Cheam Wellness Group",
+        "Address": "304-32625 South Fraser Way",
+        "City": "Abbotsford",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "304-32625 South Fraser Way Abbotsford British Columbia Canada ",
+        "Latitude": 49.0521016999999,
+        "Longitude": -122.3204674
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2787062,
+          49.0387190999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Hair Tavern",
+        "Address": "103 - 34143 Marshall Road",
+        "City": "Abbotsford",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "103 - 34143 Marshall Road Abbotsford British Columbia Canada ",
+        "Latitude": 49.0387190999999,
+        "Longitude": -122.2787062
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2894605,
+          49.0492505
+        ]
+      },
+      "properties": {
+        "Store Name": "Razors Edge Hair Gallery",
+        "Address": "33785 Essendene Avenue",
+        "City": "Abbotsford",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "33785 Essendene Avenue Abbotsford British Columbia Canada ",
+        "Latitude": 49.0492505,
+        "Longitude": -122.2894605
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2900263,
+          49.0495133
+        ]
+      },
+      "properties": {
+        "Store Name": "Spruce Collective",
+        "Address": "2622 Montrose Avenue",
+        "City": "Abbotsford",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2622 Montrose Avenue Abbotsford British Columbia Canada ",
+        "Latitude": 49.0495133,
+        "Longitude": -122.2900263
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3044697,
+          49.0504377
+        ]
+      },
+      "properties": {
+        "Store Name": "The Wonder Cabinet",
+        "City": "Abbotsford",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Abbotsford British Columbia Canada ",
+        "Latitude": 49.0504377,
+        "Longitude": -122.3044697
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2944155,
+          49.0396311
+        ]
+      },
+      "properties": {
+        "Store Name": "Wild Orange Spa",
+        "Address": "2031 McCallum Road #103",
+        "City": "Abbotsford",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2031 McCallum Road #103 Abbotsford British Columbia Canada ",
+        "Latitude": 49.0396311,
+        "Longitude": -122.2944155
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3044697,
+          49.0504377
+        ]
+      },
+      "properties": {
+        "Store Name": "Hello Gifts",
+        "City": "Abbotsford",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Abbotsford British Columbia Canada ",
+        "Latitude": 49.0504377,
+        "Longitude": -122.3044697
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.123353,
+          51.1826856
+        ]
+      },
+      "properties": {
+        "Store Name": "Rosy Cheeks Boutique",
+        "Address": "4614 BarrièreTown Road",
+        "City": "Barrière",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "4614 BarrièreTown Road Barrière British Columbia Canada ",
+        "Latitude": 51.1826856,
+        "Longitude": -120.123353
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.007186,
+          49.2811893
+        ]
+      },
+      "properties": {
+        "Store Name": "Chickadee Boutique",
+        "Address": "4347 Hastings Street",
+        "City": "Burnaby",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "4347 Hastings Street Burnaby British Columbia Canada ",
+        "Latitude": 49.2811893,
+        "Longitude": -123.007186
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125.2681087,
+          50.0324169
+        ]
+      },
+      "properties": {
+        "Store Name": "Mussels and More Pottery",
+        "Address": "1761 Island Highway",
+        "City": "Campbell River",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1761 Island Highway Campbell River British Columbia Canada ",
+        "Latitude": 50.0324169,
+        "Longitude": -125.2681087
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125.246632,
+          50.0265889999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Ocean Mountain Yoga",
+        "Address": "1121 Cedar Street",
+        "City": "Campbell River",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1121 Cedar Street Campbell River British Columbia Canada ",
+        "Latitude": 50.0265889999999,
+        "Longitude": -125.246632
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125.2101594,
+          49.96286
+        ]
+      },
+      "properties": {
+        "Store Name": "Sage Spa",
+        "Address": "2780 South Island Highway",
+        "City": "Campbell River",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2780 South Island Highway Campbell River British Columbia Canada ",
+        "Latitude": 49.96286,
+        "Longitude": -125.2101594
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9640516,
+          49.1055831
+        ]
+      },
+      "properties": {
+        "Store Name": "Luna Float",
+        "Address": "​101-45645 Tamihi Way",
+        "City": "Chilliwack",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "​101-45645 Tamihi Way Chilliwack British Columbia Canada ",
+        "Latitude": 49.1055831,
+        "Longitude": -121.9640516
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9596327,
+          49.131546
+        ]
+      },
+      "properties": {
+        "Store Name": "Restorative Health",
+        "Address": "101-7056 Vedder Road",
+        "City": "Chilliwack",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "101-7056 Vedder Road Chilliwack British Columbia Canada ",
+        "Latitude": 49.131546,
+        "Longitude": -121.9596327
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9538674,
+          49.172107
+        ]
+      },
+      "properties": {
+        "Store Name": "The Button Box Boutique",
+        "Address": "9369B Mill Street",
+        "City": "Chilliwack",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "9369B Mill Street Chilliwack British Columbia Canada ",
+        "Latitude": 49.172107,
+        "Longitude": -121.9538674
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9794171,
+          49.1515494999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Once Upon a Child",
+        "Address": "#206 - 8249 Eagle Landing Parkway",
+        "City": "Chilliwack",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "#206 - 8249 Eagle Landing Parkway Chilliwack British Columbia Canada ",
+        "Latitude": 49.1515494999999,
+        "Longitude": -121.9794171
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9492707,
+          49.1690933
+        ]
+      },
+      "properties": {
+        "Store Name": "The Cottage Boutique",
+        "Address": "46085 First Avenue",
+        "City": "Chilliwack",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "46085 First Avenue Chilliwack British Columbia Canada ",
+        "Latitude": 49.1690933,
+        "Longitude": -121.9492707
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.735192,
+          49.106387
+        ]
+      },
+      "properties": {
+        "Store Name": "The Heart",
+        "Address": "#4 5723 176 Street",
+        "City": "Cloverdale",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "#4 5723 176 Street Cloverdale British Columbia Canada ",
+        "Latitude": 49.106387,
+        "Longitude": -122.735192
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.9282659,
+          49.6735133
+        ]
+      },
+      "properties": {
+        "Store Name": "Island Gift Baskets",
+        "City": "Comox",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Comox British Columbia Canada ",
+        "Latitude": 49.6735133,
+        "Longitude": -124.9282659
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7932065,
+          49.2837626
+        ]
+      },
+      "properties": {
+        "Store Name": "Aqualux Baby Company",
+        "City": "Coquitlam",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Coquitlam British Columbia Canada ",
+        "Latitude": 49.2837626,
+        "Longitude": -122.7932065
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8643503,
+          49.2487627
+        ]
+      },
+      "properties": {
+        "Store Name": "Artisan Gifts & Flowers",
+        "Address": "1038A Austin Ave",
+        "City": "Coquitlam",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1038A Austin Ave Coquitlam British Columbia Canada ",
+        "Latitude": 49.2487627,
+        "Longitude": -122.8643503
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8701,
+          49.2370189
+        ]
+      },
+      "properties": {
+        "Store Name": "ClauDiva's Salon and Spa",
+        "Address": "936 B Brunette Avenue",
+        "City": "Coquitlam",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "936 B Brunette Avenue Coquitlam British Columbia Canada ",
+        "Latitude": 49.2370189,
+        "Longitude": -122.8701
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8231213,
+          49.2323193
+        ]
+      },
+      "properties": {
+        "Store Name": "Pacific Basket Company",
+        "Address": "#23 – 91 Golden Drive",
+        "City": "Coquitlam",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "#23 – 91 Golden Drive Coquitlam British Columbia Canada ",
+        "Latitude": 49.2323193,
+        "Longitude": -122.8231213
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7932065,
+          49.2837626
+        ]
+      },
+      "properties": {
+        "Store Name": "The Whit List",
+        "City": "Coquitlam",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Coquitlam British Columbia Canada ",
+        "Latitude": 49.2837626,
+        "Longitude": -122.7932065
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125.0002231,
+          49.6893253999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Clinic 5 Laser & Beauty Collective",
+        "Address": "460 6th Street",
+        "City": "Courtenay",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "460 6th Street Courtenay British Columbia Canada ",
+        "Latitude": 49.6893253999999,
+        "Longitude": -125.0002231
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.6204427,
+          48.7405884
+        ]
+      },
+      "properties": {
+        "Store Name": "Old Crow Jewelry Boutique",
+        "Address": "1725 Cowichan Bay Road",
+        "City": "Cowichan Bay",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1725 Cowichan Bay Road Cowichan Bay British Columbia Canada ",
+        "Latitude": 48.7405884,
+        "Longitude": -123.6204427
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.226506,
+          55.7582369999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Vintage & Restoration Love",
+        "Address": "908 102 Ave",
+        "City": "Dawson Creek",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "908 102 Ave Dawson Creek British Columbia Canada ",
+        "Latitude": 55.7582369999999,
+        "Longitude": -120.226506
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0837202,
+          49.0899969
+        ]
+      },
+      "properties": {
+        "Store Name": "Hygge Bath",
+        "Address": "5046 48th Avenue",
+        "City": "Delta",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "5046 48th Avenue Delta British Columbia Canada ",
+        "Latitude": 49.0899969,
+        "Longitude": -123.0837202
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0697722,
+          49.0248296
+        ]
+      },
+      "properties": {
+        "Store Name": "Boutique Blanche",
+        "Address": "1209 56th Street",
+        "City": "Delta",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1209 56th Street Delta British Columbia Canada ",
+        "Latitude": 49.0248296,
+        "Longitude": -123.0697722
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0264758,
+          49.0952154999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Everly Gifts",
+        "City": "Delta",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Delta British Columbia Canada ",
+        "Latitude": 49.0952154999999,
+        "Longitude": -123.0264758
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.708428,
+          48.777787
+        ]
+      },
+      "properties": {
+        "Store Name": "Willow & Orchid Boutique and Floral Design",
+        "Address": "101 Station Street",
+        "City": "Duncan",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "101 Station Street Duncan British Columbia Canada ",
+        "Latitude": 48.777787,
+        "Longitude": -123.708428
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.7079417,
+          48.7786908
+        ]
+      },
+      "properties": {
+        "Store Name": "Backwoods Soap & Candle Co.",
+        "City": "Duncan",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Duncan British Columbia Canada ",
+        "Latitude": 48.7786908,
+        "Longitude": -123.7079417
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.5795747,
+          49.1679046
+        ]
+      },
+      "properties": {
+        "Store Name": "Bella & Wren",
+        "Address": "9110 Glover Road #2",
+        "City": "Fort Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "9110 Glover Road #2 Fort Langley British Columbia Canada ",
+        "Latitude": 49.1679046,
+        "Longitude": -122.5795747
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7015838,
+          58.8052049
+        ]
+      },
+      "properties": {
+        "Store Name": "All Lash'd Up",
+        "Address": "5008 50th Avenue North",
+        "City": "Fort Nelson",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "5008 50th Avenue North Fort Nelson British Columbia Canada ",
+        "Latitude": 58.8052049,
+        "Longitude": -122.7015838
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.9767768,
+          51.2998327
+        ]
+      },
+      "properties": {
+        "Store Name": "Bona Fide",
+        "Address": "503 5th Street South",
+        "City": "Golden",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "503 5th Street South Golden British Columbia Canada ",
+        "Latitude": 51.2998327,
+        "Longitude": -116.9767768
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -127.6143646,
+          55.2663345
+        ]
+      },
+      "properties": {
+        "Store Name": "Country Herbs",
+        "Address": "3453 Hastings Street",
+        "City": "Hazelton",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "3453 Hastings Street Hazelton British Columbia Canada ",
+        "Latitude": 55.2663345,
+        "Longitude": -127.6143646
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.3254465,
+          50.6757006
+        ]
+      },
+      "properties": {
+        "Store Name": "The Modern Family Boutique",
+        "Address": "665 Victoria Street",
+        "City": "Kamloops",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "665 Victoria Street Kamloops British Columbia Canada ",
+        "Latitude": 50.6757006,
+        "Longitude": -120.3254465
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.4909517,
+          49.8643821999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Boheme Collective",
+        "Address": "1-2925 Pandosy St",
+        "City": "Kelowna",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1-2925 Pandosy St Kelowna British Columbia Canada ",
+        "Latitude": 49.8643821999999,
+        "Longitude": -119.4909517
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.446205,
+          49.8815454
+        ]
+      },
+      "properties": {
+        "Store Name": "Baby & Me",
+        "Address": "2061 Harvey Avenue",
+        "City": "Kelowna",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2061 Harvey Avenue Kelowna British Columbia Canada ",
+        "Latitude": 49.8815454,
+        "Longitude": -119.446205
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.3878903,
+          49.952439
+        ]
+      },
+      "properties": {
+        "Store Name": "Pharmasave",
+        "Address": "304-1750 Pier Mac Way",
+        "City": "Kelowna",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "304-1750 Pier Mac Way Kelowna British Columbia Canada ",
+        "Latitude": 49.952439,
+        "Longitude": -119.3878903
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.5134545,
+          49.7962474
+        ]
+      },
+      "properties": {
+        "Store Name": "Pure Salt",
+        "Address": "425 Quilchena Drive",
+        "City": "Kelowna",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "425 Quilchena Drive Kelowna British Columbia Canada ",
+        "Latitude": 49.7962474,
+        "Longitude": -119.5134545
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.4960106,
+          49.8879519
+        ]
+      },
+      "properties": {
+        "Store Name": "Maple + Crew",
+        "City": "Kelowna",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Kelowna British Columbia Canada ",
+        "Latitude": 49.8879519,
+        "Longitude": -119.4960106
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.421343,
+          49.8848252
+        ]
+      },
+      "properties": {
+        "Store Name": "TJ's The Kiddies Store",
+        "Address": "#4-360 Spedding Court",
+        "City": "Kelowna",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "#4-360 Spedding Court Kelowna British Columbia Canada ",
+        "Latitude": 49.8848252,
+        "Longitude": -119.421343
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6684949,
+          49.1618513
+        ]
+      },
+      "properties": {
+        "Store Name": "Active Baby",
+        "Address": "302-6339 200 Street",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "302-6339 200 Street Langley British Columbia Canada ",
+        "Latitude": 49.1618513,
+        "Longitude": -122.6684949
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6669343,
+          49.1176719
+        ]
+      },
+      "properties": {
+        "Store Name": "Bliss Day Spa",
+        "Address": "20055 Willowbrook Drive",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "20055 Willowbrook Drive Langley British Columbia Canada ",
+        "Latitude": 49.1176719,
+        "Longitude": -122.6669343
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7051958,
+          49.1256713
+        ]
+      },
+      "properties": {
+        "Store Name": "Fluid Juice Bar",
+        "Address": "101-20633 Fraser Highway",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "101-20633 Fraser Highway Langley British Columbia Canada ",
+        "Latitude": 49.1256713,
+        "Longitude": -122.7051958
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4688859,
+          49.0577826
+        ]
+      },
+      "properties": {
+        "Store Name": "Honey Belle Beauty Bar",
+        "Address": "27264 Fraser Hwy",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "27264 Fraser Hwy Langley British Columbia Canada ",
+        "Latitude": 49.0577826,
+        "Longitude": -122.4688859
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6671683,
+          49.1587635
+        ]
+      },
+      "properties": {
+        "Store Name": "Hunni's",
+        "Address": "#5 - 8590 200th Street",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "#5 - 8590 200th Street Langley British Columbia Canada ",
+        "Latitude": 49.1587635,
+        "Longitude": -122.6671683
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.5804519,
+          49.1675148
+        ]
+      },
+      "properties": {
+        "Store Name": "Raw Canvas Skin Bar",
+        "Address": "205 - 9084 Glover Road",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "205 - 9084 Glover Road Langley British Columbia Canada ",
+        "Latitude": 49.1675148,
+        "Longitude": -122.5804519
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6550218,
+          49.1185258999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Spa Utopia",
+        "Address": "106 - 20486 64th Avenue",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "106 - 20486 64th Avenue Langley British Columbia Canada ",
+        "Latitude": 49.1185258999999,
+        "Longitude": -122.6550218
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6620032,
+          49.1054496
+        ]
+      },
+      "properties": {
+        "Store Name": "The Local Space",
+        "Address": "106-20226 Fraser Highway",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "106-20226 Fraser Highway Langley British Columbia Canada ",
+        "Latitude": 49.1054496,
+        "Longitude": -122.6620032
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6636123,
+          49.1235387
+        ]
+      },
+      "properties": {
+        "Store Name": "The Office Home & Apparel",
+        "Address": "E206 - 20211 66th Avenue",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "E206 - 20211 66th Avenue Langley British Columbia Canada ",
+        "Latitude": 49.1235387,
+        "Longitude": -122.6636123
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6598913,
+          49.1645181
+        ]
+      },
+      "properties": {
+        "Store Name": "Wild Sage Massage Therapy Inc.",
+        "Address": "8880 202 Street",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "8880 202 Street Langley British Columbia Canada ",
+        "Latitude": 49.1645181,
+        "Longitude": -122.6598913
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6716036,
+          49.1045917
+        ]
+      },
+      "properties": {
+        "Store Name": "Waxology",
+        "Address": "19897 56 Avenue",
+        "City": "Langley",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "19897 56 Avenue Langley British Columbia Canada ",
+        "Latitude": 49.1045917,
+        "Longitude": -122.6716036
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.5983981,
+          49.2193226
+        ]
+      },
+      "properties": {
+        "Store Name": "Bellamy Gifts",
+        "City": "Maple Ridge",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Maple Ridge British Columbia Canada ",
+        "Latitude": 49.2193226,
+        "Longitude": -122.5983981
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.590095,
+          49.2194365999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Town & Country Vintage Home",
+        "Address": "102 11940 228th Street",
+        "City": "Maple Ridge",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "102 11940 228th Street Maple Ridge British Columbia Canada ",
+        "Latitude": 49.2194365999999,
+        "Longitude": -122.590095
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.5983981,
+          49.2193226
+        ]
+      },
+      "properties": {
+        "Store Name": "Oak & Ivory Collective Inc.",
+        "City": "Maple Ridge",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Maple Ridge British Columbia Canada ",
+        "Latitude": 49.2193226,
+        "Longitude": -122.5983981
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.55791,
+          49.1838146
+        ]
+      },
+      "properties": {
+        "Store Name": "Bruce's Country Market",
+        "Address": "23963 Lougheed Highway",
+        "City": "Maple Ridge",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "23963 Lougheed Highway Maple Ridge British Columbia Canada ",
+        "Latitude": 49.1838146,
+        "Longitude": -122.55791
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6557214,
+          49.219603
+        ]
+      },
+      "properties": {
+        "Store Name": "Kinectiv Sport + Health",
+        "Address": "20395 Lougheed Hwy #200",
+        "City": "Maple Ridge",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "20395 Lougheed Hwy #200 Maple Ridge British Columbia Canada ",
+        "Latitude": 49.219603,
+        "Longitude": -122.6557214
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6015121,
+          49.219629
+        ]
+      },
+      "properties": {
+        "Store Name": "Lotus & Lemongrass",
+        "Address": "11952 224th Street",
+        "City": "Maple Ridge",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "11952 224th Street Maple Ridge British Columbia Canada ",
+        "Latitude": 49.219629,
+        "Longitude": -122.6015121
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6019025,
+          49.2193596
+        ]
+      },
+      "properties": {
+        "Store Name": "Monkey Business Kid's Boutique",
+        "Address": "11947 224 Street",
+        "City": "Maple Ridge",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "11947 224 Street Maple Ridge British Columbia Canada ",
+        "Latitude": 49.2193596,
+        "Longitude": -122.6019025
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.5927787,
+          49.219634
+        ]
+      },
+      "properties": {
+        "Store Name": "Mix Hair Lounge",
+        "Address": "22714 Dewdney Trunk Rd #102",
+        "City": "Maple Ridge",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "22714 Dewdney Trunk Rd #102 Maple Ridge British Columbia Canada ",
+        "Latitude": 49.219634,
+        "Longitude": -122.5927787
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.2984801,
+          48.851047
+        ]
+      },
+      "properties": {
+        "Store Name": "Hunky Dory Children's Boutique",
+        "Address": "478 Village Bay Road",
+        "City": "Mayne Island",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "478 Village Bay Road Mayne Island British Columbia Canada ",
+        "Latitude": 48.851047,
+        "Longitude": -123.2984801
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.7900535,
+          50.1101155
+        ]
+      },
+      "properties": {
+        "Store Name": "Bee's Knees Boutique",
+        "Address": "1988 Quilchena Avenue",
+        "City": "Merritt",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1988 Quilchena Avenue Merritt British Columbia Canada ",
+        "Latitude": 50.1101155,
+        "Longitude": -120.7900535
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3067544,
+          49.1346794
+        ]
+      },
+      "properties": {
+        "Store Name": "Bella Beauty Bar",
+        "Address": "33123 First Avenue #207",
+        "City": "Mission",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "33123 First Avenue #207 Mission British Columbia Canada ",
+        "Latitude": 49.1346794,
+        "Longitude": -122.3067544
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2919759,
+          49.1450336
+        ]
+      },
+      "properties": {
+        "Store Name": "Lush Body Sugaring & Lash Lounge",
+        "Address": "7871 Stave Lake Street, Suite C210",
+        "City": "Mission",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "7871 Stave Lake Street, Suite C210 Mission British Columbia Canada ",
+        "Latitude": 49.1450336,
+        "Longitude": -122.2919759
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3078173,
+          49.1342197
+        ]
+      },
+      "properties": {
+        "Store Name": "Studio FITRx",
+        "Address": "102 - 33072 1st Avenue",
+        "City": "Mission",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "102 - 33072 1st Avenue Mission British Columbia Canada ",
+        "Latitude": 49.1342197,
+        "Longitude": -122.3078173
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3066794,
+          49.1343228
+        ]
+      },
+      "properties": {
+        "Store Name": "Pressland General",
+        "Address": "33120 1st Avenue",
+        "City": "Mission",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "33120 1st Avenue Mission British Columbia Canada ",
+        "Latitude": 49.1343228,
+        "Longitude": -122.3066794
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.028576,
+          49.21877
+        ]
+      },
+      "properties": {
+        "Store Name": "Cultured Coast",
+        "Address": "#125-4750 Rutherford Road",
+        "City": "Nanaimo",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "#125-4750 Rutherford Road Nanaimo British Columbia Canada ",
+        "Latitude": 49.21877,
+        "Longitude": -124.028576
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.0457953,
+          49.2325078999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Once Upon a Child",
+        "Address": "106 - 6461 Metral Drive",
+        "City": "Nanaimo",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "106 - 6461 Metral Drive Nanaimo British Columbia Canada ",
+        "Latitude": 49.2325078999999,
+        "Longitude": -124.0457953
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.9847917,
+          49.1858024
+        ]
+      },
+      "properties": {
+        "Store Name": "Timber + Gray Design Co.",
+        "Address": "202-1925 Bowen Road",
+        "City": "Nanaimo",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "202-1925 Bowen Road Nanaimo British Columbia Canada ",
+        "Latitude": 49.1858024,
+        "Longitude": -123.9847917
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.0209161,
+          49.2220652
+        ]
+      },
+      "properties": {
+        "Store Name": "The Green Room Esthetics Studio",
+        "Address": "5112 Broughton Place",
+        "City": "Nanaimo",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "5112 Broughton Place Nanaimo British Columbia Canada ",
+        "Latitude": 49.2220652,
+        "Longitude": -124.0209161
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.9379068,
+          49.1660797
+        ]
+      },
+      "properties": {
+        "Store Name": "Violet Hair Lounge",
+        "Address": "102 - 235 Bastion Street",
+        "City": "Nanaimo",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "102 - 235 Bastion Street Nanaimo British Columbia Canada ",
+        "Latitude": 49.1660797,
+        "Longitude": -123.9379068
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.2908524,
+          49.4933625
+        ]
+      },
+      "properties": {
+        "Store Name": "Nelson Remedy's RX",
+        "Address": "737 Baker St",
+        "City": "Nelson",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "737 Baker St Nelson British Columbia Canada ",
+        "Latitude": 49.4933625,
+        "Longitude": -117.2908524
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.9095062,
+          49.2025146999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Mila + Paige",
+        "Address": "665 Columbia Street",
+        "City": "New Westminster",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "665 Columbia Street New Westminster British Columbia Canada ",
+        "Latitude": 49.2025146999999,
+        "Longitude": -122.9095062
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0725785,
+          49.3269939
+        ]
+      },
+      "properties": {
+        "Store Name": "Active Baby",
+        "Address": "1985 Lonsdale Avenue",
+        "City": "North Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1985 Lonsdale Avenue North Vancouver British Columbia Canada ",
+        "Latitude": 49.3269939,
+        "Longitude": -123.0725785
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1390021,
+          49.2618836
+        ]
+      },
+      "properties": {
+        "Store Name": "Lussobaby",
+        "Address": "2699 Granville Street",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2699 Granville Street Vancouver British Columbia Canada ",
+        "Latitude": 49.2618836,
+        "Longitude": -123.1390021
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1028061,
+          49.3236864
+        ]
+      },
+      "properties": {
+        "Store Name": "Lussobaby",
+        "Address": "1037 Marine Drive",
+        "City": "North Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1037 Marine Drive North Vancouver British Columbia Canada ",
+        "Latitude": 49.3236864,
+        "Longitude": -123.1028061
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1013666,
+          49.3376224
+        ]
+      },
+      "properties": {
+        "Store Name": "Delish General Store",
+        "Address": "3130 Highland Boulevard",
+        "City": "North Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "3130 Highland Boulevard North Vancouver British Columbia Canada ",
+        "Latitude": 49.3376224,
+        "Longitude": -123.1013666
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.097153,
+          49.3137001
+        ]
+      },
+      "properties": {
+        "Store Name": "Spa Utopia",
+        "Address": "160 - 889 Harbourside Drive",
+        "City": "North Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "160 - 889 Harbourside Drive North Vancouver British Columbia Canada ",
+        "Latitude": 49.3137001,
+        "Longitude": -123.097153
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.463612,
+          49.031741
+        ]
+      },
+      "properties": {
+        "Store Name": "Lazy E Boutique",
+        "Address": "8141 A Main Street",
+        "City": "Osoyoos",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "8141 A Main Street Osoyoos British Columbia Canada ",
+        "Latitude": 49.031741,
+        "Longitude": -119.463612
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.31471,
+          49.32112
+        ]
+      },
+      "properties": {
+        "Store Name": "Rock-a-Bear Baby Swag & Spa",
+        "Address": "147 Morison Avenue",
+        "City": "Parksville",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "147 Morison Avenue Parksville British Columbia Canada ",
+        "Latitude": 49.32112,
+        "Longitude": -124.31471
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.312442,
+          49.3189789
+        ]
+      },
+      "properties": {
+        "Store Name": "Soak Lifestyle Boutique",
+        "Address": "180 Craig Street #4",
+        "City": "Parksville",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "180 Craig Street #4 Parksville British Columbia Canada ",
+        "Latitude": 49.3189789,
+        "Longitude": -124.312442
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.6051005,
+          49.4864457
+        ]
+      },
+      "properties": {
+        "Store Name": "GardenWorks",
+        "Address": "670 Duncan Avenue West",
+        "City": "Penticton",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "670 Duncan Avenue West Penticton British Columbia Canada ",
+        "Latitude": 49.4864457,
+        "Longitude": -119.6051005
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.5908365,
+          49.4964741
+        ]
+      },
+      "properties": {
+        "Store Name": "Intricate Reflections",
+        "Address": "456 Main Street",
+        "City": "Penticton",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "456 Main Street Penticton British Columbia Canada ",
+        "Latitude": 49.4964741,
+        "Longitude": -119.5908365
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.5925288,
+          49.5008513
+        ]
+      },
+      "properties": {
+        "Store Name": "Something Pretty Boutique",
+        "Address": "10 Front Street",
+        "City": "Penticton",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "10 Front Street Penticton British Columbia Canada ",
+        "Latitude": 49.5008513,
+        "Longitude": -119.5925288
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.6805424,
+          49.2019317
+        ]
+      },
+      "properties": {
+        "Store Name": "Coastal Collective + Co",
+        "Address": "101-10973 Barnston View Road",
+        "City": "Pitt Meadows",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "101-10973 Barnston View Road Pitt Meadows British Columbia Canada ",
+        "Latitude": 49.2019317,
+        "Longitude": -122.6805424
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.772577,
+          49.2651413
+        ]
+      },
+      "properties": {
+        "Store Name": "Coquitlam Florist",
+        "Address": "104-2020 Oxford Connector",
+        "City": "Port Coquitlam",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "104-2020 Oxford Connector Port Coquitlam British Columbia Canada ",
+        "Latitude": 49.2651413,
+        "Longitude": -122.772577
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7810708,
+          49.2628382
+        ]
+      },
+      "properties": {
+        "Store Name": "CxD Home & Co",
+        "City": "Port Coquitlam",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Port Coquitlam British Columbia Canada ",
+        "Latitude": 49.2628382,
+        "Longitude": -122.7810708
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8677562,
+          49.2849107
+        ]
+      },
+      "properties": {
+        "Store Name": "Boxed and Bundled",
+        "City": "Port Moody",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Port Moody British Columbia Canada ",
+        "Latitude": 49.2849107,
+        "Longitude": -122.8677562
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8255032,
+          49.2830991
+        ]
+      },
+      "properties": {
+        "Store Name": "Wish on a Star",
+        "Address": "268 Newport Drive",
+        "City": "Port Moody",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "268 Newport Drive Port Moody British Columbia Canada ",
+        "Latitude": 49.2830991,
+        "Longitude": -122.8255032
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7496693,
+          53.9170641
+        ]
+      },
+      "properties": {
+        "Store Name": "Kindness Krate",
+        "City": "Prince George",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Prince George British Columbia Canada ",
+        "Latitude": 53.9170641,
+        "Longitude": -122.7496693
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7880385,
+          53.9058364
+        ]
+      },
+      "properties": {
+        "Store Name": "Theory Hardware",
+        "Address": "1990 Ogilvie Street",
+        "City": "Prince George",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1990 Ogilvie Street Prince George British Columbia Canada ",
+        "Latitude": 53.9058364,
+        "Longitude": -122.7880385
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4952359,
+          52.9808902
+        ]
+      },
+      "properties": {
+        "Store Name": "Home by Sarah Nina",
+        "Address": "333 Shepherd Ave",
+        "City": "Quesnel",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "333 Shepherd Ave Quesnel British Columbia Canada ",
+        "Latitude": 52.9808902,
+        "Longitude": -122.4952359
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.1958397,
+          50.9985891
+        ]
+      },
+      "properties": {
+        "Store Name": "Begbie Kids",
+        "Address": "209 Mackenzie Avenue",
+        "City": "Revelstoke",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "209 Mackenzie Avenue Revelstoke British Columbia Canada ",
+        "Latitude": 50.9985891,
+        "Longitude": -118.1958397
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0854524,
+          49.1922177999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Westcoast Kids",
+        "Address": "12411 Bridgeport Road",
+        "City": "Richmond",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "12411 Bridgeport Road Richmond British Columbia Canada ",
+        "Latitude": 49.1922177999999,
+        "Longitude": -123.0854524
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.7645947,
+          49.1856124
+        ]
+      },
+      "properties": {
+        "Store Name": "The Garden House",
+        "Address": "52905 Yale Road",
+        "City": "Rosedale",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "52905 Yale Road Rosedale British Columbia Canada ",
+        "Latitude": 49.1856124,
+        "Longitude": -121.7645947
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.8136574,
+          49.1618431
+        ]
+      },
+      "properties": {
+        "Store Name": "Whitetail Collections",
+        "Address": "50989 Chilliwack Central Road",
+        "City": "Rosedale",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "50989 Chilliwack Central Road Rosedale British Columbia Canada ",
+        "Latitude": 49.1618431,
+        "Longitude": -121.8136574
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.2821682,
+          50.7013727999999
+        ]
+      },
+      "properties": {
+        "Store Name": "On Alex",
+        "Address": "250 Alexander St NE",
+        "City": "Salmon Arm",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "250 Alexander St NE Salmon Arm British Columbia Canada ",
+        "Latitude": 50.7013727999999,
+        "Longitude": -119.2821682
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.7598122,
+          49.4718768
+        ]
+      },
+      "properties": {
+        "Store Name": "Moorestock Mini",
+        "Address": "5755 Cowrie Street Unit 8",
+        "City": "Sechelt",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "5755 Cowrie Street Unit 8 Sechelt British Columbia Canada ",
+        "Latitude": 49.4718768,
+        "Longitude": -123.7598122
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -127.1716111,
+          54.779911
+        ]
+      },
+      "properties": {
+        "Store Name": "Mainerz Boutique",
+        "Address": "1165 Main St",
+        "City": "Smithers",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1165 Main St Smithers British Columbia Canada ",
+        "Latitude": 54.779911,
+        "Longitude": -127.1716111
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -127.1685541,
+          54.782355
+        ]
+      },
+      "properties": {
+        "Store Name": "Mountains & Meadows Co.",
+        "City": "Smithers",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Smithers British Columbia Canada ",
+        "Latitude": 54.782355,
+        "Longitude": -127.1685541
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1324279,
+          49.7354592
+        ]
+      },
+      "properties": {
+        "Store Name": "Bo & Ko. Kids",
+        "Address": "1861 Mamquam Rd",
+        "City": "Squamish",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1861 Mamquam Rd Squamish British Columbia Canada ",
+        "Latitude": 49.7354592,
+        "Longitude": -123.1324279
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8490125,
+          49.1913466
+        ]
+      },
+      "properties": {
+        "Store Name": "3 Generations Boutique",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Surrey British Columbia Canada ",
+        "Latitude": 49.1913466,
+        "Longitude": -122.8490125
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8047739,
+          49.189501
+        ]
+      },
+      "properties": {
+        "Store Name": "Body & Salt",
+        "Address": "2175 - 10355 152 Street",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2175 - 10355 152 Street Surrey British Columbia Canada ",
+        "Latitude": 49.189501,
+        "Longitude": -122.8047739
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7765699,
+          49.0463716
+        ]
+      },
+      "properties": {
+        "Store Name": "Crush Clothing",
+        "Address": "16081 24 Ave",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "16081 24 Ave Surrey British Columbia Canada ",
+        "Latitude": 49.0463716,
+        "Longitude": -122.7765699
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7781741,
+          49.0467831
+        ]
+      },
+      "properties": {
+        "Store Name": "Little Leaf Baby",
+        "Address": "2438 - 160 Street Unit 40",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2438 - 160 Street Unit 40 Surrey British Columbia Canada ",
+        "Latitude": 49.0467831,
+        "Longitude": -122.7781741
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8679934,
+          49.0322623
+        ]
+      },
+      "properties": {
+        "Store Name": "Madeline Bee Home Store",
+        "Address": "1653 128 Street",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1653 128 Street Surrey British Columbia Canada ",
+        "Latitude": 49.0322623,
+        "Longitude": -122.8679934
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8490125,
+          49.1913466
+        ]
+      },
+      "properties": {
+        "Store Name": "Magnolia & Co. Gifts",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Surrey British Columbia Canada ",
+        "Latitude": 49.1913466,
+        "Longitude": -122.8490125
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7846494,
+          49.0479687
+        ]
+      },
+      "properties": {
+        "Store Name": "Mint Style Lounge",
+        "Address": "The Shops at Morgan Crossing",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "The Shops at Morgan Crossing Surrey British Columbia Canada ",
+        "Latitude": 49.0479687,
+        "Longitude": -122.7846494
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8490125,
+          49.1913466
+        ]
+      },
+      "properties": {
+        "Store Name": "Muse Baskets and Co.",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Surrey British Columbia Canada ",
+        "Latitude": 49.1913466,
+        "Longitude": -122.8490125
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7334974,
+          49.1071262
+        ]
+      },
+      "properties": {
+        "Store Name": "Pharmasave",
+        "Address": "5778 176a Street",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "5778 176a Street Surrey British Columbia Canada ",
+        "Latitude": 49.1071262,
+        "Longitude": -122.7334974
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.692978,
+          49.0519985
+        ]
+      },
+      "properties": {
+        "Store Name": "Spent Grounds Coffee Roasters",
+        "Address": "108 - 19140 28 Avenue",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "108 - 19140 28 Avenue Surrey British Columbia Canada ",
+        "Latitude": 49.0519985,
+        "Longitude": -122.692978
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7454513,
+          49.0273508999999
+        ]
+      },
+      "properties": {
+        "Store Name": "West Coast Gardens",
+        "Address": "1420 172 Street",
+        "City": "Surrey",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1420 172 Street Surrey British Columbia Canada ",
+        "Latitude": 49.0273508999999,
+        "Longitude": -122.7454513
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125.9043099,
+          49.1523597
+        ]
+      },
+      "properties": {
+        "Store Name": "SALT",
+        "Address": "411 Campbell Street",
+        "City": "Tofino",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "411 Campbell Street Tofino British Columbia Canada ",
+        "Latitude": 49.1523597,
+        "Longitude": -125.9043099
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -128.5876357,
+          54.5172138999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Little Gumnut Co.",
+        "Address": "4615 Lazelle Avenue",
+        "City": "Terrace",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "4615 Lazelle Avenue Terrace British Columbia Canada ",
+        "Latitude": 54.5172138999999,
+        "Longitude": -128.5876357
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125.5495989,
+          48.9428306999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Compass Wedding Cafe",
+        "Address": "1754 Peninsula Road",
+        "City": "Ucluelet",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1754 Peninsula Road Ucluelet British Columbia Canada ",
+        "Latitude": 48.9428306999999,
+        "Longitude": -125.5495989
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125.5495989,
+          48.9428306999999
+        ]
+      },
+      "properties": {
+        "Store Name": "The Wreckage",
+        "Address": "1754 Peninsula Road",
+        "City": "Ucluelet",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1754 Peninsula Road Ucluelet British Columbia Canada ",
+        "Latitude": 48.9428306999999,
+        "Longitude": -125.5495989
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1205695,
+          49.2838778
+        ]
+      },
+      "properties": {
+        "Store Name": "Absolute Spa",
+        "Address": "900 West Georgia Street",
+        "City": "Vancouver ",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "900 West Georgia Street Vancouver  British Columbia Canada ",
+        "Latitude": 49.2838778,
+        "Longitude": -123.1205695
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1013235,
+          49.2603363
+        ]
+      },
+      "properties": {
+        "Store Name": "Blumen Florals",
+        "Address": "2751 Main Street",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2751 Main Street Vancouver British Columbia Canada ",
+        "Latitude": 49.2603363,
+        "Longitude": -123.1013235
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1675407,
+          49.2638446
+        ]
+      },
+      "properties": {
+        "Store Name": "Clinica Holistica",
+        "Address": "210 - 2760 W Broadway",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "210 - 2760 W Broadway Vancouver British Columbia Canada ",
+        "Latitude": 49.2638446,
+        "Longitude": -123.1675407
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1167128,
+          49.2629455999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Dalaga Beauty Studio",
+        "Address": "550 W Broadway Unit 527",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "550 W Broadway Unit 527 Vancouver British Columbia Canada ",
+        "Latitude": 49.2629455999999,
+        "Longitude": -123.1167128
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.11622,
+          49.281577
+        ]
+      },
+      "properties": {
+        "Store Name": "Dona Lucia Esthetics",
+        "Address": "521 West Georgia Street",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "521 West Georgia Street Vancouver British Columbia Canada ",
+        "Latitude": 49.281577,
+        "Longitude": -123.11622
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1193209,
+          49.276261
+        ]
+      },
+      "properties": {
+        "Store Name": "Fine Finds Boutique",
+        "Address": "1014 Mainland Street",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1014 Mainland Street Vancouver British Columbia Canada ",
+        "Latitude": 49.276261,
+        "Longitude": -123.1193209
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1011502,
+          49.2436237
+        ]
+      },
+      "properties": {
+        "Store Name": "Giving Gifts & Company",
+        "Address": "4570 Main Street",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "4570 Main Street Vancouver British Columbia Canada ",
+        "Latitude": 49.2436237,
+        "Longitude": -123.1011502
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0899472,
+          49.2573391
+        ]
+      },
+      "properties": {
+        "Store Name": "Harlow Atelier",
+        "Address": "655 E 15th Ave",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "655 E 15th Ave Vancouver British Columbia Canada ",
+        "Latitude": 49.2573391,
+        "Longitude": -123.0899472
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1067867,
+          49.270021
+        ]
+      },
+      "properties": {
+        "Store Name": "Konas Baby Boutique",
+        "Address": "1711 Manitoba Street",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1711 Manitoba Street Vancouver British Columbia Canada ",
+        "Latitude": 49.270021,
+        "Longitude": -123.1067867
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1207375,
+          49.2827291
+        ]
+      },
+      "properties": {
+        "Store Name": "Local Boom",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Vancouver British Columbia Canada ",
+        "Latitude": 49.2827291,
+        "Longitude": -123.1207375
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1010305,
+          49.2469908
+        ]
+      },
+      "properties": {
+        "Store Name": "Main St. Chiropractic",
+        "Address": "4260 Main St",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "4260 Main St Vancouver British Columbia Canada ",
+        "Latitude": 49.2469908,
+        "Longitude": -123.1010305
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.0601746,
+          49.2809999
+        ]
+      },
+      "properties": {
+        "Store Name": "Plenty + Spare",
+        "Address": "2168 East Hastings",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "2168 East Hastings Vancouver British Columbia Canada ",
+        "Latitude": 49.2809999,
+        "Longitude": -123.0601746
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1083097,
+          49.2118202
+        ]
+      },
+      "properties": {
+        "Store Name": "TJ's The Kiddies Store",
+        "Address": "88 Southwest Marine Drive",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "88 Southwest Marine Drive Vancouver British Columbia Canada ",
+        "Latitude": 49.2118202,
+        "Longitude": -123.1083097
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1014977,
+          49.2473813
+        ]
+      },
+      "properties": {
+        "Store Name": "The Flower Factory",
+        "Address": "4285 Main St",
+        "City": "Vancouver",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "4285 Main St Vancouver British Columbia Canada ",
+        "Latitude": 49.2473813,
+        "Longitude": -123.1014977
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.327606,
+          48.426282
+        ]
+      },
+      "properties": {
+        "Store Name": "Abby Sprouts",
+        "Address": "108-1841 Oak Bay Avenue",
+        "City": "Victoria",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "108-1841 Oak Bay Avenue Victoria British Columbia Canada ",
+        "Latitude": 48.426282,
+        "Longitude": -123.327606
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.37544,
+          48.4550715
+        ]
+      },
+      "properties": {
+        "Store Name": "Bellies in Bloom",
+        "Address": "#113-3531 Uptown Boulevard",
+        "City": "Victoria",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "#113-3531 Uptown Boulevard Victoria British Columbia Canada ",
+        "Latitude": 48.4550715,
+        "Longitude": -123.37544
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.3661407,
+          48.4261020999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Fish Hair Salon",
+        "Address": "1227 Broad Street",
+        "City": "Victoria",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1227 Broad Street Victoria British Columbia Canada ",
+        "Latitude": 48.4261020999999,
+        "Longitude": -123.3661407
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.3684132,
+          48.4274468
+        ]
+      },
+      "properties": {
+        "Store Name": "Good Vibe Space",
+        "Address": "565 Johnson Street",
+        "City": "Victoria",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "565 Johnson Street Victoria British Columbia Canada ",
+        "Latitude": 48.4274468,
+        "Longitude": -123.3684132
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.3364685,
+          48.4438326
+        ]
+      },
+      "properties": {
+        "Store Name": "Momease Baby Boutique",
+        "Address": "1581 Hillside Avenue",
+        "City": "Victoria",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1581 Hillside Avenue Victoria British Columbia Canada ",
+        "Latitude": 48.4438326,
+        "Longitude": -123.3364685
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.3455005,
+          48.4305573
+        ]
+      },
+      "properties": {
+        "Store Name": "Thistle & Wren",
+        "Address": "1292 Gladstone Ave",
+        "City": "Victoria",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1292 Gladstone Ave Victoria British Columbia Canada ",
+        "Latitude": 48.4305573,
+        "Longitude": -123.3455005
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.3598962,
+          48.4290463
+        ]
+      },
+      "properties": {
+        "Store Name": "Yumcha",
+        "Address": "849 Fisgard Street",
+        "City": "Victoria",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "849 Fisgard Street Victoria British Columbia Canada ",
+        "Latitude": 48.4290463,
+        "Longitude": -123.3598962
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.3656444,
+          48.4284207
+        ]
+      },
+      "properties": {
+        "Store Name": "Lykke",
+        "City": "Victoria",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Victoria British Columbia Canada ",
+        "Latitude": 48.4284207,
+        "Longitude": -123.3656444
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.2662459,
+          50.2784452
+        ]
+      },
+      "properties": {
+        "Store Name": "Birch Hill Studio",
+        "Address": "4507 27th Street",
+        "City": "Vernon",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "4507 27th Street Vernon British Columbia Canada ",
+        "Latitude": 50.2784452,
+        "Longitude": -119.2662459
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.2720107,
+          50.2670137
+        ]
+      },
+      "properties": {
+        "Store Name": "Lox and Fox Baby Boutique Co",
+        "City": "Vernon",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": " Vernon British Columbia Canada ",
+        "Latitude": 50.2670137,
+        "Longitude": -119.2720107
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.800796,
+          49.027716
+        ]
+      },
+      "properties": {
+        "Store Name": "The Handpicked Home",
+        "Address": "1406 Johnston Road",
+        "City": "White Rock",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "1406 Johnston Road White Rock British Columbia Canada ",
+        "Latitude": 49.027716,
+        "Longitude": -122.800796
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8005088,
+          49.0234549
+        ]
+      },
+      "properties": {
+        "Store Name": "Looby Doo",
+        "Address": "15218 Pacific Avenue",
+        "City": "White Rock",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "15218 Pacific Avenue White Rock British Columbia Canada ",
+        "Latitude": 49.0234549,
+        "Longitude": -122.8005088
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1284079,
+          52.1293081
+        ]
+      },
+      "properties": {
+        "Store Name": "Still North Design Co.",
+        "Address": "28A Broadway Avenue North",
+        "City": "Williams Lake",
+        "State": "British Columbia",
+        "Country": "Canada",
+        "Full Address": "28A Broadway Avenue North Williams Lake British Columbia Canada ",
+        "Latitude": 52.1293081,
+        "Longitude": -122.1284079
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.284728,
+          54.7202239999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Paddymelon Gifts",
+        "Address": "4911 49 Street",
+        "City": "Athabasca",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "4911 49 Street Athabasca Alberta Canada ",
+        "Latitude": 54.7202239999999,
+        "Longitude": -113.284728
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.5617728,
+          50.9518497
+        ]
+      },
+      "properties": {
+        "Store Name": "Gypsy Maries",
+        "Address": "B#695 Unit 214 7 Balsam Avenue",
+        "City": "Bragg Creek",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "B#695 Unit 214 7 Balsam Avenue Bragg Creek Alberta Canada ",
+        "Latitude": 50.9518497,
+        "Longitude": -114.5617728
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.2068963,
+          54.4124164
+        ]
+      },
+      "properties": {
+        "Store Name": "Muse.Inspired",
+        "Address": "#102 4819-51 Street",
+        "City": "Cold Lake",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "#102 4819-51 Street Cold Lake Alberta Canada ",
+        "Latitude": 54.4124164,
+        "Longitude": -110.2068963
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0718831,
+          51.0447330999999
+        ]
+      },
+      "properties": {
+        "Store Name": "A Simple Act Gifts",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Calgary Alberta Canada ",
+        "Latitude": 51.0447330999999,
+        "Longitude": -114.0718831
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.1543336,
+          51.0922856
+        ]
+      },
+      "properties": {
+        "Store Name": "Baby & Me Maternity",
+        "Address": "4625 Varsity Dr NW",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "4625 Varsity Dr NW Calgary Alberta Canada ",
+        "Latitude": 51.0922856,
+        "Longitude": -114.1543336
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0718831,
+          51.0447330999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Bundle + Nest",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Calgary Alberta Canada ",
+        "Latitude": 51.0447330999999,
+        "Longitude": -114.0718831
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0693653,
+          50.9431012
+        ]
+      },
+      "properties": {
+        "Store Name": "Cedar & Steam",
+        "Address": "102-12445 Lake Fraser Drive SE",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "102-12445 Lake Fraser Drive SE Calgary Alberta Canada ",
+        "Latitude": 50.9431012,
+        "Longitude": -114.0693653
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.208137,
+          51.0401023999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Kala & Lime",
+        "Address": "339 Aspen Glen Landing SW #125",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "339 Aspen Glen Landing SW #125 Calgary Alberta Canada ",
+        "Latitude": 51.0401023999999,
+        "Longitude": -114.208137
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0635868,
+          50.9112306
+        ]
+      },
+      "properties": {
+        "Store Name": "Restore YYC",
+        "Address": "279 Midpark Way SE",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "279 Midpark Way SE Calgary Alberta Canada ",
+        "Latitude": 50.9112306,
+        "Longitude": -114.0635868
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0354255,
+          51.0415609
+        ]
+      },
+      "properties": {
+        "Store Name": "Shades of Sleep & Accessories",
+        "Address": "1221- 9 Avenue S.E.",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "1221- 9 Avenue S.E. Calgary Alberta Canada ",
+        "Latitude": 51.0415609,
+        "Longitude": -114.0354255
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0717292,
+          51.0338423
+        ]
+      },
+      "properties": {
+        "Store Name": "The Cinder & Sage Loft",
+        "Address": "2107b 4 St SW",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "2107b 4 St SW Calgary Alberta Canada ",
+        "Latitude": 51.0338423,
+        "Longitude": -114.0717292
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.047266,
+          50.9423825999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Thistle & Clover",
+        "Address": "#167 755 Lake Bonavista Drive SE",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "#167 755 Lake Bonavista Drive SE Calgary Alberta Canada ",
+        "Latitude": 50.9423825999999,
+        "Longitude": -114.047266
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.1617576,
+          51.156305
+        ]
+      },
+      "properties": {
+        "Store Name": "Westcoast Kids",
+        "Address": "11610 Sarcee Trail NW",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "11610 Sarcee Trail NW Calgary Alberta Canada ",
+        "Latitude": 51.156305,
+        "Longitude": -114.1617576
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0689933,
+          50.9900821
+        ]
+      },
+      "properties": {
+        "Store Name": "Westcoast Kids",
+        "Address": "130 - 71st Avenue SE",
+        "City": "Calgary",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "130 - 71st Avenue SE Calgary Alberta Canada ",
+        "Latitude": 50.9900821,
+        "Longitude": -114.0689933
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.6142798,
+          53.5491819999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Westcoast Kids",
+        "Address": "10461 170th Street",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "10461 170th Street Edmonton Alberta Canada ",
+        "Latitude": 53.5491819999999,
+        "Longitude": -113.6142798
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.4667171,
+          51.1917968
+        ]
+      },
+      "properties": {
+        "Store Name": "Flirt Cosmetic Studio",
+        "Address": "123 4the Avenue West",
+        "City": "Cochrane",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "123 4the Avenue West Cochrane Alberta Canada ",
+        "Latitude": 51.1917968,
+        "Longitude": -114.4667171
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.709656,
+          51.463555
+        ]
+      },
+      "properties": {
+        "Store Name": "Diosa Spa",
+        "Address": "127 3 Avenue West",
+        "City": "Drumheller",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "127 3 Avenue West Drumheller Alberta Canada ",
+        "Latitude": 51.463555,
+        "Longitude": -112.709656
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.6233327,
+          53.5426444
+        ]
+      },
+      "properties": {
+        "Store Name": "3 Leaf Wellness Centre",
+        "Address": "10122 175 St NW",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "10122 175 St NW Edmonton Alberta Canada ",
+        "Latitude": 53.5426444,
+        "Longitude": -113.6233327
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.5405639,
+          53.5739433
+        ]
+      },
+      "properties": {
+        "Store Name": "Elite Electrolysis Clinic",
+        "Address": "12011 127 Street NW",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "12011 127 Street NW Edmonton Alberta Canada ",
+        "Latitude": 53.5739433,
+        "Longitude": -113.5405639
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.541637,
+          53.557862
+        ]
+      },
+      "properties": {
+        "Store Name": "Harrow Hair Company",
+        "Address": "11020 127 Street",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "11020 127 Street Edmonton Alberta Canada ",
+        "Latitude": 53.557862,
+        "Longitude": -113.541637
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.5666301,
+          53.4532199999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Jilly's Boutique",
+        "Address": "14227-23 Avenue NW",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "14227-23 Avenue NW Edmonton Alberta Canada ",
+        "Latitude": 53.4532199999999,
+        "Longitude": -113.5666301
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.6029826,
+          53.4354929
+        ]
+      },
+      "properties": {
+        "Store Name": "Little Leaf Baby",
+        "Address": "5232 Windermere Boulevard",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "5232 Windermere Boulevard Edmonton Alberta Canada ",
+        "Latitude": 53.4354929,
+        "Longitude": -113.6029826
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.4938229,
+          53.5461245
+        ]
+      },
+      "properties": {
+        "Store Name": "Navy Jay Boutique",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Edmonton Alberta Canada ",
+        "Latitude": 53.5461245,
+        "Longitude": -113.4938229
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.5381329,
+          53.5424648
+        ]
+      },
+      "properties": {
+        "Store Name": "Red Ribbon",
+        "Address": "12505 102 Avenue",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "12505 102 Avenue Edmonton Alberta Canada ",
+        "Latitude": 53.5424648,
+        "Longitude": -113.5381329
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.4938229,
+          53.5461245
+        ]
+      },
+      "properties": {
+        "Store Name": "Romeo Milan",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Edmonton Alberta Canada ",
+        "Latitude": 53.5461245,
+        "Longitude": -113.4938229
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.5253424,
+          53.5480574
+        ]
+      },
+      "properties": {
+        "Store Name": "Strength and Balance Therapeutic Massage Inc.",
+        "Address": "11807A 105 Avenue NW",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "11807A 105 Avenue NW Edmonton Alberta Canada ",
+        "Latitude": 53.5480574,
+        "Longitude": -113.5253424
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.5219849,
+          53.5390329
+        ]
+      },
+      "properties": {
+        "Store Name": "Vida Boutique",
+        "Address": "11610 100 Ave NW",
+        "City": "Edmonton",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "11610 100 Ave NW Edmonton Alberta Canada ",
+        "Latitude": 53.5390329,
+        "Longitude": -113.5219849
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.239069,
+          53.6819445
+        ]
+      },
+      "properties": {
+        "Store Name": "Concrete Blonde",
+        "Address": "Unit 109-121 Towncrest Road",
+        "City": "Fort Saskatchewan",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "Unit 109-121 Towncrest Road Fort Saskatchewan Alberta Canada ",
+        "Latitude": 53.6819445,
+        "Longitude": -113.239069
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.2022827,
+          55.7380764
+        ]
+      },
+      "properties": {
+        "Store Name": "Falher I.D.A. Pharmacy",
+        "Address": "5 Main St",
+        "City": "Falher",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "5 Main St Falher Alberta Canada ",
+        "Latitude": 55.7380764,
+        "Longitude": -117.2022827
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.3556273,
+          56.7195674
+        ]
+      },
+      "properties": {
+        "Store Name": "The Block & Co",
+        "Address": "8520 Manning Avenue Unit 21",
+        "City": "Fort McMurray",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "8520 Manning Avenue Unit 21 Fort McMurray Alberta Canada ",
+        "Latitude": 56.7195674,
+        "Longitude": -111.3556273
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.792848,
+          55.170431
+        ]
+      },
+      "properties": {
+        "Store Name": "D Luxe Boutique",
+        "Address": "9913 100 Avenue",
+        "City": "Grand Prairie",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "9913 100 Avenue Grand Prairie Alberta Canada ",
+        "Latitude": 55.170431,
+        "Longitude": -118.792848
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.7964883,
+          55.1709356999999
+        ]
+      },
+      "properties": {
+        "Store Name": "The Glow Collective",
+        "Address": "10020 100 Avenue",
+        "City": "Grande Prairie",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "10020 100 Avenue Grande Prairie Alberta Canada ",
+        "Latitude": 55.1709356999999,
+        "Longitude": -118.7964883
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.7884464,
+          55.1707125999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Indy + A",
+        "City": "Grande Prairie",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Grande Prairie Alberta Canada ",
+        "Latitude": 55.1707125999999,
+        "Longitude": -118.7884464
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.7316949,
+          52.46378
+        ]
+      },
+      "properties": {
+        "Store Name": "Gift Smack",
+        "Address": "5019A 51 Street",
+        "City": "Lacombe",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "5019A 51 Street Lacombe Alberta Canada ",
+        "Latitude": 52.46378,
+        "Longitude": -113.7316949
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.5483489,
+          53.2649778
+        ]
+      },
+      "properties": {
+        "Store Name": "Saradee Boutique",
+        "Address": "4726 50th Avenue",
+        "City": "Leduc",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "4726 50th Avenue Leduc Alberta Canada ",
+        "Latitude": 53.2649778,
+        "Longitude": -113.5483489
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.8451364,
+          49.6955856
+        ]
+      },
+      "properties": {
+        "Store Name": "Baby Beautiful Accessories",
+        "City": "Lethbridge",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Lethbridge Alberta Canada ",
+        "Latitude": 49.6955856,
+        "Longitude": -112.8451364
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.8373381,
+          49.6951058999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Baby Laurel & Co.",
+        "Address": "316 7 St S Unit 10",
+        "City": "Lethbridge",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "316 7 St S Unit 10 Lethbridge Alberta Canada ",
+        "Latitude": 49.6951058999999,
+        "Longitude": -112.8373381
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.0065227,
+          53.2625532
+        ]
+      },
+      "properties": {
+        "Store Name": "Home Hardware",
+        "Address": "2802 50 Avenue",
+        "City": "Lloydminster",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "2802 50 Avenue Lloydminster Alberta Canada ",
+        "Latitude": 53.2625532,
+        "Longitude": -110.0065227
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.2310604,
+          50.5325067
+        ]
+      },
+      "properties": {
+        "Store Name": "Blonde Ambition Apparel & Designs",
+        "City": "Longview",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Longview Alberta Canada ",
+        "Latitude": 50.5325067,
+        "Longitude": -114.2310604
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.7034049,
+          50.0291676
+        ]
+      },
+      "properties": {
+        "Store Name": "Elliot Home + Lifestyle",
+        "City": "Medicine Hat",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Medicine Hat Alberta Canada ",
+        "Latitude": 50.0291676,
+        "Longitude": -110.7034049
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.9493724,
+          49.4853105
+        ]
+      },
+      "properties": {
+        "Store Name": "Sugar Studio",
+        "Address": "702 Main Street",
+        "City": "Pincher Creek",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "702 Main Street Pincher Creek Alberta Canada ",
+        "Latitude": 49.4853105,
+        "Longitude": -113.9493724
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.8008117,
+          52.2319869
+        ]
+      },
+      "properties": {
+        "Store Name": "Auburn & Ash Design",
+        "Address": "20 Sharpe Avenue",
+        "City": "Red Deer",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "20 Sharpe Avenue Red Deer Alberta Canada ",
+        "Latitude": 52.2319869,
+        "Longitude": -113.8008117
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.8145822,
+          52.233824
+        ]
+      },
+      "properties": {
+        "Store Name": "Bangs & Co Hair Studio",
+        "Address": "6320 50 Avenue",
+        "City": "Red Deer",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "6320 50 Avenue Red Deer Alberta Canada ",
+        "Latitude": 52.233824,
+        "Longitude": -113.8145822
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.8100154,
+          52.2659561
+        ]
+      },
+      "properties": {
+        "Store Name": "Salon Harper",
+        "Address": "4813 47 St",
+        "City": "Red Deer",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "4813 47 St Red Deer Alberta Canada ",
+        "Latitude": 52.2659561,
+        "Longitude": -113.8100154
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.0198694,
+          51.2919278
+        ]
+      },
+      "properties": {
+        "Store Name": "Salon Harper",
+        "Address": "102 191 Edwards Way SW",
+        "City": "Airdrie",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "102 191 Edwards Way SW Airdrie Alberta Canada ",
+        "Latitude": 51.2919278,
+        "Longitude": -114.0198694
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.8115599,
+          52.268975
+        ]
+      },
+      "properties": {
+        "Store Name": "Wild Ones Boutique",
+        "City": "Red Deer",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Red Deer Alberta Canada ",
+        "Latitude": 52.268975,
+        "Longitude": -113.8115599
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.3070475,
+          53.5233044
+        ]
+      },
+      "properties": {
+        "Store Name": "Glitz Spray Tanning",
+        "Address": "1606 Sherwood Drive",
+        "City": "Sherwood Park",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "1606 Sherwood Drive Sherwood Park Alberta Canada ",
+        "Latitude": 53.5233044,
+        "Longitude": -113.3070475
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.3209109,
+          53.5249403
+        ]
+      },
+      "properties": {
+        "Store Name": "Interior Matters",
+        "Address": "1080-A Strathcona Drive",
+        "City": "Sherwood Park",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "1080-A Strathcona Drive Sherwood Park Alberta Canada ",
+        "Latitude": 53.5249403,
+        "Longitude": -113.3209109
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.8994833,
+          53.5461833
+        ]
+      },
+      "properties": {
+        "Store Name": "John Kenneth Hair Studio",
+        "Address": "420 King St",
+        "City": "Spruce Grove",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "420 King St Spruce Grove Alberta Canada ",
+        "Latitude": 53.5461833,
+        "Longitude": -113.8994833
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.626622,
+          53.634403
+        ]
+      },
+      "properties": {
+        "Store Name": "Concept Jewelry Design",
+        "Address": "20 Perron Street",
+        "City": "St. Albert",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "20 Perron Street St. Albert Alberta Canada ",
+        "Latitude": 53.634403,
+        "Longitude": -113.626622
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.9723333,
+          53.5399085
+        ]
+      },
+      "properties": {
+        "Store Name": "Crown & Fox",
+        "Address": "3003 43 Avenue #121",
+        "City": "Stony Plain",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "3003 43 Avenue #121 Stony Plain Alberta Canada ",
+        "Latitude": 53.5399085,
+        "Longitude": -113.9723333
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.4004199,
+          51.0378158
+        ]
+      },
+      "properties": {
+        "Store Name": "Pure Bliss Massage Therapy",
+        "City": "Strathmore",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Strathmore Alberta Canada ",
+        "Latitude": 51.0378158,
+        "Longitude": -113.4004199
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.071729,
+          52.3080207999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Natural Solutions Health Store",
+        "Address": "2120 29 Beju Industrial Drive",
+        "City": "Sylvan Lake",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "2120 29 Beju Industrial Drive Sylvan Lake Alberta Canada ",
+        "Latitude": 52.3080207999999,
+        "Longitude": -114.071729
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.1497393,
+          49.7818356999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Johnson's Gift and Jewelry",
+        "City": "Taber",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": " Taber Alberta Canada ",
+        "Latitude": 49.7818356999999,
+        "Longitude": -112.1497393
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.8581402,
+          54.1574868
+        ]
+      },
+      "properties": {
+        "Store Name": "Westlock Wellness Massage & Tan Bar",
+        "Address": "10148-107 Street",
+        "City": "Westlock",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "10148-107 Street Westlock Alberta Canada ",
+        "Latitude": 54.1574868,
+        "Longitude": -113.8581402
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.8613235,
+          54.1553615
+        ]
+      },
+      "properties": {
+        "Store Name": "The Loft Salon and Spa",
+        "Address": "10611 100 Avenue",
+        "City": "Westlock",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "10611 100 Avenue Westlock Alberta Canada ",
+        "Latitude": 54.1553615,
+        "Longitude": -113.8613235
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.377428,
+          52.969637
+        ]
+      },
+      "properties": {
+        "Store Name": "Refresh Wellness Centre",
+        "Address": "5109 50 Avenue",
+        "City": "Wetaskiwin",
+        "State": "Alberta",
+        "Country": "Canada",
+        "Full Address": "5109 50 Avenue Wetaskiwin Alberta Canada ",
+        "Latitude": 52.969637,
+        "Longitude": -113.377428
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.8899194,
+          52.6344459
+        ]
+      },
+      "properties": {
+        "Store Name": "Lifewise",
+        "Address": "303 Main St",
+        "City": "Saint Brieux",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "303 Main St Saint Brieux Saskatchewan Canada ",
+        "Latitude": 52.6344459,
+        "Longitude": -104.8899194
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.1352205,
+          51.9224277
+        ]
+      },
+      "properties": {
+        "Store Name": "Studio On 1st",
+        "Address": "200 1st Street",
+        "City": "Delisle",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "200 1st Street Delisle Saskatchewan Canada ",
+        "Latitude": 51.9224277,
+        "Longitude": -107.1352205
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.1362682,
+          51.9190482
+        ]
+      },
+      "properties": {
+        "Store Name": "Ooh-La-Lash Esthetics",
+        "Address": "426 Pacific Avenue",
+        "City": "Kerrobert",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "426 Pacific Avenue Kerrobert Saskatchewan Canada ",
+        "Latitude": 51.9190482,
+        "Longitude": -109.1362682
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.1426337,
+          51.4745007
+        ]
+      },
+      "properties": {
+        "Store Name": "Clementine - Home Floral Gift",
+        "Address": "705 11th Avenue East",
+        "City": "Kindersley",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "705 11th Avenue East Kindersley Saskatchewan Canada ",
+        "Latitude": 51.4745007,
+        "Longitude": -109.1426337
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.8670094,
+          50.6466508
+        ]
+      },
+      "properties": {
+        "Store Name": "The Painted Parasol",
+        "Address": "220 James Street North",
+        "City": "Lumsden",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "220 James Street North Lumsden Saskatchewan Canada ",
+        "Latitude": 50.6466508,
+        "Longitude": -104.8670094
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.5256699,
+          49.8348331
+        ]
+      },
+      "properties": {
+        "Store Name": "Dusty Road Boutique",
+        "City": "Maryfield",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": " Maryfield Saskatchewan Canada ",
+        "Latitude": 49.8348331,
+        "Longitude": -101.5256699
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.6081149,
+          52.8633614
+        ]
+      },
+      "properties": {
+        "Store Name": "Daisies, Dreams and Decor",
+        "Address": "506 Main Street",
+        "City": "Melfort",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "506 Main Street Melfort Saskatchewan Canada ",
+        "Latitude": 52.8633614,
+        "Longitude": -104.6081149
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.6565797,
+          50.1391077
+        ]
+      },
+      "properties": {
+        "Store Name": "West Wind Florist",
+        "Address": "1611 Broadway Avenue",
+        "City": "Moosomin",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "1611 Broadway Avenue Moosomin Saskatchewan Canada ",
+        "Latitude": 50.1391077,
+        "Longitude": -101.6565797
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -108.2958995,
+          52.7736005
+        ]
+      },
+      "properties": {
+        "Store Name": "The Smith's Makeup Artistry and Photography",
+        "Address": "1122 A 102 St",
+        "City": "North Battleford",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "1122 A 102 St North Battleford Saskatchewan Canada ",
+        "Latitude": 52.7736005,
+        "Longitude": -108.2958995
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.5825233,
+          50.4475097
+        ]
+      },
+      "properties": {
+        "Store Name": "Luxe Hair Studio",
+        "Address": "104 Victoria Avenue East",
+        "City": "Regina",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "104 Victoria Avenue East Regina Saskatchewan Canada ",
+        "Latitude": 50.4475097,
+        "Longitude": -104.5825233
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.6632259,
+          52.1270958
+        ]
+      },
+      "properties": {
+        "Store Name": "Mini Moss by Era",
+        "Address": "234 21st Street East",
+        "City": "Saskatoon",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "234 21st Street East Saskatoon Saskatchewan Canada ",
+        "Latitude": 52.1270958,
+        "Longitude": -106.6632259
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.6247452,
+          52.1153213
+        ]
+      },
+      "properties": {
+        "Store Name": "Cravings",
+        "Address": "3  2105 8th Street East",
+        "City": "Saskatoon",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "3  2105 8th Street East Saskatoon Saskatchewan Canada ",
+        "Latitude": 52.1153213,
+        "Longitude": -106.6247452
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.6629151,
+          52.1300058
+        ]
+      },
+      "properties": {
+        "Store Name": "The Refillery YXE",
+        "Address": "158 2nd Avenue North",
+        "City": "Saskatoon",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "158 2nd Avenue North Saskatoon Saskatchewan Canada ",
+        "Latitude": 52.1300058,
+        "Longitude": -106.6629151
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.5691447,
+          52.1489605
+        ]
+      },
+      "properties": {
+        "Store Name": "Tryst Boutique",
+        "Address": "126 1844 McOrmond Drive",
+        "City": "Saskatoon",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "126 1844 McOrmond Drive Saskatoon Saskatchewan Canada ",
+        "Latitude": 52.1489605,
+        "Longitude": -106.5691447
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.799508,
+          50.2843449999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Little Somethings Boutique",
+        "Address": "143 Central Avenue North",
+        "City": "Swift Current",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "143 Central Avenue North Swift Current Saskatchewan Canada ",
+        "Latitude": 50.2843449999999,
+        "Longitude": -107.799508
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.5778411,
+          52.3183023
+        ]
+      },
+      "properties": {
+        "Store Name": "Nourish Natural Health Food Store",
+        "Address": "A-205 Central Street",
+        "City": "Warman",
+        "State": "Saskatchewan",
+        "Country": "Canada",
+        "Full Address": "A-205 Central Street Warman Saskatchewan Canada ",
+        "Latitude": 52.3183023,
+        "Longitude": -106.5778411
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.2184929,
+          50.910626
+        ]
+      },
+      "properties": {
+        "Store Name": "Little Elska",
+        "Address": "365 Main Street",
+        "City": "Arborg",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "365 Main Street Arborg Manitoba Canada ",
+        "Latitude": 50.910626,
+        "Longitude": -97.2184929
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.0540981,
+          49.2299567
+        ]
+      },
+      "properties": {
+        "Store Name": "REKK Beauty",
+        "Address": "578 Broadway Street",
+        "City": "Boissevain",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "578 Broadway Street Boissevain Manitoba Canada ",
+        "Latitude": 49.2299567,
+        "Longitude": -100.0540981
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.9625289,
+          49.8381807
+        ]
+      },
+      "properties": {
+        "Store Name": "Baby Bump",
+        "Address": "728 18th Street",
+        "City": "Brandon",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "728 18th Street Brandon Manitoba Canada ",
+        "Latitude": 49.8381807,
+        "Longitude": -99.9625289
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.304535,
+          50.448907
+        ]
+      },
+      "properties": {
+        "Store Name": "Countryside Massage",
+        "Address": "36-16-28NE",
+        "City": "St Lazare",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "36-16-28NE St Lazare Manitoba Canada ",
+        "Latitude": 50.448907,
+        "Longitude": -101.304535
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.2456221,
+          53.8264331
+        ]
+      },
+      "properties": {
+        "Store Name": "Glow Day Spa",
+        "Address": "262 Patrick Avenue",
+        "City": "The Pas",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "262 Patrick Avenue The Pas Manitoba Canada ",
+        "Latitude": 53.8264331,
+        "Longitude": -101.2456221
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.1387386,
+          49.8977868
+        ]
+      },
+      "properties": {
+        "Store Name": "Generation Green",
+        "Address": "433 Main Street Unit 100",
+        "City": "Winnipeg",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "433 Main Street Unit 100 Winnipeg Manitoba Canada ",
+        "Latitude": 49.8977868,
+        "Longitude": -97.1387386
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.1539924,
+          49.8568879
+        ]
+      },
+      "properties": {
+        "Store Name": "Nest Family Centre & Store",
+        "Address": "667 Stafford Street",
+        "City": "Winnipeg",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "667 Stafford Street Winnipeg Manitoba Canada ",
+        "Latitude": 49.8568879,
+        "Longitude": -97.1539924
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.1419071,
+          49.8983259
+        ]
+      },
+      "properties": {
+        "Store Name": "Westcoast Kids",
+        "Address": "103 Princess Street",
+        "City": "Winnipeg",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "103 Princess Street Winnipeg Manitoba Canada ",
+        "Latitude": 49.8983259,
+        "Longitude": -97.1419071
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.9387484,
+          49.1804439
+        ]
+      },
+      "properties": {
+        "Store Name": "Little Thingz Clothing Ltd.",
+        "Address": "477 Stanley Ave",
+        "City": "Winkler",
+        "State": "Manitoba",
+        "Country": "Canada",
+        "Full Address": "477 Stanley Ave Winkler Manitoba Canada ",
+        "Latitude": 49.1804439,
+        "Longitude": -97.9387484
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.9751385,
+          43.2272369
+        ]
+      },
+      "properties": {
+        "Store Name": "Curated Cradle",
+        "Address": "370 Wilson Street East #10",
+        "City": "Ancaster",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "370 Wilson Street East #10 Ancaster Ontario Canada ",
+        "Latitude": 43.2272369,
+        "Longitude": -79.9751385
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.1952546999999,
+          45.2253356
+        ]
+      },
+      "properties": {
+        "Store Name": "Blush & Black",
+        "Address": "76 Mill St",
+        "City": "Almonte",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "76 Mill St Almonte Ontario Canada ",
+        "Latitude": 45.2253356,
+        "Longitude": -76.1952546999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.6949593,
+          44.391131
+        ]
+      },
+      "properties": {
+        "Store Name": "Sophia St. Apothecary",
+        "Address": "34 Sophia St W",
+        "City": "Barrie",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "34 Sophia St W Barrie Ontario Canada ",
+        "Latitude": 44.391131,
+        "Longitude": -79.6949593
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.9990265,
+          42.334166
+        ]
+      },
+      "properties": {
+        "Store Name": "Sixty One",
+        "Address": "61 Talbot Street West",
+        "City": "Blenheim",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "61 Talbot Street West Blenheim Ontario Canada ",
+        "Latitude": 42.334166,
+        "Longitude": -81.9990265
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.9542235,
+          46.1858596
+        ]
+      },
+      "properties": {
+        "Store Name": "The Birch Tree",
+        "Address": "10 Woodward Avenue",
+        "City": "Blind River",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "10 Woodward Avenue Blind River Ontario Canada ",
+        "Latitude": 46.1858596,
+        "Longitude": -82.9542235
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6913472,
+          43.9129422
+        ]
+      },
+      "properties": {
+        "Store Name": "Petit Nordique",
+        "Address": "80 King Street West",
+        "City": "Bowmanville",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "80 King Street West Bowmanville Ontario Canada ",
+        "Latitude": 43.9129422,
+        "Longitude": -78.6913472
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3078787,
+          45.0389565
+        ]
+      },
+      "properties": {
+        "Store Name": "Maggie & Kaye",
+        "City": "Bracebridge",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " Bracebridge Ontario Canada ",
+        "Latitude": 45.0389565,
+        "Longitude": -79.3078787
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.7990319,
+          43.3255196
+        ]
+      },
+      "properties": {
+        "Store Name": "The Spark Box",
+        "City": "Burlington",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " Burlington Ontario Canada ",
+        "Latitude": 43.3255196,
+        "Longitude": -79.7990319
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.2169047,
+          44.5007686999999
+        ]
+      },
+      "properties": {
+        "Store Name": "MAB Organics",
+        "City": "Collingwood",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " Collingwood Ontario Canada ",
+        "Latitude": 44.5007686999999,
+        "Longitude": -80.2169047
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.2169047,
+          44.5007686999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Sam & Lance",
+        "City": "Collingwood",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " Collingwood Ontario Canada ",
+        "Latitude": 44.5007686999999,
+        "Longitude": -80.2169047
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.727828,
+          45.017105
+        ]
+      },
+      "properties": {
+        "Store Name": "Love and Lee",
+        "Address": "111 Pitt Street",
+        "City": "Cornwall",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "111 Pitt Street Cornwall Ontario Canada ",
+        "Latitude": 45.017105,
+        "Longitude": -74.727828
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3416637999999,
+          43.6912005999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Lock & Lily",
+        "City": "East York",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " East York Ontario Canada ",
+        "Latitude": 43.6912005999999,
+        "Longitude": -79.3416637999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.5020675999999,
+          43.6012984
+        ]
+      },
+      "properties": {
+        "Store Name": "F45 New Toronto",
+        "Address": "2847 Lake Shore Boulevard",
+        "City": "Etobicoke",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "2847 Lake Shore Boulevard Etobicoke Ontario Canada ",
+        "Latitude": 43.6012984,
+        "Longitude": -79.5020675999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.347314,
+          46.721983
+        ]
+      },
+      "properties": {
+        "Store Name": "Olive Branch Market",
+        "Address": "2771 Highway 17 North",
+        "City": "Goulais River",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "2771 Highway 17 North Goulais River Ontario Canada ",
+        "Latitude": 46.721983,
+        "Longitude": -84.347314
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.7507567999999,
+          43.3112827
+        ]
+      },
+      "properties": {
+        "Store Name": "The Garden Gate Gifts and Florals",
+        "Address": "55 Main Street E",
+        "City": "Grand Bend",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "55 Main Street E Grand Bend Ontario Canada ",
+        "Latitude": 43.3112827,
+        "Longitude": -81.7507567999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.2531609999999,
+          43.547993
+        ]
+      },
+      "properties": {
+        "Store Name": "Blooms + Flora",
+        "Address": "182 Woolwich Street",
+        "City": "Guelph",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "182 Woolwich Street Guelph Ontario Canada ",
+        "Latitude": 43.547993,
+        "Longitude": -80.2531609999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.8711024,
+          43.2557206
+        ]
+      },
+      "properties": {
+        "Store Name": "The Belvidere Company",
+        "City": "Hamilton",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " Hamilton Ontario Canada ",
+        "Latitude": 43.2557206,
+        "Longitude": -79.8711024
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.4925337,
+          43.4516395
+        ]
+      },
+      "properties": {
+        "Store Name": "Imagine It Gift Baskets",
+        "City": "Kitchener",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " Kitchener Ontario Canada ",
+        "Latitude": 43.4516395,
+        "Longitude": -80.4925337
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.7441226,
+          44.3538424
+        ]
+      },
+      "properties": {
+        "Store Name": "Twine x Twig",
+        "Address": "232 Kent Street West",
+        "City": "Lindsay",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "232 Kent Street West Lindsay Ontario Canada ",
+        "Latitude": 44.3538424,
+        "Longitude": -78.7441226
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.2935888,
+          42.9839519
+        ]
+      },
+      "properties": {
+        "Store Name": "Salt Therapy Breathing Centre",
+        "Address": "585 Oxford Street",
+        "City": "London",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "585 Oxford Street London Ontario Canada ",
+        "Latitude": 42.9839519,
+        "Longitude": -81.2935888
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.884233,
+          44.7490171
+        ]
+      },
+      "properties": {
+        "Store Name": "Shep's General Store",
+        "Address": "309 King Street",
+        "City": "Midland",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "309 King Street Midland Ontario Canada ",
+        "Latitude": 44.7490171,
+        "Longitude": -79.884233
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.6876659,
+          43.467517
+        ]
+      },
+      "properties": {
+        "Store Name": "She Boutique",
+        "City": "Oakville",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " Oakville Ontario Canada ",
+        "Latitude": 43.467517,
+        "Longitude": -79.6876659
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1143204999999,
+          45.8257697
+        ]
+      },
+      "properties": {
+        "Store Name": "HER Empowerment Boutique",
+        "Address": "74 Pembroke Street West",
+        "City": "Pembroke",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "74 Pembroke Street West Pembroke Ontario Canada ",
+        "Latitude": 45.8257697,
+        "Longitude": -77.1143204999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.2501537999999,
+          44.9003081
+        ]
+      },
+      "properties": {
+        "Store Name": "Flint and Honey",
+        "Address": "42 Gore Street East",
+        "City": "Perth",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "42 Gore Street East Perth Ontario Canada ",
+        "Latitude": 44.9003081,
+        "Longitude": -76.2501537999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.2928369999999,
+          43.9508415
+        ]
+      },
+      "properties": {
+        "Store Name": "En Pointe Boutique",
+        "Address": "7 Queen Street",
+        "City": "Port Hope",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "7 Queen Street Port Hope Ontario Canada ",
+        "Latitude": 43.9508415,
+        "Longitude": -78.2928369999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.4368961999999,
+          43.8529634
+        ]
+      },
+      "properties": {
+        "Store Name": "Westcoast Kids",
+        "Address": "J007 - 9350 Yonge Street",
+        "City": "Richmond Hill",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "J007 - 9350 Yonge Street Richmond Hill Ontario Canada ",
+        "Latitude": 43.8529634,
+        "Longitude": -79.4368961999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.8254868,
+          51.0202377
+        ]
+      },
+      "properties": {
+        "Store Name": "Finishing Touches",
+        "Address": "177 Howey Street",
+        "City": "Red Lake",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "177 Howey Street Red Lake Ontario Canada ",
+        "Latitude": 51.0202377,
+        "Longitude": -93.8254868
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.4020773,
+          42.9812656
+        ]
+      },
+      "properties": {
+        "Store Name": "Lovewell",
+        "Address": "188 Maxwell Street",
+        "City": "Sarnia",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "188 Maxwell Street Sarnia Ontario Canada ",
+        "Latitude": 42.9812656,
+        "Longitude": -82.4020773
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.9325467,
+          46.5217699
+        ]
+      },
+      "properties": {
+        "Store Name": "Le Petit Spa Esthetics",
+        "Address": "1775 Lasalle Blvd Unit D",
+        "City": "Sudbury",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "1775 Lasalle Blvd Unit D Sudbury Ontario Canada ",
+        "Latitude": 46.5217699,
+        "Longitude": -80.9325467
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.3866494,
+          43.5506356
+        ]
+      },
+      "properties": {
+        "Store Name": "Grand Beauty Box",
+        "Address": "32 B-1 Centennial Drive",
+        "City": "Seaforth",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "32 B-1 Centennial Drive Seaforth Ontario Canada ",
+        "Latitude": 43.5506356,
+        "Longitude": -81.3866494
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.3946378,
+          43.5521194
+        ]
+      },
+      "properties": {
+        "Store Name": "Salus Studio",
+        "Address": "53 Main Street South",
+        "City": "Seaforth",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "53 Main Street South Seaforth Ontario Canada ",
+        "Latitude": 43.5521194,
+        "Longitude": -81.3946378
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.2637439,
+          43.1788607
+        ]
+      },
+      "properties": {
+        "Store Name": "Mike + Jojo Baby Boutique",
+        "Address": "41 Maywood Avenue",
+        "City": "St Catharines",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "41 Maywood Avenue St Catharines Ontario Canada ",
+        "Latitude": 43.1788607,
+        "Longitude": -79.2637439
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.730296,
+          43.2283526
+        ]
+      },
+      "properties": {
+        "Store Name": "Nude Beauty Bar",
+        "Address": "Green Road",
+        "City": "Stoney Creek",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "Green Road Stoney Creek Ontario Canada ",
+        "Latitude": 43.2283526,
+        "Longitude": -79.730296
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.9702052999999,
+          43.370982
+        ]
+      },
+      "properties": {
+        "Store Name": "Relish Day Spa",
+        "Address": "397 Ontario Street",
+        "City": "Stratford",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "397 Ontario Street Stratford Ontario Canada ",
+        "Latitude": 43.370982,
+        "Longitude": -80.9702052999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3907639,
+          43.6792367
+        ]
+      },
+      "properties": {
+        "Store Name": "Macpherson Toy House",
+        "Address": "103 - 1128 Yonge Street",
+        "City": "Toronto",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "103 - 1128 Yonge Street Toronto Ontario Canada ",
+        "Latitude": 43.6792367,
+        "Longitude": -79.3907639
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3360326999999,
+          43.661787
+        ]
+      },
+      "properties": {
+        "Store Name": "Sapling Child",
+        "Address": "1093 Queen Street East",
+        "City": "Toronto",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "1093 Queen Street East Toronto Ontario Canada ",
+        "Latitude": 43.661787,
+        "Longitude": -79.3360326999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3831843,
+          43.653226
+        ]
+      },
+      "properties": {
+        "Store Name": "Functional Food Co.",
+        "City": "Toronto",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": " Toronto Ontario Canada ",
+        "Latitude": 43.653226,
+        "Longitude": -79.3831843
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2225519,
+          48.435483
+        ]
+      },
+      "properties": {
+        "Store Name": "Ritual Skin Co.",
+        "Address": "8 Court Street South",
+        "City": "Thunder Bay",
+        "State": "Ontario",
+        "Country": "Canada",
+        "Full Address": "8 Court Street South Thunder Bay Ontario Canada ",
+        "Latitude": 48.435483,
+        "Longitude": -89.2225519
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.0624277,
+          48.4276139
+        ]
+      },
+      "properties": {
+        "Store Name": "Boutique La Fabrik",
+        "Address": "190 rue racine estm",
+        "City": "Chicoutimi",
+        "State": "Quebec",
+        "Country": "Canada",
+        "Full Address": "190 rue racine estm Chicoutimi Quebec Canada ",
+        "Latitude": 48.4276139,
+        "Longitude": -71.0624277
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5835223,
+          45.5240685
+        ]
+      },
+      "properties": {
+        "Store Name": "Klova boutique écoresponsable \/ Klova Sustainable Shop",
+        "Address": "4522, Saint-Denis Street",
+        "City": "Montreal",
+        "State": "Quebec",
+        "Country": "Canada",
+        "Full Address": "4522, Saint-Denis Street Montreal Quebec Canada ",
+        "Latitude": 45.5240685,
+        "Longitude": -73.5835223
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.567256,
+          45.5016889
+        ]
+      },
+      "properties": {
+        "Store Name": "Cordial Gift Co.",
+        "City": "Montreal",
+        "State": "Quebec",
+        "Country": "Canada",
+        "Full Address": " Montreal Quebec Canada ",
+        "Latitude": 45.5016889,
+        "Longitude": -73.567256
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.567256,
+          45.5016889
+        ]
+      },
+      "properties": {
+        "Store Name": "Le Monde Est Tout-Petit",
+        "City": "Montreal",
+        "State": "Quebec",
+        "Country": "Canada",
+        "Full Address": " Montreal Quebec Canada ",
+        "Latitude": 45.5016889,
+        "Longitude": -73.567256
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.5661021999999,
+          44.6658236
+        ]
+      },
+      "properties": {
+        "Store Name": "Nature Folk Wellness Studio",
+        "Address": "88 Portland Street",
+        "City": "Dartmouth",
+        "State": "Nova Scotia",
+        "Country": "Canada",
+        "Full Address": "88 Portland Street Dartmouth Nova Scotia Canada ",
+        "Latitude": 44.6658236,
+        "Longitude": -63.5661021999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.5749349,
+          44.6410057999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Sweet Jane's Gift",
+        "Address": "1300 Queen Street",
+        "City": "Halifax",
+        "State": "Nova Scotia",
+        "Country": "Canada",
+        "Full Address": "1300 Queen Street Halifax Nova Scotia Canada ",
+        "Latitude": 44.6410057999999,
+        "Longitude": -63.5749349
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.84485,
+          45.626935
+        ]
+      },
+      "properties": {
+        "Store Name": "The Little Shop Subscription Box",
+        "City": "Pomquet",
+        "State": "Nova Scotia",
+        "Country": "Canada",
+        "Full Address": " Pomquet Nova Scotia Canada ",
+        "Latitude": 45.626935,
+        "Longitude": -61.84485
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.7487108,
+          47.0566630999999
+        ]
+      },
+      "properties": {
+        "Store Name": "Nanette's Healthy Pantry",
+        "Address": "354 Madawaska Road",
+        "City": "Grand Falls",
+        "State": "New Brunswick",
+        "Country": "Canada",
+        "Full Address": "354 Madawaska Road Grand Falls New Brunswick Canada ",
+        "Latitude": 47.0566630999999,
+        "Longitude": -67.7487108
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.4992109,
+          47.0259112
+        ]
+      },
+      "properties": {
+        "Store Name": "The Urban Nest",
+        "Address": "3 Renaud Street",
+        "City": "Miramichi",
+        "State": "New Brunswick",
+        "Country": "Canada",
+        "Full Address": "3 Renaud Street Miramichi New Brunswick Canada ",
+        "Latitude": 47.0259112,
+        "Longitude": -65.4992109
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.0614542,
+          45.272766
+        ]
+      },
+      "properties": {
+        "Store Name": "LORDON",
+        "Address": "20 King Street",
+        "City": "Saint John",
+        "State": "New Brunswick",
+        "Country": "Canada",
+        "Full Address": "20 King Street Saint John New Brunswick Canada ",
+        "Latitude": 45.272766,
+        "Longitude": -66.0614542
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.2818382,
+          45.1921998
+        ]
+      },
+      "properties": {
+        "Store Name": "Spree Lifestyle Boutique & Studio",
+        "Address": "164 Milltown Boulevard",
+        "City": "Saint Stephen",
+        "State": "New Brunswick",
+        "Country": "Canada",
+        "Full Address": "164 Milltown Boulevard Saint Stephen New Brunswick Canada ",
+        "Latitude": 45.1921998,
+        "Longitude": -67.2818382
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.5727811,
+          46.1490439
+        ]
+      },
+      "properties": {
+        "Store Name": "Fashion Today",
+        "Address": "119 King Street",
+        "City": "Woodstock",
+        "State": "New Brunswick",
+        "Country": "Canada",
+        "Full Address": "119 King Street Woodstock New Brunswick Canada ",
+        "Latitude": 46.1490439,
+        "Longitude": -67.5727811
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.1278823999999,
+          46.2366554
+        ]
+      },
+      "properties": {
+        "Store Name": "Coast to Coast Beauty",
+        "Address": "172B Great George Street",
+        "City": "Charlottetown",
+        "State": "Prince Edward Island",
+        "Country": "Canada",
+        "Full Address": "172B Great George Street Charlottetown Prince Edward Island Canada ",
+        "Latitude": 46.2366554,
+        "Longitude": -63.1278823999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.3717418,
+          62.4539753
+        ]
+      },
+      "properties": {
+        "Store Name": "Sutherland's Drugs",
+        "Address": "50th St & 50th Avenue",
+        "City": "Yellowknife",
+        "State": "Northwest Territories",
+        "Country": "Canada",
+        "Full Address": "50th St & 50th Avenue Yellowknife Northwest Territories Canada ",
+        "Latitude": 62.4539753,
+        "Longitude": -114.3717418
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.3944147,
+          34.1446671
+        ]
+      },
+      "properties": {
+        "Store Name": "Little Moon Society",
+        "Address": "12053 1\/2 Ventura Place",
+        "City": "Studio City ",
+        "State": "California",
+        "Country": "USA",
+        "Full Address": "12053 1\/2 Ventura Place, Studio City, CA",
+        "Latitude": 34.1446671,
+        "Longitude": -118.3944147
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.0304599999999,
+          33.4876283
+        ]
+      },
+      "properties": {
+        "Store Name": "Posh Tots",
+        "Address": "345 Highland Avenue, Augusta, GA",
+        "City": "345 Highland Avenue, Augusta",
+        "State": " GA",
+        "Country": "USA",
+        "Full Address": "345 Highland Avenue, Augusta, GA",
+        "Latitude": 33.4876283,
+        "Longitude": -82.0304599999999
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.017872,
+          30.204684
+        ]
+      },
+      "properties": {
+        "Store Name": "Pascale's Spa",
+        "Address": "1118B Coolidge Boulevard, Lafayette, LA",
+        "City": "1118B Coolidge Boulevard, Lafayette",
+        "State": " LA",
+        "Country": "USA",
+        "Full Address": "1118B Coolidge Boulevard, Lafayette, LA",
+        "Latitude": 30.204684,
+        "Longitude": -92.017872
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.0699187,
+          42.3417043
+        ]
+      },
+      "properties": {
+        "Store Name": "CouCou",
+        "Address": "24 Union Park Street, Boston, MA",
+        "City": "24 Union Park Street, Boston",
+        "State": " MA",
+        "Country": "USA",
+        "Full Address": "24 Union Park Street, Boston, MA",
+        "Latitude": 42.3417043,
+        "Longitude": -71.0699187
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.3514579,
+          43.6805674
+        ]
+      },
+      "properties": {
+        "Store Name": "Adalia Salon",
+        "Address": "506 Main Street, Westbrook, ME",
+        "City": "506 Main Street, Westbrook",
+        "State": " ME",
+        "Country": "USA",
+        "Full Address": "506 Main Street, Westbrook, ME",
+        "Latitude": 43.6805674,
+        "Longitude": -70.3514579
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.8431267,
+          35.2270869
+        ]
+      },
+      "properties": {
+        "Store Name": "Selenite Beauty",
+        "Address": "Charlotte, NC",
+        "City": "Charlotte, NC",
+        "Country": "USA",
+        "Full Address": "Charlotte, NC",
+        "Latitude": 35.2270869,
+        "Longitude": -80.8431267
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.82355,
+          34.2222159
+        ]
+      },
+      "properties": {
+        "Store Name": "FiggyCo LLC",
+        "Address": "1904 Eastwood Road, Wilmington, NC",
+        "City": "1904 Eastwood Road, Wilmington",
+        "State": " NC",
+        "Country": "USA",
+        "Full Address": "1904 Eastwood Road, Wilmington, NC",
+        "Latitude": 34.2222159,
+        "Longitude": -77.82355
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.8373878,
+          36.1524878
+        ]
+      },
+      "properties": {
+        "Store Name": "OAK Nashville",
+        "Address": "4200 Charlotte Avenue, Nashville, TN",
+        "City": "4200 Charlotte Avenue, Nashville",
+        "State": " TN",
+        "Country": "USA",
+        "Full Address": "4200 Charlotte Avenue, Nashville, TN",
+        "Latitude": 36.1524878,
+        "Longitude": -86.8373878
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          153.02298,
+          -27.47003
+        ]
+      },
+      "properties": {
+        "Store Name": "Big Little Things",
+        "City": "Brisbane",
+        "Country": "Australia",
+        "Latitude": -27.47003,
+        "Longitude": 153.02298
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          153.02298,
+          -27.47003
+        ]
+      },
+      "properties": {
+        "Store Name": "Memphis + Willow",
+        "City": "Brisbane",
+        "Country": "Australia",
+        "Latitude": -27.47003,
+        "Longitude": 153.02298
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.20973,
+          55.66875
+        ]
+      },
+      "properties": {
+        "Store Name": "My Tiny Hero",
+        "City": "2640 Hedehusene",
+        "Country": "Denmark",
+        "Latitude": 55.66875,
+        "Longitude": 12.20973
+      }
+    }
+  ]
+}

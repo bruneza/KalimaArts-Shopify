@@ -1,0 +1,28 @@
+<style type="text/css">
+  .swiper-slide-{{ block.id }}.swiper-slide-active .heading {
+    color: {{ headingColor }}; font-size: {{ headingSize }}px; -webkit-animation-name: {{headingAnimation }}; animation-name: {{ headingAnimation }}; -webkit-animation-delay: {{ headingAnimationDelay }}s; animation-delay: {{ headingAnimationDelay }}s;
+  }
+  .swiper-slide-{{ block.id }}.swiper-slide-active .subheading {
+    color: {{ subheadingColor }}; font-size: {{ subheadingSize }}px; -webkit-animation-name: {{ subheadingAnimation }}; animation-name: {{ subheadingAnimation }}; -webkit-animation-delay: {{ subheadingAnimationDelay }}s; animation-delay: {{ subheadingAnimationDelay }}s;
+  }
+  .swiper-slide-{{ block.id }}.swiper-slide-active .cation {
+    color: {{ captionColor }}; font-size: {{ captionSize }}px; -webkit-animation-name: {{ captionAnimation }}; animation-name: {{ captionAnimation }}; -webkit-animation-delay: {{ captionAnimationDelay }}s; animation-delay: {{ captionAnimationDelay }}s;
+  }
+  .swiper-slide-{{ block.id }}.swiper-slide-active .caption-link {
+    -webkit-animation-name: {{ buttonAnimation }}; animation-name: {{ buttonAnimation }}; -webkit-animation-delay: {{ buttonAnimationDelay }}s; animation-delay: {{ buttonAnimationDelay }}s;
+  }   
+  .swiper-slide-{{ block.id }} img{
+    object-position: {{ block.settings.image_position }};                    
+  }
+  @media (max-width: 767px){
+    .swiper-slide-{{ block.id }}.swiper-slide-active .heading {
+      font-size: {{ block.settings.mobile_heading_size }}px;
+    }
+    .swiper-slide-{{ block.id }}.swiper-slide-active .subheading {
+      font-size: {{ block.settings.mobile_subheading_size }}px;
+    }
+    .swiper-slide-{{ block.id }}.swiper-slide-active .cation {
+      font-size: {{ block.settings.mobile_caption_size }}px;
+    }
+  }
+</style>

@@ -1,0 +1,177 @@
+{%- case type -%}
+  {%- when 'logo' -%}
+    <div class="col-lg-{{ _width }} col-md-12 col-sm-12 col-12">
+      <div class="footer-block footer-logo">
+        {% if block.settings.logo != blank or block.settings.logo_svg != blank %}
+          <div class="logo-footer">
+            {% assign _logo_size = block.settings.logo_max_width | append: 'x' %}
+            {% assign _logo_size_2x = block.settings.logo_max_width | times: 2 | append: 'x' %}
+            {% assign _logo_svg = block.settings.logo_svg %}
+
+            <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="logo-site{% if _lazyload %} lazyload waiting{% endif %}">
+              {% unless block.settings.logo == blank %}
+                <img {% if _lazyload %} class="lazyload" data-srcset="{{ block.settings.logo | img_url: _logo_size }} 1x, {{ block.settings.logo | img_url: _logo_size_2x }} 2x"
+                   {% else %}src="{{ block.settings.logo | img_url: _logo_size }}"{% endif %} 
+                   alt="{{ shop.name | escape }}"
+                   style="max-width: {{ block.settings.logo_max_width }}px;" />
+              {% else %}
+                {{ _logo_svg }}
+              {% endunless %}
+            </a>
+          </div>
+        {% endif %}
+
+        {% if block.settings.show_phone_number_box %}
+          <div class="support-box-1">
+            {% if block.settings.phone_number_box_icon %}
+            {%- render 'theme-icon', type: 'support' -%}
+            {% endif %}
+
+            <div class="text">
+              <span>{{ block.settings.phone_number_box_text_1 }}</span>
+              <span>{{ block.settings.phone_number_box_text_2 }}</span>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.show_address_box %}
+          <div class="support-box-2">
+            <div class="text">
+              <span>{{ block.settings.address_box_text_1 }}</span>
+              <span>{{ block.settings.address_box_text_2 }}</span>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.social_icon %}
+          <div class="widget-social">
+            {% include 'social-media-icons' %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+  {%- when 'menu' -%}
+    {%- assign _f_menu = block.settings.footer_menu -%}
+    {%- unless _f_menu == blank -%}
+      <div class="col-lg-{{ _width }} col-md-3 col-sm-3 col-12">
+        <div class="footer-block footer-menu">
+
+          {%- assign _f_title = block.settings.footer_menu_title -%}
+          {%- assign _hide_title_desktop = block.settings.hide_footer_menu_title -%}
+          <h6{% if _hide_title_desktop %} class="hide-title"{% endif %}>{{ _f_title }}<span class="icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 41 64"><path d="M38.4 26.304q0 0.448-0.384 0.768l-16.64 16.704q-0.32 0.32-0.832 0.32t-0.768-0.32l-16.64-16.704q-0.384-0.32-0.384-0.768t0.384-0.832l1.792-1.792q0.32-0.384 0.768-0.384t0.832 0.384l14.016 14.016 14.080-14.016q0.32-0.384 0.832-0.384t0.768 0.384l1.792 1.792q0.384 0.32 0.384 0.832z"></path></svg></span></h6>
+
+          <ul class="f-list">
+            {%- for l in linklists[_f_menu].links -%}
+            <li><a href="{{ l.url }}"><span>{{ l.title }}</span></a></li>
+            {%- endfor -%}
+          </ul>
+
+        </div>
+      </div>      
+    {%- endunless -%}
+
+  {%- when 'newsletter'-%}
+    {% unless section.settings.email_type == 'none' %}
+      {%- liquid
+        assign _fix_layout = section.settings.fix_layout
+        assign _mailing_title = section.settings.mailing_title
+        assign _mailing_caption = section.settings.mailing_caption
+        assign _mailing_form_action = section.settings.mailing_form_action
+        assign _mailing_text_placeholder = section.settings.mailing_text_placeholder
+      -%}
+
+      <div id="widget-newsletter" class="fix-{{ _fix_layout }}">
+        <div class="widget-newsletter">
+          <div class="{{ _layout_class }}">
+
+            <div class="newsletter-container">
+              {%- unless _mailing_title == blank -%}
+                <div class="newsletter-title">
+                <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="paper-plane" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-paper-plane fa-w-16 fa-2x"><path fill="currentColor" d="M464 4.3L16 262.7C-7 276-4.7 309.9 19.8 320L160 378v102c0 30.2 37.8 43.3 56.7 20.3l60.7-73.8 126.4 52.2c19.1 7.9 40.7-4.2 43.8-24.7l64-417.1C515.7 10.2 487-9 464 4.3zM192 480v-88.8l54.5 22.5L192 480zm224-30.9l-206.2-85.2 199.5-235.8c4.8-5.6-2.9-13.2-8.5-8.4L145.5 337.3 32 290.5 480 32l-64 417.1z" class=""></path></svg>
+                <span>{{ _mailing_title }}</span></div>
+              {%- endunless -%}
+
+              {%- unless _mailing_caption == blank -%}
+                <p>{{ _mailing_caption }}</p>
+              {%- endunless -%}
+
+              {%- if section.settings.email_type == 'mailchimp' -%}
+                <form action="{{ _mailing_form_action }}" method="post" id="mc-embedded-subscribe-form" class="form-inline form-subscribe" name="mc-embedded-subscribe-form" target="_blank" rel="noopener">
+                  <input class="form-control" type="email" required placeholder="{{ _mailing_text_placeholder }}" name="EMAIL" id="email-input" />
+                  <button id="email-submit" type="submit" class="btn-custom">{{ section.settings.mailing_button_text }}</button>
+                </form>
+              {%- elsif section.settings.email_type == 'klaviyo' -%}
+                {%- assign klaviyo_id  = _mailing_form_action | split: 'g=' | last -%}
+                <form action="{{ _mailing_form_action }}" method="post" id="mc-embedded-subscribe-form" class="form-inline form-subscribe klaviyo_styling" target="_blank" novalidate="novalidate">
+                  <input type="hidden" name="g" value="{{klaviyo_id}}">
+                  <input required type="email" class="form-control" value="" name="email" class="contact_email" placeholder="{{ _mailing_text_placeholder }}">
+                  <button id="email-submit" type="submit" class="btn-custom">{{ section.settings.mailing_button_text }}</button>
+                </form>
+              {%- else -%}
+                {%- assign formId = 'ContactFooter' -%}
+                <form method="post" action="/contact#ContactFooter" id="ContactFooter" accept-charset="UTF-8" class="contact-form" novalidate="novalidate">
+                  <input type="hidden" name="form_type" value="customer">
+                  <input type="hidden" name="utf8" value="✓">
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <input type="email" name="contact[email]" id="ContactFooter-email" class="form-control" value="" placeholder="{{ _mailing_text_placeholder }}" aria-label="Email address" aria-required="true" required="" autocorrect="off" autocapitalize="off">
+                  <button id="email-submit" type="submit" class="btn-custom" name="commit">{{ section.settings.mailing_button_text }}</button>
+                </form>
+              {%- endif -%}
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    {%- endunless -%}
+
+  {%- when 'copyright'-%}
+    <div class="footer-bot">
+      <div class="{{ _layout_class }}">      
+        <div class="table-row">
+
+          <div class="copyright">
+            <p>&copy; {{ 'now' | date: '%Y' }} <strong>{{ shop.name }}</strong>. All Rights Reserved</p>
+          </div>
+          
+          {%- include 'footer-widget-snippet', type: 'payment-icon' -%}
+
+        </div>
+      </div>
+    </div>
+
+  {%- when 'payment-icon'-%}
+    {% unless section.settings.payment_icon_type == 'none' %}
+      <div class="payment-icons">
+        
+        <ul class="list-inline">
+          {% if section.settings.payment_icon_type == 'image' and section.settings.payment_image != blank %}
+            {% assign _payment_size = section.settings.payment_image_width | append: 'x' %}
+            {% assign _payment_size_2x = section.settings.payment_image_width | times: 2 | append: 'x' %}
+            <li {% if _lazyload %} class="lazyload waiting{% endif %}"> 
+              <img {% if _lazyload %} class="lazyload" data-srcset="{{ section.settings.payment_image | img_url: _payment_size }} 1x, {{ section.settings.payment_image | img_url: _payment_size_2x }} 2x"
+                   {% else %}src="{{ section.settings.payment_image | img_url: _payment_size }}"{% endif %} 
+                   alt="Payment"
+                   style="max-width: {{ section.settings.payment_image_width }}px;" />
+            </li> 
+
+          {% else %}
+            {% for i in (1..4) %}
+              {% assign _font_icon = 'payment_icon_' | append: i %}
+
+              {% unless section.settings[_font_icon] == blank %}
+                {% assign _icon_title = 'payment_icon_title_' | append: i %}
+                <li>{{ section.settings[_font_icon] }}</li>
+              {% endunless %}
+
+            {% endfor %}
+
+          {% endif %}
+        </ul>
+        
+      </div>
+    {% endunless %}
+
+{%- endcase -%}

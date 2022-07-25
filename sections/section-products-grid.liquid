@@ -1,0 +1,451 @@
+{% include 'products-grid-snippet' %}
+
+{% schema %}
+{
+  "name": "Products Grid",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Created by 'Products Grid' section"
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Section Label",
+      "default": "Products Grid"
+    },
+    {
+      "id": "cssclass",
+      "type": "text",
+      "label": "Extra CSS Class",
+      "default": "dashbuy-section"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_mobile",
+      "label": "Visibility: Hide for Mobile"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Section Layout Mode",
+      "default": "boxed",
+      "options": [
+        { "value": "boxed", "label": "Boxed" },
+        { "value": "full",  "label": "Wide" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_section",
+      "label": "Padding Section",
+      "default": 15,
+      "min": 0,
+      "max": 15,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "New arrivals"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Text link",
+      "default": "Go to section"
+    },
+    {
+      "type": "checkbox",
+      "id": "fix_subheading",
+      "label": "Fix Text link position when Heading is too long"
+    },
+    {
+      "type": "header",
+      "content": "Block settings"
+    },
+    {
+      "type": "select",
+      "id": "type",
+      "label": "Type",
+      "default": "row",
+      "options": [
+        { "value": "row", "label": "Row" },
+        { "value": "carousel", "label": "Carousel" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "limited",
+      "label": "Total items",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Number of items per row"
+    },
+    {
+      "type": "range",
+      "id": "item_per_row",
+      "label": "Desktop",
+      "min": 2,
+      "max": 7,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "item_per_row_tablet",
+      "label": "Tablet",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "item_per_row_mobile",
+      "label": "Mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Carousel settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "navigator",
+      "label": "Show Navigator",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "navigator_position",
+      "label": "Navigator position",
+      "options": [
+        { "value": "1", "label": "Next to Heading" },
+        { "value": "2", "label": "Below Heading" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "paging",
+      "label": "Show Bullet",
+      "default": false
+    },
+    {
+          "type": "header",
+          "content": "Block Background"
+        },
+        {
+          "type": "select",
+          "id": "section_bg_style",
+          "label": "Background style",
+          "options": [
+            { "value": "color", "label": "Background color" },
+            { "value": "image", "label": "Background image" }
+          ],
+          "default": "color"
+        },
+        {
+          "type": "color",
+          "id": "section_bg_color",
+          "label": "Background color",
+          "default": "#ffffff"
+        },
+        {
+          "id": "section_bg_image",
+          "type": "image_picker",
+          "label": "Background image",
+          "info": "Default size is 1920x980 pixels"
+        }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+		{
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#ffffff"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection item"
+        }
+      ]
+    },
+    {
+      "type": "product-half-width",
+      "name": "Product - half width",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Heading"
+        },
+        {
+        "type": "text",
+        "id": "block-heading",
+        "label": "Heading",
+        "default": "New Block"
+        },
+        {
+          "type": "header",
+          "content": "Block Product"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection item"
+        },
+        {
+          "type": "header",
+          "content": "Block Background"
+        },
+        {
+          "type": "select",
+          "id": "bg_style",
+          "label": "Background style",
+          "options": [
+            { "value": "color", "label": "Background color" },
+            { "value": "image", "label": "Background image" }
+          ],
+          "default": "color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#ffffff"
+        },
+        {
+          "id": "bg_image",
+          "type": "image_picker",
+          "label": "Background image",
+          "info": "Default size is 1920x980 pixels"
+        }
+      ]
+    },
+    {
+      "type": "product-image",
+      "name": "Product with image",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Block Product"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection item"
+        },
+        {
+          "type": "header",
+          "content": "Block image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_size",
+          "label": "Image size",
+          "info": "Default size is 200x300 pixels"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop now"
+        }
+      ]
+    },
+    {
+      "type": "product-deal",
+      "name": "Product with deal",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Block Product"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection item"
+        },
+        {
+          "type": "header",
+          "content": "Block Deal"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "default": "1",
+          "options": [
+            { "value": "1", "label": "Next to Heading" },
+            { "value": "2", "label": "Below Heading" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text 1"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2",
+          "info": "Only for position is Below Heading"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Only for position is Below Heading"
+        },
+        {
+          "type": "text",
+          "id": "image_size",
+          "label": "Image size",
+          "info": "Default size is 200x160 pixels"
+        },
+        {
+          "type": "text",
+          "id": "expire",
+          "label": "Expire",
+          "info": "mm/dd/yyyy.Eg: 12/20/2019"
+        }
+      ]
+    },
+    {
+      "type": "product-listing",
+      "name": "Product listing",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#ffffff"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection item"
+        },
+        {
+          "type": "select",
+          "id": "item_per_row",
+          "label": "Number of item per row",
+          "default": "2",
+          "options": [
+            { "value": "2", "label": "2 items" },
+            { "value": "3", "label": "3 items" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "carousel_style",
+          "label": "Carousel style",
+          "default": "1",
+          "options": [
+            { "value": "1", "label": "1 row" },
+            { "value": "2", "label": "2 rows" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "product-listing-hw",
+      "name": "Listing half width",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Block Product"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection item"
+        },
+        {
+          "type": "select",
+          "id": "carousel_style",
+          "label": "Carousel style",
+          "default": "1",
+          "options": [
+            { "value": "1", "label": "1 row" },
+            { "value": "2", "label": "2 rows" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Block Background"
+        },
+        {
+          "type": "select",
+          "id": "bg_style",
+          "label": "Background style",
+          "options": [
+            { "value": "color", "label": "Background color" },
+            { "value": "image", "label": "Background image" }
+          ],
+          "default": "color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#ffffff"
+        },
+        {
+          "id": "bg_image",
+          "type": "image_picker",
+          "label": "Background image",
+          "info": "Default size is 1920x980 pixels"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products Grid",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,153 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+<div itemscope itemtype="http://schema.org/Product">
+  {% capture ssw_rich_snippet %}{% render 'ssw-widget-avg-rate-rich' %}{% endcapture %}
+  {% unless ssw_rich_snippet contains 'Liquid error' %}
+  {{ ssw_rich_snippet }}
+  {% endunless %}
+  <meta itemprop="image" content="https:{{ product.featured_image.src | product_img_url: 'grande' }}">
+  <meta itemprop="mpn" content="{{ product.variants.first.barcode }}" />
+  <span itemprop="name" class="hide">{{ product.title }}</span>
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="sku" content="{{ product.variants.first.sku }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | truncate: 100 }}">
+  
+  <div itemprop="review" itemscope itemtype="https://schema.org/Review" style="display: none;"> Review:
+    <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+        <span itemprop="ratingValue">5</span> -
+    </span>
+    <b>"<span itemprop="name">A masterpiece of literature</span>" </b> by
+    <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">John Doe</span></span>, written on
+    <meta itemprop="datePublished" content="2020-05-04">May 4, 20020
+    <div itemprop="reviewBody">Great</div>
+    <span itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Washington Times"></span>
+  </div>
+  
+  {% assign _lazyload = settings.use_lazyload %}
+  {% assign _product_layout = 'normal' %}
+  {% assign _product_sidebar_mode = section.settings.sidebar_mode %}
+  
+  {% if _product_sidebar_mode == 'none' %}
+    {% assign _main_class = 'col-12' %}
+  {% else %}
+    {% assign _sb_class = 'col-lg-3 d-none d-lg-block' %}
+    {% assign _main_class = 'col-lg-9 col-md-12' %}
+  {% endif %}
+  
+  <div class="container">
+    <div class="row">
+      
+      {% if _product_sidebar_mode == 'left' %}
+        {% include 'sidebar-product' %}
+      {% endif %}
+      
+      <div class="{{ _main_class }}">
+        <div id="col-main" class="page-product layout-{{ _product_layout }}">
+          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+            
+            {% if product.available %}
+              <link itemprop="availability" href="https://schema.org/InStock" />
+            {% else %}
+              <link itemprop="availability" href="https://schema.org/OutOfStock" />
+            {% endif %}
+
+            <div class="product">
+              <div class="product-content-wrapper">
+                <div class="row">
+
+                  {% include 'product-detail-image' %}
+
+                  <div class="col-lg-7 col-md-6 col-sm-6 col-12">
+                    <div id="product-info" class="product-info">
+                      <div class="product-info-inner">
+
+                        {%- include 'product-detail-snippet', type: 'discount-popup' -%}
+                        {%- include 'product-detail-snippet', type: 'vendor' -%}
+
+                        <h1 itemprop="name" content="{{ product.title }}" class="page-heading">{{ product.title }}</h1>
+
+                        {%- include 'product-detail-snippet', type: 'review' -%}
+
+                        {% if settings.show_social_sharing_product %}
+                          {%- include 'product-detail-snippet', type: 'social-sharing' -%}
+                        {% endif %}
+
+                        {%- include 'product-detail-snippet', type: 'stock' -%}
+                        {%- include 'product-detail-snippet', type: 'short-description' -%}
+                        {%- include 'product-detail-snippet', type: 'size-chart' -%}
+                        {%- include 'product-detail-snippet', type: 'wishlist-compare' -%}
+                        {%- include 'product-detail-snippet', type: 'sku' -%}
+                        {%- include 'product-detail-snippet', type: 'price' -%}
+                        {%- include 'product-detail-snippet', type: 'deals' -%}
+
+                        {% if product.available %}   
+
+                          {% assign hide_default_title = false %}
+                          {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                            {% assign hide_default_title = true %}
+                          {% endif %}
+
+                          <div class="group-cw clearfix">
+                            {% form 'product', product, class:'product-form product-action variants' %}
+                              {% include 'product-detail-variants' %}
+                              <div class="qty-add-cart">
+                                {%- include 'product-detail-snippet', type: 'qty' -%}
+                                {%- include 'product-detail-snippet', type: 'btn' -%}
+                              </div>
+                            {% endform %}
+
+                            {% include 'layout-people-in-cart' %}
+                            {%- include 'product-detail-snippet', type: 'order-shipping' -%}
+                          </div>
+
+                        {% else %}
+                          {%- include 'product-detail-snippet', type: 'unavailable' -%}
+
+                        {% endif %}  
+
+                        {%- include 'product-detail-snippet', type: 'pre-order' -%}
+                        {%- include 'product-detail-snippet', type: 'secure-image' -%}
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+
+        {% if section.settings.show_product_tab %}
+          {% include 'product-toggle' %}
+        {% endif %}
+
+        {% if section.settings.product_tab_review == 'below' and settings.product_review_option != 'none' %}
+          <div class="review-item" id="tab_review_tabbed">
+            <div id="tab-review" class="container">
+              {%- include 'product-detail-snippet', type: 'review-content' -%}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.enable_related_product %}
+          {% include 'related-product' %}
+        {% endif %}
+      </div>
+      
+      {% if _product_sidebar_mode == 'right' %}
+        {% include 'sidebar-product' %}
+      {% endif %}
+
+    </div>
+  </div>
+  
+</div>
+
+{% if settings.enable_notify_product_page %}
+  {% include 'layout-notify' %}
+{% endif %}
+
+{% include 'product-template-script' %}

@@ -1,0 +1,49 @@
+{%- assign _product = block.settings.product -%}
+{%- assign _image_position = block.settings.special_product_position -%}
+
+{% unless _collection == blank or collection.products_count == 0 %}
+
+  <div class="hp-tabs-list-wrapper special-product-v2{% unless _product == blank %} special-product-true{% endunless %} position-{{ _image_position }}">
+
+      {% unless _product == blank %}
+        <div class="hp-tabs-special hp-tabs-special-product">
+          <div class="block-special-product listing-sp-{{ block.id }}">
+            {%- assign product = all_products[_product] -%}
+            {% include 'special-product-item-v2' %}
+          </div>
+        </div>
+      {% endunless %}
+
+      <div class="hp-tabs-list tabs-list-row">
+        <div class="row">
+
+          {% for product in collection.products limit: _limit %}
+            <div class="product-grid-item {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}">
+              {% include 'product-item' %}
+            </div>
+          {% endfor %}
+
+        </div>
+      </div>
+
+  </div>
+
+{% else %}
+
+  <div class="hp-tabs-list-wrapper special-product-true position-left">
+    
+    <div class="hp-tabs-special hp-tabs-special-product">
+      <div class="block-special-product">
+        {{ emptySpecialProduct }}
+      </div>
+    </div> 
+
+    <div class="hp-tabs-list tabs-list-row">
+      <div class="row">
+        {{ emptyProduct }}
+      </div>
+    </div>
+
+  </div>
+
+{% endunless %}

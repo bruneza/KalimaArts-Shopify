@@ -1,0 +1,25 @@
+{% if settings.use_quick_view or settings.product_wishlist_option != 'disable' %}
+  <div class="product-button">
+
+      {% if settings.use_quick_view %}
+        <div data-target="#quick-shop-popup" class="quick_shop" data-handle="{{ product.handle }}" data-toggle="modal" title="{{ 'products.product.quick_shop' | t }}">
+          {%- render 'theme-icon', type: 'view-1' -%}
+          <span>{{ 'products.product.quick_shop' | t }}</span>
+        </div>
+      {% endif %}
+
+      {% if settings.product_wishlist_option != 'disable' %} 
+        <div class="product-wishlist">
+          {% if settings.product_wishlist_option == 'wishlist-compare' %} 
+            {% render 'arn_wl_cp_custom_buttons', type: 'wl_add_btn', product_handle: product.handle %}
+          {% else %}
+            {% capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with product.id %}{% endcapture %}
+            {% unless the_snippet_fave_icon contains 'Liquid error' %}
+            {{ the_snippet_fave_icon }}
+            {% endunless %}  
+          {% endif %}
+        </div>
+      {% endif %}
+
+  </div>
+{% endif %}

@@ -1,0 +1,99 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+<div itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="image" content="https:{{ product.featured_image.src | product_img_url: 'grande' }}">
+  <meta itemprop="mpn" content="{{ product.variants.first.barcode }}" />
+  <span itemprop="name" class="hide">{{ product.title }}</span>
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="sku" content="{{ product.variants.first.sku }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | truncate: 100 }}">
+
+  {% assign _lazyload = settings.use_lazyload %}
+  {% assign _product_layout = 'extended' %}
+
+  <div id="col-main" class="page-product layout-{{ _product_layout }}">
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+      
+      {% if product.available %}
+        <link itemprop="availability" href="https://schema.org/InStock" />
+      {% else %}
+        <link itemprop="availability" href="https://schema.org/OutOfStock" />
+      {% endif %}
+      
+      <div class="container">
+        <div class="product">
+          
+          <div class="product-content-wrapper">
+            <div class="row">
+
+              {% include 'product-detail-image' %}
+              {% include 'product-detail-content' %}
+
+              <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                <div id="product-info" class="product-info">
+                  <div class="product-info-inner">
+
+                    {%- include 'product-detail-snippet', type: 'stock' -%}
+                    {%- include 'product-detail-snippet', type: 'price' -%}
+
+                    {% if product.available %}
+                      {% assign hide_default_title = false %}
+
+                      {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                        {% assign hide_default_title = true %}
+                      {% endif %}
+
+                      <div class="group-cw clearfix">
+                        {% form 'product', product, class:'product-form product-action variants' %} 
+                          {%- include 'product-detail-snippet', type: 'qty' -%}
+                          {%- include 'product-detail-variants' -%}
+                          {%- include 'product-detail-snippet', type: 'btn' -%}
+                          {%- include 'product-detail-snippet', type: 'wishlist-compare' -%}
+                        {% endform %}
+                      </div>
+
+                    {% else %}
+                      {%- include 'product-detail-snippet', type: 'unavailable' -%}
+
+                    {% endif %}
+
+                    {%- include 'product-detail-snippet', type: 'pre-order' -%}
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {% if section.settings.show_product_tab %}
+        {% include 'product-extended-toggle' %}
+      {% endif %}
+
+      {% if section.settings.product_tab_review == 'below' and settings.product_review_option != 'none' %}
+        <div class="review-item" id="tab_review_tabbed">
+          <div id="tab-review" class="container">
+            {%- include 'product-detail-snippet', type: 'review-content' -%}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.enable_related_product %}
+        <div class="container">
+          {% include 'related-product' %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</div>
+
+{% if settings.enable_notify_product_page %}
+  {% include 'layout-notify' %}
+{% endif %}
+
+{% include 'product-template-script' %}

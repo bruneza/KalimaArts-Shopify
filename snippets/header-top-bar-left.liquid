@@ -1,0 +1,108 @@
+{% if section.settings.enable_multi_store %}
+  <div class="multi-store">
+    <ul class="list-inline">
+      {% assign _store_name_1 = section.settings.store_name_1 %}
+      {% assign _store_image_1 = section.settings.store_image_1 %}
+      {% assign _store_name_2 = section.settings.store_name_2 %}
+      {% assign _store_image_2 = section.settings.store_image_2 %}
+      {% assign _store_link_2 = section.settings.store_link_2 %}
+
+      {% unless _store_name_1 == blank %}
+      <li{% if _lazyload %} class="lazyload waiting"{% endif %}>
+        <div class="inner" style="background: {{ section.settings.store_background_1 }};">
+          {% unless _store_image_1 == blank %}
+          <img {% if _lazyload %}class="lazyload"
+             data-srcset="{{ _store_image_1 | img_url: '20x'}} 1x, {{ _store_image_1 | img_url: '40x'}} 2x"
+             {% else %}src="{{ _store_image_1 | img_url: '20x'}}"{% endif %}
+             alt="Store" />
+          {% endunless %}
+          <span style="color: {{ section.settings.store_text_color_1 }};">{{ _store_name_1 }}</span>
+        </div>
+      </li>
+      {% endunless %}
+
+      {% unless _store_name_2 == blank %}
+      <li{% if _lazyload %} class="lazyload waiting"{% endif %}>
+        <div class="inner" style="background: {{ section.settings.store_background_2 }};">
+          <a href="{{ _store_link_2 }}" target="_blank">
+            {% unless _store_image_2 == blank %}
+            <img {% if _lazyload %}class="lazyload"
+               data-srcset="{{ _store_image_2 | img_url: '20x'}} 1x, {{ _store_image_2 | img_url: '40x'}} 2x"
+               {% else %}src="{{ _store_image_2 | img_url: '20x'}}"{% endif %}
+               alt="Store" />
+            {% endunless %}
+            <span style="color: {{ section.settings.store_text_color_2 }};">{{ _store_name_2 }}</span>  
+          </a>
+        </div>
+      </li>
+      {% endunless %}
+    </ul>
+  </div>
+{% endif %}
+
+{% unless settings.header_style == 2 %}
+  {% if section.settings.enable_header_contact %}
+    {% assign _header_phone_number = section.settings.header_phone_number %}
+    {% assign _phone_icon_type = settings.phone_icon_type %}
+    {% assign _phone_font_icon = settings.phone_font_icon %}
+    {% assign _phone_icon = settings.phone_icon %}
+
+    {% assign _header_email = section.settings.header_email %}
+    {% assign _email_icon_type = settings.email_icon_type %}
+    {% assign _email_font_icon = settings.email_font_icon %}
+    {% assign _email_icon = settings.email_icon %}
+
+    {% if settings.header_style == 6 %}
+      {% assign _header_contact_classs = 'header-contact-box d-none d-lg-block' %}
+    {% else %}
+      {% assign _header_contact_classs = 'header-contact-box' %}
+    {% endif %}
+
+    <div class="{{ _header_contact_classs }}">
+      <ul class="list-inline">
+
+        {% unless _header_phone_number == blank %}
+          <li class="phone{% if _lazyload and _phone_icon_type == 'image' %} lazyload waiting{% endif %}">
+            {% if _phone_icon_type == 'font-icon' %}
+              {{ _phone_font_icon }}
+
+            {% else %}
+              <img {% if _lazyload %}class="lazyload"
+                   data-srcset="{{ _phone_icon | img_url: '20x'}} 1x, {{ _phone_icon | img_url: '40x'}} 2x"
+                   {% else %}src="{{ _phone_icon | img_url: '20x'}}"{% endif %}
+                   alt="Phone" />
+
+            {% endif %}
+            <span>{{ _header_phone_number }}</span>
+          </li>
+        {% endunless %}
+
+        {% unless _header_email == blank %}
+          <li class="email{% if _lazyload and _email_icon_type == 'image' %} lazyload waiting{% endif %}">
+            {% if _email_icon_type == 'font-icon' %}
+              {{ _email_font_icon }}
+
+            {% else %}
+              <img {% if _lazyload %}class="lazyload"
+                   data-srcset="{{ _email_icon | img_url: '20x'}} 1x, {{ _email_icon | img_url: '40x'}} 2x"
+                   {% else %}src="{{ _email_icon | img_url: '20x'}}"{% endif %}
+                   alt="Phone" />
+
+            {% endif %}
+            <span>{{ _header_email }}</span>
+          </li>
+        {% endunless %}
+
+      </ul>
+    </div>
+  {% endif %}
+
+{% else %}
+
+  {% unless section.settings.welcome_text == blank %}
+    <div class="top-bar-left">
+      <div class="welcome">{{ section.settings.welcome_text }}</div>
+    </div>
+  {% endunless %}
+
+{% endunless %}

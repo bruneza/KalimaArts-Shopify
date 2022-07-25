@@ -1,0 +1,172 @@
+var AT_Filter = window.AT_Filter || {};
+
+(function($) {
+	AT_Filter = {
+
+		init: function () {
+			this.filterElem = $(".grid-uniform");
+			this.isLoading = false;
+			this.updateURL = false;
+			this.requestAgain = false;
+            this.title;
+
+			if( this.filterElem.length > 0 ) {
+				this.addEvent();
+				// Bind to StateChange Event
+			    History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+			        var State = History.getState(); // Note: We are using History.getState() instead of event.state;
+			        AT_Filter.updateURL = false;
+			        if(AT_Filter.requestAgain)
+			        	AT_Filter.requestPage(State.data.url);
+			       	AT_Filter.requestAgain = true;
+			    });
+			}
+		},
+
+		addEvent: function() {
+			//prevent li clicked
+			AT_Filter.filterElem.on("click", ".advanced-filter", function(event){
+				return false;
+			});
+
+			AT_Filter.filterElem.on("click", ".advanced-filter a", function(e){
+				
+				if (AT_Filter.isLoading) {
+					return; 
+				}
+				
+				var target = $(e.currentTarget), href;
+
+				href = target.attr("href");
+				//Set active or remove active for filter
+				if(target.parent().hasClass("active-filter")) {
+					target.parent().removeClass("active-filter");
+				}
+				else {
+					target.parent().addClass("active-filter");
+				}
+				
+				AT_Filter.updateURL = true;
+				AT_Filter.requestPage(href);
+				return false;
+				
+			});
+          
+          //Click on pager
+          $(document).on('click', '.srp-filter-wrapper .advanced-filter a', function(e){
+          	if (AT_Filter.isLoading) {
+				return; 
+			}
+            
+            var target = $(e.currentTarget), href;
+            if( target.parent().hasClass('active') )
+            	return;
+            
+            href = target.attr("href");
+            AT_Filter.updateURL = true;
+            AT_Filter.requestPage(href);
+            return false;
+          });
+          
+          $(document).on('click','.sort-by li.sort-action',function(e){
+            if (AT_Filter.isLoading) {
+				return; 
+			}
+	
+            var href;
+            $('.sort-by .name').html($(this).html()); 
+
+            if(!$(this).hasClass('active')){
+              var value = jQuery(this).attr('data-sort');
+              Shopify.queryParams.sort_by = value;
+              href = '?'+jQuery.param(Shopify.queryParams)
+              //location.search = jQuery.param(Shopify.queryParams);
+              AT_Filter.updateURL = true;
+              AT_Filter.requestPage(href);
+            }
+          });
+		},
+
+		requestPage: function(href) {
+			
+			if (history.pushState) {
+				this.getPage(href);
+				
+			} else {
+				location.assign(href);
+			}
+			
+		},
+
+		filterPage: function(href){
+			var splitArr = [],  param;
+            if(String(href).indexOf("/") != -1) {
+              splitArr = href.split("/");
+              param = splitArr[splitArr.length - 1];
+            }
+            else
+              param = href;
+              return param;
+		},
+
+		getPage: function(href) {
+          	$(".is-countdown").countdown("pause"); //pause countdown if page has DEAL
+			$('.new-loading').addClass('loading');
+			this.isLoading = true;
+			jQuery.ajax({
+			   url: href,
+			   success: function (response)
+			   {
+                   var _obj = $(response);
+                   AT_Filter.title = _obj[19];
+                   if(AT_Filter.updateURL) {
+                     var params = AT_Filter.filterPage(href);
+                     AT_Filter.updateURL = false;
+                     AT_Filter.requestAgain = false;
+
+                     History.pushState( {url: href}, AT_Filter.title.innerHTML,  href );
+
+                   }
+                   AT_Filter.isLoading = false;
+                   $('.new-loading').removeClass('loading');
+                 
+                   jQuery('.filter-sidebar.position-body.toggle').slideToggle("slow");
+                   jQuery('html,body').removeClass('sidebar-opened');
+                   var product_list = _obj.find(".cata-product");
+
+                   $("#col-main").empty().append(_obj.find("#col-main").children());
+                   $(".pagination-showing").empty().append(_obj.find(".pagination-showing").children());
+                   $(".pagination-holder").empty().append(_obj.find(".pagination-holder").children());
+                 
+                   AT_Filter.filterElem.each(function(){
+                     var sel = ".sb-filter." + $(this).data('prefix')
+                     ,filter_list = _obj.find(sel);
+                     $(this).empty().append(filter_list);
+                   })
+
+                   AT_Main.filterCatalog();
+                   AT_Main.fixButton();
+                   AT_Main.fixTitle();
+                   AT_Main.handleReviews();
+                   AT_Main.handleGridList();
+                 
+                   {% if settings.currency_type == '2' %}
+                   Currency.convertAll('{{ settings.default_currency }}', Currency.currentCurrency);
+                   {% endif %}
+                 
+			   },
+			   error: function(e) {
+                   console.log(e);
+			   },
+
+			});
+			
+			
+		},
+		
+	}
+})(jQuery);
+
+$(document).ready(function(){ 
+	AT_Filter.init();
+});

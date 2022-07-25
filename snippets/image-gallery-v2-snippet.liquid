@@ -1,0 +1,113 @@
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _layout = section.settings.layout -%}
+{%- assign _type = section.settings.type -%}
+{%- assign _bg_color = section.settings.bg_color -%}
+{%- assign _border_top = section.settings.border_top -%}
+{%- assign _image_size = section.settings.image_size -%}
+{%- assign _image_width = _image_size | split: 'x' | first -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+<div id="home-banner-v2-{{ section.id }}" class="home-banner-v2 border-top-{{ _border_top }} layout-{{_layout }}{% if _hide_mobile %} d-none d-md-block{% endif %}" data-section-type="image-gallery-02" data-section-id="{{ section.id }}" style="background: {{ _bg_color }};  border-color: {{ section.settings.border_top_color }};">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <div class="banner-grid-content banner-grid-{{ _type }}" data-type="{{ _type }}">
+      {% for block in section.blocks %}
+        {%- assign _image = block.settings.image -%}
+        {%- assign _text = block.settings.text -%}
+        {%- assign _link = block.settings.link -%}
+
+        <div class="banner-item" style="max-width: {{ _image_width }}px;">
+          {% unless block.settings.image == blank %}
+            <a href="{{ _link }}">
+              {% include 'image-lazysize' with image: _image, image_size: _image_size, image_class: '', image_alt: 'Banner' %}     
+            </a>
+          
+          	{% unless _text == blank %}
+              <a href="{{ _link }}" class="text">{{ _text }}</a>
+          	{% endunless %}
+
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+
+          {% endunless %}
+        </div>
+
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <div class="banner-grid-row">
+      {% for i in (1..10) %}
+        <div class="banner-item">
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endfor %}
+    </div>
+
+  {% endif %}
+
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>
+
+
+<script>
+    jQuery(document).ready(function($) {
+      
+      var _sections = new theme.Sections();
+      _sections.register('image-gallery-02',function(){
+        
+        var _type = $('#home-banner-v2-{{ section.id }} .banner-grid-content').attr('data-type');
+                      
+        if(_type == 'carousel'){
+
+          setTimeout(function(){
+            jQuery("#home-banner-v2-{{ section.id }} .banner-grid-carousel").length && jQuery("#home-banner-v2-{{ section.id }} .banner-grid-carousel").owlCarousel({
+              nav			: true
+              ,items		: 10
+              ,rtl			: jQuery('body').data('rtl')
+              ,dots			: false
+              ,margin	  	: 20
+              ,responsive 	: {
+                  0:{
+                    items: 3
+                  }
+                  ,480:{
+                    items: 4
+                  }
+                  ,600:{
+                    items: 5
+                  }
+                  ,768:{
+                    items: 6
+                  }
+                  ,991:{
+                    items: 7
+                  }
+                  ,1024:{
+                    items: 8
+                  }
+                  ,1080:{
+                    items: 9
+                  }
+                  ,1200:{
+                    items: 10
+                  } 
+                }
+              ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+            });
+          }, 1200);
+      	}
+                         
+        return;
+      
+      });
+
+    });
+</script>

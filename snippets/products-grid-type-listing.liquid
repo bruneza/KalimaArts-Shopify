@@ -1,0 +1,53 @@
+{%- assign _background = block.settings.bg_color -%}
+{%- assign _carousel_style = block.settings.carousel_style -%}
+
+{%- assign _item_per_row = block.settings.item_per_row -%}
+
+{% if _item_per_row == '2' %}
+  {%- assign _class = "col-lg-6 col-md-6 col-sm-6 col-12" -%}
+{% else %}
+  {%- assign _class = "col-lg-4 col-md-4 col-sm-6 col-12" -%}
+{% endif %}
+
+<div class="product-grid-content block-type-{{ block.type }}" style="background-color: {{ _background }};">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+
+  {% include 'heading-snippet' %}
+
+  {% unless block_collection == blank or collection.products_count == 0 %}
+
+    <div class="product-grid-inner" data-item-per-row="{{ block.settings.item_per_row }}">
+      <div class="product-listing-{{ _type }}{% if _type == 'row' %} row{% endif %}">
+        {% for product in collection.products limit: _limit %}
+
+          {% if _type == 'carousel' and _carousel_style == '2' %}
+            {% capture _mod %}{{ forloop.index | modulo: 2 }}{% endcapture %}
+            {% if _mod == '1' %}<div class="product-grid-item">{% endif %}
+
+            {% include 'product-owl-item' %}
+
+            {% if _mod == '0' or forloop.last %}</div>{% endif %}
+
+          {% else %}
+            <div class="product-grid-item{% if _type == 'row' %} {{ _class }}{% endif %}">
+              {% include 'product-owl-item' %}
+            </div>
+
+          {% endif %}
+
+        {% endfor %}
+      </div>
+    </div>
+
+  {% else %}
+
+    <div class="product-grid-inner">
+      <div class="product-listing-row row">
+        {{ emptyProductListing }}
+      </div>
+    </div>
+
+  {% endunless %}
+  
+   {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

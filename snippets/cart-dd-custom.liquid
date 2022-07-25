@@ -1,0 +1,164 @@
+<script type="text/javascript">
+    Shopify.updateCartInfo = function(cart, cart_summary_id, cart_count_id) {
+        if ((typeof cart_summary_id) === 'string') {
+            var cart_summary = jQuery(cart_summary_id);
+            if (cart_summary.length) {
+              
+                cart_summary.empty();
+              
+                var _root_url = '{{ routes.root_url }}';
+                if(_root_url == '/'){
+                  _root_url = '';
+                }
+
+                jQuery.each(cart, function(key, value) {
+                    if (key === 'items') {
+
+                        if (value.length) {
+
+                            jQuery('<div class="items"></div>').appendTo(cart_summary);
+                            var table = jQuery(cart_summary_id + ' div.items');
+
+                            jQuery.each(value, function(i, item) {
+                                jQuery('<div class="items-inner"> \
+                                    <div class="cart-item-image"> \
+                                        <a href="' + _root_url + item.url + '">\
+                                            <img class="lazyload" data-src="' + Shopify.resizeImage(item.image, '90x') + '" alt="" />\
+                                        </a>\
+                                    </div>\
+                                    <div class="cart-item-info">\
+                                        <div class="cart-item-title">\
+                                            <a href="' + _root_url + item.url + '">' + item.product_title + '</a>\
+                                        </div>\
+                                        <div class="cart-item-quantity">QTY: ' + item.quantity  + '</div>\
+                                        <div class="cart-item-price">' + Shopify.formatMoney(item.price, '{{shop.money_format}}')  + '</div>\
+                                    </div>\
+                                    <a data-cart-item="' + item.id + '" class="cart-close" title="{{ 'general.header.cart_info.remove' | t }}" href="javascript:;" data-cart-remove="' +  (i + 1) + '"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="8" height="17" viewBox="0 0 44 64"><path d="M0 48.64q0-2.304 1.664-3.968l12.48-12.48-12.48-12.544q-1.664-1.6-1.664-3.904t1.664-3.904 3.904-1.6 3.904 1.6l12.544 12.544 12.48-12.544q1.6-1.6 3.904-1.6t3.904 1.6 1.6 3.904-1.6 3.904l-12.48 12.544 12.48 12.48q1.6 1.664 1.6 3.968t-1.6 3.904-3.904 1.6-3.904-1.6l-12.48-12.48-12.544 12.48q-1.6 1.6-3.904 1.6t-3.904-1.6q-1.664-1.664-1.664-3.904z"></path></svg></a>\
+                                </div>').appendTo(table);
+                            });
+
+                            jQuery('<div class="subtotal"><span>{{ 'general.header.cart_info.subtotal' | t }}</span><span class="cart-item-total-price">' + Shopify.formatMoney(cart.total_price, '{{shop.money_format}}') + '</span></div>').appendTo(cart_summary);
+                            jQuery('<div class="action"><a href="{{ routes.cart_url }}" class="btn btn-2">{{ 'general.header.cart_info.view_shopping_bag' | t }}</a><button class="btn btn-1" type="submit" name="checkout">{{ 'general.header.cart_info.checkout' | t }}</button></div>').appendTo(cart_summary);
+                        }
+                        else {
+                            jQuery('<div class="cart-item-empty"><p>{{ 'general.header.cart_info.cart_empty_html' | t }}</p></div>').appendTo(cart_summary);
+                        }
+                    }
+                });
+
+
+            }
+        }
+
+        updateCartDesc(cart);
+    };
+
+    function updateCartDesc(data){
+        var $cartLinkText = $('.cart-target .number');
+        var $cartPrice = Shopify.formatMoney(data.total_price, '{{shop.money_format}}');
+        
+        switch(data.item_count){
+             case 0:
+               $cartLinkText.html('<span class="n-item">0</span>');
+               break;
+             case 1:
+               $cartLinkText.html('<span class="n-item">1</span>');
+               break;
+             default:
+               $cartLinkText.html('<span class="n-item">' + data.item_count + '</span>');
+               break;
+        }
+      
+        $cartLinkText.append($cartPrice);
+
+        $('.addcart-modal-subtotal').html('<strong>{{ 'general.header.cart_info.subtotal' | t }}:</strong>' +Shopify.formatMoney(data.total_price, '{{shop.money_format}}'));
+
+        // Update free shipping
+        var _cart_total = data.total_price
+        {% if settings.free_shipping_price == blank %}
+        var _free_shipping_price = 100;
+        {% else %}
+        var _free_shipping_price = {{ settings.free_shipping_price }};
+        {% endif %}
+        var _free_shipping_price_100 = _free_shipping_price * 100;
+                                
+        if (_cart_total > _free_shipping_price_100){
+          $('.sb-progress').html('<span class="sb-progress-bar" style="width: 100%">100%</span>');
+          $('.sb-text').html('{{ "cart.general.free_shipping_text_1" | t }} ' + Shopify.formatMoney(_free_shipping_price_100, "{{shop.money_format}}"));
+          $('.header-search-menu .shipping-text span').html('<span class="free-delivery">{{ "cart.general.free_delivery_available" | t }}</span>');
+        }
+                                                                                                                
+        else{
+          var _progress = Math.floor(_cart_total / _free_shipping_price)
+              ,_spend = _free_shipping_price_100 - _cart_total;
+                                                                                                          
+          $('.sb-progress').html('<span class="sb-progress-bar" style="width:' + _progress +'%">' + _progress + '%</span>');
+          $('.sb-text').html('{{ "cart.general.free_shipping_text_2" | t }} ' + '<strong>' + Shopify.formatMoney(_spend, "{{shop.money_format}}") + '</strong>' + ' {{ "cart.general.free_shipping_text_3" | t }} ' + '<strong>' + Shopify.formatMoney(_free_shipping_price_100, "{{shop.money_format}}") + '</strong>');
+          $('.header-search-menu .shipping-text span').html('<span>{{ "cart.general.remaining_to" | t }}<br> {{ "cart.general.free_delivery" | t }}</span><span>' + Shopify.formatMoney(_spend, "{{shop.money_format }}") + '</span>');
+        }
+                                                            
+        {% if settings.currency_type == '2' %}
+          currenciesCallbackSpecial('.cart-target span.money', '.wrap-progress .sb-text span.money');
+          currenciesCallbackSpecial('#cart-info span.money');
+          currenciesCallbackSpecial('#layer-addcart-modal span.money');
+          currenciesCallbackSpecial('.header-search-menu .shipping-text span.money');
+        {% endif %}
+    }
+
+    Shopify.onCartUpdate = function(cart) {
+        Shopify.updateCartInfo(cart, '#cart-info #cart-content', 'shopping-cart');
+    };
+
+    $(window).on('load', function () {
+
+        Shopify.getCart(function(cart) {
+            Shopify.updateCartInfo(cart, '#cart-info #cart-content'); 
+        });
+      
+        $('.cart-dd').on('click', '.cart-close', function(e){
+            var prodId = $(e.currentTarget).data('cart-item');
+            $('body').addClass('cart-loading');
+            $.ajax({
+                type: 'POST',
+                url: '/cart/change.js',
+                data: { quantity: 0, id: prodId },
+                dataType: 'json',
+                error: function(err){
+                    console.log(err);
+                },
+                success: function(resp) {
+                  $('body').removeClass('cart-loading');
+                    Shopify.updateCartInfo(resp, '#cart-info #cart-content');
+                    if(typeof cartObj != "undefined") {
+                        cartObj.syncCartSB(resp, prodId)
+                    } else {
+                        {% if settings.currency_type == '2' %}
+                        Currency.convertAll('{{ settings.default_currency }}', Currency.currentCurrency); 
+                        {% endif %}   
+                    }
+                                            
+                    // Update free shipping
+                    var _cart_total = resp.total_price
+                    {% if settings.free_shipping_price == blank %}
+                    var _free_shipping_price = 100;
+                    {% else %}
+                    var _free_shipping_price = {{ settings.free_shipping_price }};
+                    {% endif %}
+                    var _free_shipping_price_100 = _free_shipping_price * 100;
+                                
+                    if (_cart_total > _free_shipping_price_100){
+                      $('.sb-progress').html('<span class="sc-progress-bar" style="width: 100%">100%</span>');
+                      $('.sb-text').html('{{ "cart.general.free_shipping_text_1" | t }} ' + Shopify.formatMoney(_free_shipping_price_100, "{{shop.money_format}}"));
+                    }
+                                                                                                                
+                    else{
+                      var _progress = Math.floor(_cart_total / _free_shipping_price)
+                          ,_spend = _free_shipping_price_100 - _cart_total;
+                      $('.sb-progress').html('<span class="sb-progress-bar" style="width:' + _progress +'%">' + _progress + '%</span>');
+                      $('.sb-text').html('{{ "cart.general.free_shipping_text_2" | t }} ' + '<strong>' + Shopify.formatMoney(_spend, "{{shop.money_format}}") + '</strong>' + ' {{ "cart.general.free_shipping_text_3" | t }} ' + '<strong>' + Shopify.formatMoney(_free_shipping_price_100, "{{shop.money_format}}") + '</strong>');
+                    }
+                }
+            })
+        })
+    });
+</script>

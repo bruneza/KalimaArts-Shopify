@@ -1,0 +1,16 @@
+{% if settings.show_product_review  %}
+  {% unless settings.product_review_option == 'none' %}
+    <div class="product-review">
+      {% if settings.product_review_option == 'shopify-review' %}
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      {% elsif settings.product_review_option == 'loox' %}
+        <div class="loox-rating" data-fetch data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+      {% else %}
+        {% capture the_snippet_review_avg %}{% render 'ssw-widget-avg-rate-listing', product: product %}{% endcapture %}
+        {% unless the_snippet_review_avg contains 'Liquid error' %}
+        {{ the_snippet_review_avg }}
+        {% endunless %} 
+      {% endif %}
+    </div>
+  {% endunless %} 
+{% endif %} 

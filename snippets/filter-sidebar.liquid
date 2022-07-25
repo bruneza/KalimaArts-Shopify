@@ -1,0 +1,81 @@
+{% assign file_extension = 'png' %}
+{% assign i_fil = i_fil | plus: 1 %}
+{% assign _prefix_filter = block.settings.filter_prefix | strip | downcase %}
+{% assign _arr_prop = block.settings.filter_prefix_prop | split: ',' %}
+
+{% unless _prefix_filter == blank %}
+  {% capture ci %}{{ _prefix_filter }}{% endcapture %}
+    <div class="sb-widget filter-sidebar position-sidebar style-{{ _sb_filters_style }}">
+      <div class="sb-filter-wrapper">
+        
+        <div class="sbw-filter">
+          <div class="grid-uniform" data-prefix="{{_prefix_filter}}">
+
+            <div id="filter-{{ i_fil }}" class="sb-filter {{_prefix_filter}}" data-type="{{_prefix_filter}}">
+              <div class="sbf-title">
+                <span>{{ _prefix_filter | capitalize }}</span>
+                <a id="clear-filter-{{ i_fil }}" class="clear-filter hidden" style="float: right;" href="javascript:void(0);">Clear</a>
+              </div>
+
+              <ul class="advanced-filters{% if ci == 'color' %} list-inline afs-color{% endif %}">
+                <li class="hide">{{_all_tags}}</li>
+
+                {% for cus_tag in _arr_prop %}
+                  {% capture af_tag %}{{ cus_tag | strip | downcase | prepend: '+++' | append: '+++' }}{% endcapture %}
+
+                  {% assign custom_tag = cus_tag | strip | downcase %}
+
+                  {% if _all_tags contains af_tag %}
+                    {% assign value = custom_tag %}
+                    {% assign new_val = custom_tag | capitalize %}
+
+                    {% assign active_bool = false %}
+                    {% for cur_tag in current_tags %}
+                    {% capture n_t %}{{ cur_tag | downcase }}{% endcapture %}
+                      {% if n_t == custom_tag %}
+                        {% assign active_bool = true %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if active_bool %}
+                      {% for tag in collection.tags %}
+                        {% capture t %}{{tag | strip | downcase }}{% endcapture %}
+                        {% if t == custom_tag  %}
+                          {% if ci == 'color' %}
+                            <li class="advanced-filter af-color color-{{ value | handle }}  active-filter" data-group="{{ _prefix_filter }}" data-handle="{{ custom_tag | handleize }}"
+                                style="background-color:{{ value | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }});">
+                              {{ '' | link_to_remove_tag: tag | replace: 'Remove tag ','' }}
+                            </li>
+                          {% else %}
+                            <li class="advanced-filter rt active-filter" data-group="{{ _prefix_filter }}" data-handle="{{ custom_tag | handleize }}">
+                              {{ custom_tag | capitalize | link_to_remove_tag: tag | replace: 'Remove tag ','' }}
+                            </li>
+                          {% endif %}
+
+                        {% endif %}
+                      {% endfor %}
+                    {% else %}
+
+                      {% if ci == 'color' %}
+                        <li class="advanced-filter af-color color-{{ value | handle }}" data-group="{{ _prefix_filter }}"  data-test="{{cus_tag}}"
+                            style="background-color:{{ value | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }});">
+                          {{ '' | link_to_add_tag: custom_tag | replace: 'Narrow selection to products matching tag ', '' }}
+                        </li>
+
+                      {% else %}
+                        <li class="advanced-filter rt" data-group="{{ _prefix_filter }}" data-test="{{cus_tag}}">
+                          {{ custom_tag | capitalize | link_to_add_tag: custom_tag | replace: 'Narrow selection to products matching tag ', '' }}
+                        </li>
+
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+{% endunless %}

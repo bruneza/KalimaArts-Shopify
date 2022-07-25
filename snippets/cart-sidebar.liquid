@@ -1,0 +1,15 @@
+<div class="cart-sb">
+  <form action="{{routes.cart_url}}" method="post">
+    
+    <div class="cart-sb-title">
+      <span class="c-title">{{ "general.header.cart_info.title" | t }}</span>
+      <span class="c-close">{%- render 'theme-icon', type: 'delete' -%}</span>
+    </div>
+    
+    <div id="cart-info"{% if settings.enable_free_shipping %} class="shipping-true"{% endif %}>
+      <div id="cart-content" class="cart-content">
+        <div class="cart-loading"></div>
+      </div>
+    </div>
+  </form>
+</div>

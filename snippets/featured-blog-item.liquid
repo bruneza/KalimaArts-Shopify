@@ -1,0 +1,26 @@
+<div class="post-item-inner">
+
+  {% if article.image %}
+    <div class="post-image {% if _lazyload %}lazyload waiting{% endif %}">
+      {% assign image_alt = article.title | escape %}
+      <a href="{{ article.url }}">
+        <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ article | img_url: _image_size }}" alt="Blog" />
+      </a>
+    </div>
+  {% endif %}
+
+  <div class="post-content">
+    <div class="meta-data">
+      <span class="date">{{ article.published_at | date: "%b %d, %Y" }}</span>
+    </div>
+
+    <div class="info">
+      <div class="blog-title {{ _article_name_size }}"><a href="{{ article.url }}">{{ article.title }}</a></div>
+      
+      {% if section.settings.show_excerpt and article.excerpt != blank %}
+      <div class="blog-excerpt">{{ article.excerpt }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+</div> 

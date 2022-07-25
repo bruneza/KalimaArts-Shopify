@@ -1,0 +1,19 @@
+{%- liquid
+  assign headerFont = settings.header_font_1 | split: ':' | first | split: '&' | first | replace: '+', ' '
+  assign bodyFont   = settings.general_font_1 | split: ':' | first | split: '&' | first | replace: '+', ' '
+-%}
+
+<style>
+  :root {
+    --font-heading: {% unless headerFont == blank %}{{ headerFont }}, {% endunless %}'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-standard: {% unless bodyFont == blank %}{{ bodyFont }}, {% endunless %}'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+</style>
+
+{%- liquid
+  assign headerFont = settings.header_font_1
+  assign bodyFont   = settings.general_font_1
+-%}
+{%- assign google_font_url = 'https://fonts.googleapis.com/css2?family=' -%}
+{%- capture gg_link -%}{{headerFont}}{% unless bodyFont == blank %}&family={{bodyFont}}{% endunless %}{%- endcapture -%}
+<link href="{{google_font_url}}{{gg_link}}&display=swap" rel="stylesheet" type="text/css"/>

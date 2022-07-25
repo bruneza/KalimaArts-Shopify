@@ -1,0 +1,40 @@
+{% unless section.settings.vertical_nav_linklist == blank %}
+  <div class="vertical-menu dropdown-fix{% if _header_style == 4 or _header_style == 7 %} d-none d-lg-block{% endif %}">
+    <div class="sidemenu-holder">
+
+      <div class="navigation">
+        <div class="head">
+          {%- render 'theme-icon', type: 'list-1' -%}
+          <span>{{ 'general.text.all_departments' | t }}</span>
+        </div>
+        
+        {% unless template == 'index' %}
+          <nav class="navbar vertical-navbar">
+            <div class="collapse navbar-collapse">
+              <ul class="main-nav" data-expand="20">
+                {% for l in linklists[section.settings.vertical_nav_linklist].links %}
+                  {% include 'vertical-nav-link' %}
+                {% endfor %}
+              </ul>
+            </div>
+          </nav>
+
+        {% else %}
+          {% unless settings.left_column_style == 'normal-slideshow' %}
+            <nav class="navbar vertical-navbar">
+              <div class="collapse navbar-collapse">
+                <ul class="main-nav">
+                  {% for l in linklists[section.settings.vertical_nav_linklist].links %}
+                    {% include 'vertical-nav-link' %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </nav>
+          {% endunless %}
+
+        {% endunless %}
+      </div>
+
+    </div>
+  </div>
+{% endunless %}

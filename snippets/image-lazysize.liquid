@@ -1,0 +1,26 @@
+{% if image_size == blank %}{% assign image_size = '1080x' %}{% endif %}
+
+{% if _lazyload %}
+  {% assign image_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+  {% assign image_ratio = image.aspect_ratio %}
+  {% assign image_width = '[180, 320, 540, 720, 1080, 1366, 1920, 2048]' %}
+
+  <span class="image-lazysize" style="position:relative;padding-top:{% unless image == blank %}{{ 1 | divided_by: image.aspect_ratio | times: 100}}%{% else %}100%{% endunless %};">
+    <!-- noscript pattern -->
+    <noscript>
+      <img class="img-lazy {{ image_class }}" src="{{ image | img_url: image_size }}" alt="{{ image.alt }}"/>
+    </noscript>
+    
+    <img class="lazyload {{ image_class }} img-lazy blur-up"
+         data-src="{{ image_url }}"
+         data-widths="{{ image_width}} "
+         data-aspectratio="{{ image_ratio }}"
+         data-sizes="auto"
+         data-parent-fit="cover"
+         alt="{{ image.alt }}"/>
+  </span>
+
+{% else %}
+	<img class="{{ image_class }}" src="{{ image | img_url: image_size }}" alt="{{ image.alt }}"/>
+{% endif %}
+

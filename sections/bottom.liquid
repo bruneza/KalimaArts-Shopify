@@ -1,0 +1,91 @@
+{% include 'bottom-snippet' %}
+
+{% schema %}
+  {
+    "name": "Bottom Products",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_mobile",
+        "label": "Visibility: Hide for Mobile"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Section Layout Mode",
+        "default": "boxed",
+        "options": [
+          { "value": "boxed", "label": "Boxed" },
+          { "value": "full", "label": "Wide" }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "products-listing",
+        "name": "Products Listing",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Featured products"
+          },
+          {
+            "id": "width",
+            "type": "range",
+            "label": "Column width",
+            "min": 1,
+            "max": 12,
+            "default": 3
+          },
+          {
+            "id": "collection",
+            "type": "collection",
+            "label": "Collection item"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "id": "width",
+            "type": "range",
+            "label": "Column width",
+            "min": 1,
+            "max": 12,
+            "default": 3
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "The default image size is 330x360 pixels"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link to"
+          }
+        ]
+      }
+    ],
+	"presets": [
+      {
+        "name": "Bottom Products",
+        "blocks": [
+          { "type": "products-listing" },
+          { "type": "products-listing" },
+          { "type": "products-listing" },
+          { "type": "image" }
+        ]
+      }
+    ]
+  }
+{% endschema %}

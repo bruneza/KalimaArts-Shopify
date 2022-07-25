@@ -1,0 +1,63 @@
+{%- assign _background = block.settings.bg_color -%}
+{%- assign _image = block.settings.image -%}
+{%- assign _image_size = block.settings.image_size -%}
+{%- assign _button_text = block.settings.button_text -%}
+
+{% if _image_size == blank %}{%- assign _image_size = '200x' -%}{% endif %}
+
+<div class="product-grid-content block-type-{{ block.type }}" style="background-color: {{ _background }};">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+  
+  {% include 'heading-snippet' %}
+
+  {% unless block_collection == blank or collection.products_count == 0 %}
+
+    <div class="product-grid-inner">
+
+        {% unless _image == blank %}
+          <div class="product-type-item">
+            <div class="block-image">
+              
+              <a href="{{ collection.url }}">
+                {% include 'image-lazysize' with image: _image, image_size: _image_size, image_class: '', image_alt: 'Deals' %}
+              </a>
+              
+              {% unless _button_text == blank %}
+                <a class="btn btn-1 btn-link" href="{{ collection.url }}">{{ _button_text }}</a>
+              {% endunless %}
+            </div>
+          </div>
+        {% endunless %}
+
+        <div class="product-grid-wrapper">
+          <div class="product-grid-{{ _type }}{% if _type == 'row' %} row{% endif %}">
+            {% for product in collection.products limit: _limit %}
+              <div class="product-grid-item{% if _type == 'row' %} {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}{% endif %}">
+                {% include 'product-item' %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+    </div>
+
+  {% else %}
+
+    <div class="product-grid-inner">
+      <div class="product-type-item">
+        <div class="block-image">
+          {{ emptyImage }}
+        </div>
+      </div>
+
+      <div class="product-grid-wrapper">
+        <div class="product-grid-row row">
+          {{ emptyProduct }}
+        </div>
+      </div>
+    </div>
+
+  {% endunless %}
+  
+   {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

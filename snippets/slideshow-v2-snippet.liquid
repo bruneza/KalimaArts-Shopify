@@ -1,0 +1,280 @@
+{%- assign _show_slideshow = section.settings.show_slideshow -%}
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _background_color = section.settings.background -%}
+
+{%- assign _autoplay = section.settings.autoplay -%}
+{%- assign _autoplay_speed = section.settings.autoplay_speed | time: 1000 -%}
+{%- assign _animation = section.settings.animation -%}
+
+{%- assign _navigator = section.settings.navigator -%}
+{%- assign _paging = section.settings.paging -%}
+
+{% capture emptyImage %}
+  <div class="image no-image">
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  </div>
+{% endcapture %}
+
+{% if _show_slideshow %}
+<div class="slideshow-02 slideshow-catalog-wrapper sidebar-{{ section.settings.slideshow_block_right }}" data-section-type="slideshow" data-section-id="{{ section.id }}">
+  <div class="bc-wrapper{% if _hide_mobile %} d-none d-md-block{% endif %}" style="background-color: {{ _background_color }};">
+      
+    <div class="wrap-stb{% if section.settings.fix_text_box_position %} fix-textbox{% endif %}">
+      
+      <div class="bc-home-slideshow">
+        {% if section.blocks.size > 0 %}
+          <div class="home-slideshow-wrapper home-slideshow-wrapper-{{ section.id }} swiper-container swiper-container-2" data-autoplay="{{ _autoplay }}" data-time="{{ _autoplay_speed }}" data-animation="{{ _animation }}">
+            <div class="home-slideshow swiper-wrapper">
+
+              {% for block in section.blocks %}
+                {% if block.type == 'image' %}
+                  {%- assign _image = block.settings.image -%}
+                  {%- assign _image_mobile = block.settings.mobile_image -%}
+                  {%- assign link = block.settings.link -%}
+                  {%- assign textAlign = block.settings.alignment -%}
+                  {%- assign position = block.settings.position -%}
+                  {%- assign horizontal_position = block.settings.horizontal_position -%}
+
+                  {%- assign headingText = block.settings.heading -%}
+                  {%- assign headingBoldText = block.settings.heading_bold -%}
+                  {%- assign headingAnimation = block.settings.heading_animation -%}
+                  {%- assign headingAnimationDelay = block.settings.heading_animation_delay -%}
+                  {%- assign headingColor = block.settings.heading_color -%}
+                  {%- assign headingSize = block.settings.heading_size -%}
+
+                  {%- assign subheadingText = block.settings.subheading -%}
+                  {%- assign subheadingBoldText = block.settings.subheading_bold -%}
+                  {%- assign subheadingAnimation = block.settings.subheading_animation -%}
+                  {%- assign subheadingAnimationDelay = block.settings.subheading_animation_delay -%}
+                  {%- assign subheadingColor = block.settings.subheading_color -%}
+                  {%- assign subheadingSize = block.settings.subheading_size -%}
+
+                  {%- assign captionText = block.settings.caption -%}
+                  {%- assign captionBoldText = block.settings.caption_bold -%}
+                  {%- assign captionAnimation = block.settings.caption_animation -%}
+                  {%- assign captionAnimationDelay = block.settings.caption_animation_delay -%}
+                  {%- assign captionColor = block.settings.caption_color -%}
+                  {%- assign captionSize = block.settings.caption_size -%}
+
+                  {%- assign buttonText = block.settings.button_text -%}              
+                  {%- assign buttonAnimation = block.settings.button_animation -%}
+                  {%- assign buttonAnimationDelay = block.settings.button_animation_delay -%}
+
+                  {%- assign image_width = '[1024, 1366, 1920, 2048]' -%}
+              
+                  {% if headingText == blank  and subheadingText == blank  and captionText == blank  and buttonText == blank %}
+                    {%- assign _has_text = false -%}
+                  {% else %}
+                    {%- assign _has_text = true -%}
+                  {% endif %}
+
+                  {% unless _image == blank  %}
+                    <div class="swiper-slide swiper-slide-{{ block.id }}">
+                      <a href="{{ link }}">
+                        {% include 'image-slideshow-lazysize' with image:_image_mobile, image_class: 'img-mobile', image_size: '1080x' %}
+                        {% include 'image-slideshow-lazysize' with image:_image, image_class: 'img-desk', image_size: '1920x' %}
+                      </a> 
+
+                      {% if _has_text %}
+                        <div class="swiper-content {{ textAlign }} slide-{{ forloop.index }} container">
+                          <div class="container-box" style="top: {{ position }}%; left: {{ horizontal_position }}%;transform: translate(-{{ horizontal_position }}%, -{{ position }}%);">
+
+                            {% unless headingText == blank %}<div class="heading bold-{{ headingBoldText }}">{{ headingText }}</div>{% endunless %}
+                            {% unless subheadingText == blank %}<div class="subheading bold-{{ subheadingBoldText }}">{{ subheadingText }}</div>{% endunless %}
+                            {% unless captionText == blank %}<div class="cation bold-{{ captionBoldText }}">{{ captionText }}</div>{% endunless %}
+
+                            {% unless buttonText == blank %}
+                            <div class="caption-link">
+                              <a class="slider-button btn btn-1" href="{{ link }}">{{ buttonText }}</a>                
+                            </div>
+                            {% endunless %}
+
+                            {% include 'slideshow-css' %}
+
+                          </div> 
+                        </div>
+                      {% endif %}
+
+                    </div>
+
+                  {% else %}
+                    <div class="swiper-slide no-image">
+                      <a href="{{ link }}">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</a>
+                    </div>
+
+                  {% endunless %}
+
+                {% endif %}
+              {% endfor %}
+
+            </div>
+            
+            <div class="btn-pagination">
+              {% if _paging %}
+                <div class="swiper-pagination swiper-pagination-02 swiper-pagination-white"></div>
+              {% endif %}
+
+              {% if _navigator %}
+                <div class="swiper-button-next swiper-button-next-02 swiper-button-white">
+                  {%- render 'theme-icon', type: 'left-open-mini' -%}
+                </div>
+                <div class="swiper-button-prev swiper-button-prev-02 swiper-button-white">
+                  {%- render 'theme-icon', type: 'right-open-mini' -%}
+                </div>
+              {% endif %}
+            </div>
+            
+        </div>
+
+        {% for block in section.blocks %}
+          {% if block.type == 'product' %}
+
+          <div class="block-collection">
+            {% for i in (1..5) %}
+              {%- assign _collection = 'collection_' | append: i -%}
+              {%- assign collection = collections[block.settings[_collection]] -%} 
+
+              {% unless block.settings[_collection] == blank %}
+                <div class="collection-item">
+                  {% include 'collection-item' %}
+                </div>
+              {% endunless %}
+
+            {% endfor %}
+          </div>
+
+          {% endif %}
+        {% endfor %}
+
+        <script>
+          jQuery(document).ready(function($) {
+            
+            var _sections = new theme.Sections();
+            _sections.register('slideshow',function(){
+              if(jQuery('.slideshow-02 .home-slideshow-wrapper-{{ section.id }}').length){
+                jQuery('.slideshow-02 .home-slideshow-wrapper-{{ section.id }}').each(function(index,value){
+
+                  let _delay_time = jQuery(value).data('time') * 1000;
+                  let _animation = jQuery(value).data('animation');
+
+                  let swiper = new Swiper('.swiper-container-2', {
+                    {% if _autoplay %}
+                      autoplay: {
+                        delay: _delay_time,
+                        disableOnInteraction: false,
+                      },
+                    {% endif %}
+                    loop: true,
+                    pagination: {
+                      el: '.swiper-pagination-02',
+                      clickable: true
+                    },
+                    navigation: {
+                      nextEl: '.swiper-button-next-02',
+                      prevEl: '.swiper-button-prev-02',
+                    },
+                    spaceBetween: 0,
+                    effect: _animation,
+                    {% case section.settings.animation %}
+                      {% when 'cube' %}
+                        cubeEffect: {
+                          slideShadows: false
+                        },
+                      {% when 'coverflow' %}
+                        coverflowEffect: {
+                          rotate: 30,
+                          slideShadows: false
+                        },
+                      {% when 'flip' %}
+                        flipEffect: {
+                          rotate: 30,
+                          slideShadows: false
+                        },
+                      {% else %}
+                    {% endcase %}
+                    setWrapperSize: false
+                  });
+                });
+              }
+            });
+            
+          });
+        </script>
+
+        {% else %}
+
+        <div class="home-slideshow-wrapper swiper-container">
+          <div class="home-slideshow swiper-wrapper">
+
+            <div class="swiper-slide no-image">
+              <a href="{{ link }}">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</a>
+            </div>
+
+          </div>
+        </div>
+
+        {% endif %}
+      </div>
+
+      {% unless section.settings.slideshow_block_right == 'none' %}
+        {% if section.settings.slideshow_block_right  == 'banner' %}
+          {%- assign _three_banner_style = section.settings.three_banner_style -%}
+          {%- assign _bg_color = section.settings.three_image_bg_color -%}
+
+          <div class="bc-three-banner style-{{ _three_banner_style }}">
+            {% for block in section.blocks %}
+
+              {% if block.type == 'br-image' %}
+                {% unless block.settings.three_image == blank %}
+
+                  <div class="bc-item">
+                    <div class="bc-item-inner" style="background: {{ _bg_color  }};">
+                      <div class="bc-item-left">
+                        <a href="{{ block.settings.three_link }}">
+                          <img src="{{ block.settings.three_image | img_url: '140x' }}'" alt="Banner" />
+                        </a>
+                      </div>
+
+                      <div class="bc-item-body">
+                        {% unless block.settings.three_text == blank %}
+                          <div class="bc-item-text"><a href="{{ block.settings.three_link }}">{{ block.settings.three_text }}</a></div>
+                        {% endunless %}
+                        {% unless block.settings.three_button == blank %}
+                          <a class="bc-item-" href="{{ block.settings.three_link }}">{{ block.settings.three_button }}</a>
+                        {% endunless %}
+                      </div>
+                    </div>
+                  </div>
+
+                {% endunless %}
+              {% endif %}
+
+            {% endfor %}
+          </div>
+
+        {% else %}
+          <div class="bc-three-banner bc-products">
+            <div class="bc-product-list">
+              {% for block in section.blocks %}
+                {% if block.type == 'br-product' %}
+                 
+                  {% unless block.settings.product == blank %}
+                    {% assign product = all_products[block.settings.product] %}
+                    {% include 'slideshow-product-item' %}
+                  {% endunless %}
+
+                {% endif %}
+
+              {% endfor %}
+            </div>
+          </div>
+
+        {% endif %}
+      {% endunless %}
+      
+    </div>
+    
+  </div>
+</div>
+{% endif %}

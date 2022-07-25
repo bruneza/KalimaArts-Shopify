@@ -1,0 +1,14 @@
+{% assign _swatches_size = 0 %}
+{% for option in product.options %}
+  {% assign _option = option | downcase %}
+
+  {% if _option == "size" %}
+    {% assign _swatches_size = 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if _swatches_size == 1 %}
+  <div class="wrap-swatch-size">
+    {% include 'swatch_item' with 'Size' %}
+  </div>
+{% endif %}

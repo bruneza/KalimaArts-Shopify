@@ -1,0 +1,76 @@
+{% include 'products-grid-config' %}
+
+<div id="product-grid-{{ section.id }}" class="product-grid-section{% if _hide_mobile %} d-none d-md-block{% endif %} layout-{{_layout }}" data-section-type="product-grid" data-section-id="{{ section.id }}" {{ section_background_section | strip }} >
+    <div class="product-grid-inner{% unless _subheading == blank %} subheading-true fix-subheading-{{ _fix_subheading_position }}{% endunless %} {% if _type == 'carousel' %}navigator-position-{{ _navigator_position }}{% endif %} {% unless _css_class == blank %} {{ _css_class }} {% endunless %}" data-type="{{ _type }}">
+      
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+      
+          {%- assign block_collection = block.settings.collection -%}
+          {%- assign collection = collections[block_collection] -%}
+
+          {% case block.type %}
+            {% when 'product' %}  
+              {% include 'products-grid-type-product' %}
+
+            {% when 'product-half-width' %}
+              {% include 'products-grid-type-half-width' %}
+
+            {% when 'product-deal' %}
+              {% include 'products-grid-type-deal' %}
+      
+      		{% when 'product-image' %}
+              {% include 'products-grid-type-image' %}
+      
+            {% when 'product-listing-hw' %}
+              {% include 'products-grid-type-listing-hw' %}
+
+            {% else %}
+              {% include 'products-grid-type-listing' %}
+
+          {% endcase %}
+
+        {% endfor %}
+
+      {% else %}
+        
+        {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+          {% include 'heading-snippet' %}
+
+          <div class="product-grid-row">
+            <div class="row"> 
+              {{ emptyProduct }}
+            </div>
+          </div>
+        {% if settings.left_column_style == 'none' %}</div>{% endif %}
+
+      {% endif %}
+
+    </div>
+  
+  	{% include 'products-grid-script' %}
+
+    <style type="text/css">
+      #product-grid-{{ section.id }} .product-grid-content .row {
+        {% if _padding == 0 %}
+          margin: 0;
+        {% else %}
+          margin: -{{ _padding }}px;
+        {% endif %}
+      }
+      #product-grid-{{ section.id }} .product-grid-content .row .product-grid-item {
+        {% if _padding == 0 %}
+          padding: 0;
+        {% else %}
+          padding: {{ _padding }}px;
+        {% endif %}
+      }	
+      #product-grid-{{ section.id }} .product-grid-content.block-type-product-listing .product-listing-carousel .product-wrapper {
+        margin-bottom: {{ _padding }}px;
+      }
+      #product-grid-{{ section.id }} .product-grid-content.block-type-product-listing-hw .product-grid-carousel .product-wrapper {
+        margin-bottom: {{ _padding }}px;
+      }
+    </style>
+  
+</div>

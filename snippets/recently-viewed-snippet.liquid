@@ -1,0 +1,105 @@
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _layout = section.settings.layout -%}
+
+{%- assign _navigator = section.settings.navigator -%}
+{%- assign _paging = section.settings.paging -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+
+<div class="section-recently-viewed hide layout-{{_layout }}{% if _hide_mobile %} d-none d-md-block{% endif %}">
+  <div class="{{ _layout_class }}">
+
+    <script src="{{ 'jquery.tmpl-products.min.js' | asset_url}}"></script>
+
+    {% include 'heading-block' %}
+
+    <div id="recently-viewed-products" class="collection clearfix" data-handle="{{ product.handle }}"></div>
+
+    {% raw %}
+    <script id="recently-viewed-product-template" type="text/x-jquery-tmpl"> 
+    <div id="product-${handle}" class="product check-product" data-rwhandle="${handle}" >
+        <div class="product-image">
+          <a href="${url}" title="${title}">
+            <img src="${Shopify.Products.resizeImage(featured_image, "160x")}" />
+          </a>
+        </div>
+    </div>
+    </script>
+    {% endraw %}
+
+    <script> 
+      Shopify.Products.showRecentlyViewed({
+        howManyToShow: 20,
+        onComplete: function() {
+          
+          $('.section-recently-viewed').removeClass('hide');
+          
+          var _handle = $('#recently-viewed-products').data('handle');
+          
+          $('.check-product').each(function(){
+            var _rwhandle = $(this).data('rwhandle')
+            if(_rwhandle === _handle){
+              $(this).remove();
+            }
+          });
+          
+          jQuery("#recently-viewed-products").length && jQuery("#recently-viewed-products").on('initialize.owl.carousel initialized.owl.carousel', function(e) {  
+
+            var current = e.relatedTarget.current()
+            var items = $(this).find('.owl-stage').children()
+            var add = e.type == 'changed' || e.type == 'initialized'
+
+            items.eq(e.relatedTarget.normalize(current )).toggleClass('current', add)
+
+          }).owlCarousel({
+            loop	: false
+            ,nav	: {{ _navigator }}
+            ,dots 	: {{ _paging }}
+            ,items	: 10
+            ,rtl	: jQuery('body').data('rtl')
+            ,margin	: 0
+            ,responsive : {
+                0:{
+                    items: 1
+                }
+                ,320:{
+                    items: 2
+                }
+                ,480:{
+                    items: 3
+                }
+                ,576:{
+                    items: 4
+                }
+                ,600:{
+                    items: 5
+                }
+                ,768:{
+                    items: 6
+                }
+                ,992:{
+                    items: 7
+                }
+                ,1024:{
+                    items: 8
+                }
+                ,1200:{
+                    items: 9
+                }
+                ,1400:{
+                    items: 10
+                }
+            }
+            ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+          });
+        } 
+      });
+    </script>
+
+  </div>
+</div>

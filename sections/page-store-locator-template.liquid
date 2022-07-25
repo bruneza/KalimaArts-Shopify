@@ -1,0 +1,217 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+
+{%- assign _api_key   = settings.gg_map_api | strip -%}
+{%- assign _map_ip    = section.settings.use_ip_location -%}
+{%- assign _map_zoom  = section.settings.map_zoom | plus: 0 -%}
+{%- assign _latlong   = section.settings.contact_latlong | split: ',' -%}
+{%- assign _map_style = section.settings.store_style | default: '[]' | strip_newlines | replace: '  ',' ' | replace: ' ', '' -%}
+
+{%- unless _api_key == blank -%}
+  <div class="page-contact" data-section-id="{{section.id}}" data-section-type="store-location">
+    <div id="store-locator">
+      <input type="hidden" name="store-locator-data"
+              data-ip-location="{{ _map_ip }}"
+              data-map-zoom="{{ _map_zoom }}"
+              data-latitude="{{ _latlong[0] | strip }}"
+              data-longitude="{{ _latlong[1] | strip }}"
+              data-active="{%- if _api_key != blank -%}true{%- else -%}false{%- endif -%}">
+
+      <div class="container">
+        <div id="col-main" class="store-locator-content">
+          <div class="row">
+   
+            <div class="col-panel col-xl-3 col-lg-4 col-12">
+              <div id="panel"></div>
+            </div>
+            <div class="col-map-canvas col-xl-9 col-lg-8 col-12">
+              <div id="map-canvas"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{%- endunless -%}
+
+<script id="api_map_key" src="//maps.googleapis.com/maps/api/js?key={{ settings.gg_map_api }}"></script>
+<script crossorigin="anonymous" src="{{ 'store-locator.min.js' | asset_url }}"></script>
+<script id="map__style" type="application/json">{{- _map_style -}}</script>
+<script id="store_info" type="application/json">[
+  {%- for block in section.blocks -%}
+    {%- assign __store_name     = block.settings.store_name -%}
+    {%- assign __store_address  = block.settings.store_address -%}
+    {%- assign __store_features = block.settings.store_features -%}
+    {%- assign __store_latlong  = block.settings.store_latlong | split: ',' -%}
+    {"title":"{{__store_name}}","address":"{{__store_address}}","features":"{{__store_features}}","latitude":{{__store_latlong[0] | strip | plus: 0 }},"longitude":{{__store_latlong[1] | strip | plus: 0 }} }{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}]</script>
+
+<script>
+  jQuery(document).ready(function($) {
+    var i_sections = new theme.Sections();
+    i_sections.register('store-location' ,function(){
+      var myLati
+          ,myLongi
+          ,myCountry
+          ,storeData = $('#store-locator input[name="store-locator-data"]')
+          ,store_info = JSON.parse($('#store_info').html());
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+      if ($.parseJSON(storeData.attr('data-ip-location'))) {
+        var get_LatLong = ()=>{
+          return $.ajax({
+            url: 'https://get.geojs.io/v1/ip/geo.js',
+            type: 'POST',
+            dataType: 'jsonp',
+            success: function(location) {
+              myLati = location.latitude;
+              myLongi = location.longitude;
+              myCountry = location.country;
+            }
+          });
+        }
+      }else{
+          myLati = Number(storeData.attr('data-latitude'))
+          myLongi = Number(storeData.attr('data-longitude'))
+        }
+      let map_initialize = async ()=>{
+
+        if ($.parseJSON(storeData.attr('data-ip-location'))) {
+          let _awaitResp = await get_LatLong();
+        }
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+          center         : new google.maps.LatLng(myLati,myLongi),
+          zoom           : Number(storeData.attr('data-map-zoom')),
+          scrollwheel    : true,
+          styles         : JSON.parse($('#map__style').html()),
+          mapTypeId      : google.maps.MapTypeId.ROADMAP
+        });
+
+        var panelDiv  = document.getElementById('panel')
+            ,data     = new PlacesDataSource(map)
+            ,view     = new storeLocator.View(map, data);
+
+        view.createMarker = function(store) {
+          return new RichMarker({
+            position: store.getLocation(),
+            map: map,
+            draggable: false,
+            anchor: RichMarkerPosition.MIDDLE,
+            shadow:false,
+            content: `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-marker-alt" role="img" xmlns="http://www.w3.org/2000/svg" width="27" height="43" viewBox="0 0 384 512" class="svg-inline--fa fa-map-marker-alt fa-w-12 fa-2x"><path fill="currentColor" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z" class=""></path></svg>`
+          });
+        };
+
+        new storeLocator.Panel(panelDiv,{view: view});
+        $('#panel .location-search input').val(myCountry);
+    }
+
+      function PlacesDataSource() {}
+      PlacesDataSource.prototype.getStores = function(bounds, features, callback) {
+        if (store_info.length) {
+          let stores = [];
+          store_info.forEach((i,v)=>{
+            let latLng = new google.maps.LatLng(i.latitude, i.longitude)
+              ,store   = new storeLocator.Store(i.title, latLng, null, {title: i.title, address: i.address, misc: i.features});
+
+            store.getInfoPanelContent = function() {
+              let details = this.getDetails();
+              return '<div class="list-loca-stores"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="map-marker-alt" role="img" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 384 512" class="svg-inline--fa fa-map-marker-alt fa-w-12 fa-2x"><path fill="currentColor" d="M192 96c-52.935 0-96 43.065-96 96s43.065 96 96 96 96-43.065 96-96-43.065-96-96-96zm0 160c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64zm0-256C85.961 0 0 85.961 0 192c0 77.413 26.97 99.031 172.268 309.67 9.534 13.772 29.929 13.774 39.465 0C357.03 291.031 384 269.413 384 192 384 85.961 298.039 0 192 0zm0 473.931C52.705 272.488 32 256.494 32 192c0-42.738 16.643-82.917 46.863-113.137S149.262 32 192 32s82.917 16.643 113.137 46.863S352 149.262 352 192c0 64.49-20.692 80.47-160 281.931z" class=""></path></svg><b>' + details.title + '</b><br>' + details.address + '</div>';
+            };
+            stores.push(store);
+          })
+          this.sortByDistance_(bounds.getCenter(),stores);
+          callback(stores);
+        }
+      };
+      PlacesDataSource.prototype.sortByDistance_ = function(latLng, stores) {stores.sort(function(a, b){return a.distanceTo(latLng) - b.distanceTo(latLng);});};
+
+      $.parseJSON(storeData.attr('data-active')) && map_initialize();
+    });
+  });
+</script>
+{% schema %}
+{
+  "name":"Store Locator Page",
+  "tag":"section",
+  "settings":[
+    {
+      "type": "image_picker",
+      "id": "breadcrumb_image",
+      "label": "Breadcrumb image"
+    },
+    {
+       "type":"header",
+       "content":"Map config"
+    },
+    {
+      "type":"paragraph",
+      "content":"Please make sure API Key had been inserted in Theme settings > App Integrations > Google Map"
+    },
+    {
+      "type":"checkbox",
+      "id":"use_ip_location",
+      "label":"Geolocation service",
+      "default":true
+    },
+    {
+      "type":"text",
+      "id":"contact_latlong",
+      "label":"Configure store locator",
+      "info":"When you disable 'Geolocation services'. Type by [Latitude and Longitude](http:\/\/latlong.net)",
+      "placeholder":"E.g: 51.514863,-0.133689",
+      "default": "51.514863,-0.133689"
+    },
+    {
+       "type":"range",
+       "id":"map_zoom",
+       "label":"Zoom",
+       "min":1,
+       "max":15,
+       "step":1,
+       "default":5
+    },
+    {
+      "type":"textarea",
+      "id":"store_style",
+      "label":"Map style",
+      "info":"Add json data here. [How to get json data](http:\/\/snazzymaps.com) or [Here](https:\/\/mapstyle.withgoogle.com)"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"store",
+      "name":"Stores",
+      "settings":[
+        {
+          "type": "text",
+          "id": "store_name",
+          "label": "Store name"
+        },
+        {
+          "type": "textarea",
+          "id": "store_address",
+          "label": "Store info"
+        },
+        {
+          "type": "textarea",
+          "id": "store_features",
+          "label": "Operating hour"
+        },
+        {
+          "type": "text",
+          "id": "store_latlong",
+          "label": "Store location",
+          "info": "Type by [Latitude and Longitude](http:\/\/latlong.net)"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _visibility = section.settings.visibility -%}
+{%- assign _icon = section.settings.icon -%}
+
+{%- unless _visibility == 'none' -%}
+  {%- if _visibility == 'mobile' -%}
+    {%- assign _visibility_class = 'd-lg-none' -%}
+  {%- elsif _visibility == 'desktop' -%}
+    {%- assign _visibility_class = 'd-none d-lg-block' -%}
+  {%- else -%}
+    {%- assign _visibility_class = 'show-both' -%}
+  {%- endif -%}
+
+  <div class="mobile-department {{ _visibility_class }}">
+    <div class="container">
+      
+      <ul class="mobile-department-list icon-{{ _icon }}">
+        {% for block in section.blocks %}
+          {% assign _image = block.settings.image %}
+          {% assign _svg = block.settings.svg %}
+          {% assign _link = block.settings.link %}
+          {% assign _text = block.settings.text %}
+
+          <li{% if _link contains collection.url %} class="active"{% endif %}>
+            <a href="{{ _link }}"{% if _lazyload and _icon == 'image' %} class="lazyload waiting"{% endif %}>
+              {% if _icon == 'image' %}
+                <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ _image | img_url: '46x' }}" />
+              {% elsif _icon == 'svg' %}
+                {{ _svg }}
+              {% else %}
+              {% endif %}
+              {% unless _text == blank %}<span class="text">{{ _text }}</span>{% endunless %}
+            </a>
+          </li>
+        
+        {% endfor %}
+      </ul>
+      
+    </div>
+  </div>
+{%- endunless -%}

@@ -1,0 +1,19 @@
+{% assign compare_at_price = product.compare_at_price %}
+{% assign price = product.price -%}
+{% assign price_varies = product.price_varies %}
+{% assign available = product.available %}
+{% assign money_price = price | money %}
+
+<div class="product-price notranslate">
+  {% if available %}
+    {% if compare_at_price > price %}
+        <span class="price-sale">{{ money_price }}</span>
+  		<span class="price-compare">{{ compare_at_price | money }}</span>
+    {% else %}
+        <span class="price">{{ money_price }}</span>
+    {% endif %}
+
+  {% else %}
+    <span class="sold-out">{{ 'products.product.sold_out' | t }}</span>
+  {% endif %}
+</div>

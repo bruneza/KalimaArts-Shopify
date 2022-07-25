@@ -1,0 +1,188 @@
+<div id="related_item">
+  
+      {% include 'heading-block' %}
+  
+      {% assign _item_per_row = section.settings.item_per_row %}
+      {% assign _item_per_row_tablet = section.settings.item_per_row_tablet %}
+      {% assign _item_per_row_mobile = section.settings.item_per_row_mobile %}
+      {% assign _case = section.settings.related_product_data %}
+
+      {% if _case == 'collection' %}
+        {% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+          {% assign found_a_collection = false %}
+
+          {% for c in product.collections %}
+            {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+            {% assign found_a_collection = true %}
+            {% assign collection = c %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% if collection and collection.products_count > 1 %}
+          <div class="related-items">
+            
+            {% assign current_product = product %}
+            {% assign current_product_found = false %}
+            {% for product in collection.products limit: section.settings.related_product_limit %}
+
+              {% if product.handle == current_product.handle %}
+                {% assign current_product_found = true %}
+              {% else %}
+                {% unless current_product_found == false and forloop.last %}
+                  {% include 'product-item' with collection.handle %}
+                {% endunless %}
+              {% endif %}
+
+            {% endfor %}
+
+          </div>
+    
+          <script>
+              //<![CDATA[
+              jQuery(document).ready(function($) {
+                jQuery(".related-items").on('initialize.owl.carousel initialized.owl.carousel change.owl.carousel changed.owl.carousel', function(e) {
+                var current = e.relatedTarget.current()
+                var items = $(this).find('.owl-stage').children()
+                var add = e.type == 'changed' || e.type == 'initialized'
+
+                items.eq(e.relatedTarget.normalize(current )).toggleClass('current', add)
+              }).owlCarousel({
+                  nav		: true
+                  ,dots 	: false
+                  ,items	: {{ _item_per_row }}
+                  ,rtl		: jQuery('body').data('rtl')
+                  ,margin	: 0
+                  ,responsive : {
+                      0:{
+                         items: 1
+                      }
+                      ,320:{
+                         items: {{ _item_per_row_mobile }}
+                      }
+                      ,768:{
+                         items: {{ _item_per_row_tablet }}
+                      }
+                      ,1024:{
+                         items: {{ _item_per_row }}
+                      }                                                                
+                  }
+                  ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+                });
+
+              })
+          </script>
+        {% endif %}
+    	
+      
+      {% else %}
+          {% assign _querry = "" %} 
+          {% assign _search_uri = shop.secure_url | append:"/search?type=product&q=" %}
+	
+          {% assign _all_vendors = "" %}
+          {% assign _all_handle = "" %}
+
+          {% capture current_product_vendor %}{{ product.vendor}}{% endcapture %}
+          {% capture current_product_handle %}{{ product.handle}}{% endcapture %}
+
+            {% if current_product_vendor != blank %}
+              {% unless _all_vendors contains current_product_vendor %}
+                {% assign _all_vendors = _all_vendors | append:current_product_vendor | append:"|"  %}
+              {% endunless %} 
+            {% endif %}
+
+            {% unless _all_handle contains current_product_handle %}
+                {% assign _all_handle = _all_handle | append:current_product_handle | append:"|"  %}
+            {% endunless %} 
+
+
+          {% assign _vendor_array = _all_vendors | split: '|' %}
+          {% assign _handle_array = _all_handle | split: '|' %}
+
+          {% if _case == "vendors" %}
+
+            {% if _vendor_array.size > 0 %}
+              {% for _vendor in _vendor_array %}
+
+                {%if _querry == "" %}
+                    {% assign _querry = _querry | append:" vendor:" | append: _vendor  %}
+                {% else %} 
+                    {% assign _querry = _querry | append:" OR vendor:" | append:_vendor  %}
+                {% endif %}  
+
+              {% endfor %}
+            {% endif %}
+
+          {% endif %}
+
+          {% unless _vendor_array.size < 1 %}
+
+          {% for _handle in _handle_array %}
+            {% assign _querry = _querry | append:" NOT handle:" | append:_handle  %}
+          {% endfor %}
+
+          {% assign _search_uri = _search_uri | append:_querry  %}
+
+          <div class="related-items"></div>
+
+          <script>
+            //<![CDATA[
+            jQuery(document).ready(function($) {
+
+              var _callback_uri = "{{_search_uri}}";
+              if (location.protocol !== 'https:') {
+                _callback_uri = _callback_uri.replace("https:", "http:");
+              }
+
+              jQuery.ajax({
+                type: 'GET',     
+                url: _callback_uri,
+                success: function ( json_reponse ) {
+                  var _result_wrapper = jQuery(json_reponse).find(".page-search .cata-product")
+                  ,_is_found      = _result_wrapper.length > 0 ? true : false;;
+
+                  if( _is_found ){
+                    jQuery(".related-items").html( _result_wrapper.html() );
+                    if( !jQuery(".related-items").hasClass("owl-loaded") ){
+
+                      {% if settings.currency_type == '2' %}
+                        currenciesCallbackSpecial('.related-items span.money');
+                      {% endif %}
+                      
+                      jQuery('.related-items').owlCarousel({
+                        nav			: true
+                        ,dots 		: false
+                        ,items		: {{ _item_per_row }}
+                        ,rtl		: jQuery('body').data('rtl')
+                        ,margin		: 30
+                        ,responsive : {
+                            0:{
+                               items: 1
+                            }
+                            ,320:{
+                               items: {{ _item_per_row_mobile }}
+                            }
+                            ,768:{
+                               items: {{ _item_per_row_tablet }}
+                            }
+                            ,1024:{
+                               items: {{ _item_per_row }}
+                            }                                                                
+                        }
+                        ,navText	: ['<span class="button-prev"></span>', '<span class="button-next"></span>']
+                      });
+
+                    }
+                  }  
+                }
+              });       
+
+            });
+            //]]>
+          </script> 
+
+          {% endunless %}
+      
+      {% endif %}
+
+</div>

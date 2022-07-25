@@ -1,0 +1,96 @@
+<div class="col-lg-5 col-md-6 col-sm-6 col-12">
+  <div id="product-image" class="product-image">
+    <div class="product-image-inner">
+
+      {% if product.images.size > 0 %}
+
+      <div class="slider-main-image">
+
+        {% unless settings.saleoff_label == 'none' %}
+          {% if product.variants.first.compare_at_price and product.variants.first.price < product.variants.first.compare_at_price %}
+            <div id="product__label" class="product-label">
+              <span class="label-sale type-{{ settings.saleoff_label }}">
+                {% if settings.saleoff_label == 'text' %}
+                  <span class="sale-text">{{ 'products.label.sale' | t }}</span>
+                {% else %}
+                  {% assign _discount_price = product.variants.first.compare_at_price | minus: product.variants.first.price %}
+                  {% assign _percent = _discount_price | times: 100 | divided_by: product.variants.first.compare_at_price %}
+                  <span class="sale-text">-{{ _percent }}<sup>%</sup></span>
+                {% endif %}
+              </span>
+            </div>
+          {% endif %}
+        {% endunless %}
+
+        <div id="slide--main" class="slider-for-03">
+          {% for media in product.media %}
+            <div class="slick-item slick-zoom">            
+              {% case media.media_type %}
+                {% when 'image' %}
+                  <a data-thumbnail-id="{{ media.id }}" class="prod-zoom" data-fancybox="gallery" href="{{ media | img_url: '2048x2048' }}">
+                    {% include 'product-image-lazysize' with image: media, image_size: '2048x2048', image_class: 'image-zoom', image_alt: media.title %}
+                </a>
+                {% when 'external_video' %}
+                  <div class="product-single__media" data-media-id="{{ media.id }}">
+                    {{ media | external_video_tag }}
+                  </div>
+                {% when 'model' %}
+                  <div class="product-single__media" data-media-id="{{ media.id }}">
+                    {{ media | model_viewer_tag }}
+                  </div>
+                {% else %}
+              {% endcase %}
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="slick-btn-03">
+          <span class="btn-prev">{%- render 'theme-icon', type: 'left-open-1' -%}</span>
+          <span class="btn-next">{%- render 'theme-icon', type: 'right-open-1' -%}</span>
+        </div>  
+
+        {% if section.settings.meta_video %}
+        {% assign _meta_video = product.metafields.c_f %}
+        {% assign key = 'video_url' %}
+
+        {% unless _meta_video.video_url == blank %}
+        <div class="meta-video">
+          <a href="{{ _meta_video.video_url }}" class="m-video">{%- render 'theme-icon', type: 'video-play' -%}{{ 'products.product.video' | t }}</a>
+        </div>
+        
+        <script>
+          $(document).ready(function() {
+            $('.m-video').fancybox({
+              openEffect  : 'none',
+              closeEffect : 'none',
+              helpers : {
+                media : {}
+              }
+            });
+          });
+        </script>
+
+        {% endunless %}
+
+        {% endif %}
+      </div>
+
+      <div id="slide--thumbs" class="slider-filter slider-thumbs-03">
+        {% for media in product.media %}                  
+        <div class="slick-item" data-thumbnail-id="{{ media.id }}" data-match="{% if media.alt == product.title %}none-group{% else %}{{ media.alt | escape }}{% endif %}">
+          <div class="slick-item-image">
+            {% include 'product-detail-image-lazysize' with image: media, image_size: 'small', image_class: '', image_alt: media.title %}
+          </div>
+        </div>
+        
+        {% endfor %}
+      </div>
+
+      {% else %}
+      <img src="{{ 'default-image.jpg' | asset_url }}" />
+
+      {% endif %}
+
+    </div>
+  </div>
+</div>

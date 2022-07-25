@@ -1,0 +1,25 @@
+<!-- Begin Menu Mobile-->
+<div class="mobile-version d-lg-none">
+  <div class="menu-mobile navbar">   
+    
+    <div class="mm-wrapper">
+      <div class="nav-collapse is-mobile-nav">
+        
+        <ul class="main-nav mobile-touch-{{ section.settings.mobile_touch_menu }}">
+          {% if settings.mobile_bar == 'inside' %}
+            <li class="mobile-layout-bar">{% include 'layer-mobile-bar' %}</li>
+          {% endif %}
+          
+          {% for l in linklists[section.settings.mobile_linklist].links %}
+            {% include 'nav-link-mobile' %}
+          {% endfor %} 
+        </ul>   
+        
+        {% include 'layer-mobile-contact-bar' %}
+        
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- End Menu Mobile-->

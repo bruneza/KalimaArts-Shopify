@@ -1,0 +1,162 @@
+{% include 'products-tabs-v2-config' %}
+
+  <div role="tabpanel" id="hp-tabs-{{ section.id }}" class="hp-tabs-section layout-{{_layout }} tab-style-v2{% if _hide_mobile %} d-none d-md-block{% endif %}{% if _type == 'row' %} heading-row-{{ _text_align_tab_title }}{% endif %} {% if _padding == 'no' %} no-padding{% endif %}" style="background-color: {{ section.settings.bg_color }};" data-section-type="products-tabs-v2" data-section-id="{{ section.id }}">
+    {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+
+      <div class="wrap-tab-content" data-type="{{ _type }}">
+        {% if section.blocks.size > 0 %}
+
+          <div class="nav-tab-wrapper">
+            <ul class="nav nav-tabs tab-heading tab-heading-{{ _tab_title_style }}" role="tablist">
+
+              {% for block in section.blocks %}
+                {%- assign _tab_title = block.settings.tab_title -%}
+                {%- assign _collection = block.settings.collection -%}
+                {%- assign collection = collections[_collection] -%}
+              
+                <li class="tab-title nav-item">
+                  <a class="nav-link{% if _number_active == forloop.index %} active {% endif %}" href="#hp-tabs-{{ section.id }}-{{ forloop.index }}" data-template-id="thp-tabs-{{ section.id }}-{{ forloop.index }}" aria-controls="hp-tabs-{{ section.id }}-{{ forloop.index }}" role="tab" data-toggle="tab">
+                    {% unless _collection == blank %}
+                      {% unless _tab_title == blank %}{{ _tab_title }}{% else %}{{ collection.title }}{% endunless %}
+
+                    {% else %}
+                      {{ 'homepage.onboarding.tab_title' | t }}
+
+                    {% endunless %}
+                  </a>
+                </li>
+
+              {% endfor %}
+
+            </ul>
+          </div>
+
+          <div class="tab-content">
+            {% for block in section.blocks %}
+
+              {%- assign _collection = block.settings.collection -%}
+              {%- assign collection = collections[_collection] -%}
+              {%- assign _product =  block.settings.product -%}
+
+              <div role="tabpanel" class="{% if _number_active == forloop.index %}show active {% endif %}tab-pane" id="hp-tabs-{{ section.id }}-{{ forloop.index }}">
+                <template class="tab-temp-id thp-tabs-{{ section.id }}-{{ forloop.index }}">
+                  <div class="hp-tabs-content">
+                  
+                    <div class="hp-tabs-special-product">
+                      <div class="block-special-product-v2">
+
+                        {% unless _product == blank %}
+                          {%- assign product = all_products[_product] -%}
+                          {% include 'special-product-item-v2' %}
+                        {% else %}
+                          {{ emptySpecialProduct }}
+                        {% endunless %}
+
+                      </div>
+                    </div> 
+
+                    <div class="hp-tabs-list tabs-list-row">
+                      <div class="row">
+
+                        {% unless _collection == blank or collection.products_count == 0 %}
+                          {% for product in collection.products limit: _limit %}
+                            <div class="product-grid-item {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}">
+                              {% include 'product-item' %}
+                            </div>
+                          {% endfor %}
+
+                        {% else %}
+                          {{ emptyProduct }}
+
+                        {% endunless  %}
+
+                      </div>
+                    </div>
+
+                  </div>
+                </template>
+              </div>
+
+            {% endfor %}
+          </div>
+        
+          <script>
+                jQuery(document).ready(function($) {
+
+                  var _sections = new theme.Sections();
+                  _sections.register('products-tabs',function(){
+
+                    setTimeout(function(){
+                      $("#hp-tabs-{{ section.id }} .tab-title .nav-link").each(function( index ) {
+                        if($(this).hasClass('active')){
+                          $(this).click();
+                        }
+                      });
+                    }, 1500);
+
+                    jQuery('#hp-tabs-{{ section.id }} .tab-title .nav-link').click(function(e){
+                      var __tab_template = $(this).attr('data-template-id');
+                      var __tab_controls = $(this).attr('aria-controls');
+                      var __tab_template_class = "." + __tab_template;
+                      var __tab_controls_id = "#" + __tab_controls;
+                      var __tab_content = $(__tab_template_class)[0];
+
+                      if(__tab_content){
+                        $(__tab_template_class).remove();
+                        var clone = __tab_content.content.cloneNode(true);
+                        $(__tab_controls_id).append(clone);
+                      }
+
+                    });
+
+                  });
+
+                });
+              </script>
+
+        {% else %}
+
+          <div class="nav-tab-wrapper">
+            <ul class="nav nav-tabs tab-heading tab-heading-1" role="tablist">
+              {% for i in (1..3) %}
+
+                <li class="tab-title nav-item">
+                  <a class="nav-link{% if forloop.first %} active{% endif %}" href="#hp-tabs-{{ section.id }}-{{ forloop.index }}" aria-controls="hp-tabs-{{ section.id }}-{{ forloop.index }}" role="tab" data-toggle="tab">
+                    {{ 'homepage.onboarding.tab_title' | t }}
+                  </a>
+                </li>
+
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="tab-content">
+            {% for i in (1..3) %}
+
+              <div role="tabpanel" class="{% if _number_active == forloop.index %}show active {% endif %}tab-pane" id="hp-tabs-{{ section.id }}-{{ forloop.index }}">
+                <div class="hp-tabs-content">
+                  
+                  <div class="hp-tabs-special-product">
+                    <div class="block-special-product-v2">
+                      {{ emptySpecialProduct }}
+                    </div>
+                  </div>
+                  
+                  <div class="hp-tabs-list tabs-list-row">
+                    <div class="row">
+                      {{ emptyProduct }}
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+
+            {% endfor %}
+          </div>
+
+        {% endif %}
+    
+      </div>
+
+    {% if settings.left_column_style == 'none' %}</div>{% endif %}
+  </div>

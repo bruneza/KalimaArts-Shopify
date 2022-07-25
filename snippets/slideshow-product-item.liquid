@@ -1,0 +1,153 @@
+{% assign _item_effect = settings.product_item_hover_effect %}
+{% capture number_of_images %}{{ product.images | size }}{% endcapture %}
+{% assign number_images = number_of_images | plus:0 %}
+
+{% if settings.use_quick_view == false and settings.product_wishlist_option == 'disable' %}
+{% assign _disable_wl_qv = 'disable-wl-qv' %}
+{% endif %}
+
+<div class="product-wrapper {{ _disable_wl_qv }} effect-{{ _item_effect }}">
+
+  <div class="product-head">
+    <div class="product-image">
+      
+      {% if settings.product_title_position == 'above' %}
+        <div class="product-group-vendor-name">
+          {% if settings.show_product_vendor %}<div class="product-vendor">{{ product.vendor | link_to_vendor }}</div>{% endif %}
+          <h5 class="product-name balance-{{ settings.title_balance_row }}"><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h5>
+          {% include 'product-grid-review' %}
+        </div>
+      {% endif %}
+
+      <div class="featured-img product-ratio-{{ settings.collections_product_ratio }}{% if number_images > 1 and _item_effect == 'switch' %} switch-image{% endif %}">
+        <a href="{{ product.url | within: collection }}">
+
+          {% include 'product-image-lazysize' with image: product.featured_image, image_size: '420x', image_class: 'featured-image front', image_alt: product.title %}
+
+          {% if number_images > 1 and _item_effect == 'switch' %}
+            <span class="img-back d-none d-lg-block">
+              {% include 'product-image-lazysize' with image: product.images[1], image_size: '420x', image_class: 'back', image_alt: product.title %}
+            </span>
+          {% endif %}
+
+          {% include 'product-label' %}
+        </a>
+      </div>
+      
+      {% assign meta_shortdes = product.metafields.c_f %}
+      {% assign key = 'description_excerpt' %}
+
+      {% unless meta_shortdes.description_excerpt == blank %}
+        <div class="product-des-list">{{ meta_shortdes.description_excerpt }}</div>
+      {% endunless %}
+
+    </div>
+  </div>
+
+  <div class="product-content">
+    <div class="pc-inner">
+
+      {% if settings.product_title_position == 'below' %}
+        <div class="product-group-vendor-name">
+          {% if settings.show_product_vendor %}<div class="product-vendor">{{ product.vendor | link_to_vendor }}</div>{% endif %}
+          <h5 class="product-name balance-{{ settings.title_balance_row }}"><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h5>
+          {% include 'product-grid-review' %}
+        </div>
+      {% endif %}
+      
+      <div class="price-cart-wrapper">
+        {% include 'product-price' %}
+
+        <div class="product-add-cart">
+          {% unless product.template_suffix == 'redirect' %}
+          
+            {% if settings.disable_ajax_cart %}
+              <a href="{{ product.url | within: collection }}" class="btn-add-cart select-options" title="{{ 'products.product.select_options' | t }}">{%- render 'theme-icon', type: 'icon-right' -%}<span class="text">{{ 'products.product.select_options' | t }}</span></a>
+
+            {% else %} 
+              {% if product.variants.size > 1 %}
+                <a href="{{ product.url | within: collection }}" class="btn-add-cart select-options" title="{{ 'products.product.select_options' | t }}">{%- render 'theme-icon', type: 'icon-right' -%}<span class="text">{{ 'products.product.select_options' | t }}</span></a>
+                <select class="d-none" name="id">
+                  {% for variant in product.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+                  {% endfor %}
+                </select>
+          
+              {% else %}
+                {% if product.available %}
+                  <form action="/cart/add" method="post" enctype="multipart/form-data">
+                    <a href="javascript:void(0)" class="btn-add-cart add-to-cart" title="{{ 'products.product.add_to_cart' | t }}">{%- render 'theme-icon', type: 'add-cart-icon' -%}{%- render 'theme-icon', type: 'icon-loading' -%}<span class="text">{{ 'products.product.add_to_cart' | t }}</span></a>
+                    <select class="d-none" name="id">
+                      {% for variant in product.variants %}
+                        <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+                      {% endfor %}
+                    </select>
+                  </form>
+                {% endif %}
+
+              {% endif %}
+
+            {% endif %}
+
+          {% else %}
+            {% assign meta_redirect = product.metafields.c_f %}
+            {% assign key = 'redirect_url' %}
+
+            {% unless meta_redirect.redirect_url == blank %}
+              <a target="_blank" rel="noopener" href="{{ meta_redirect.redirect_url }}" class="btn-add-cart select-options" title="{{ 'products.product.select_options' | t }}">{%- render 'theme-icon', type: 'icon-right' -%}<span class="text">{{ 'products.product.select_options' | t }}</span></a>
+            {% endunless %}
+
+          {% endunless %}
+          
+        </div>
+      </div> 
+      
+      {% include 'product-button' %}
+
+      {% if product.available %}
+        {% assign meta_shortdes = product.metafields.c_f %}
+        {% assign key = 'countdown_timer' %}
+
+        {% unless meta_shortdes.countdown_timer == blank %}
+          {% include 'check-shop-url' %}
+
+          {% if _shop_url == _check_shop_url %}
+            {%- assign seconds = 34 | times: 60 | times: 60 -%}
+            {%- assign _expire = 'now' | date: "%s" | plus: seconds | date: "%m/%d/%Y" -%} 
+          {% else %}
+            {%- assign _expire = meta_shortdes.countdown_timer -%}
+          {% endif %}
+
+          {%- assign _dueDate = _expire | split: '/' -%}
+
+          <div class="meta-countdown">
+            <div class="wrapper-countdown">
+              <span class="deal-text">{{ 'products.big_product.text_end_in' | t }}</span>
+              <div class="countdown_{{ product.id }}"></div>
+            </div>
+          </div>
+
+          <script type="text/javascript">
+            jQuery(document).ready(function($){
+
+              var currentDate = new Date();
+              var dueDate = new Date( {{ _dueDate[2] }}, {{ _dueDate[0] | plus:0 }} - 1, {{ _dueDate[1] | plus:0 }} );
+
+              if(currentDate < dueDate){
+                $('.meta-countdown .countdown_{{ product.id }}').countdown({until: dueDate, format: 'HMS', padZeroes: true});
+              }else{
+                $('.meta-countdown .countdown_{{ product.id }}').parent().hide();
+              }
+
+            });
+          </script>
+
+        {% endunless %}
+
+      {% endif %}
+
+    </div>
+  </div>
+
+</div>
+

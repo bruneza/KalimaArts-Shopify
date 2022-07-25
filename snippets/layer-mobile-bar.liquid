@@ -1,0 +1,50 @@
+{% assign _lazyload = settings.use_lazyload %}
+{% include 'multi-lang-source' %}
+
+<ul class="m-block-icons list-inline">
+    
+  {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
+  {% if shop.customer_accounts_enabled %}
+  {% assign _account_icon_type = settings.account_icon_type %}
+  {% assign _account_font_icon = settings.account_font_icon %}
+  {% assign _account_icon = settings.account_icon %}
+
+  <li class="m-customer-account{% if _lazyload and _account_icon_type == 'image' %} lazyload waiting{% endif %}">
+    <a href="{{ routes.account_url }}" title="{{ 'general.header.my_account' | t }}">
+
+      {% if _account_icon_type == 'font-icon' %}
+      {{ _account_font_icon }}
+
+      {% else %}
+      <img {% if _lazyload %}class="lazyload"
+           data-srcset="{{ _account_icon | img_url: '20x'}} 1x, {{ _account_icon | img_url: '40x'}} 2x"
+           {% else %}src="{{ _account_icon | img_url: '20x'}}"{% endif %}
+           alt="Account" />
+
+      {% endif %}
+
+    </a>
+  </li>
+  {% endif %}
+  
+  {% if settings.enable_product_compare %}
+    <li class="compare-target">
+      {% render 'arn_wl_cp_custom_buttons', type: 'cp_show_btn', product_handle: product.handle %}
+    </li>
+  {% endif %}
+    
+  {% if settings.product_wishlist_option == 'wishlist-compare' %}
+    <li class="wishlist-target">
+      {% render 'arn_wl_cp_custom_buttons', type: 'wl_show_btn', product_handle: product.handle %}
+    </li>
+  {% endif %}
+
+  {% if settings.currency_type != '3' or locale_selector %}
+    {% if locale_selector %}
+      <li class="currency_icon currency_icon_mobile type-lang-list" data-target="#language-popup" data-toggle="modal" data-flag="{% if settings.m_lang_type == 'shopify-native' %}lang-list{% else %}lang-weglot{% endif %}"></li>
+    {% else %}
+      <li class="currency_icon currency_icon_mobile flag-3" data-target="#language-popup" data-toggle="modal" data-flag="currency"><i></i></li>
+    {% endif %}
+  {% endif %}
+  
+</ul>

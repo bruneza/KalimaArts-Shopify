@@ -1,0 +1,100 @@
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _layout = section.settings.layout -%}
+{%- assign _menu = section.settings.menu -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+<div id="menu-image-{{ section.id }}" class="menu-image-section layout-{{_layout }}{% if _hide_mobile %} d-none d-md-block{% endif %}" data-section-type="menu-image" data-section-id="{{ section.id }}">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+
+  {%- assign _heading = section.settings.heading -%}
+  {%- assign _subheading = section.settings.subheading -%}
+
+  {% unless _heading == blank %}
+    <div class="title-wrapper">
+      <h3>{{ _heading }}</h3>
+      {% unless _subheading == blank %}<a href="{{ section.settings.link }}">{{ _subheading }}{%- render 'theme-icon', type: 'angle-right' -%}</a>{% endunless %}
+    </div>
+  {% endunless %}
+
+  <div class="menu-image-content">
+    {% unless _menu == blank %}
+      <div class="box-menu">
+
+        {% for _menu_link in linklists[_menu].links %}
+          {% assign submenu = _menu_link.title | handleize %}
+
+          {% if linklists[submenu].links.size > 0 %}
+            <li>
+              <a href="{{ _menu_link.url }}" class="heading">
+                <span>{{ _menu_link.title }}</span>
+              </a>
+              <ul class="d-menu">
+                {% for l in linklists[submenu].links %}
+                  <li><a tabindex="-1" href="{{ l.url }}"><span>{{ l.title }}</span></a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ _menu_link.url }}" class="heading">
+                <span>{{ _menu_link.title }}</span>
+              </a>
+            </li>
+          {% endif %}
+
+        {% endfor %}
+
+      </div>
+    {% endunless %}
+
+    {% if section.blocks.size > 0 %}
+        <div class="nav-tab-wrapper">
+          <ul class="nav nav-tabs nav-tabs-owl tab-heading" role="tablist">
+
+            {% for block in section.blocks %}
+              {%- assign _tab_title = block.settings.text -%}
+            
+              <li class="tab-title nav-item">
+                <a class="nav-link{% if forloop.first %} active{% endif %}" href="#box-image-{{ section.id }}-{{ forloop.index }}" aria-controls="box-image-{{ section.id }}-{{ forloop.index }}" role="tab" data-toggle="tab">
+                  {% unless _tab_title == blank %}{{ _tab_title }}{% else %}{{ 'homepage.onboarding.tab_title' | t }}{% endunless %}
+                </a>
+              </li>
+
+            {% endfor %}
+
+          </ul>
+        </div>
+
+        <div class="tab-content">
+          {% for block in section.blocks %}
+            {%- assign _image = block.settings.image -%}
+            {%- assign _link = block.settings.link -%}
+
+            <div role="tabpanel" class="{% if forloop.first %}show active {% endif %}tab-pane" id="box-image-{{ section.id }}-{{ forloop.index }}">
+              <div class="image">
+                
+                <a href="{{ _link }}">
+                  {% unless block.settings.image == blank %}
+                    {% include 'image-lazysize' with image: _image, image_size: _image_size, image_class: '', image_alt: 'Banner' %}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endunless %}
+                </a>
+                
+              </div>
+            </div>
+
+          {% endfor %}
+        </div>
+    {% endif %}
+
+  </div>
+
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

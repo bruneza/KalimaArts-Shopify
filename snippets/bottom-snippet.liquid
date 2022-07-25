@@ -1,0 +1,111 @@
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _layout = section.settings.layout -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+{% capture emptyProduct %}
+  {% for j in (1..3) %}
+    <div class="row">
+      
+      <div class="product-image col-md-5 col-sm-5 col-6">
+        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+
+      <div class="product-content col-md-7 col-sm-7 col-6">
+        <div class="product-content-inner">
+
+          <h5 class="product-name">{{ 'homepage.onboarding.product_title' | t }}</h5>
+          <div class="product-price"><span class="price">{{ 1999 | money }}</span></div>
+
+        </div>
+      </div>
+
+    </div>
+  {% endfor %}
+{% endcapture %}
+
+{% capture emptyImage %}
+  <div class="image no-image block-image">
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  </div>
+{% endcapture %}
+
+
+{% comment %} 
+<div id="bottom-widget" class="layout-{{ _layout }}{% if _hide_mobile %} d-none d-md-block{% endif %}">
+  
+  <div class="product-listing-items">
+    <div class="{{ _layout_class }}">
+      
+      <div class="row"> 
+        
+        {% if section.blocks.size > 0 %}
+
+          {% for block in section.blocks %}
+            {%- assign _class = block.settings.width -%}
+            <div class="listing-items-col col-lg-{{ _class }} col-md-6 col-sm-6 col-12">
+
+              {% if block.type == 'products-listing' %}
+
+                {%- assign block_collection = collections[block.settings.collection] -%}
+                {%- assign collection = collections[block.settings.collection] -%}
+                {%- assign _heading = block.settings.heading -%}
+
+                {% unless block_collection == blank or collection.products_count == 0 %} 
+
+                  <h4><a href="{{ collection.url }}">{% unless _heading == blank %}{{ _heading }}{% else %}{{ collection.title }}{% endunless %}</a></h4>
+
+                  {% for product in collection.products limit: 3 %}
+                    {% include 'products-listing-item' %}
+                  {% endfor %}
+
+                {% else %}
+                  <h4>{{ 'homepage.onboarding.products_listing_title' | t }}</h4>
+                  {{ emptyProduct }}
+
+                {% endunless %}
+
+              {% else %}
+                {%- assign _image = block.settings.image -%}
+                {%- assign _link = block.settings.link -%}
+
+                {% unless _image == blank  %}
+                  <div class="block-image{% if _lazyload %} lazyload waiting{% endif %}">
+                    <a href="{{ _link }}" {% if _lazyload %}style="position:relative;padding-top:{% unless _image == blank %}{{ 1 | divided_by: _image.aspect_ratio | times: 100 }}%{% else %}100%{% endunless %};"{% endif %}>
+                      {% include 'image-lazysize' with image: _image, image_size: '330x360', image_class: '', image_alt: 'Banner' %}
+                    </a>
+                  </div>
+              
+                {% else %}
+                    {{ emptyImage }}
+              
+                {% endunless %}
+
+              {% endif %}
+
+            </div>
+          {% endfor %}
+        
+        {% else %}
+          {% for i in (1..4) %}
+            <div class="listing-items-col col-lg-3 col-md-6 col-sm-6 col-12">
+              <h4>{{ 'homepage.onboarding.products_listing_title' | t }}</h4>
+              {{ emptyProduct }}
+            </div>
+          {% endfor %}
+
+        {% endif %}
+
+      </div> 
+
+    </div>
+  </div>
+  
+</div>
+ {% endcomment %} 

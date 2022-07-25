@@ -1,0 +1,14 @@
+{% assign _swatches_color = 0 %}
+{% for option in product.options %}
+  {% assign _option = option | downcase %}
+
+  {% if _option == "color" or _option == 'colour' %}
+    {% assign _swatches_color = 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if _swatches_color == 1 %}
+  <div class="wrap-swatch-color">
+    {% include 'swatch_item' with 'Color' %}
+  </div>
+{% endif %}

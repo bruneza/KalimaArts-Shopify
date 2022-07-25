@@ -1,0 +1,41 @@
+<!-- Begin Recently Viewed Products -->
+
+<script src="{{ 'jquery.tmpl-products.min.js' | asset_url}}"></script>
+
+<script>
+  Shopify.Products.recordRecentlyViewed();
+</script>
+
+<!-- End Recently Viewed Products -->
+
+{% include 'layout-visitor-count' %}
+
+{% if _show_add_to_cart_sticky %}
+  <div class="add-to-cart-sticky">
+    <form action="/cart/add" method="post" class="product-action variants" enctype="multipart/form-data">
+      <select id="product-select-{{ product.id }}" name="id">
+        {% for variant in product.variants %}
+
+        {% if variant.available %}
+        <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title | remove: 'Default Title' }} {{ variant.price | money }}</option>
+
+        {% else %}
+        <option disabled="disabled">
+          {{ variant.title }} - {{'products.product.sold_out' | t }}
+        </option>
+
+        {% endif %}
+
+        {% endfor %}
+      </select>
+
+      <button class="add-to-cart btn btn-1" type="button">{{ 'products.product.add_to_cart' | t }}</button> 
+    </form>
+  </div>
+{% endif %}
+
+{% if _show_discount_popup %}
+  {% include 'layer-discount-modal' %}
+{% endif %}
+
+{%- if settings.sold_out_variants -%}{% render 'linked-options' %}{%- endif -%}

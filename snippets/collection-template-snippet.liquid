@@ -1,0 +1,131 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+
+{% assign _lazyload = settings.use_lazyload %}
+{% assign _sidebar_mode = section.settings.sidebar_mode %}
+{% assign _item_per_page = section.settings.item_per_page %}
+{% assign _col_des_position = section.settings.col_des_position %}
+
+{% assign _sb_filters = section.settings.sb_filters %}
+{% assign _sb_filters_position = section.settings.sb_filters_position %}
+{% assign _filter_logic = section.settings.and_logic %}
+{% assign _body_filters_style = section.settings.body_filters_style %}
+
+{% if _sidebar_mode == 'none' %}
+  {% assign _main_class = "col-12" %}
+  {% assign _sidebar = "hide-sidebar" %}
+{% else %}
+  {% assign _sb_class = "col-lg-3 col-md-12" %}
+  {% assign _main_class = "main-cata-page col-lg-9 col-md-12 col-sm-12 col-12" %}
+  {% assign _sidebar = "active-sidebar" %}
+{% endif %}
+
+{% assign i_fil = 0 %}
+{% assign _all_tags = '' %}
+
+{% for tag in collection.all_tags %}
+  {% capture _tag %}{{ tag | strip | downcase | append: '+++' }}{% endcapture %}
+  {% assign _all_tags = _all_tags | append: _tag %}
+{% endfor %}
+{% assign _all_tags = _all_tags | prepend: '+++' %}
+
+{% if _sb_filters == 'groups' %}
+  <script crossorigin="anonymous" src="{{ 'jquery.history.js' | asset_url }}" defer></script>
+  <script crossorigin="anonymous" src="{{ 'bc.ajax-filter.js' | asset_url }}" defer></script> 
+{% endif %}
+
+<div class="page-cata {{ _sidebar }}" data-logic="{{ _filter_logic }}">
+  <div class="container">
+  
+    <div class="row">
+      
+      {% if _sidebar_mode == 'left' %}
+        {% include 'sidebar-catalog' %}
+      {% endif %}
+
+      {% paginate collection.products by _item_per_page %}
+
+      <div class="{{ _main_class }}">
+
+        {% assign _collectionurl = '/collections/' | append: collection.handle %}
+
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'subcollection' %}
+              {% include 'sub-collections' %}
+          {% endcase %}
+        {% endfor %} 
+
+        <div class="wrap-cata-title">
+          <h2>{{ collection.title }}</h2>
+        </div>
+        
+        {% if _col_des_position == 'top' and collection.description != blank %}
+          <div class="cata-description">{{ collection.description }}</div>
+        {% endif %}
+
+        {% include 'cata-toolbar' %}
+
+        {% if _sb_filters_position == 'body' and collection.all_tags.size > 0 %}
+        
+          <div class="sb-widget filter-sidebar position-body style-{{ _body_filters_style }}">
+            <div class="sb-filter-wrapper">
+
+              <div class="f-close" title="Close">{%- render 'theme-icon', type: 'delete' -%}</div>
+              {% if _sb_filters == 'groups' %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'filter' %}
+                    {% include 'filter-body' %}
+                  {% endif %}
+                {% endfor %}
+              
+              {% else %}
+                {% include 'filter-tags' %}
+              
+              {% endif %}
+
+            </div>
+          </div>
+        {% endif %}
+
+        <div id="col-main">
+          {% if collection.products_count > 0 %}
+
+            <div class="cata-product cp-grid{% if _sidebar_mode == 'none' %} no-sidebar{% endif %}">
+              {% if collection.products.size > 0 %}
+
+                {% for product in collection.products %}
+                  <div class="product-grid-item mode-view-item">
+                    {% include 'product-item' %}
+                  </div>
+                {% endfor %}
+
+              {% endif %}
+            </div>
+
+          {% else %}
+            <p>{{ 'collections.general.no_product' | t }}</p>
+
+          {% endif %}
+        </div>
+
+        {% include 'pagination' %}
+
+        {% if _col_des_position == 'bottom' and collection.description != blank %}
+          <div class="cata-description">{{ collection.description }}</div>
+        {% endif %}
+      </div>
+
+      {% endpaginate %}
+
+      {% if _sidebar_mode == 'right' %}
+        {% include 'sidebar-catalog' %}
+      {% endif %}
+
+    </div>
+  
+  </div>
+</div>
+
+{% if settings.enable_notify_collection_page %}
+  {% include 'layout-notify' %}
+{% endif %}

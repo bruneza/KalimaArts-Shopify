@@ -1,0 +1,76 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+
+<div id="col-main">
+  <div class="category-content">
+
+    <div class="category-grid-view">
+      <div class="row">
+
+        {% if section.settings.display_type == 'all' %}
+          {% for collection in collections %}
+            <div class="collection-item col-lg-2 col-md-3 col-sm-4 col-6">
+              {% include 'collection-item' %}
+            </div>
+          {% endfor %}   
+        
+        {% else %}
+          {% for block in section.blocks %}
+            <div class="collection-item col-lg-2 col-md-3 col-sm-4 col-6">
+              {%- assign collection = collections[block.settings.collection] -%}
+              {% include 'collection-item' %}
+            </div>
+          {% endfor %}
+        
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collections list page",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "All of your collections are listed by default. To customize your list, choose 'Selected' and add collections."
+      },
+      {
+        "type": "image_picker",
+        "id": "breadcrumb_image",
+        "label": "Breadcrumb image"
+      },
+      {
+        "type": "radio",
+        "id": "display_type",
+        "label": "Select collections to show",
+        "default": "all",
+        "options": [
+          {
+            "value": "all",
+            "label": "All"
+          },
+          {
+            "value": "selected",
+            "label": "Selected"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "label": "Collection",
+            "id": "collection",
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

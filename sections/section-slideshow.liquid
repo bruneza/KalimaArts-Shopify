@@ -1,0 +1,943 @@
+{% include 'slideshow-snippet' %}
+
+{% schema %}
+{
+  "name": "Slideshow V1",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Created by 'Slideshow V1' section. Please try to keep your slideshow images the same size."
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Section Label",
+      "default": "Slideshow V1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_slideshow",
+      "label": "Show slideshow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_mobile",
+      "label": "Visibility: hide for mobile"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Section Layout Mode",
+      "default": "boxed",
+      "options": [
+        { "value": "full", "label": "Wide" },
+    		{ "value": "full-padding", "label": "Wide with padding" },
+    		{ "value": "boxed", "label": "Boxed" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "slideshow_height",
+      "label": "Slideshow height",
+      "default": "auto-height",
+      "options": [
+        { "value": "auto-height", "label": "Auto" },
+    		{ "value": "full-height", "label": "Full screen" },
+    		{ "value": "fix-height", "label": "Manually" }
+      ]
+    },
+    {
+      "type":"range",
+      "id":"manually_height",
+      "label":"Manually slideshow height",
+      "min": 300,
+      "max": 700,
+      "step": 5,
+      "unit":"px",
+      "default": 425
+    }, 
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Auto Slides"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto rotate between slides",
+      "default": true
+    },
+    {
+      "type":"range",
+      "id":"autoplay_speed",
+      "label":"Change slides every",
+      "min":5,
+      "max":10,
+      "step": 1,
+      "unit":"Sec",
+      "default":6
+    }, 
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Slideshow Animation",
+      "default": "slide",
+      "options": [
+        { "label": "Fade", "value": "fade" },
+        { "label": "Slide", "value": "slide" },
+    		{ "label": "Cube", "value": "cube" },
+    		{ "label": "Coverflow", "value": "coverflow" },
+    		{ "label": "flip", "value": "flip" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Navigator"
+    },
+    {
+      "type": "checkbox",
+      "id": "navigator",
+      "label": "Show Navigator Next Prev",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "paging",
+      "label": "Show Bullet at Bottom",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Block three images",
+      "info": "Block image 1,2,3"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_three_banner",
+      "label": "Enable block three images",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "three_banner_style",
+      "label": "Style",
+      "options": [
+        { "label": "Style 1", "value": "1" },
+        { "label": "Style 2", "value": "2" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "three_image_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Block Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "three_image_1",
+      "label": "Image"
+    },
+    {
+      "type": "textarea",
+      "id": "three_text_1",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "three_button_1",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "three_link_1",
+      "label": "Link to"
+    },
+    {
+      "type": "header",
+      "content": "Block Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "three_image_2",
+      "label": "Image"
+    },
+    {
+      "type": "textarea",
+      "id": "three_text_2",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "three_button_2",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "three_link_2",
+      "label": "Link to"
+    },
+    {
+      "type": "header",
+      "content": "Block Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "three_image_3",
+      "label": "Image"
+    },
+    {
+      "type": "textarea",
+      "id": "three_text_3",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "three_button_3",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "three_link_3",
+      "label": "Link to"
+    },
+    {
+      "type": "header",
+      "content": "Layout Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "fix_text_box_position",
+      "label": "Fixed Content Position",
+      "info": "Use when show the 'Left column section' in Theme Settings."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Slideshow - Image",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Background image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label":"Image position",
+          "default": "center center",
+          "options": [
+            { "value":"left top", "label": "Left top" },
+            { "value":"center top", "label": "Center top" },
+            { "value":"right top", "label": "Right top" },
+            { "value":"left center", "label": "Left center" },
+            { "value":"center center", "label": "Center center" },
+            { "value":"right center", "label": "Right center" },
+            { "value":"left bottom", "label": "Left bottom" },
+            { "value":"center bottom", "label": "Center bottom" },
+            { "value":"right bottom", "label": "Right bottom" }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Slideshow link to"
+        },
+        {
+          "type": "header",
+          "content": "IMAGE LAYOUT"
+        },
+        {
+          "type": "range",
+          "id": "image_vertical_position",
+          "label": "Top vertical position",
+          "default": 10,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "image_horizontal_position",
+          "label": "Left horizontal position",
+          "default": 70,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%"
+        }, 
+        {
+          "type": "image_picker",
+          "id": "image_layer",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_layer_size",
+          "label": "Image size (in px)",
+          "default": "520x700",
+          "info": "E.g: 520x700"
+        },
+        {
+          "type": "select",
+          "id": "image_layer_animation",
+          "label": "Animation",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "image_layer_delay",
+          "label": "Start the animation after",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        },
+        {
+          "type": "header",
+          "content": "TEXT BOX LAYOUT"
+        },
+        {
+          "type": "range",
+          "id": "position",
+          "label": "Top vertical position",
+          "default": 30,
+          "min": 1,
+          "max": 99,
+          "step": 1,
+          "unit": "%"
+        }, 
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "label": "Left horizontal position",
+          "default": 10,
+          "min": 1,
+          "max": 99,
+          "step": 1,
+          "unit": "%"
+        }, 
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Text alignment",
+          "default": "text-center",
+          "options": [
+            { "value": "text-left", "label": "Left" },
+            { "value": "text-center", "label": "Middle" },
+            { "value": "text-right", "label": "Right" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Text box content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Subheading 2"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Label"
+        },
+        {
+          "type": "header",
+          "content": "Text box style"
+        },
+        {
+          "type": "checkbox",
+          "id": "heading_bold",
+          "label": "Bold Heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "subheading_bold",
+          "label": "Bold Subheading"
+        },
+        {
+          "type": "checkbox",
+          "id": "caption_bold",
+          "label": "Bold Subheading 2"
+        },
+        {
+          "type": "header",
+          "content": "Text box color"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "subheading_color",
+          "label": "Subheading",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "caption_color",
+          "label": "Subheading 2",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Text box font size - Desktop"
+        }, 
+        {
+          "type": "range",
+          "id": "heading_size",
+          "label": "Heading",
+          "min": 10,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "subheading_size",
+          "label": "Subheading",
+          "min": 10,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "caption_size",
+          "label": "Subheading 2",
+          "min": 10,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "Text box font size - Mobile"
+        },
+        {
+          "type": "range",
+          "id": "mobile_heading_size",
+          "label": "Heading",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "mobile_subheading_size",
+          "label": "Subheading",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "mobile_caption_size",
+          "label": "Subheading 2",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "header",
+          "content": "Text box animation"
+        },
+        {
+          "type": "select",
+          "id": "heading_animation",
+          "label": "Heading",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "subheading_animation",
+          "label": "Subheading",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "caption_animation",
+          "label": "Subheading 2",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_animation",
+          "label": "Button Animation",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Text box animation delay"
+        },
+        {
+          "type": "range",
+          "id": "heading_animation_delay",
+          "label": "Heading",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        },
+        {
+          "type": "range",
+          "id": "subheading_animation_delay",
+          "label": "Subheading",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        },
+        {
+          "type": "range",
+          "id": "caption_animation_delay",
+          "label": "Subheading 2",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        },
+        {
+          "type": "range",
+          "id": "button_animation_delay",
+          "label": "Button",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Slideshow - Video",
+      "limit": 6,
+      "settings": [
+        {
+          "type":"checkbox",
+          "id":"use_embed",
+          "label":"Embed video"
+        },
+        {
+          "type": "textarea",
+          "id": "video",
+          "label": "Video url",
+          "info": "Go to Settings > Files > click 'Upload files' to upload your video, then copy the url and paste to here. If you enable 'Embed video', please copy embed code and paste here."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Slideshow link to"
+        },
+        {
+          "type": "header",
+          "content": "TEXT BOX LAYOUT"
+        },
+        {
+          "type": "range",
+          "id": "position",
+          "label": "Top vertical position",
+          "default": 30,
+          "min": 1,
+          "max": 99,
+          "step": 1,
+          "unit": "%"
+        }, 
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "label": "Left horizontal position",
+          "default": 10,
+          "min": 1,
+          "max": 99,
+          "step": 1,
+          "unit": "%"
+        }, 
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Text alignment",
+          "default": "text-center",
+          "options": [
+            { "value": "text-left", "label": "Left" },
+            { "value": "text-center", "label": "Middle" },
+            { "value": "text-right", "label": "Right" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Text box content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Subheading 2"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Label"
+        },
+        {
+          "type": "header",
+          "content": "Text box style"
+        },
+        {
+          "type": "checkbox",
+          "id": "heading_bold",
+          "label": "Bold Heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "subheading_bold",
+          "label": "Bold Subheading"
+        },
+        {
+          "type": "checkbox",
+          "id": "caption_bold",
+          "label": "Bold Subheading 2"
+        },
+        {
+          "type": "header",
+          "content": "Text box color"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "subheading_color",
+          "label": "Subheading",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "caption_color",
+          "label": "Subheading 2",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Text box font size - Desktop"
+        }, 
+        {
+          "type": "range",
+          "id": "heading_size",
+          "label": "Heading",
+          "min": 10,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "subheading_size",
+          "label": "Subheading",
+          "min": 10,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "default": 48
+        },
+        {
+          "type": "range",
+          "id": "caption_size",
+          "label": "Subheading 2",
+          "min": 10,
+          "max": 80,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "Text box font size - Mobile"
+        },
+        {
+          "type": "range",
+          "id": "mobile_heading_size",
+          "label": "Heading",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "mobile_subheading_size",
+          "label": "Subheading",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "mobile_caption_size",
+          "label": "Subheading 2",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "header",
+          "content": "Text box animation"
+        },
+        {
+          "type": "select",
+          "id": "heading_animation",
+          "label": "Heading",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "subheading_animation",
+          "label": "Subheading",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "caption_animation",
+          "label": "Subheading 2",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_animation",
+          "label": "Button Animation",
+          "default": "fadeIn",
+          "options": [
+            { "value": "fadeIn", "label": "Fade In" },
+            { "value": "moveFromLeft", "label": "Move From Left" },
+            { "value": "moveFromRight", "label": "Move From Right" },
+            { "value": "moveFromTop", "label": "Move From Top" },
+            { "value": "moveFromBottom", "label": "Move From Bottom" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Text box animation delay"
+        },
+        {
+          "type": "range",
+          "id": "heading_animation_delay",
+          "label": "Heading",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        },
+        {
+          "type": "range",
+          "id": "subheading_animation_delay",
+          "label": "Subheading",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        },
+        {
+          "type": "range",
+          "id": "caption_animation_delay",
+          "label": "Subheading 2",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        },
+        {
+          "type": "range",
+          "id": "button_animation_delay",
+          "label": "Button",
+          "default": 1,
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "Sec"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Block Products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection_1",
+          "label": "Collection item 01"
+        },
+        {
+          "type": "collection",
+          "id": "collection_2",
+          "label": "Collection item 02"
+        },
+        {
+          "type": "collection",
+          "id": "collection_3",
+          "label": "Collection item 03"
+        },
+        {
+          "type": "collection",
+          "id": "collection_4",
+          "label": "Collection item 04"
+        },
+        {
+          "type": "collection",
+          "id": "collection_5",
+          "label": "Collection item 05"
+        },
+        {
+          "type": "collection",
+          "id": "collection_6",
+          "label": "Collection item 06"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Slideshow V1",
+    "category": "Slideshow",
+    "settings": {
+      "autoplay": true
+    },
+    "blocks": [
+      { "type": "image" },
+      { "type": "image" }
+    ]
+  }]
+}
+{% endschema %}

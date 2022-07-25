@@ -1,0 +1,441 @@
+{% include 'collection-infinite-template-snippet' %}
+
+{% schema %}
+  {
+    "name": "Collection pages",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "breadcrumb_image",
+        "label": "Breadcrumb image"
+      }, 
+      {
+        "type": "select",
+        "id": "col_des_position",
+        "label": "Position of the collection description",
+        "options": [
+          { "value": "top", "label": "Top" },
+          { "value": "bottom", "label": "Bottom" },
+          { "value": "none", "label": "None" }
+        ],
+        "default": "top"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_col_gl",
+        "label": "Enable Mode View",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_col_sort_by",
+        "label": "Enable Sort by",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "item_per_page",
+        "label": "Products per page",
+        "min": 8,
+        "max": 50,
+        "step": 1,
+        "default": 16
+      }, 
+      {
+        "type": "header",
+        "content": "Collection Filter",
+        "info": "To customize Collection Filter content, please click Add content > Filter by group."
+      },
+      {
+         "type":"checkbox",
+         "id":"and_logic",
+         "label":"Disable 'AND' operator in a group filter",
+         "default":true
+      },
+      {
+        "type": "select",
+        "id": "sb_filters",
+        "label": "Filter type",
+        "options": [
+          { "value": "tags", "label": "Filter by Tags" },
+          { "value": "groups", "label": "Filter by Groups"  }
+        ],
+        "default": "groups"
+      },
+      {
+        "type": "select",
+        "id": "sb_filters_position",
+        "label": "Filter position",
+        "options": [
+          { "value": "sidebar","label": "Sidebar" },
+          { "value": "body","label": "Body" },
+          { "value": "none","label": "None" }
+        ],
+        "default": "sidebar"
+      },
+      {
+        "type": "select",
+        "id": "sb_filters_style",
+        "label": "Filter sidebar style",
+        "options": [
+          { "value": "normal","label": "Normal" },
+          { "value": "accordion","label": "Accordion" }
+        ],
+        "default": "normal"
+      },
+      {
+        "type": "select",
+        "id": "body_filters_style",
+        "label": "Filter body and mobile style",
+        "options": [
+          { "value": "drawer","label": "Drawer" },
+          { "value": "toggle","label": "Toggle" } 
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "header",
+        "content": "Sidebar Mode",
+        "info": "To customize your sidebar content, please click Add content."
+      },
+      {
+        "type": "select",
+        "id": "sidebar_mode",
+        "label": "Sidebar Mode",
+        "options": [
+          { "value": "left", "label": "Left sidebar" },
+          { "value": "right", "label": "Right sidebar" },
+          { "value": "none", "label": "None sidebar" }
+        ],
+        "default": "left"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "subcollection",
+        "name": "Sub-collections",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "select",
+            "id": "type",
+            "label": "Select component to show",
+            "options": [
+              { "value": "metafield", "label": "Metafield" },
+              { "value": "menu", "label": "Menu item" }
+            ],
+            "default": "metafield"
+          },
+          {
+            "type": "text",
+            "id": "subcategory_title",
+            "label": "Heading",
+            "default": "Categories"
+          },
+          {
+            "type": "link_list",
+            "id": "subcategory_menu",
+            "label": "Menu item"
+          },
+          {
+            "type": "range",
+            "id": "subcollection_per_row",
+            "label": "Item per row",
+            "min": 2,
+            "max": 4,
+            "step": 1,
+            "default": 4
+          }
+        ]
+      },
+      {
+        "type": "heading_filter",
+        "name": "Heading Filter",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading_filter",
+            "label": "Text",
+            "default": "Filter"
+          }
+        ]
+      },
+      {
+    		"type": "filter",
+    		"name": "Filter by Groups",
+    		"settings": [
+          {
+            "type":"text",
+            "id":"filter_prefix",
+            "label":"Title"
+          },
+          {
+            "type":"textarea",
+            "id":"filter_prefix_prop",
+            "label":"Product tags",
+            "info":"Add a comma-separated list of product tags. Only the tags fond in the collection will be displayed as filter. Eg: Blue, M, L, etc"
+          } 
+        ]
+      },
+      {
+        "type": "collections",
+        "name": "Sidebar - Categories",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Categories"
+          },
+          {
+            "type": "paragraph",
+            "content": "All of your collections are listed by default. To customize your list, choose 'Selected' and add collections."
+          },
+          {
+            "type": "select",
+            "id": "display_type",
+            "label": "Select collections to show",
+            "default": "all",
+            "options": [
+              { "value": "all", "label": "All" },
+              { "value": "selected", "label": "Selected" },
+              { "value": "navigation", "label": "Navigation" }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "icon",
+            "label": "Thumbnail icon",
+            "options": [
+              { "value": "collection-image", "label": "Use collection image" },
+              { "value": "upload", "label": "Upload from Assets - png format" },
+              { "value": "upload-svg","label": "Upload from Assets - svg format" },
+              { "value": "upload-setting","label": "Upload by Settings - Use when choose 'Selected'" },
+              { "value": "none","label": "None" }
+            ],
+            "default": "none",
+            "info": "If you select 'Upload from Assets', please go to Assets folder, then click 'Add a new asset' to upload the image. The image size is 25x25 pixels, syntax is xxx.png. 'xxx' is collection handle."
+          },
+          {
+            "type": "link_list",
+            "id": "menu_item",
+            "label": "Menu items",
+            "info": "Use when choose 'Navigation'"
+          },
+          {
+            "type": "header",
+            "content": "Collection 01"
+          },
+          {
+            "type": "collection",
+            "id": "collection_1",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 02"
+          },
+          {
+            "type": "collection",
+            "id": "collection_2",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 03"
+          },
+          {
+            "type": "collection",
+            "id": "collection_3",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 04"
+          },
+          {
+            "type": "collection",
+            "id": "collection_4",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 05"
+          },
+          {
+            "type": "collection",
+            "id": "collection_5",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_5",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 06"
+          },
+          {
+            "type": "collection",
+            "id": "collection_6",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_6",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 07"
+          },
+          {
+            "type": "collection",
+            "id": "collection_7",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_7",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 08"
+          },
+          {
+            "type": "collection",
+            "id": "collection_8",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_8",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 09"
+          },
+          {
+            "type": "collection",
+            "id": "collection_9",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_9",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 10"
+          },
+          {
+            "type": "collection",
+            "id": "collection_10",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_10",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 11"
+          },
+          {
+            "type": "collection",
+            "id": "collection_11",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_11",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Collection 12"
+          },
+          {
+            "type": "collection",
+            "id": "collection_12",
+            "label": "Collection item"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_12",
+            "label": "Image"
+          }
+        ]
+      },
+      {
+        "type": "banner",
+        "name": "Sidebar - Banner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "The default image size is 270x400 pixels"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link to"
+          }
+        ]
+      },
+      {
+        "type": "products-listing",
+        "name": "Sidebar - Products",
+        "settings": [
+          {
+            "type": "text",
+            "id": "sb_latest_product_title",
+            "label": "Heading",
+            "default": "Latest Products"
+          },
+          {
+            "type": "collection",
+            "id": "sb_latest_product_col",
+            "label": "Collection"
+          },
+          {
+            "type": "range",
+            "id": "sb_latest_product_limit",
+            "label": "Total items",
+            "min": 1,
+            "max": 12,
+            "default": 8
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

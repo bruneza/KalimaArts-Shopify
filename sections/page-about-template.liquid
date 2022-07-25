@@ -1,0 +1,478 @@
+{% if section.blocks.size > 0 %}
+<div id="col-main" class="page-content page-about-us">
+
+  {% if section.settings.banner %}
+  <div class="type-banner">
+    {% for block in section.blocks %}
+
+    {% if block.type == 'banner' %}
+
+    {%- assign _image = block.settings.image -%}
+    {%- assign _title = block.settings.title -%}
+    {%- assign _caption = block.settings.caption -%}
+
+    {% unless _image == blank %}
+    <div class="banner-wrapper" style="background-image:url({{ _image | img_url: '1920x' }}); width: auto;">
+      <div class="container">
+        <div class="banner-text">
+          {% unless _title == blank %}<h3>{{ _title }}</h3>{% endunless %}
+          {% unless _caption == blank %}<p>{{ _caption }}</p>{% endunless %}
+        </div>
+      </div>
+    </div>
+    {% endunless %}
+
+    {% endif %}
+
+    {% endfor %}
+
+  </div>
+  {% endif %}
+
+  {% if section.settings.banner_text %}
+  <div class="type-image-text">
+    <div class="container image-text">
+      <div class="row">
+
+        {% for block in section.blocks %}
+
+        {% if block.type == 'banner_text' %}
+
+        {%- assign _image = block.settings.image -%}
+        {%- assign _title = block.settings.title -%}
+        {%- assign _caption = block.settings.caption -%}
+
+        <div class="item col-md-4 col-sm-12">
+          {% unless _image == blank %}
+          <div class="image">
+            <img src="{{ _image | img_url: '500x' }}" alt="Image" />
+          </div>
+          {% endunless %}
+
+          <div class="text-box">
+            {% unless _title == blank %}<h4 class="text">{{ _title }}</h4>{% endunless %}
+            {% unless _caption == blank %}<p>{{ _caption }}</p>{% endunless %}
+          </div>
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if section.settings.our_team %}
+  <div class="type-our-team" style="background-color: {{ section.settings.team_bg_color }}">
+    <div class="container our-team">
+
+      <div class="row-table">
+        <div class="row">
+          {% for block in section.blocks %}
+
+          {% if block.type == 'team' %}
+
+          <div class="wrap-item col-lg-2 col-md-3 col-sm-4 col-6">
+            <div class="item">
+              {% if block.settings.style == 'image' %}
+
+                {%- assign _image = block.settings.image -%}
+                {%- assign _name = block.settings.name -%}
+                {%- assign _major = block.settings.major -%}
+
+                {% unless _image == blank %}
+                  <img src="{{ _image | img_url: '300x' }}" alt="Image" />
+                {% endunless %}
+
+                {% unless _name == blank %}<span class="name">{{ _name }}</span>{% endunless %}
+                {% unless _major == blank %}<span class="major">{{ _major }}</span>{% endunless %}
+
+              {% else %}
+                {%- assign _text_1 = block.settings.text_1 -%}
+                {%- assign _text_2 = block.settings.text_2 -%}
+                {%- assign _text_link = block.settings.text_link -%}
+                {%- assign _link = block.settings.link -%}
+
+                <div class="item-inner" {% if block.settings.style == 'color' %} style="background-color: {{ block.settings.bg_color }}"{% endif %}>
+                  <div class="wrap-team">
+                    {% unless _text_1 == blank %}<span class="text-1">{{ _text_1 }}</span>{% endunless %}
+                  	{% unless _text_2 == blank %}<span class="text-2">{{ _text_2 }}</span>{% endunless %}
+                  </div>
+                </div>
+              
+                {% unless _text_link == blank %}<a href="{{ _link }}">{{ _text_link }}</a>{% endunless %}
+
+              {% endif %}
+              </div>
+            </div>
+
+          {% endif %}
+
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% endif %}
+  
+  {% if section.settings.text_box %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'text-box' %}
+
+        <div class="type-text-box">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-lg-8 col-md-7 col-sm-12">
+                <div class="text-box-left">
+
+                  {% for i in (1..4) %}
+                  {%- assign _show = 'tb_left_' | append: i -%}
+
+                  {% if block.settings[_show] %}
+                  <div class="tbl-item">
+                    {%- assign _tb_left_title = 'tb_left_title_' | append: i -%}
+                    {%- assign _tb_left_caption = 'tb_left_caption_' | append: i -%}
+
+                    {% unless block.settings[_tb_left_title] == blank %}<h4>{{ block.settings[_tb_left_title] }}</h4>{% endunless %}
+                    {% unless block.settings[_tb_left_caption] == blank %}<p>{{ block.settings[_tb_left_caption] }}</p>{% endunless %}
+                  </div>
+                  {% endif %}
+
+                  {% endfor %}
+
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-5 col-sm-12">
+                <div class="text-box-right">
+
+                  {% for i in (1..4) %}
+                    {%- assign _tb_right = 'tb_right_' | append: i -%}
+                    {% unless block.settings[_tb_right] == blank %}<h5>{{ block.settings[_tb_right] }}</h5>{% endunless %}
+                  {% endfor %}
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      {% endif %}
+    {% endfor %}
+  
+  {% endif %}
+
+</div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "About Us Page",
+    "max_blocks": 50,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Banner",
+        "info": "Please add Content from Content section, select type is 'Banner'"
+      },
+      {
+        "type": "checkbox",
+        "id": "banner",
+        "label": "Show Banner",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Banner & Text",
+        "info": "Please add Content from Content section, select type is 'Image & Text'"
+      },
+      {
+        "type": "checkbox",
+        "id": "banner_text",
+        "label": "Show Banner & Text",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Our Team",
+        "info": "Please add Content from Content section, select type is 'Our Team'"
+      },
+      {
+        "type": "checkbox",
+        "id": "our_team",
+        "label": "Show our team",
+        "default": true
+      },
+      {
+        "label": "Background color",
+        "id": "team_bg_color",
+        "type": "color",
+        "default": "#f5f5f5"
+      },
+      {
+        "type": "header",
+        "content": "Text box",
+        "info": "Please add Content from Content section, select type is 'Text box'"
+      },
+      {
+        "type": "checkbox",
+        "id": "text_box",
+        "label": "Show text box",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "banner",
+        "name": "Banner",
+        "settings": [
+          {
+            "label": "Image",
+            "id": "image",
+            "type": "image_picker",
+            "info": "Image width is 1920 pixels"
+          },
+          {
+            "label": "Heading",
+            "id": "title",
+            "type": "text"
+          },
+          {
+            "label": "Caption",
+            "id": "caption",
+            "type": "textarea"
+          }
+        ]
+      },
+      {
+        "type": "banner_text",
+        "name": "Image & Text",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Block image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "Default size is 500x333 pixels"
+          },
+          {
+            "type": "header",
+            "content": "Text box"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "What we really do?"
+          },
+          {
+            "type": "textarea",
+            "id": "caption",
+            "label": "Text",
+            "default": "Donec libero dolor, tincidunt id laoreet vitae,ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna, vitae ultrices lacus purus vitae metus."
+          }
+        ]
+      },
+      {
+        "type": "team",
+        "name": "Our team",
+        "settings": [
+          {
+            "label": "Style",
+            "id": "style",
+            "type": "select",
+            "default": "image",
+            "options": [
+              {
+                "value": "image",
+                "label": "Image"
+              },
+              {
+                "value": "color",
+                "label": "Color"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Image"
+          },
+          {
+            "label": "Image",
+            "id": "image",
+            "type": "image_picker",
+            "info": "Default size is 300x300 pixels"
+          },
+          {
+            "label": "Name",
+            "id": "name",
+            "type": "text"
+          },
+          {
+            "label": "Major",
+            "id": "major",
+            "type": "text"
+          },
+          {
+            "type": "header",
+            "content": "Color"
+          },
+          {
+            "label": "Background color",
+            "id": "bg_color",
+            "type": "color",
+            "default": "#fed700"
+          },
+          {
+            "label": "Text 01",
+            "id": "text_1",
+            "type": "text",
+            "default": "We are"
+          },
+          {
+            "label": "Text 02",
+            "id": "text_2",
+            "type": "text",
+            "default": "Hiring!"
+          },
+          {
+            "label": "Text Link",
+            "id": "text_link",
+            "type": "text",
+            "default": "See Details"
+          },
+          {
+            "label": "Link to",
+            "id": "link",
+            "type": "url"
+          }
+        ]
+      },
+      {
+        "type": "text-box",
+        "name": "Text box",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Text box left"
+          },
+          {
+            "label": "Text box 01",
+            "id": "tb_left_1",
+            "type": "checkbox",
+            "default": true
+          },
+          {
+            "label": "Heading",
+            "id": "tb_left_title_1",
+            "type": "text",
+            "default": "What we really do?"
+          },
+          {
+            "label": "Caption",
+            "id": "tb_left_caption_1",
+            "type": "textarea",
+            "default": "Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna, vitae ultrices lacus purus vitae metus."
+          },
+          {
+            "label": "Text box 02",
+            "id": "tb_left_2",
+            "type": "checkbox",
+            "default": true
+          },
+          {
+            "label": "Heading",
+            "id": "tb_left_title_2",
+            "type": "text",
+            "default": "Our vision"
+          },
+          {
+            "label": "Caption",
+            "id": "tb_left_caption_2",
+            "type": "textarea",
+            "default": "Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna, vitae ultrices lacus purus vitae metus."
+          },
+          {
+            "label": "Text box 03",
+            "id": "tb_left_3",
+            "type": "checkbox",
+            "default": true
+          },
+          {
+            "label": "Heading",
+            "id": "tb_left_title_3",
+            "type": "text",
+            "default": "History of the Company"
+          },
+          {
+            "label": "Caption",
+            "id": "tb_left_caption_3",
+            "type": "textarea",
+            "default": "Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna, vitae ultrices lacus purus vitae metus."
+          },
+          {
+            "label": "Text box 04",
+            "id": "tb_left_4",
+            "type": "checkbox",
+            "default": true
+          },
+          {
+            "label": "Heading",
+            "id": "tb_left_title_4",
+            "type": "text",
+            "default": "Cooperate with Us!"
+          },
+          {
+            "label": "Caption",
+            "id": "tb_left_caption_4",
+            "type": "textarea",
+            "default": "Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna, vitae ultrices lacus purus vitae metus."
+          },
+          {
+            "type": "header",
+            "content": "Text box right"
+          },
+          {
+            "label": "Text 01",
+            "id": "tb_right_1",
+            "type": "text",
+            "default": "Support 24/7"
+          },
+          {
+            "label": "Text 02",
+            "id": "tb_right_2",
+            "type": "text",
+            "default": "Best Quanlity"
+          },
+          {
+            "label": "Text 03",
+            "id": "tb_right_3",
+            "type": "text",
+            "default": "Fastest Delivery"
+          },
+          {
+            "label": "Text 04",
+            "id": "tb_right_4",
+            "type": "text",
+            "default": "Customer Care"
+          },
+          {
+            "label": "Text 05",
+            "id": "tb_right_5",
+            "type": "text",
+            "default": "Over 200 Satisfied Customers"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

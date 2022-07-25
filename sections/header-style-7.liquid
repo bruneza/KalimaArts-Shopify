@@ -1,0 +1,966 @@
+<header data-section-type="header" data-section-id="{{ section.id }}" class="header-content" data-headerstyle="{{ settings.header_style }}" data-stick="{{ settings.show_sticky_bar }}" data-stickymobile="{{ settings.show_sticky_bar_mobile }}">
+  {%- liquid
+    assign _layout = settings.layout
+    assign _header_style = settings.header_style
+    assign _lazyload = settings.use_lazyload
+    assign _show_search = settings.show_search
+  -%}
+  
+  {%- if _layout == 'boxed' -%}{%- assign _layout_class = 'container' -%}{%- endif -%}
+
+  <div class="header-container layout-{{ _layout }} style-{{ _header_style }}" data-style="{{ _header_style }}">
+    
+    {%- unless section.settings.vertical_nav_linklist == blank -%}
+      <ul class="main-nav fix-vertical-left-column hide"> 
+        {%- for l in linklists[section.settings.vertical_nav_linklist].links -%}
+          {%- include 'vertical-nav-link' -%}
+        {%- endfor -%}
+      </ul>
+    {%- endunless -%}
+
+    {%- include 'header-top-bar' -%}
+
+    <div class="header-main">
+      <div class="{{ _layout_class }}">
+        <div class="table-row">
+          {%- render 'header-snippet', type: 'hamburger' -%}
+
+          <div class="header-menu-logo">
+            {%- include 'header-vertical-menu' -%}
+            {%- render 'header-snippet', type: 'logo' -%}
+          </div> 
+ 
+          {%- render 'header-snippet', type: 'mobile-cart-icon' -%}
+
+          <div class="header-search-menu">
+            {%- render 'header-snippet', type: 'search' -%}
+            {%- include 'header-horizontal-menu' -%}
+          </div>
+
+          {%- render 'header-snippet', type: 'icons' -%}
+        </div>
+      </div>
+    </div>
+      
+    {% include 'navigation-mobile' %}
+
+  </div>
+  
+  {%- render 'header-snippet', type: 'mobile-search' -%}
+  
+</header>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo image - Desktop"
+      }, 
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "logo_max_width",
+        "label": "Custom image width (in pixels)",
+        "default": "125"
+      },
+      {
+        "type": "textarea",
+        "id": "logo_svg_desktop",
+        "label": "SVG"
+      },
+      {
+        "type": "header",
+        "content": "Logo image - Mobile"
+      }, 
+      {
+        "type": "image_picker",
+        "id": "logo_mobile",
+        "label": "Image",
+        "info": "Retina Displays require double the pixels to display the same image."
+      },
+      {
+        "type": "text",
+        "id": "logo_mobile_max_width",
+        "label": "Custom image width (in pixels)",
+        "default": "125"
+      },
+      {
+        "type": "textarea",
+        "id": "logo_svg_mobile",
+        "label": "SVG"
+      },
+      {
+        "type": "header",
+        "content": "Multi Store"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_multi_store",
+        "label": "Show Multi Store"
+      },
+      {
+        "type": "textarea",
+        "id": "multi_store_text",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Store 1"
+      },
+      {
+        "type": "color",
+        "id": "store_background_1",
+        "label": "Background"
+      },
+      {
+        "type": "color",
+        "id": "store_text_color_1",
+        "label": "Text color"
+      },
+      {
+        "type": "text",
+        "id": "store_name_1",
+        "label": "Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "store_image_1",
+        "label": "Image"
+      },
+      {
+        "type": "header",
+        "content": "Store 2"
+      },
+      {
+        "type": "color",
+        "id": "store_background_2",
+        "label": "Background"
+      },
+      {
+        "type": "color",
+        "id": "store_text_color_2",
+        "label": "Text color"
+      },
+      {
+        "type": "text",
+        "id": "store_name_2",
+        "label": "Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "store_image_2",
+        "label": "Image"
+      },
+      {
+        "type": "url",
+        "id": "store_link_2",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Contact Box"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_header_contact",
+        "label": "Show contact box on Desktop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_header_contact_mobile",
+        "label": "Show contact box on Mobile",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "header_phone_number",
+        "label": "Phone number",
+        "default": "(+800) 123 456 7890"
+      },
+      {
+        "type": "text",
+        "id": "header_email",
+        "label": "Email",
+        "default": "sample@email.com"
+      },
+      {
+        "type": "textarea",
+        "id": "header_store_info",
+        "label": "Store info",
+        "info": "Only for Mobile"
+      },
+      {
+        "type": "url",
+        "id": "header_directions",
+        "label": "Directions",
+        "info": "Only for Mobile"
+      },
+      {
+        "type": "header",
+        "content": "Header Links"
+      }, 
+      {
+        "type": "url",
+        "id": "header_locator_page",
+        "label": "Store location"
+      },
+      {
+        "type": "url",
+        "id": "header_order_page",
+        "label": "Track order",
+        "info":"Follow this [instruction](https:\/\/help.aftership.com\/hc\/en-us\/articles/115008489448-How-can-I-add-Track-Button-to-Shopify) on how to create Tracck order page."
+      },
+      {
+        "type": "header",
+        "content": "Navigation - Desktop Main Menu"
+      },
+      {
+        "type": "link_list",
+        "id": "nav_linklist",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "header",
+        "content": "Navigation - Desktop vertical menu"
+      },
+      {
+        "type": "link_list",
+        "id": "vertical_nav_linklist",
+        "label": "Menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "vertical_nav_linklist_icon",
+        "label": "Show thumbnail images",
+        "info": "Please go to Assets folder, then click 'Add a new asset' to upload the image. The image size is 20x20 pixels, syntax is xxx.png. 'xxx' is menu item handle."
+      },
+      {
+        "type": "header",
+        "content": "Navigation - Mobile Menu"
+      },
+      {
+        "type": "link_list",
+        "id": "mobile_linklist",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "select",
+        "id": "mobile_touch_menu",
+        "label": "Mobile touch menu",
+        "options": [
+          { "value": "submenu", "label": "Go to Submenu" },
+          { "value": "link", "label": "Go to Link" }
+        ],
+        "default": "submenu"
+      },
+      {
+        "type": "header",
+        "content": "Menu Flyout Left",
+        "info": "Input menu titles, add a separator ; for each title"
+      },
+      {
+        "type": "textarea",
+        "id": "nav_flyout_menu_handle",
+        "label": "Menu's title"
+      },
+      {
+        "type": "header",
+        "content": "Navigation highlight item",
+        "info": "Input menu titles, add a separator ; for each title"
+      },
+      {
+        "default": true,
+        "id": "enable_highlight_item",
+        "label": "Enable navigation highlight item",
+        "type": "checkbox"
+      },
+      {
+        "id": "nav_highlight_item",
+        "label": "Main menu",
+        "type": "textarea"
+      },
+      {
+        "id": "vertical_nav_highlight_item", 
+        "label": "Vertical menu",
+        "type": "textarea"
+      },
+      {
+        "type": "header",
+        "content": "Navigation sale label"
+      },
+      {
+        "default": true,
+        "id": "enable_menu_sale_label",
+        "info": "You can change label's text by going to theme's Language > Menu > Labels",
+        "label": "Enable Sale Label",
+        "type": "checkbox"
+      },
+      {
+        "id": "menu_sale_label_handle",
+        "info": "Input menu titles, add a separator ; for each title",
+        "label": "Sale's title",
+        "type": "textarea"
+      },
+      {
+        "type": "header",
+        "content": "Navigation new label"
+      },
+      {
+        "default": true,
+        "id": "enable_menu_new_label",
+        "info": "You can change label's text by going to theme's Language > Menu > Labels",
+        "label": "Enable New Label ",
+        "type": "checkbox"
+      },
+      {
+        "id": "menu_new_label_handle",
+        "info": "Input menu titles, add a separator ; for each title",
+        "label": "New's title",
+        "type": "textarea"
+      },
+      {
+        "type": "header",
+        "content": "Navigation hot label"
+      },
+      {
+        "default": true,
+        "id": "enable_menu_hot_label",
+        "info": "You can change label's text by going to theme's Language > Menu > Labels",
+        "label": "Enable Hot Label ",
+        "type": "checkbox"
+      },
+      {
+        "id": "menu_hot_label_handle",
+        "info": "Input menu titles, add a separator ; for each title",
+        "label": "Hot's title",
+        "type": "textarea"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "mega-menu-trigger",
+        "name": "Mega Nav Trigger",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "To customize your content, click 'Add content > Nav Row Content' right below this block."
+          },
+          {
+            "type": "header",
+            "content": "Layout"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Block Label"
+          },
+          {
+            "type": "text",
+            "id": "mega_navigation",
+            "label": "Mega navigation trigger",
+            "info": "Add the title of the menu that you want to turn into a mega-nav"
+          },
+          {
+            "type": "select",
+            "id": "position",
+            "label": "Submenu Position",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" },
+              { "value": "center", "label": "Center" }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "range",
+            "id": "manually_width",
+            "label": "Width",
+            "default": 100,
+            "min": 20,
+            "max": 100,
+            "step": 1,
+            "unit": "%"
+          },
+          {
+            "type": "select",
+            "id": "mega_menu_bg",
+            "label": "Background style",
+            "options": [
+              { "value": "bg_image", "label": "Background image" },
+              { "value": "bg_color", "label": "Background color" }
+            ],
+            "default": "bg_color"
+          },
+          {
+            "type": "image_picker",
+            "id": "mega_menu_bg_img",
+            "label": "Background image"
+          },
+          {
+            "type": "text",
+            "id": "mega_menu_bg_img_size",
+            "label": "Image size",
+            "default": "292x270",
+            "info": "E.g: 292x270"
+          },
+          {
+            "type": "select",
+            "id": "mega_menu_bg_position",
+            "label": "Background image position",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" },
+              { "value": "center", "label": "Center" }
+            ],
+            "default": "right"
+          },
+          {
+            "type": "color",
+            "id": "mega_menu_bg_color",
+            "label": "Background color",
+            "default": "#fff"
+          },
+          {
+            "type": "range",
+            "id": "mega_menu_min_height",
+            "label": "Min height",
+            "min": 50,
+            "max": 500,
+            "step": 10,
+            "default": 300,
+            "unit": "px",
+            "info": "Default is 300px"
+          }
+        ]
+      },
+      {
+         "type": "mega-menu",
+         "name": "+ Nav Row Content",
+         "settings": [
+            {
+              "type": "paragraph",
+              "content": "To customize your content, click 'Add content > Nav Column Content' right below this block."
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Block Label"
+            }
+         ]
+      },
+      {
+        "type": "mega-menu-column",
+         "name": "++ Nav Column Content",
+         "settings": [
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Block Label"
+            },
+            {
+              "type": "header",
+              "content": "Content Components"
+            },
+            {
+              "type": "select",
+              "id": "mega_menu_col",
+              "label": "Select component to show",
+              "options": [
+                { "value": "menu", "label": "Menu item" },
+                { "value": "multi-menu", "label": "Multiple menu items" },
+                { "value": "product", "label": "Product" },
+                { "value": "collection", "label": "Collection" },
+                { "value": "menu-product", "label": "Menu item & Product" },
+                { "value": "image", "label": "Image" },
+                { "value": "none", "label": "None" }
+              ],
+              "default": "menu"
+            },
+            {
+               "type": "header",
+               "content": "Column width"
+            },
+            {
+               "type": "range",
+               "id": "mega_menu_width_col",
+               "label": "Width",
+               "default": 3,
+               "min": 0,
+               "max": 12,
+               "step": 1,
+               "unit": "/12"
+            },
+            {
+               "type": "header",
+               "content": "Column Heading"
+            },
+            {
+              "type": "text",
+              "id": "mega_menu_title_col",
+              "label": "Heading"
+            },
+            {
+              "type": "checkbox",
+              "id": "mega_menu_image_title_col",
+              "label": "Only show Heading on Mobile"
+            },
+            {
+              "type": "url",
+              "id": "mega_menu_link_col",
+              "label": "Link to"
+            },
+            {
+              "type": "header",
+              "content": "Component - Menu item"
+            },
+            {
+              "type": "link_list",
+              "id": "mega_menu_ll_col",
+              "label": "Menu item"
+            },
+            {
+              "type": "header",
+              "content": "Component - Product"
+            },
+            {
+              "type": "product",
+              "id": "mega_menu_product_col",
+              "label": "Product item"
+            },
+            {
+             "type": "header",
+             "content": "Component - Collection"
+            },
+            {
+              "type": "collection",
+              "id": "mega_menu_collection_col",
+              "label": "Collection item"
+            },
+            {
+              "type": "range",
+              "id": "mega_menu_collection_limit_col",
+              "label": "Total items",
+              "min": 1,
+              "max": 10,
+              "step": 1,
+              "default": 4
+            },
+            {
+             "type": "header",
+             "content": "Component - Image"
+            },
+            {
+              "type": "image_picker",
+              "id": "mega_menu_image_col",
+              "label": "Upload a image"
+            },
+            {
+              "type": "text",
+              "id": "mega_menu_image_size_col",
+              "label": "- Image size",
+              "default": "460x240",
+              "info": "E.g: 460x240"
+            },
+            {
+              "type": "url",
+              "id": "mega_menu_image_link_col",
+              "label": "Image link"
+            }
+         ]
+      },
+      {
+        "type": "mega-menu-tab",
+        "name": "Mega Nav Tabs",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "To customize your content, click 'Add content > Mega Nav Tabs Content' right below this block."
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Block Label"
+          },
+          {
+            "type": "text",
+            "id": "mega_navigation",
+            "label": "Mega navigation trigger",
+            "info": "Add the title of the menu that you want to turn into a Mega-nav"
+          },
+          {
+            "type": "color",
+            "id": "mega_menu_bg_color",
+            "label": "Background color",
+            "default": "#fff"
+          },
+          {
+            "type": "range",
+            "id": "mega_menu_min_height",
+            "label": "Min height",
+            "min": 50,
+            "max": 500,
+            "step": 10,
+            "default": 300,
+            "unit": "px",
+            "info": "Default is 300px"
+          }
+        ]
+      },
+      {
+        "type": "tab-menu",
+        "name": "+ Nav Tabs Content",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "To customize your content, click 'Add content > Nav Tabs Row' right below this block."
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Block Label"
+          },
+          {
+            "type":"text",
+            "id":"tab_title",
+            "label":"Tab Heading",
+            "default":"Tab Heading"
+          } 
+        ]
+      },
+      {
+         "type": "tab-menu-row",
+         "name": "++ Nav Tabs Row",
+         "settings": [
+            {
+              "type": "paragraph",
+              "content": "To customize your content, click 'Add content > Nav Tabs Column' right below this block."
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Block Label"
+            }
+         ]
+      },
+      {
+         "type": "tab-menu-column",
+         "name": "+++ Nav Tabs Column",
+         "settings": [
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Block Label"
+            },
+            {
+              "type": "header",
+              "content": "Content Components"
+            },
+            {
+              "type": "select",
+              "id": "mega_menu_tab_col",
+              "label": "Content Components",
+              "options": [
+                { "value": "menu", "label": "Menu item" },
+                { "value": "multi-menu", "label": "Multiple menu items" },
+                { "value": "image", "label": "Image" },
+                { "value": "none", "label": "None" }
+              ],
+              "default": "menu"
+            },
+            {
+              "type": "header",
+              "content": "Column width"
+            },
+            {
+              "type": "range",
+              "id": "mega_menu_tab_width_col",
+              "label": "Width",
+              "default": 4,
+              "min": 0,
+              "max": 12,
+              "step": 1,
+              "info": "(0 is Auto width, 12 is 100%)"
+            },
+            {
+              "type": "header",
+              "content": "Column Heading"
+            },
+            {
+              "type": "text",
+              "id": "mega_menu_tab_title_col",
+              "label": "Heading"
+            },
+            {
+              "type": "checkbox",
+              "id": "mega_menu_tab_image_title_col",
+              "label": "Only show Heading on Mobile"
+            },
+            {
+              "type": "url",
+              "id": "mega_menu_tab_link_col",
+              "label": "Link to"
+            },
+            {
+              "type": "header",
+              "content": "Component - Menu item"
+            },
+            {
+              "type": "link_list",
+              "id": "mega_menu_tab_ll_col",
+              "label": "Menu item"
+            },
+            {
+              "type": "header",
+              "content": "Component - Image"
+            },
+            {
+              "type": "image_picker",
+              "id": "mega_menu_tab_image_col",
+              "label": "Image"
+            },
+            {
+              "type": "text",
+              "id": "mega_menu_tab_image_size_col",
+              "label": "Image size",
+              "default": "460x240",
+              "info": "E.g: 460x240"
+            },
+            {
+              "type": "url",
+              "id": "mega_menu_tab_image_link_col",
+              "label": "Image link"
+            }
+         ]
+      },
+      {
+        "type": "mega-vertical-trigger",
+        "name": "Mega Vertical Nav Trigger",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "To customize your content, click 'Add content > Vertical Nav Row' right below this block."
+          },
+          {
+            "type": "header",
+            "content": "Layout"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Block Label"
+          },
+          {
+            "type": "text",
+            "id": "mega_navigation",
+            "label": "Mega Vertical navigation trigger",
+            "info": "Add the title of the menu that you want to turn into a mega-nav"
+          },
+          {
+            "type": "range",
+            "id": "manually_width",
+            "label": "Width",
+            "default": 100,
+            "min": 25,
+            "max": 100,
+            "step": 25,
+            "unit": "%"
+          },
+          {
+            "type": "select",
+            "id": "mega_menu_bg",
+            "label": "Background style",
+            "options": [
+              { "value": "bg_image", "label": "Background image" },
+              { "value": "bg_color", "label": "Background color" }
+            ],
+            "default": "bg_color"
+          },
+          {
+            "type": "image_picker",
+            "id": "mega_menu_bg_img",
+            "label": "Background image"
+          },
+          {
+            "type": "text",
+            "id": "mega_menu_bg_img_size",
+            "label": "Image size",
+            "default": "292x270",
+            "info": "E.g: 292x270"
+          },
+          {
+            "type": "select",
+            "id": "mega_menu_bg_position",
+            "label": "Background image position",
+            "options": [
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" },
+              { "value": "center", "label": "Center" }
+            ],
+            "default": "right"
+          },
+          {
+            "type": "color",
+            "id": "mega_menu_bg_color",
+            "label": "Background color",
+            "default": "#fff"
+          },
+          {
+            "type": "range",
+            "id": "mega_menu_min_height",
+            "label": "Min height",
+            "min": 50,
+            "max": 500,
+            "step": 10,
+            "default": 300,
+            "unit": "px",
+            "info": "Default is 300px"
+          }
+        ]
+      },
+      {
+        "type": "mega-vertical-menu",
+        "name": "+ Vertical Nav Row",
+          "settings": [
+          {
+            "type": "paragraph",
+            "content": "To customize your content, click 'Add content > Nav Column Content' right below this block."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block Label"
+          }
+        ]
+      },
+      {
+        "type": "mega-vertical-column",
+        "name": "++ Vertical Nav Column",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block Label"
+          },
+          {
+            "type": "header",
+            "content": "Content Components"
+          },
+          {
+            "type": "select",
+            "id": "mega_menu_col",
+            "label": "Select component to show",
+            "options": [
+              { "value": "menu", "label": "Menu item" },
+              { "value": "multi-menu", "label": "Multiple menu items" },
+              { "value": "product", "label": "Product" },
+              { "value": "collection", "label": "Collection" },
+              { "value": "menu-product", "label": "Menu item & Product" },
+              { "value": "image", "label": "Image" },
+              { "value": "none", "label": "None" }
+            ],
+            "default": "menu"
+          },
+          {
+            "type": "header",
+            "content": "Column width"
+          },
+          {
+            "type": "range",
+            "id": "mega_menu_width_col",
+            "label": "Width",
+            "default": 3,
+            "min": 0,
+            "max": 12,
+            "step": 1,
+            "info": "(0 is Auto width, 12 is 100%)"
+          },
+          {
+            "type": "header",
+            "content": "Column Heading"
+          },
+          {
+            "type": "text",
+            "id": "mega_menu_title_col",
+            "label": "Heading"
+          },
+          {
+            "type": "checkbox",
+            "id": "mega_menu_image_title_col",
+            "label": "Only show Heading on Mobile"
+          },
+          {
+            "type": "url",
+            "id": "mega_menu_link_col",
+            "label": "Link to"
+          },
+          {
+            "type": "header",
+            "content": "Component - Menu item"
+          },
+          {
+            "type": "link_list",
+            "id": "mega_menu_ll_col",
+            "label": "Menu item"
+          },
+          {
+            "type": "header",
+            "content": "Component - Product"
+          },
+          {
+            "type": "product",
+            "id": "mega_menu_product_col",
+            "label": "Product item"
+          },
+          {
+            "type": "header",
+            "content": "Component - Collection"
+          },
+          {
+            "type": "collection",
+            "id": "mega_menu_collection_col",
+            "label": "Collection item"
+          },
+          {
+            "type": "range",
+            "id": "mega_menu_collection_limit_col",
+            "label": "Total items",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 4
+          },
+          {
+            "type": "header",
+            "content": "Component - Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "mega_menu_image_col",
+            "label": "Upload a image"
+          },
+          {
+            "type": "text",
+            "id": "mega_menu_image_size_col",
+            "label": "Image size",
+            "default": "460x240",
+            "info": "E.g: 460x240"
+          },
+          {
+            "type": "url",
+            "id": "mega_menu_image_link_col",
+            "label": "Image link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

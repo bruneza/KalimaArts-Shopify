@@ -1,0 +1,48 @@
+<div class="product-wrapper">
+
+  <div class="product-head">
+    <div class="product-image">
+      
+      <div class="product-group-vendor-name">
+        <h5 class="product-name"><a href="{{ prod.url | within: collection }}">{{ prod.title }}</a></h5>
+      </div>
+
+      <div class="featured-img product-ratio-{{ settings.collections_product_ratio }}">
+        <a href="{{ prod.url | within: collection }}">
+          {% include 'product-image-lazysize' with image: prod.featured_image, image_size: '370x', image_class: 'featured-image front', image_alt: prod.title %}
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="product-content">
+    <div class="pc-inner">
+      
+      <div class="price-cart-wrapper">
+        {% assign compare_at_price = prod.compare_at_price %}
+        {% assign price = prod.price -%}
+        {% assign price_varies = prod.price_varies %}
+        {% assign available = prod.available %}
+        {% assign money_price = price | money %}
+
+        <div class="product-price notranslate">
+          {% if available %}
+          {% if compare_at_price > price %}
+          <span class="price-sale">{{ money_price }}</span>
+          <span class="price-compare">{{ compare_at_price | money }}</span>
+          {% else %}
+          <span class="price">{{ money_price }}</span>
+          {% endif %}
+
+          {% else %}
+          <span class="sold-out">{{ 'products.product.sold_out' | t }}</span>
+          {% endif %}
+        </div>
+      </div> 
+
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,30 @@
+{%- assign _layout = section.settings.layout -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {% if _header_style == 2 and _fix_header_2 %}
+    {%- assign _layout_class = 'container' -%}
+  {% else %}
+    {%- assign _layout_class = 'container-fluid' -%}
+  {% endif %}
+{% endif %}
+
+<div class="top-bar-textbox layout-{{ _layout }} d-none d-lg-block">
+  <div class="textbox-container">
+    <div class="{{ _layout_class }}">
+
+      <ul class="top-bar-list">
+        {% for block in section.blocks %}
+          {%- assign _text = block.settings.text -%}
+
+          {% unless _text == blank %}
+            <li>{{ _text }}</li>
+          {% endunless %}
+        
+        {% endfor %} 
+      </ul>
+
+    </div>
+  </div>
+</div>

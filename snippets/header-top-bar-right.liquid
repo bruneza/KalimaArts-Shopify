@@ -1,0 +1,63 @@
+<div class="top-bar-right">
+  <ul class="list-inline">
+
+    {% assign _header_locator_page = section.settings.header_locator_page %}
+    {% assign _location_icon_type = settings.location_icon_type %}
+    {% assign _location_font_icon = settings.location_font_icon %}
+    {% assign _location_icon = settings.location_icon %}
+    
+    {% assign _header_order_page = section.settings.header_order_page %}
+    {% assign _order_icon_type = settings.order_icon_type %}
+    {% assign _order_font_icon = settings.order_font_icon %}
+    {% assign _order_icon = settings.order_icon %}
+
+    {% include 'multi-lang-source' %}
+    
+    {% unless _header_locator_page == blank %}
+      <li class="store-location">
+        <a href="{{ _header_locator_page }}"{% if _lazyload and _location_icon_type == 'image' %} class="lazyload waiting"{% endif %}>
+          {% if _location_icon_type == 'font-icon' %}
+            {{ _location_font_icon }}
+
+          {% else %}
+            <img {% if _lazyload %}class="lazyload"
+                 data-srcset="{{ _location_icon | img_url: '20x'}} 1x, {{ _location_icon | img_url: '40x'}} 2x"
+                 {% else %}src="{{ _location_icon | img_url: '20x'}}"{% endif %}
+                 alt="Phone" />
+
+          {% endif %}
+          <span>{{ 'general.header.store_location' | t }}</span>
+        </a>
+      </li>
+    {% endunless %}
+
+    {% unless _header_order_page == blank %}
+      <li class="order">
+        <a href="{{ _header_order_page }}"{% if _lazyload and _order_icon_type == 'image' %} class="lazyload waiting"{% endif %}>
+          {% if _order_icon_type == 'font-icon' %}
+            {{ _order_font_icon }}
+
+          {% else %}
+            <img {% if _lazyload %}class="lazyload"
+                 data-srcset="{{ _order_icon | img_url: '20x'}} 1x, {{ _order_icon | img_url: '40x'}} 2x"
+                 {% else %}src="{{ _order_icon | img_url: '20x'}}"{% endif %}
+                 alt="Phone" />
+
+          {% endif %}
+          <span>{{ 'general.header.track_your_order' | t }}</span>
+        </a>
+      </li>
+    {% endunless %}
+
+    {% include 'customer-links' %}
+    
+    {% if settings.currency_type != '3' or locale_selector %}
+      {% if locale_selector %}
+        <li class="currency_icon currency_icon_desktop type-lang-list" data-target="#language-popup" data-toggle="modal" data-flag="{% if settings.m_lang_type == 'shopify-native' %}lang-list{% else %}lang-weglot{% endif %}"></li>
+      {% else %}
+        <li class="currency_icon currency_icon_desktop flag-3" data-target="#language-popup" data-toggle="modal" data-flag="currency"><i></i></li>
+      {% endif %}
+    {% endif %}
+
+  </ul>
+</div>

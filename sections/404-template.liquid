@@ -1,0 +1,26 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+
+<div id="col-main" class="page-404">
+  <div class="container text-center">
+    
+    <div class="box-404-text">
+      <h1>{{ 'general.404.title' | t }}</h1>
+      <p>{{ 'general.404.text' | t }}</p>
+      <a href="{{ routes.root_url }}" class="btn btn-1">{{ 'general.404.back_to_homepage' | t }}</a>
+    </div>
+    
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "404 page",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "breadcrumb_image",
+        "label": "Breadcrumb image"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,277 +1,229 @@
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
-    <link rel="canonical" href="{{ canonical_url }}">
-    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-
-
-    {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
-    {%- endif -%}
-
-    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    {%- endunless -%}
-
-    <title>
+<html lang="{{ shop.locale }}" class="js{% if template == 'index' %} templateIndex{% endif %}">
+<head>
+  {% unless settings.favicon == blank %}<link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">{% endunless %}
+  
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name='HandheldFriendly' content='True'>
+  <meta name='MobileOptimized' content='375'>
+  <meta http-equiv="cleartype" content="on">
+  <meta name="theme-color" content="{{ settings.main_color }}">
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% include 'css-var' %}
+  
+  {%- capture seo_title -%}
+    {%- if template == 'search' and search.performed == true -%}
+      {{ 'search.general.heading' | t: count: search.results_count }}: {{ 'search.general.results_with_count' | t: terms: search.terms, count: search.results_count }}
+    {%- else -%}
       {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    </title>
-
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
-
-    {% render 'meta-tags' %}
-     <script src="{{ 'font-awesome.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'jquery-3.5.min.js' | asset_url }}" defer="defer"></script>
-    {{ content_for_header }}
-
-    {%- liquid
-      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
-      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
-      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
-    %}
-
-    {% style %}
-    /** CUSTOM FONT**/
-    @font-face {
-      font-family: "mark-pro";
-      src: url({{ "Mark Pro.woff2" | asset_url }}) format("woff2"),
-      url({{ "Mark Pro.woff" | asset_url }}) format("woff");
-    }
-    @font-face {
-      font-family: "mark-bold-pro";
-      src: url({{ "Mark Pro Bold.woff2" | asset_url }}) format("woff2"),
-      url({{ "Mark Pro Bold.woff" | asset_url }}) format("woff");
-    }
-    /** END CUSTOM FONT**/
-
-      {{ settings.type_body_font | font_face: font_display: 'swap' }}
-      {{ body_font_bold | font_face: font_display: 'swap' }}
-      {{ body_font_italic | font_face: font_display: 'swap' }}
-      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
-      {{ settings.type_header_font | font_face: font_display: 'swap' }}
-
-      :root {
-        --font-body-family: "mark-pro", {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
-        --font-body-style: {{ settings.type_body_font.style }};
-        --font-body-weight: 400;
-
-        --font-heading-family: "mark-pro", {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
-        --font-heading-style: {{ settings.type_header_font.style }};
-        --font-heading-weight: 700;
-
-        --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
-        --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
-
-        --color-base-text: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
-        --color-shadow: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
-        --color-base-background-1: {{ settings.colors_background_1.red }}, {{ settings.colors_background_1.green }}, {{ settings.colors_background_1.blue }};
-        --color-base-background-2: {{ settings.colors_background_2.red }}, {{ settings.colors_background_2.green }}, {{ settings.colors_background_2.blue }};
-        --color-base-solid-button-labels: {{ settings.colors_solid_button_labels.red }}, {{ settings.colors_solid_button_labels.green }}, {{ settings.colors_solid_button_labels.blue }};
-        --color-base-outline-button-labels: {{ settings.colors_outline_button_labels.red }}, {{ settings.colors_outline_button_labels.green }}, {{ settings.colors_outline_button_labels.blue }};
-        --color-base-accent-1: {{ settings.colors_accent_1.red }}, {{ settings.colors_accent_1.green }}, {{ settings.colors_accent_1.blue }};
-        --color-base-accent-2: {{ settings.colors_accent_2.red }}, {{ settings.colors_accent_2.green }}, {{ settings.colors_accent_2.blue }};
-        --payment-terms-background-color: {{ settings.colors_background_1 }};
-
-        --gradient-base-background-1: {% if settings.gradient_background_1 != blank %}{{ settings.gradient_background_1 }}{% else %}{{ settings.colors_background_1 }}{% endif %};
-        --gradient-base-background-2: {% if settings.gradient_background_2 != blank %}{{ settings.gradient_background_2 }}{% else %}{{ settings.colors_background_2 }}{% endif %};
-        --gradient-base-accent-1: {% if settings.gradient_accent_1 != blank %}{{ settings.gradient_accent_1 }}{% else %}{{ settings.colors_accent_1 }}{% endif %};
-        --gradient-base-accent-2: {% if settings.gradient_accent_2 != blank %}{{ settings.gradient_accent_2 }}{% else %}{{ settings.colors_accent_2 }}{% endif %};
-
-        --media-padding: {{ settings.media_padding }}px;
-        --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
-        --media-border-width: {{ settings.media_border_thickness }}px;
-        --media-radius: {{ settings.media_radius }}px;
-        --media-shadow-opacity: {{ settings.media_shadow_opacity | divided_by: 100.0 }};
-        --media-shadow-horizontal-offset: {{ settings.media_shadow_horizontal_offset }}px;
-        --media-shadow-vertical-offset: {{ settings.media_shadow_vertical_offset }}px;
-        --media-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
-
-        --page-width: {{ settings.page_width | divided_by: 10 }}rem;
-        --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
-
-        --card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
-        --card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
-        --card-text-alignment: {{ settings.card_text_alignment }};
-        --card-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
-        --card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
-        --card-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
-        --card-shadow-horizontal-offset: {{ settings.card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
-        --card-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
-        --card-shadow-blur-radius: {{ settings.card_shadow_blur | divided_by: 10.0 }}rem;
-
-        --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
-
-        --popup-border-width: {{ settings.popup_border_thickness }}px;
-        --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
-        --popup-corner-radius: {{ settings.popup_corner_radius }}px;
-        --popup-shadow-opacity: {{ settings.popup_shadow_opacity | divided_by: 100.0 }};
-        --popup-shadow-horizontal-offset: {{ settings.popup_shadow_horizontal_offset }}px;
-        --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
-        --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
-
-        --drawer-border-width: {{ settings.drawer_border_thickness }}px;
-        --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
-        --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
-        --drawer-shadow-horizontal-offset: {{ settings.drawer_shadow_horizontal_offset }}px;
-        --drawer-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
-        --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
-
-        --spacing-sections-desktop: {{ settings.spacing_sections }}px;
-        --spacing-sections-mobile: {% if settings.spacing_sections < 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
-
-        --grid-desktop-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
-        --grid-desktop-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
-        --grid-mobile-vertical-spacing: {{ settings.spacing_grid_vertical | divided_by: 2 }}px;
-        --grid-mobile-horizontal-spacing: {{ settings.spacing_grid_horizontal | divided_by: 2 }}px;
-
-        --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
-        --text-boxes-border-width: {{ settings.text_boxes_border_thickness }}px;
-        --text-boxes-radius: {{ settings.text_boxes_radius }}px;
-        --text-boxes-shadow-opacity: {{ settings.text_boxes_shadow_opacity | divided_by: 100.0 }};
-        --text-boxes-shadow-horizontal-offset: {{ settings.text_boxes_shadow_horizontal_offset }}px;
-        --text-boxes-shadow-vertical-offset: {{ settings.text_boxes_shadow_vertical_offset }}px;
-        --text-boxes-shadow-blur-radius: {{ settings.text_boxes_shadow_blur }}px;
-
-        --buttons-radius: {{ settings.buttons_radius }}px;
-        --buttons-radius-outset: {% if settings.buttons_radius > 0 %}{{ settings.buttons_radius | plus: settings.buttons_border_thickness }}{% else %}0{% endif %}px;
-        --buttons-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;
-        --buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
-        --buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
-        --buttons-shadow-horizontal-offset: {{ settings.buttons_shadow_horizontal_offset }}px;
-        --buttons-shadow-vertical-offset: {{ settings.buttons_shadow_vertical_offset }}px;
-        --buttons-shadow-blur-radius: {{ settings.buttons_shadow_blur }}px;
-        --buttons-border-offset: {% if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0 %}0.3{% else %}0{% endif %}px;
-
-        --inputs-radius: {{ settings.inputs_radius }}px;
-        --inputs-border-width: {{ settings.inputs_border_thickness }}px;
-        --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
-        --inputs-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
-        --inputs-shadow-horizontal-offset: {{ settings.inputs_shadow_horizontal_offset }}px;
-        --inputs-margin-offset: {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_opacity > 0 %}{{ settings.inputs_shadow_vertical_offset | abs }}{% else %}0{% endif %}px;
-        --inputs-shadow-vertical-offset: {{ settings.inputs_shadow_vertical_offset }}px;
-        --inputs-shadow-blur-radius: {{ settings.inputs_shadow_blur }}px;
-        --inputs-radius-outset: {% if settings.inputs_radius > 0 %}{{ settings.inputs_radius | plus: settings.inputs_border_thickness }}{% else %}0{% endif %}px;
-
-        --variant-pills-radius: {{ settings.variant_pills_radius }}px;
-        --variant-pills-border-width: {{ settings.variant_pills_border_thickness }}px;
-        --variant-pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
-        --variant-pills-shadow-opacity: {{ settings.variant_pills_shadow_opacity | divided_by: 100.0 }};
-        --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
-        --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
-        --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: inherit;
-      }
-
-      html {
-        box-sizing: border-box;
-        font-size: calc(var(--font-body-scale) * 62.5%);
-        height: 100%;
-      }
-
-      body {
-        display: grid;
-        grid-template-rows: auto auto 1fr auto;
-        grid-template-columns: 100%;
-        min-height: 100%;
-        margin: 0;
-        font-size: 1.5rem;
-        letter-spacing: 0.06rem;
-        line-height: calc(1 + 0.8 / var(--font-body-scale));
-        font-family: var(--font-body-family);
-        font-style: var(--font-body-style);
-        font-weight: var(--font-body-weight);
-      }
-
-      @media screen and (min-width: 750px) {
-        body {
-          font-size: 1.6rem;
-        }
-      }
-    {% endstyle %}
-
-    {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'bru-styles.css' | asset_url | stylesheet_tag }}
-
-    {%- unless settings.type_body_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
-    {%- endunless -%}
-    {%- unless settings.type_header_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
-    {%- endunless -%}
-
-    {%- if settings.predictive_search_enabled -%}
-      <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
-
-    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-    if (Shopify.designMode) {
-      document.documentElement.classList.add('shopify-design-mode');
-    }
-    </script>
-  </head>
-
-  <body class="gradient">
-    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
-      {{ "accessibility.skip_to_text" | t }}
-    </a>
-
-    {% section 'header' %}
-    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {{ content_for_layout }}
-    </main>
-
-    {% section 'bru-footer' %}
-
-    <ul hidden>
-      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
-    </ul>
-
-    <script>
-      window.shopUrl = '{{ shop.url }}';
-      window.routes = {
-        cart_add_url: '{{ routes.cart_add_url }}',
-        cart_change_url: '{{ routes.cart_change_url }}',
-        cart_update_url: '{{ routes.cart_update_url }}',
-        predictive_search_url: '{{ routes.predictive_search_url }}'
-      };
-
-      window.cartStrings = {
-        error: `{{ 'sections.cart.cart_error' | t }}`,
-        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`
-      }
-
-      window.variantStrings = {
-        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
-        soldOut: `{{ 'products.product.sold_out' | t }}`,
-        unavailable: `{{ 'products.product.unavailable' | t }}`,
-      }
-
-      window.accessibilityStrings = {
-        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
-        shareSuccess: `{{ 'general.share.success_message' | t }}`,
-        pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
-        playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
-      }
-    </script>
-
-    {%- if settings.predictive_search_enabled -%}
-      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+    {%- if current_tags -%}
+      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
     {%- endif -%}
+    {%- if current_page != 1 -%}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- assign escaped_page_title = page_title | escape -%}
+    {%- unless escaped_page_title contains shop.name -%}
+      &ndash; {{ shop.name }}
+    {%- endunless -%}
+  {%- endcapture -%}
+  <title>{{ seo_title | strip }}</title>
+  
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {% include 'social-meta-tags' %}
+  <link rel="preconnect dns-prefetch" href="https://cdn.shopify.com">
+  <link rel="preconnect dns-prefetch" href="https://v.shopify.com">
+  <link rel="preconnect dns-prefetch" href="https://cdn.shopifycloud.com">
+
+  {% include 'check-shop-url' %}
+
+  <link rel="preload" href="{{'header-footer.min.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{'global.min.css' | asset_url }}" as="style">
+  
+  {% if template == 'index' %}
+  <link rel="preload" href="{{'themes.min.css' | asset_url }}" as="style" >
+  {% else %}
+  <link rel="preload" href="{{'styles.min.css' | asset_url }}" as="style">
+  {% endif %}
+  <link rel="preload" href="{{'vendor.css' | asset_url }}" as="style">
+  {%- if settings.dark_version -%}
+  <link rel="preload" href="{{'bg-dark.min.css' | asset_url }}" as="style">
+  {%- endif -%}
     
+  {% if _shop_url == _check_shop_url %}
+  <link rel="preload" href="{{'change_color.min.css' | asset_url }}" as="style" >
+  {% endif %}
+
+  {%- if settings.dark_version -%}
+  <link rel="preload" href="{{'bg-dark.min.css' | asset_url }}" as="style" >
+  {%- endif -%}
+
+  <link rel="preload" href="{{'bru-style.css' | asset_url }}" as="style">
+
+  <!-- header-css-file  ================================================== -->
+  
+  <link href="{{ 'vendor.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+  <link href="{{ 'header-footer.min.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+  <link href="{{ 'global.min.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+  <script crossorigin="anonymous" src="{{ 'font-awesome.min.js' | asset_url }}" defer></script>
+
+  {% if template == 'index' %}
+  <link href="{{ 'themes.min.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+  {% else %}
+  <link href="{{ 'styles.min.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+  {% endif %}
+
+  {% if settings.direction == 'RTL' %}
+    <link href="{{ 'global-rtl.min.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+    {% assign _rtl = true %}
+  {% else %}
+    {% assign _rtl = false %}
+  {% endif %}
+  
+  {% if _shop_url == _check_shop_url %}
+  <link href="{{ 'change_color.min.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+  {% endif %}
+
+  {%- if settings.dark_version -%}
+  <link href="{{ 'bg-dark.min.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+  {%- endif -%}
+  <link href="{{ 'bru-style.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+  
+  {% include 'theme-font' %}
+
+  <script crossorigin="anonymous" async src="{{ 'lazysizes.min.js' | asset_url }}"></script>
+
+  {{ shop.metafields.loox["global_html_head"] }}
+  {% include 'arn_wl_cp_settings' %}
+  {% include 'arn_wl_cp_styles' %}
+  {% include 'arn_icons_define' %}
+
+  {{ content_for_header }}
+
+  {% if shop.metafields.arena.wl_cp_settings.general_settings.app_script == false %}
+    <script defer crossorigin="anonymous" src="{{ 'arn-wishlist-compare.js'  | asset_url }}"></script>
+  {% endif %}</head>
+
+<body data-rtl="{{ _rtl }}" class="template{{ template | split: '.' | first | camelize }} mobile-bar-{{ settings.mobile_bar }} as-{{ settings.ajax_search }} category-mode-{{ settings.catalog_mode }} {{ settings.mode_view_default }} lazy-loading-img">
+  <script crossorigin="anonymous" src="{{ 'jquery-3.5.min.js' | asset_url }}"></script>
+  
+  {% if template contains 'customers' %}
+    <script crossorigin="anonymous" src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+    <script crossorigin="anonymous" src="{{ 'bc.customerArea.js'  | asset_url }}"></script>
+  {% endif %}
+
+  {% if template == 'index' %}
+    <script crossorigin="anonymous" src="{{ 'jquery.swiper.js' | asset_url }}" defer></script>
+    <script crossorigin="anonymous" src="{{ 'muuri.min.js' | asset_url  }}" defer></script>
+  {% endif %}
+  
+  <script crossorigin="anonymous" src="{{ 'bootstrap.4x.min.js' | asset_url }}" defer></script>
+  <script crossorigin="anonymous" src="{{ 'api.jquery.js' | shopify_asset_url }}" defer></script>
+ 
+  {%- liquid
+    assign _lazyload = settings.use_lazyload
+    assign _general_layout_mode = settings.general_placement
+    assign _boxed_mode_bg = settings.boxed_mode_bg
+    assign _dark_version = settings.dark_version
+    assign _fix_boxed = settings.fix_boxed
+    assign _breadcrumb_styles = settings.breadcrumb_styles
+    assign _back_to_top = settings.show_back_to_top
+    assign _cart_styles = settings.cart_styles
+    assign _show_cookie_policy = settings.show_cookie_policy
+    assign _enable_visitor_count = settings.enable_visitor_count
+    assign _show_add_to_cart_sticky = settings.show_add_to_cart_sticky
+    assign _show_discount_popup = settings.show_discount_popup
+    assign _use_color_hexcode = settings.use_color_hexcode
+    assign _auto_currency = settings.auto_currency_selector
+  -%}
+  
+  {% if request.design_mode %}{% include 'arnverifycode' %}{% endif %}
+  
+  <div{% if _dark_versionl %} id="dark"{% endif %} class="boxed-wrapper mode-{{ _boxed_mode_bg }}{% if _fix_boxed %} fix-boxed{% endif %}" data-cart-style="{{ _cart_styles }}" data-redirect="{{ settings.enable_redirect_checkout }}" data-ajax-cart="{{ settings.disable_ajax_cart }}">
+    
+    <div class="new-loading"></div>
+
+    {% include 'auto-language' %}
+    
+    {% if _shop_url == _check_shop_url %}
+      <div class="purchase-wrapper">
+        <a href="https://themeforest.net/item/electro-gadgets-digital-responsive-shopify-theme/16544295" target="_blank" class="envato-purchase-btn">
+          <img src="{{ 'purchase-icon.png' | asset_url }}" alt="purchase">
+        </a>
+        <div class="envato-purchase-popup">
+          <div class="popup-top">
+            <h2>Purchase Electro theme!</h2>
+            <p>Get 10+ ready to use outstanding layouts in one package for only $59. Lifetime updates, top seller plugins compatibility and much more.</p>
+            <a href="https://themeforest.net/item/electro-gadgets-digital-responsive-shopify-theme/16544295" target="_blank">Purchase today for $59</a>
+          </div>
+          <div class="popup-bottom">
+            <h2>Need more licenses?</h2>
+            <p>Purchase multiple licenses and get a discount!<br>The more you purchase the more you save.</p>
+            <a href="https://arenacommerce.com/" target="_blank">Contact us</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    
+    <div id="page-body" class="electro-v8 {% unless template == 'index' %}breadcrumb-{{ _breadcrumb_styles }} {% endunless %}{{ _general_layout_mode }}">
+
+      {% if _shop_url == _check_shop_url %}{% section 'preview-panel' %}{% endif %}
+      
+      <div class="header-department">
+        {% if settings.announcement_bar %}{% section 'announcement-bar' %}{% endif %}
+        {% include 'header' %}
+        
+        {% if template == 'index' or template contains 'collection' %}
+          {% section 'mobile-department' %}
+        {% endif %} 
+      </div>
+      
+      {% include 'language-modal' %}
+      
+      <div id="body-content">
+        <div id="main-content">
+          <div class="main-content">{{ content_for_layout }}</div>
+        </div>
+      </div>
+      
+      {% if _auto_currency != 'disable' and settings.currency_type != '3' %}{% include 'auto-currency' %}{% endif %}
+      {% if settings.newsletter_popup %}{% section 'newsletter-template' %}{% endif %}
+      {% if settings.recently_viewed %}{% section 'recently-viewed' %}{% endif %}
+     {%comment%}  {% if settings.bottom_products %}{% section 'bottom' %}{% endif %}
+     {% if settings.logo_list %}{% section 'bottom-partner' %}{% endif %} {%endcomment%}
+      {% section 'footer' %}
+    </div>
+    
+    {% if settings.mobile_bar == 'outside' %}
+      {% include 'layer-mobile-bar' %}
+    {% endif %}
+    
+    {% if _cart_styles == 'dropdown' %}
+      {% include 'cart-dd-custom' %}
+      {% include 'layer-cart-modal' %}
+    {% else %}
+      {% include 'cart-sb-custom' %}
+      {% include 'cart-sidebar' %}
+    {% endif %} 
+    
+    {% if settings.currency_type == '2' %}{% include 'currencies' %}{% endif %}
+    {% if settings.use_quick_view %}{% include 'quick-shop-product' %}{% endif %}
+    {% if _use_color_hexcode %}{% include 'color-hexcode' %}{% endif %}
+    
+    {% if _show_cookie_policy %}{% include 'cookie-policy' %}{% endif %}
+    {% if template contains 'product' %}{% include 'theme-product' %}{% endif %}
+    
+  </div>
+  {% if _back_to_top %}<div id="scroll-to-top" title="Back To Top"><a href="javascript:;">{%- render 'theme-icon', type: 'back-top' -%}</a></div>{% endif %}
+  {% include 'script-files' %}
+  
+  {{ shop.metafields.loox["global_html_body"] }}
+      
   </body>
 </html>

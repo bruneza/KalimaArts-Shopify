@@ -1,0 +1,16 @@
+{% comment %}
+ Created Style Sheet
+{% endcomment %}
+
+<div class="cf-color hide">
+	{% assign ar_color = settings.color_config | downcase | split: ',' %}
+	<style>
+	{% for i_color in ar_color  %}{% assign temp = i_color | strip_newlines %}
+	.cf-{{temp | split: ':' | first }}{background: {{temp | split: ':' | last }};}
+	label.cf-{{temp | split: ':' | first }}:before{
+	    content:'';
+	    background: {{temp | split: ':' | last }};
+	}
+	{% endfor %}
+	</style>
+</div>	

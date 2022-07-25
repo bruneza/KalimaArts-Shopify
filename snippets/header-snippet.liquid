@@ -1,0 +1,308 @@
+{%- case type -%}
+  {%- when 'hamburger' -%}
+    <div class="navbar navbar-responsive-menu d-lg-none">
+      <div class="responsive-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+
+  {%- when 'logo' -%}
+    <div class="header-logo">
+      {%- liquid
+        assign _logo_image = section.settings.logo
+        assign _logo_size = section.settings.logo_max_width | append: 'x'
+        assign _logo_svg = section.settings.logo_svg_desktop 
+      %}
+      <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="logo-site logo-site-desktop d-none d-lg-block{% if _lazyload %} lazyload waiting{% endif %}">
+        {% unless _logo_image == blank %}
+          <img {% if _lazyload %} class="lazyload" data-src="{{ _logo_image | img_url: _logo_size }}"
+               {% else %}src="{{ _logo_image | img_url: _logo_size }}"{% endif %} 
+               alt="{{ shop.name | escape }}"
+               style="max-width: {{ section.settings.logo_max_width }}px;" />
+        {% else %}
+          {{ _logo_svg }}
+        {% endunless %}
+      </a>
+
+      {%- liquid
+        assign _logo_image_mobile = section.settings.logo_mobile
+        assign _logo_size_mobile = section.settings.logo_mobile_max_width | append: 'x'
+        assign _logo_size_2x_mobile = section.settings.logo_mobile_max_width | times: 2 | append: 'x'
+        assign _logo_svg_mobile = section.settings.logo_svg_mobile
+      %}
+      <a href="{{ routes.root_url }}" title="{{ shop.name | escape }}" class="logo-site logo-site-mobile d-lg-none{% if _lazyload %} lazyload waiting{% endif %}">
+        {% unless _logo_image_mobile == blank %}
+          <img {% if _lazyload %} class="lazyload" data-src="{{ _logo_image_mobile | img_url: _logo_size_2x_mobile }}"
+               {% else %}src="{{ _logo_image_mobile | img_url: _logo_size_2x_mobile }}"{% endif %} 
+               alt="{{ shop.name | escape }}"
+               style="max-width: {{ section.settings.logo_mobile_max_width }}px;" />
+          {% else %}
+            {{ _logo_svg_mobile }}
+        {% endunless %}
+      </a>
+    </div>
+
+  {%- when 'mobile-cart-icon' -%}
+    {%- if settings.show_search -%}
+      <div class="m-search-icon d-lg-none">
+        {%- render 'theme-icon', type: 'search-mobile' -%}
+        {%- render 'theme-icon', type: 'cancel-mobile-2' -%}
+      </div>
+    {%- endif -%}
+
+    {%- unless settings.catalog_mode -%}
+      {%- liquid
+        assign _cart_icon_type = settings.cart_icon_type
+        assign _cart_font_icon = settings.cart_font_icon
+        assign _cart_icon = settings.cart_icon
+      %}
+
+      <div class="m-cart-icon cart-target{% if _lazyload and _cart_icon_type == 'image' %} lazyload waiting{% endif %} d-lg-none">
+        
+        <a href="{{ routes.cart_url }}" class="mobile-basket" title="cart">
+          {% if _cart_icon_type == 'font-icon' %}
+            {{ _cart_font_icon }}
+
+          {% else %}
+            <img {% if _lazyload %}class="lazyload"
+                 data-srcset="{{ _cart_icon | img_url: '20x'}} 1x, {{ _cart_icon | img_url: '40x'}} 2x"
+                 {% else %}src="{{ _cart_icon | img_url: '20x'}}"{% endif %}
+                 alt="Cart" />
+
+          {% endif %}
+
+          <span class="number"><span class="n-item">0</span></span>
+        </a>
+        
+      </div>
+    {% endunless %}
+
+  {%- when 'search' -%}
+    {%- if settings.show_search -%}
+      <div class="searchbox d-none d-lg-block">
+
+        {%- liquid
+          assign _search_icon_type = settings.search_icon_type
+          assign _search_font_icon = settings.search_font_icon
+          assign _search_icon = settings.search_icon
+        %}
+
+        <form id="search" class="navbar-form search" action="/search" method="get">
+          <input type="hidden" name="type" value="product" />
+          <input type="hidden" name="options[prefix]" value="last" />
+          <input id="bc-product-search" type="text" name="q" class="form-control bc-product-search"  placeholder="{{ 'general.text.search_placeholder' | t }}" autocomplete="off" />
+
+          <button type="submit" class="search-icon">
+            <span{% if _lazyload and _search_icon_type == 'image' %} class="lazyload waiting"{% endif %}>
+
+              {%- if _search_icon_type == 'font-icon' -%}
+                {{ _search_font_icon }}
+
+              {%- else -%}
+                <img {% if _lazyload %}class="lazyload"
+                     data-srcset="{{ _search_icon | img_url: '20x'}} 1x, {{ _search_icon | img_url: '40x'}} 2x"
+                     {% else %}src="{{ _search_icon | img_url: '20x'}}"{% endif %}
+                     alt="Search" />
+
+              {%- endif -%}
+
+            </span>
+          </button>
+        </form>
+
+        {%- if settings.ajax_search == 'default-theme' -%}
+          <div id="result-ajax-search" class="result-ajax-search">
+            <ul class="search-results"></ul>
+          </div>
+        {%- endif -%}
+
+      </div>
+  {%- endif -%}
+
+  {%- when 'icons' -%}
+    <div class="header-icons d-none d-lg-block">
+  
+    {% if _header_style == 6 %}
+      {% include 'header-search' %}
+    {% endif %}
+    
+    <ul class="list-inline"> 
+      
+      {% if _header_style == 5 or _header_style == 6 %}
+        {% include 'multi-lang-source' %}
+        
+        {% if settings.currency_type != '3' or locale_selector %}
+          {% if locale_selector %}
+            <li class="currency_icon currency_icon_desktop type-lang-list" data-target="#language-popup" data-toggle="modal" data-flag="{% if settings.m_lang_type == 'shopify-native' %}lang-list{% else %}lang-weglot{% endif %}"></li>
+          {% else %}
+            <li class="currency_icon currency_icon_desktop flag-3" data-target="#language-popup" data-toggle="modal" data-flag="currency"><i></i></li>
+          {% endif %}
+        {% endif %}
+
+        {% if shop.customer_accounts_enabled %}
+
+          {% assign _account_icon_type = settings.account_icon_type %}
+          {% assign _account_font_icon = settings.account_font_icon %}
+          {% assign _account_icon = settings.account_icon %}
+
+          <li class="customer-account{% if _lazyload and _account_icon_type == 'image' %} lazyload waiting{% endif %}">
+            <a href="{{ routes.account_url }}" title="{{ 'general.header.my_account' | t }}">
+
+              {% if _account_icon_type == 'font-icon' %}
+                {{ _account_font_icon }}
+
+              {% else %}
+                <img {% if _lazyload %}class="lazyload"
+                     data-srcset="{{ _account_icon | img_url: '20x'}} 1x, {{ _account_icon | img_url: '40x'}} 2x"
+                     {% else %}src="{{ _account_icon | img_url: '20x'}}"{% endif %}
+                     alt="Account" />
+
+              {% endif %}
+
+            </a>
+          </li>
+        {% endif %}
+      {% endif %}
+
+      {% if settings.enable_product_compare %}
+        <li class="compare-target">
+          {% render 'arn_wl_cp_custom_buttons', type: 'cp_show_btn', product_handle: product.handle %}
+        </li>
+      {% endif %}
+
+      {% if settings.product_wishlist_option == 'wishlist-compare' %}
+        <li class="wishlist-target">
+          {% render 'arn_wl_cp_custom_buttons', type: 'wl_show_btn', product_handle: product.handle %}
+        </li>
+      {% endif %}
+
+      {% unless settings.catalog_mode %} 
+        {% assign _cart_icon_type = settings.cart_icon_type %}
+        {% assign _cart_font_icon = settings.cart_font_icon %}
+        {% assign _cart_icon = settings.cart_icon %}
+      
+        <li class="top-cart-holder{% if settings.cart_styles == 'dropdown' %} hover-dropdown{% endif %}">
+          <div class="cart-target">
+
+            {% if settings.cart_styles == 'dropdown' %}
+              <a href="javascript:void(0)" class="basket dropdown-toggle{% if _lazyload and _cart_icon_type == 'image' %} lazyload waiting{% endif %}" title="cart">
+                {% if _cart_icon_type == 'font-icon' %}
+                  {{ _cart_font_icon }}
+
+                {% else %}
+                  <img {% if _lazyload %}class="lazyload"
+                       data-srcset="{{ _cart_icon | img_url: '20x'}} 1x, {{ _cart_icon | img_url: '40x'}} 2x"
+                       {% else %}src="{{ _cart_icon | img_url: '20x'}}"{% endif %}
+                       alt="Cart" />
+
+                {% endif %}
+
+                <span class="number"><span class="n-item">{{ cart.item_count }}</span></span>
+              </a>
+
+              <div class="cart-dd">
+                <form id="cart-info" action="{{routes.cart_url}}" method="post">
+                  <div id="cart-content" class="cart-content">
+                    <div class="cart-loading"></div>
+                  </div>
+                </form>
+              </div>
+
+            {% else %}
+              <a href="javascript:void(0)" class="basket cart-toggle{% if _lazyload and _cart_icon_type == 'image' %} lazyload waiting{% endif %}" title="cart">
+                {% if _cart_icon_type == 'font-icon' %}
+                  {{ _cart_font_icon }}
+
+                {% else %}
+                  <img {% if _lazyload %}class="lazyload"
+                       data-srcset="{{ _cart_icon | img_url: '20x'}} 1x, {{ _cart_icon | img_url: '40x'}} 2x"
+                       {% else %}src="{{ _cart_icon | img_url: '20x'}}"{% endif %}
+                       alt="Cart" />
+
+                {% endif %}
+
+                <span class="number"><span class="n-item">{{ cart.item_count }}</span></span>
+              </a>
+
+            {% endif %}
+
+          </div>
+        </li>            
+      {% endunless %}
+
+    </ul>
+  </div>
+
+  {%- when 'shipping-text' -%}
+    {%- unless section.settings.shipping_text == blank -%}
+      <div class="shipping-text">
+        <span>{{ section.settings.shipping_text }}</span>
+      </div>
+    {%- endunless -%}
+
+  {%- when 'mobile-search' -%}
+    {% if settings.show_search %}
+      <div class="searchbox searchbox-mobile">
+        <div class="container">
+
+          {% assign _search_icon_type = settings.search_icon_type %}
+          {% assign _search_font_icon = settings.search_font_icon %}
+          {% assign _search_icon = settings.search_icon %}
+
+          <form id="search-mobile" class="navbar-form search" action="/search" method="get">
+            <input type="hidden" name="type" value="product" />
+            <input type="hidden" name="options[prefix]" value="last" />
+            <input id="bc-product-mobile-search" type="text" name="q" class="form-control bc-product-search"  placeholder="{{ 'general.text.search_placeholder' | t }}" autocomplete="off" />
+
+            <button type="submit" class="search-icon">
+              <span{% if _lazyload and _search_icon_type == 'image' %} class="lazyload waiting"{% endif %}>
+
+                {% if _search_icon_type == 'font-icon' %}
+                  {{ _search_font_icon }}
+
+                {% else %}
+                  <img {% if _lazyload %}class="lazyload"
+                       data-srcset="{{ _search_icon | img_url: '20x'}} 1x, {{ _search_icon | img_url: '40x'}} 2x"
+                       {% else %}src="{{ _search_icon | img_url: '20x'}}"{% endif %}
+                       alt="Search" />
+
+                {% endif %}
+
+              </span>
+            </button>
+          </form>
+          
+          {% if settings.ajax_search == 'default-theme' %}
+            <div class="result-ajax-search">
+              <ul class="search-results"></ul>
+            </div>
+          {% endif %}
+
+        </div>
+      </div>
+    {% endif %}
+
+  {%- when 'contact-box' -%}
+    {% if section.settings.enable_header_contact %}
+      <div class="header-contact-box">
+        
+        {% if section.settings.enable_header_contact_icon %}
+          {%- render 'theme-icon', type: 'support' -%}
+        {% endif %}
+
+        <div class="info">
+          {% unless section.settings.header_phone_number == blank %}
+            <span>{{ section.settings.header_phone_number }}</span>
+          {% endunless %}
+
+          {% unless section.settings.header_email == blank %}
+            <span>{{ section.settings.header_email }}</span>
+          {% endunless %}
+        </div>
+        
+      </div>
+    {% endif %}
+
+{%- endcase -%}

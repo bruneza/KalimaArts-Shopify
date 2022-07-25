@@ -1,0 +1,220 @@
+<link rel="preload" href="{{'mapbox-gl.css' | asset_url }}" as="style">
+<link href="{{ 'mapbox-gl.css' | asset_url }}" rel="stylesheet" type="text/css" media="all">
+{%- liquid
+  assign isBoxed = true
+  assign countries = section.settings.countries | split: ','
+-%}
+
+{%- capture map_content -%}
+  <div class="map-wrapper">
+    <div id="map"></div>
+    <div class="map-style overlay-ui">
+      <button class="js-map-style" data-style="streets-v11"> {{ 'page.store_location.map' | t}}</button>
+      <button class="js-map-style" data-style="satellite-streets-v10"> {{ 'page.store_location.satellite' | t}}</button>
+    </div>
+  </div>
+{%- endcapture -%}
+
+<div class="section-page-store-location" data-section-id="{{section.id}}" data-section-type="store-location">
+  <div class="section-wrapper">
+    {%- if isBoxed -%} <div class="container"> {%- endif -%}
+      <div class="section-header text-center">
+        <h2 class="page-title">{{page.title}}</h2>
+      </div>
+      <div class="section-body">
+        <div class="map-search ">
+          <form class="map-search_form js-search-form d-flex justify-content-between align-items-center">
+            <div class="map-search_item d-flex justify-content-between align-items-center">
+              <div class="title">{{ 'page.store_location.title_of_find_stores' | t}}</div>
+              <input type="text" name="zip" placeholder="{{ 'page.store_location.zipcode' | t}}" value="">
+            </div>
+            <div class="map-search_item d-flex justify-content-between align-items-center">
+              <div class="title">{{ 'page.store_location.country' | t}}</div>
+              <div class="select-group">
+                <select name="country">
+
+                  {%- for country in countries -%}
+                    {%- capture country_strip -%}{{country | strip | strip_newlines}}{%- endcapture -%}
+                    <option value="{%- render 'alpha-2' country: country_strip  -%}">{{country_strip}}</option>
+                  {%- endfor -%}
+                </select>
+                {%- render 'theme-icon' type: 'angle-down' -%}
+              </div>
+            </div>
+            <div class="map-search_item d-flex justify-content-between align-items-center">
+              <div class="title">{{ 'page.store_location.distance' | t}}</div>
+              <div class="select-group">
+                <select name="distance">
+                  <option value="5">5KM</option>
+                  <option value="10">10KM</option>
+                  <option value="15">15KM</option>
+                  <option value="20">20KM</option>
+                  <option value="25">25KM</option>
+                  <option value="50">50KM</option>
+                  <option value="100">100KM</option>
+                </select>
+                {%- render 'theme-icon' type: 'angle-down' -%}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-1">{{ 'page.store_location.search' | t}}</button>
+          </form>
+        </div>
+
+        <div id="map-container">
+          <div class="marker-custom js-marker-custom d-none">
+            <img src="{{'location-icon.png' | asset_url}}" alt="" width="50">
+          </div>
+          {% comment %} {%- capture stores_location -%}
+            {%- if section.blocks.size > 0 -%}
+              <div class="store-list js-store-list">
+                {%- assign stores_json = '' | split: '{+=+}' -%}
+                {%- for block in section.blocks -%}
+                  {%- liquid
+                    assign address = block.settings.address
+                    assign phone   = block.settings.phone
+                    assign long    = block.settings.long
+                    assign lat     = block.settings.lat
+                    assign website = block.settings.website
+                  -%}
+                  {%- capture json -%}
+                    {"id": "{{block.id}}","lngLat": [{{long}},{{lat}}],"address": "{{address}}","phone": "{{phone}}","website": "{{website}}"}
+                  {%- endcapture -%}
+                  {%- assign json = json | split: '\(-.-)/' -%}
+                  {%- assign stores_json = stores_json | concat: json -%}
+                  {%- capture block_content -%}
+                    {%- if address != blank -%} {%- endif -%}
+                    {%- if phone != blank -%} {%- endif -%}
+                    {%- if website != blank -%} {%- endif -%}
+                  {%- endcapture-%}
+                  {%- if block_content != blank -%}
+                    <div class="store-item js-store-item d-flex" data-id="{{block.id}}">
+                      {%- render 'theme-icon' type: 'marker' -%}
+                      <div class="info">
+                        {{block_content}}
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              <script id="stores-json" type="application/json">[{{stores_json | join: ','}}]</script>
+            {%- endif -%}
+          {%- endcapture -%} {% endcomment %}
+
+          <div class="row">
+            <div class="col-12 col-lg-4">
+              <div class="store-list js-store-list">
+                <div class="store-item js-store-item js-template d-none">
+                  {%- render 'theme-icon' type: 'marker' -%}
+                  {%raw%}
+                    <div class="info">
+                      <div class="address js-address">{{address}}</div>
+                      <div class="phone"><a href="tel: {{phone}}">{{phone}}</a></div>
+                      <div class="website"><a href="{{website}}" target="_blank">{{website}}</a></div>
+                    </div>
+                  {%endraw%}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-8">
+              {{map_content}}
+            </div>
+          </div>
+          {% comment %} {%- if stores_location != blank -%}
+          {%- else -%}
+            {{map_content}}
+          {%- endif -%} {% endcomment %}
+        </div>
+      </div>
+    {%- if isBoxed -%} </div> {%- endif -%}
+  </div>
+  <script id="map-config" type="application/json">
+    {
+      "accessToken": "{{section.settings.key}}",
+      {%- if section.settings.start_lng != blank and section.settings.start_lat != blank-%}
+        "startPoint" : [{{section.settings.start_lng}}, {{section.settings.start_lat}}],
+      {%- endif -%}
+      "zoom": "{{section.settings.zoom}}"
+    }
+  </script>
+</div>
+
+<script type="application/javascript">
+  window.theme = Object.assign( window.theme || {}, {
+    template: "{{template}}",
+    locationsUrl: "{{'locations.json' | asset_url }}"
+  });
+</script>
+
+<link href="{{'locations.json' | asset_url}}" as="script">
+<script crossorigin="anonymous" src="{{ 'turf.min.js' | asset_url }}"></script>
+<script crossorigin="anonymous" src="{{ 'mapbox-gl.min.js' | asset_url }}"></script>
+<script crossorigin="anonymous" src="{{ 'store-location-page.js' | asset_url }}"></script>
+
+{%- schema -%}
+  {
+    "name" : {
+      "en": "Retailer Locator"
+    },
+    "tag" : "section",
+    "settings" : [
+      {
+        "type": "header",
+        "content": {
+          "en": "Start Point"
+        }
+      },
+      {
+        "type": "text",
+        "id": "start_lat",
+        "label": {
+          "en": "Lat"
+        },
+        "default" : "49.282730"
+      },
+      {
+        "type": "text",
+        "id": "start_lng",
+        "label": {
+          "en": "Long"
+        },
+        "default" : "-123.120735"
+      },
+      {
+        "type": "header",
+        "content": {
+          "en": "MAP SETTINGS"
+        }
+      },
+      {
+        "type" : "textarea",
+        "id" : "countries",
+        "label" : {
+          "en" : "Countries"
+        },
+        "default" : "Canada, United States,Australia,Denmark",
+        "info": {
+          "en": "Separated by commas"
+        }
+      },
+      {
+        "type": "text",
+        "id": "key",
+        "label": {
+          "en": "Key"
+        }
+      },
+      {
+        "type" : "range",
+        "id": "zoom",
+        "label": {
+          "en" : "Zoom"
+        },
+        "step": 1,
+        "min" : 8,
+        "max" : 18,
+        "default" : 13
+      }
+    ]
+  }
+{%- endschema -%}

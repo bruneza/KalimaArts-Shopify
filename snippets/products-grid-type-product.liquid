@@ -1,0 +1,33 @@
+{%- assign _background = block.settings.bg_color -%}
+
+<div class="product-grid-content block-type-{{ block.type }}" style="background-color: {{ _background }};">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+  
+    {% include 'heading-snippet' %}
+
+    {% unless block_collection == blank or collection.products_count == 0 %}
+
+      <div class="product-grid-inner">
+        <div class="product-grid-{{ _type }}{% if _type == 'row' %} row{% endif %}">
+          {% for product in collection.products limit: _limit %}
+
+            <div class="product-grid-item{% if _type == 'row' %} {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}{% endif %}">
+              {% include 'product-item' %}
+            </div>
+
+          {% endfor %}
+        </div>
+      </div>
+
+    {% else %}
+
+      <div class="product-grid-row">
+        <div class="row"> 
+          {{ emptyProduct }}
+        </div>
+      </div>
+
+    {% endunless %}
+  
+   {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

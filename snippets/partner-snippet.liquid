@@ -1,0 +1,94 @@
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _layout = section.settings.layout -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+{%- assign _item_per_row = section.settings.item_per_row -%}
+{%- assign _item_per_row_tablet = section.settings.tablet_item_per_row -%}
+{%- assign _item_per_row_mobile = section.settings.mobile_item_per_row -%}
+
+{% if section.settings.image_size == blank %}
+  {%- assign _image_size = '150x' -%}
+{% else %}
+  {%- assign _image_size = section.settings.image_size -%}
+{% endif %}
+
+<div class="partner-wrapper layout-{{_layout }}{% if _hide_mobile %} d-none d-md-block{% endif %}">
+  <div class="{{ _layout_class }}">
+
+  {% if section.blocks.size > 0 %}
+
+    <div class="widget-partner widget-partner-{{ section.id }}">
+      {% for block in section.blocks %}
+
+        {%- assign _image = block.settings.image -%}
+        {%- assign _link = block.settings.link -%}
+
+        {% if _link == blank %}
+          <div class="partner-item{% if _lazyload %} lazyload waiting{% endif %}">
+            {% unless block.settings.image == blank %}
+              <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ _image | img_url: _image_size }}" alt="Logo" />
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endunless %}
+          </div>
+      
+        {% else %}
+          <div class="partner-item{% if _lazyload %} lazyload waiting{% endif %}">
+            {% unless _image == blank %}
+              <a href="{{ _link }}">
+                <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ _image | img_url: _image_size }}" alt="Logo" />
+              </a>
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endunless %}
+          </div>
+        {% endif %}
+
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <div class="widget-partner widget-partner-{{ section.id }}">
+      {% for i in (1.._item_per_row) %}
+        <div class="partner-item">
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endfor %}
+    </div>
+
+  {% endif %}
+
+  </div>
+</div>
+
+<script>
+  jQuery(document).ready(function($) {
+    jQuery('.widget-partner').length && jQuery('.widget-partner').owlCarousel({
+      nav			    : true
+      ,dots       : false
+      ,margin 	  : 20
+		  ,rtl		    : jQuery('body').data('rtl')
+      ,responsive : {
+        0:{
+          items: 1
+        }
+        ,370:{
+          items: {{ _item_per_row_mobile }}
+        }
+        ,600:{
+          items: {{ _item_per_row_tablet }}
+        }
+        ,1024:{
+          items: {{ _item_per_row }}
+        }
+      }
+      ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+    });
+  });
+</script>

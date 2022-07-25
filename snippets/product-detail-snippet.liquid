@@ -1,0 +1,382 @@
+{%- case type -%}
+    {%- when 'vendor' -%}
+        {% if section.settings.show_product_vendor and product.vendor != blank %}
+            <div class="product-vendor">{{ product.vendor | link_to_vendor }}</div>
+        {% endif %}
+
+    {%- when 'btn' -%}
+        <div class="action-button">
+          <button id="add-to-cart" class="add-to-cart btn btn-1" type="button">{%- render 'theme-icon', type: 'add-cart-icon' -%}{{ 'products.product.add_to_cart' | t }}</button> 
+        </div>
+
+        {% capture the_snippet_fave %}{% render 'socialshopwave-widget-fave' %}{% endcapture %}
+        {% unless the_snippet_fave contains 'Liquid error' %}
+        {{ the_snippet_fave }}
+        {% endunless %}    
+
+        {%- if section.settings.enable_payment_button -%}
+          {{ form | payment_button }}
+        {%- endif -%}
+
+    {%- when 'deals' -%}
+        {%- if product.available and section.settings.meta_countdown_timer -%}
+          {%- assign meta_shortdes = product.metafields.c_f -%}
+          {%- assign key = 'countdown_timer' -%}
+
+          {%- unless meta_shortdes.countdown_timer == blank -%}
+            {%- include 'check-shop-url' -%}
+
+            {%- if _shop_url == _check_shop_url -%}
+              {%- assign seconds = 34 | times: 60 | times: 60 -%}
+              {%- assign _expire = 'now' | date: "%s" | plus: seconds | date: "%m/%d/%Y" -%}
+            {%- else -%}
+              {%- assign _expire = meta_shortdes.countdown_timer -%}
+            {% endif %}
+
+            {%- assign _dueDate = _expire | split: '/' -%}
+
+            <div class="detail-deal">
+              <div class="wrapper-countdown">
+                <span class="deal-text">{{ 'products.product.offer' | t }}</span>
+                <div class="countdown_{{ product.id }}"></div>
+              </div>
+            </div>
+
+            <script type="text/javascript">
+              jQuery(document).ready(function($){
+
+                var currentDate = new Date();
+                var dueDate = new Date( {{ _dueDate[2] }}, {{ _dueDate[0] | plus:0 }} - 1, {{ _dueDate[1] | plus:0 }} );
+
+                if(currentDate < dueDate){
+                  $('.countdown_{{ product.id }}').countdown({until: dueDate, format: 'HMS', padZeroes: true});
+                }
+
+                else{
+                  $('.countdown_{{ product.id }}').parent().hide();
+                }
+
+              });
+            </script>
+
+          {%- endunless -%}
+
+        {%- endif -%}
+
+    {%- when 'discount-popup' -%}
+        {%- if settings.show_discount_popup -%}
+            {%- assign _meta_discount_percent = product.metafields.c_f -%}
+            {%- assign _meta_discount_code = product.metafields.c_f -%}
+            {%- assign key = 'discount_code' -%}
+
+            {%- unless _meta_discount_code.discount_code == blank -%}
+                <div class="hide">
+                  <a href="/discount/{{ _meta_discount_code.discount_code }}?redirect={{ product.url }}" class="btn-discount-code btn btn-1">
+                    {%- if _meta_discount_percent.discount_percent == blank -%}
+                    Get my 10% offer now
+                    {%- else -%}
+                    Get my {{ _meta_discount_percent.discount_percent }} offer now
+                    {%- endif -%}
+                  </a>
+                </div>
+            {%- endunless -%}
+        {%- endif -%}
+
+    {%- when 'order-shipping' -%}
+        {%- if section.settings.order_shipping_time -%}
+          <ul class="shipping-time" data-GMT="{{ section.settings.utc_timezone }}" data-deliverytime="{{ section.settings.delivery_time }}" data-deadline="{{ section.settings.deadline_day }}">
+
+            <li class="delivery-time"></li>
+
+            <li class="deadline">
+              <span class="text">{{ 'products.product.order_within' | t }}</span>
+              <div class="countdown_deadline"></div>
+            </li>  
+
+          </ul>
+        {%- endif -%}
+
+    {%- when 'pre-order' -%}
+        {%- if section.settings.enable_pre_order_button -%}   
+          <div id="pre-order-popup" style="display: none;">
+            {%- form 'contact' -%}
+
+            <span class="alert-pre-order{% if form.posted_successfully? %} success{% endif %}"></span>
+
+            <div id="pre-order-form">
+
+              <div class="row">
+                <div class="form-group col-lg-6 col-md-12">
+                  <label for="name">{{'contact.form.name' | t }}<span class="req">*</span></label>
+                  <input required type="text" id="name" class="form-control" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.first_name }} {{ customer.last_name }}{% endif %}" name="contact[name]">
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12">
+                  <label for="email">{{'contact.form.email' | t }}<span class="req">*</span></label>
+                  <input required="" type="email" id="email" class="form-control" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" name="contact[email]">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-lg-6 col-md-12">
+                  <label for="phone">{{'contact.form.phone' | t }}</label>
+                  <input type="text" id="phone" class="form-control" value="" name="contact[phone]">
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12">
+                  <label for="product_name">Product Name<span class="req">*</span></label>
+                  <input readonly id="product_name" class="form-control" value="{{ product.title }}" name="contact[product_name]" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="message">{{'contact.form.message' | t }}</label>
+                <textarea required="" id="message" class="form-control" name="contact[body]"></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-1">{{ 'contact.form.submit_button' | t }}</button>
+              </div>
+            </div>
+
+            {%- endform -%}
+          </div>
+
+          <script>
+            jQuery(document).ready(function($) {   
+              $(".pre-order a").fancybox({
+                'autoDimensions': false
+                ,'width'        : 650                  
+                ,'autoSize'     : false
+              });
+
+              if($('.alert-pre-order').hasClass('success')){
+                $('.pre-order-success').removeClass('hide');
+              }
+            });
+          </script>
+        {%- endif -%}
+
+    {%- when 'pre-order-btn' -%}
+        {%- if section.settings.enable_pre_order_button -%}
+          <div class="pre-order">
+            <a href="#pre-order-popup" class="btn-pre-order btn btn-1">{{ 'products.product.pre_order' | t }}</a>
+          </div>
+          <div class="pre-order-success hide">{{ 'products.product.pre_order_alert' | t }}</div> 
+        {%- endif -%}
+
+    {%- when 'price' -%}
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+        <meta itemprop="priceValidUntil" content="2022-11-05" />
+
+        <div id="purchase-{{ product.id }}" class="product-price">
+          <div class="detail-price" itemprop="price" content="{{ product.price | divided_by: 100.00 }}">
+            {%- if product.compare_at_price > product.price -%}
+              <span class="price-sale">{{ product.price | money }}</span>
+              <del class="price-compare"> {{ product.compare_at_price | money }}</del>
+            {%- else -%}
+              <span class="price">{{ product.price | money }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+
+    {%- when 'qty' -%}
+        <div class="quantity-product">
+            <label>{{ 'products.product.quantity' | t }}</label>
+            <div class="quantity">
+                <input type="number" id="quantity" class="item-quantity" name="quantity" value="1" />
+                <span class="qty-inner qty-wrapper">
+
+                  <span class="qty-up" title="Increase" data-src="#quantity">
+                    {%- render 'theme-icon', type: 'plus' -%}
+                  </span>
+
+                  <span class="qty-down" title="Decrease" data-src="#quantity">
+                    {%- render 'theme-icon', type: 'minus' -%}
+                  </span>
+
+                </span>
+            </div>
+        </div>
+
+    {%- when 'review' -%}
+        {%- unless settings.product_review_option == 'none' -%}
+            <div class="rating-links">
+                <div class="rating-inner">
+                  {%- if settings.product_review_option == 'shopify-review' -%}
+                    <div class="shopify-product-reviews-badge" data-id="{{ product.id }}"></div>
+                  {%- elsif settings.product_review_option == 'loox' -%}
+                    <div class="loox-rating" data-fetch data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+                  {%- else -%}
+                    {% capture the_snippet_review_avg %}{% render 'ssw-widget-avg-rate-profile' %}{% endcapture %}
+                    {% unless the_snippet_review_avg contains 'Liquid error' %}
+                    {{ the_snippet_review_avg }}
+                    {% endunless %}  
+                  {%- endif -%}
+                </div>
+                {%- if settings.product_review_option == 'shopify-review' or settings.product_review_option == 'loox' -%}
+                  <a href="#tab_review">{{ 'products.product.add_your_review' | t }}</a>
+                {%- endif -%}
+            </div>
+        {% endunless %}
+
+        {%- if product.available and settings.product_review_option == 'growave' -%}
+            <div class="ssw-html-widget ssw-reward-place-order" data-module="Reward" data-name="PlaceOrder" data-product_id="{{product.id}}"></div>
+        {%- endif -%}
+
+    {%- when 'stock' -%}
+        <div id="stock">
+            <span>{{"products.product.available" | t }}:</span>
+            {%- if product.available -%}
+            <span class="stock">{{"products.product.in_stock" | t }}</span>
+            {%- else -%}
+            <span class="stock">{{"products.product.out_stock" | t }}</span>
+            {%- endif -%}
+        </div>
+
+    {%- when 'unavailable' -%}
+        <meta itemprop="price" content="{{ product.price | divided_by: 100.00  }}" />
+
+        <div class="group-cw clearfix">
+          <div class="action-button">
+            <button id="add-to-cart" class="sold-out btn btn-1" type="button">{{'products.product.sold_out' | t }}</button>
+          </div>
+          {%- include 'product-detail-snippet', type: 'pre-order-btn' -%}
+        </div>
+
+    {%- when 'wishlist-compare' -%}
+        {%- if settings.product_wishlist_option != 'disable' -%}
+          {%- if settings.product_wishlist_option == 'wishlist-compare' -%} 
+            {%- render 'arn_wl_cp_custom_buttons', type: 'wl_add_btn', product_handle: product.handle -%}
+          {%- else -%}
+            {%- capture the_snippet_fave -%}{%- render 'socialshopwave-widget-fave' -%}{%- endcapture -%}
+            {%- unless the_snippet_fave contains 'Liquid error' -%}
+            {{ the_snippet_fave }}
+            {%- endunless -%}   
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if settings.enable_product_compare -%}
+            {%- render 'arn_wl_cp_custom_buttons', type: 'cp_add_btn', product_handle: product.handle -%}
+        {%- endif -%}
+
+    {%- when 'review-content' -%}
+        {%- unless settings.product_review_option == 'none' -%}
+          {%- if settings.product_review_option == 'shopify-review' -%}
+            <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+          {%- elsif settings.product_review_option == 'loox' -%}
+            <div id="looxReviews" data-product-id="{{product.id}}">{{ product.metafields.loox.reviews }}</div>
+          {%- else -%}
+            {%- capture the_snippet_reviews -%}{%- render 'socialshopwave-widget-recommends' with 1 -%}{%- endcapture -%}
+            {%- unless the_snippet_reviews contains 'Liquid error' -%}
+            {{ the_snippet_reviews }}
+            {%- endunless -%}
+          {%- endif -%}
+        {%- endunless -%}
+
+        {%- capture the_snippet_reviews -%}{%- render 'socialshopwave-widget-recommends' with 1 -%}{%- endcapture -%}
+        {%- unless the_snippet_reviews contains 'Liquid error' -%}
+        {{ the_snippet_reviews }}
+        {%- endunless -%}   
+
+    {%- when 'short-description' -%}
+        {%- if section.settings.meta_description_excerpt -%}
+          {%- assign meta_shortdes = product.metafields.c_f -%}
+          {%- assign key = 'description_excerpt' -%}
+
+          {%- unless meta_shortdes.description_excerpt == blank -%}
+            <div class="short-description">{{ meta_shortdes.description_excerpt }}</div>
+          {%- endunless -%}
+        {%- endif -%}
+
+    {%- when 'size-chart' -%}
+        {%- if section.settings.meta_size_chart -%}
+          {%- assign meta_sizechart = product.metafields.c_f -%}
+          {%- assign key = 'image_size_chart' -%}
+
+          {%- unless meta_sizechart.image_size_chart == blank -%}
+
+            <div class="size-chart">
+              <a href="#size-chart-popup"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="chart-line" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-chart-line fa-w-16 fa-2x"><path fill="currentColor" d="M117.65 277.65c6.25 6.25 16.38 6.25 22.63 0L192 225.94l84.69 84.69c6.25 6.25 16.38 6.25 22.63 0L409.54 200.4l29.49 29.5c15.12 15.12 40.97 4.41 40.97-16.97V112c0-8.84-7.16-16-16-16H363.07c-21.38 0-32.09 25.85-16.97 40.97l29.5 29.49-87.6 87.6-84.69-84.69c-6.25-6.25-16.38-6.25-22.63 0l-74.34 74.34c-6.25 6.25-6.25 16.38 0 22.63l11.31 11.31zM496 400H48V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16z" class=""></path></svg>{{ 'products.product.size_chart' | t }}</a>
+            </div>
+
+            <div id="size-chart-popup" style="display: none;"><img src= "{{ meta_sizechart.image_size_chart | split: 'https:' }}" alt="" /></div>
+
+            <script>
+              jQuery(document).ready(function($) {   
+                $(".size-chart a").fancybox();
+              });
+            </script>
+
+          {%- endunless -%}
+        {%- endif -%}
+
+    {%- when 'sku' -%}
+        <ul class="product-sku-collection">
+          {%- if section.settings.show_product_sku -%}
+            <li class="product-code"{% if product.variants.first.sku == blank %} style="display:none;{% endif %}">
+              <span>{{ 'products.product.product_code' | t }}</span>
+              <span id="sku">{{ product.variants.first.sku }}</span>
+            </li>
+          {%- endif -%}
+
+          {%- if section.settings.show_product_collections and product.collections.size > 0 -%}
+            <li class="category">
+              <span>{{ 'products.product.category' | t }}</span>
+              {%- for p_col in product.collections -%}
+                <a href="{{ p_col.url }}">{{ p_col.title }}{% unless forloop.last %},{% endunless %}</a>
+              {%- endfor -%}
+            </li>
+          {%- endif -%}
+        </ul>
+
+    {%- when 'secure-image' -%}
+        {%- unless section.settings.secure == blank -%}
+          <div class="secure-image">
+            <img src="{{ section.settings.secure | img_url: '450x'}}" alt="Secure" />
+          </div>
+        {%- endunless -%}
+
+    {%- when 'social-sharing' -%}
+        {% if template contains 'article' or template contains 'blog' %}
+        {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
+        {% capture shareTitle %}{{ article.title }}{% endcapture %}
+        {% capture shareHandle %}{{ article.handle }}{% endcapture %}
+
+        {% elsif template contains 'product' %}
+        {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+        {% capture shareTitle %}{{ product.title }}{% endcapture %}
+        {% capture shareHandle %}{{ product.handle }}{% endcapture %}
+
+        {% elsif template == 'password' %}
+        {% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+        {% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
+        {% endif %}
+
+        <div class="share-links social-sharing" data-permalink="{{ permalinkURL }}">
+          <ul class="list-inline">
+            
+            {% if settings.share_facebook %}
+              <li>
+                <a class="facebook" target="_blank" rel="noopener" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" title="Facebook">
+                  {%- render 'theme-icon', type: 'facebook' -%}
+                  <span>Share</span>
+                </a>
+              </li>
+            {% endif %} 
+            
+            {% if settings.share_twitter %}
+            <li>
+              <a class="twitter" target="_blank" rel="noopener" href="//twitter.com/share?url={{ permalinkURL }}&amp;text={{ shareHandle }}" title="Twitter">
+                {%- render 'theme-icon', type: 'twitter' -%}
+                <span>Tweet</span>
+              </a>
+            </li>
+            {% endif %}  
+
+          </ul>
+        </div>
+
+    {%- else -%}
+
+{%- endcase -%}

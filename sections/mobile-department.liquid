@@ -1,0 +1,61 @@
+{% include 'mobile-department' %}
+
+{% schema %}
+  {
+    "name": "Header Department",
+    "max_blocks": 10,
+    "settings": [
+      {
+        "type": "select",
+        "id": "visibility",
+        "label": "Visibility",
+        "default": "mobile",
+        "options": [
+          { "label": "Mobile", "value": "mobile" },
+          { "label": "Desktop", "value": "desktop" },
+          { "label": "Both",  "value": "both" },
+          { "label": "Disable",  "value": "none" }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "icon",
+        "label": "Icon to show",
+        "default": "image",
+        "options": [
+          { "label": "Image", "value": "image" },
+          { "label": "SVG", "value": "svg" },
+          { "label": "Disable",  "value": "none" }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "label": "Image",
+            "id": "image",
+            "type": "image_picker"
+          },
+          {
+            "label": "SVG",
+            "id": "svg",
+            "type": "textarea"
+          },
+          {
+            "label": "Text",
+            "id": "text",
+            "type": "text"
+          },
+          {
+            "label": "Link to",
+            "id": "link",
+            "type": "url"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

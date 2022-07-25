@@ -1,0 +1,163 @@
+{% include 'single-product-snippet' %}
+
+{% schema %}
+{
+  "name": "Single Product",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Created by 'Single Product' section"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label",
+      "default": "Single Product"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_mobile",
+      "label": "Visibility: Hide for Mobile"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Section Layout Mode",
+      "default": "boxed",
+      "options": [
+        { "value": "boxed", "label": "Boxed" },
+        { "value": "full", "label": "Wide" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "type",
+      "label": "Type",
+      "options": [
+        { "value": "row", "label": "Row" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "range",
+      "id": "style",
+      "label": "Style",
+      "default": 1,
+      "min": 1,
+      "max": 4
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Text",
+      "default": "Deals Of The Week"
+    },
+    {
+      "type": "header",
+      "content": "Background",
+      "info": "Only for Style 1"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Background style",
+      "options": [
+        { "value": "color", "label": "Background color" },
+        { "value": "image", "label": "Background image" }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "id": "bg_image",
+      "type": "image_picker",
+      "label": "Background image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Block Product"
+        },
+        {
+          "id": "product",
+          "type": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "product_sold",
+          "label": "Number of product already sold",
+          "min": 0,
+          "max": 100,
+          "default": 6,
+          "info": "Zero value to hide"
+        },
+        {
+          "type": "header",
+          "content": "Text Box",
+          "info": "Only for Style 1"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#000000"
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text #1",
+          "default": "LIMITED"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text #2",
+          "default": "WEEK DEAL"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Text #3",
+          "default": "HURRY UP BEFORE OFFER WILL END"
+        },
+         {
+          "id": "buy_now",
+          "type": "checkbox",
+          "label": "Show Buy Now button"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Single Product",
+      "category": "Collection",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

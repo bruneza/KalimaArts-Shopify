@@ -1,0 +1,214 @@
+{% assign description = product.description %}
+{% capture description %}{{ description }}{% endcapture %}
+
+<div class="product-simple-tab" style="background-color:{{ section.settings.product_tab_bg_color }};">
+  <div class="container">
+    
+      <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+          
+          <li class="nav-item"><a class="nav-link active" href="#tabs-accessories" aria-controls="tabs-accessories" role="tab" data-toggle="tab">Accessories</a></li>
+
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+
+              {% case block.type %}
+                {% when 'description' %}
+                  {% unless description == blank %}
+
+                    {% if block.settings.multi-tab %}
+                      {% assign description_parts = description | split: "<h5" %}
+
+                      <li class="nav-item"><a class="nav-link" href="#tabs-description" aria-controls="tabs-description" role="tab" data-toggle="tab">{{ 'products.product.description' | t }}</a></li>
+
+                      {% for part in description_parts %}
+                        {% if part contains "</h5>" %}
+                          {% assign remove = part | split: ">" | first | append: ">" %}
+                          {% capture ind %}{{ forloop.index | plus: 0}}{% endcapture %}
+                          <li class="nav-item"><a class="nav-link" href="#tabs-{{ forloop.index }}" aria-controls="tabs-{{ forloop.index }}" role="tab" data-toggle="tab">{{ part | split: "</h5>" | first | strip_html | replace: remove, "" }}</a></li>
+                        {% endif %}
+                      {% endfor %}
+
+                    {% else %}
+                      <li class="nav-item"><a class="nav-link" href="#tabs-description" aria-controls="tabs-description" role="tab" data-toggle="tab">{{ 'products.product.description' | t }}</a></li>
+
+                    {% endif %}
+
+                  {% endunless %}
+
+                {% when 'page' %}
+                  <li class="nav-item"><a class="nav-link" href="#tabs-page-{{ block.id }}" aria-controls="tabs-page-{{ block.id }}" role="tab" data-toggle="tab">{{ block.settings.page_title }}</a></li>
+
+              {% endcase %}
+
+            {% endfor %}
+          {% endif %}
+
+          {% if section.settings.product_tab_review == 'inside' and settings.product_review_option != 'none' %}
+            <li class="nav-item" id="tab_review_tabbed"><a class="nav-link" href="#tab-review" aria-controls="tab-review" role="tab" data-toggle="tab">{{'products.product.customer_reviews' | t }}</a></li>
+          {% endif %}
+        </ul>
+
+        <div class="tab-content">
+
+          <div role="tabpanel" class="tab-pane show active" id="tabs-accessories">
+            <form action="/cart/add" method="post" id="bundledAddToCart">
+              <div class="bundled-items">
+
+                <div id="crust-items" class="{% unless meta_bw.bundle_1 == blank %} bundled-1-true{% endunless %} {% unless meta_bw.bundle_2 == blank %} bundled-2-true{% endunless %}">
+
+                  <ul class="bundled-images">
+                    <li class="image image-00" data-id="bundled-0">
+                      <h5>{{ product.title }}</h5>
+                      {% assign product_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+                      <img src="{{ product_image | product_img_url: '150x' }}" alt="{{ product.title | escape }}" />
+                      <span class="price">{{ product.variants.first.price | money }}</span>
+                    </li>
+
+                    {% unless meta_bw.bundle_1 == blank %}
+                      <li class="image image-01 bundled-1" data-id="bundled-1">
+                        <h5><a href="{{ accessory_1.url }}">{{ accessory_1.title }}</a></h5>
+                        {% assign featured_image_1 = accessory_1.selected_or_first_available_variant.featured_image | default: accessory_1.featured_image %}
+                        <img src="{{ featured_image_1 | product_img_url: '150x' }}" alt="{{ featured_image_1.title | escape }}" />
+                        <span class="price">{{ accessory_1.variants.first.price | money }}</span>
+                      </li>
+                    {% endunless %}
+
+                    {% unless meta_bw.bundle_2 == blank %}
+                      <li class="image image-02 bundled-2" data-id="bundled-2">
+                        <h5><a href="{{ accessory_2.url }}">{{ accessory_2.title }}</a></h5>
+                        {% assign featured_image_2 = accessory_2.selected_or_first_available_variant.featured_image | default: accessory_2.featured_image %}
+                        <img src="{{ featured_image_2 | product_img_url: '150x' }}" alt="{{ featured_image_2.title | escape }}" />
+                        <span class="price">{{ accessory_2.variants.first.price | money }}</span>
+                      </li>
+                    {% endunless %}
+                  </ul>
+
+                  <div class="wrap-bundled-item">
+                    <div class="bundled-item bundled-item-0 product-action ">
+                      <input type="checkbox" checked="checked" disabled >
+                      <div class="wrap-item">
+                        <span class="bundled-product-title"><strong>This product:</strong> {{ product.title }}</span>
+
+                        <div id="purchase-{{ product.id }}" class="bundled-price b-price-0">
+                          <span class="price">{{ product.variants.first.price | money }}</span>
+                          <span class="t-price hide">{{ product.variants.first.price }}</span>
+                        </div>
+
+                        <div id="qty-{{ product.id }}" class="product-qty product-qty-0 hide">
+                          <input id="{{ product.variants.first.id }}" name="updates[{{ product.selected_or_first_available_variant.id }}]" class="field" min="0" type="text" value="1" />
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {% unless meta_bw.bundle_1 == blank %}
+                      <div class="bundled-item bundled-item-1">
+                        <input type="checkbox" checked="checked" class="bundled-checkbox" id="bundled-1" name="bundled1" value="bi1">
+
+                        <div class="b-info"> 
+                          <span class="bundled-product-title">{{ accessory_1.title }}</span>
+
+                          <div id="purchase-{{ accessory_1.id }}" class="bundled-price b-price-1">
+                            <span class="price">{{ accessory_1.variants.first.price | money }}</span>
+                            <span class="t-price hide">{{ accessory_1.variants.first.price }}</span>
+                          </div>
+
+                          <div id="qty-{{ accessory_1.id }}" class="product-qty product-qty-1 hide">
+                            <input id="{{ accessory_1.variants.first.id }}" name="updates[{{ accessory_1.selected_or_first_available_variant.id }}]" class="field" min="0" type="text" value="1" />
+                          </div>
+                        </div>
+                      </div>
+                    {% endunless %}
+
+                    {% unless meta_bw.bundle_2 == blank %}
+                      <div class="bundled-item bundled-item-2">
+                        <input type="checkbox" checked="checked" class="bundled-checkbox" id="bundled-2" name="bundled2" value="bi2">
+
+                        <div class="b-info">
+                          <span class="bundled-product-title">{{ accessory_2.title }}</span>
+
+                          <div id="purchase-{{ accessory_2.id }}" class="bundled-price b-price-2">
+                            <span class="price">{{ accessory_2.variants.first.price | money }}</span>
+                            <span class="t-price hide">{{ accessory_2.variants.first.price }}</span>
+                          </div>
+
+                          <div id="qty-{{ accessory_2.id }}" class="product-qty product-qty-2 hide">
+                            <input id="{{ accessory_2.variants.first.id }}" name="updates[{{ accessory_2.selected_or_first_available_variant.id }}]" class="field" min="0" type="text" value="1" />
+                          </div>
+                        </div>
+                        
+                      </div>
+                    {% endunless %}
+                  </div>
+
+                </div>
+
+                <div class="action-bundle">
+                  <div class="bundled-total-price">
+                    {% assign _total_price = product.variants.first.price | plus: accessory_1.variants.first.price | plus: accessory_2.variants.first.price  %}
+                    <div id="bundled-tp-{{ product.id }}" class="total-price"><span class="price">{{ _total_price | money }}</span></div>
+                  </div>
+                  <button id="add-to-cart" class="bt-add-to-cart btn btn-1" type="button"><span class="flaticon-commerce"></span>{{ 'products.product.add_all_to_cart' | t }}</button> 
+                </div>
+
+              </div>
+            </form>
+          </div>
+          
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+
+              {% case block.type %}
+                {% when 'description' %}
+                  {% unless description == blank %}
+
+                    {% if block.settings.multi-tab %}
+                      {% assign description_parts = description | split: "<h5" %}
+
+                      <div role="tabpanel" class="tab-pane" id="tabs-description">
+                        {{ product.description | split: '<h5>' | first }}
+                      </div>
+
+                      {% for part in description_parts %}
+                        {% assign fp = part | append: " " | split: "</h5>" | last %}
+                        {% assign p = part | append: " " | split: "</h5>" | last | strip_html | replace: "&nbsp;", "" | replace: " ", "" | strip_newlines %}
+                        {% capture ind %}{{ forloop.index | plus: 0}}{% endcapture %}
+
+                        {% if p != "" or fp contains "<img " or fp contains "<iframe " %}
+                          <div role="tabpanel" class="tab-pane" id="tabs-{{ forloop.index }}">
+                            {{ part | split: "</h5>" | last | replace: "<div", "<span" | replace: "</div", "</span" }}
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+
+                    {% else %}
+                      <div role="tabpanel" class="tab-pane" id="tabs-description">
+                        {{ product.description }}
+                      </div>
+
+                    {% endif %}
+
+                  {% endunless %}
+
+                {% when 'page' %}
+                  <div role="tabpanel" class="tab-pane" id="tabs-page-{{ block.id }}">
+                    {{ pages[block.settings.page].content }}
+                  </div>
+
+              {% endcase %}
+
+            {% endfor %}
+          {% endif %}
+
+          {% if section.settings.product_tab_review == 'inside' and settings.product_review_option != 'none' %}
+            <div role="tabpanel" class="tab-pane" id="tab-review">
+              <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+            </div>
+          {% endif %}
+          
+        </div>
+      </div>
+  
+  </div>
+</div>

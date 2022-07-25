@@ -1,0 +1,198 @@
+{%- liquid
+  assign _hide_mobile = section.settings.hide_mobile
+  assign _layout = section.settings.layout 
+-%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+<div class="{% unless section.settings.cssclass == blank %}{{ section.settings.cssclass }}{% endunless %} custom-content-wrapper custom-content-wrapper-{{ section.id }}{% if _hide_mobile %} d-none d-md-block{% endif %} {% if section.settings.top_margin %}custom-content-margin-top{% endif %} {% if section.settings.bottom_margin %}custom-content-margin-bottom{% endif %} {% if section.settings.check_min_height %}only-min-height{% endif %}" data-section-id="{{ section.id }}" data-section-type="custom-content">
+  <div class="custom-content-width{% if settings.left_column_style == 'none' %} {{ _layout_class }}{% endif %}">
+    
+    {% render 'heading-block' %}
+
+    <div class="custom-content row">
+      {% for block in section.blocks %}
+
+        {%- liquid
+          case block.settings.width
+            when '25%'
+                assign block_width = 'col-xl-3 col-lg-3 col-md-4 col-sm-12' 
+            when '33%'
+                assign block_width = 'col-xl-4 col-lg-4 col-md-4 col-sm-12' 
+            when '41%'
+                assign block_width = 'col-xl-5 col-lg-5 col-md-5 col-sm-12' 
+            when '50%'
+                assign block_width = 'col-xl-6 col-lg-6 col-md-6 col-sm-12' 
+            when '59%'
+                assign block_width = 'col-xl-7 col-lg-7 col-md-7 col-sm-12' 
+            when '66%'
+                assign block_width = 'col-xl-8 col-lg-8 col-md-12 col-sm-12' 
+            when '75%'
+                assign block_width = 'col-xl-9 col-lg-9 col-md-12 col-sm-12' 
+            when '100%'
+                assign block_width = 'col-xl-12 col-lg-12 col-md-12 col-sm-12'
+          endcase 
+        -%}
+      
+        <div class="custom-item custom-item-{{ block.id }} {{ block_width }} align-{{ block.settings.alignment }}" {{ block.shopify_attributes }} style="{% if section.settings.check_min_height %}min-height: {{ section.settings.text_min_height }}px;{% endif %}">
+          <div class="custom-item-inner custom-item-inner-{{ block.type }}">
+
+              {% case block.type %}
+                {% when 'image' %}
+
+                  {% comment %} Custom Image Block {% endcomment %}
+
+                  {% if block.settings.image != blank %}
+                    <div class="custom-block-image">
+                      {% render 'image-lazysize' with image: block.settings.image, image_size: '1920x', image_class: '', image_alt: 'Banner' %}
+                    </div>
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+
+                {% when 'image-gallery' %}
+
+                  {% comment %} Custom Image Gallery Block {% endcomment %}
+
+                  <div class="custom-block-image-gallery">
+                    <div class="row">
+                      {% for i in (1..6) %}
+                        {%- assign _image = 'image_' | append: i -%}
+
+                        {% unless block.settings[_image] == blank %}
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                          <div class="image">
+                            {% render 'image-lazysize' with image: block.settings[_image], image_size: '270x', image_class: '', image_alt: 'Banner' %}
+                          </div>
+                        </div>
+                        {% endunless %}
+
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                {% when 'text' %}
+
+                  {% comment %} Custom Text Block {% endcomment %}
+                  <style>
+                    .custom-content-wrapper-{{ section.id }} .custom-item-{{ block.id }} .custom-block-heading-text {
+                      color: {{ block.settings.heading_color }};
+                    }
+
+                    .custom-content-wrapper-{{ section.id }} .custom-item-{{ block.id }} .custom-block-body-text {
+                      color: {{ block.settings.paragraph_color }};
+                    }
+                  </style>
+
+                  <div class="custom-block-text text-{{ block.settings.align_text }}">
+                    {% unless block.settings.heading_text == blank %}
+                      <h2 class="custom-block-heading-text">{{ block.settings.heading_text }}</h2>
+                    {% endunless %}
+
+                    {% unless block.settings.paragraph_text == blank %}
+                      <div class="custom-block-body-text">{{ block.settings.paragraph_text }}</div>
+                    {% endunless %}
+                  </div>       
+
+                {% when 'product' %}
+
+                  {% comment %} Custom Product Block {% endcomment %}
+                  {%- assign product = all_products[block.settings.product] -%}
+
+                  {% if product.title.size > 0 %}
+                    <div class="custom-block-product">
+                      <div class="custom-product-inner">
+
+                        {% if product.featured_image != blank %}
+                          <div class="image">
+                            <a href="{{ product.url }}" class="text-center{% if block.settings.show_spacing %} padding{% endif %}">
+                              {% render 'product-image-lazysize' with image: product.featured_image, image_size: '1024x', image_class: '', image_alt: product.title %}
+                            </a>
+                          </div>
+                        {% endif %}
+
+                        <div class="info">
+                          <div class="product-author">{{ product.vendor }}</div>
+                          <h5 class="product-name">{{ product.title }}</h5>
+                          {% render 'product-price' %}
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                  {% else %}
+                    <div class="custom-product-inner">
+                      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                      {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+
+                      <div class="info">
+                        <div class="product-author">Product vendor</div>
+                        <h5 class="product-name">Example Product Title</h5>
+                        <div class="product-price"><span class="price">$19.99</span></div>
+                      </div>
+                    </div>
+                  {% endif %}
+
+                {% when 'collection' %}
+
+                  {% comment %} Custom Collection Block {% endcomment %}
+                  {%- assign collection = collections[block.settings.collection] -%}
+
+                  {% unless collection == empty %}
+                    <div class="custom-block-collection text-center">
+                      <div class="custom-collection-inner">
+                        <div class="image">
+                          {% if block.settings.image != blank %}
+                            <a href="{{ collection.url }}">
+                              {% render 'image-lazysize' with image: block.settings.image, image_size: '1024x', image_class: '', image_alt: 'Banner' %}
+                            </a>
+                          {% else %}
+                            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {% endif %}
+                        </div>
+
+                        <div class="info">
+                          <a href="{{ collection.url }}">{{ collection.title }}</a>
+                        </div>
+                      </div>
+                    </div>
+
+                  {% else %}
+                    <div class="custom-collection-inner">
+                      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                      {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+
+                      <div class="info">
+                        <a href="#">Your collection's name</a>
+                      </div>
+                    </div>
+                  {% endunless %}
+
+                {% when 'html' %}
+                  {% comment %} Custom HTML Block {% endcomment %}
+                  {% unless block.settings.code == blank %}
+                    <div class="custom-block-html">{{ block.settings.code }}</div>
+                  {% endunless %}
+
+              {% endcase %}
+
+            </div>
+        </div>
+
+      {% endfor %}
+    </div>
+
+  </div>
+  
+  <style>
+  {% unless section.settings.background_color == blank %}
+    .custom-content-wrapper-{{ section.id }} {
+      background-color: {{ section.settings.background_color }};      
+    }
+  {% endunless %}
+</style>
+</div>

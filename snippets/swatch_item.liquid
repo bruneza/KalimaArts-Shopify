@@ -1,0 +1,80 @@
+{% comment %}
+  Set the extension of your color files below. Use 'png', 'jpeg', 'jpg' or 'gif'.
+{% endcomment %}
+
+{% assign file_extension = 'png' %}
+
+{% if swatch_item == blank %}
+<div class="swatch error">
+  <p>You must include the snippet swatch_item.liquid with the name of a product option.</p> 
+  <p>Use: <code>{% raw %}{% include 'swatch_item' with 'name of your product option here' %}{% endraw %}</code></p>
+  <p>Example: <code>{% raw %}{% include 'swatch_item' with 'Size' %}{% endraw %}</code></p>
+</div>
+{% else %}
+
+  {% assign found_option = false %}
+  {% assign is_color = false %}
+  {% assign option_index = 0 %}
+
+  {% for option in product.options %}
+    {% if option == swatch_item %}
+      {% assign found_option = true %}
+      {% assign option_index = forloop.index0 %}
+      {% assign downcased_option = swatch_item | downcase %}
+        {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+          {% assign is_color = true %}
+        {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% unless found_option %}
+
+  {% else %}
+    <div class="swatch-col">
+      <div class="swatch {{swatch_item | downcase}} clearfix" data-option-index="{{ option_index }}">
+        
+        {% assign values = '' %}
+        {% for variant in product.variants %}
+        
+          {% capture _image_html %}
+            {{ variant.image | product_img_url: '390x' }}
+          {% endcapture %}
+
+          {% if _image_html contains 'assets/no-image' %}
+            {% capture _image_html %}
+              {{ '//cdn.shopify.com/s/files/1/2704/5152/t/9/assets/default-image.jpg?8778941885593112869' }}
+            {% endcapture %} 
+          {% endif %}
+        
+          {% assign value = variant.options[option_index] %}
+        
+          {% unless values contains value %}
+            {% assign values = values | join: ',' %}
+            {% assign values = values | append: ',' | append: value %} 
+            {% assign values = values | split: ',' %}
+        
+            <div data-value="{{ value | escape }}" class="swatch-element {% if is_color %}color image-{{ settings.swatches_color_image}}{% endif %} {{ value | handle }}">
+              <input{% if is_color %} data-swatch-image="{{_image_html}}"{% endif %} type="radio" name="option-{{ option_index }}" value="{{ value | escape }}" />
+              
+              {% if is_color %}
+                {% if settings.swatches_color_image %}
+                  <label class="lazyload" data-src="{{ _image_html }}" data-swatch-image="{{_image_html}}" style="background-image: url({{ variant.image | product_img_url: '80x' }})"></label>
+                {% else %}
+                  <label data-swatch-image="{{_image_html}}" style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }})"></label>
+                {% endif %}
+              
+              {% else %}
+                <label for="swatch-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+              {% endif %}
+            </div>
+        
+          {% endunless %}
+        
+        {% endfor %}
+        
+      </div>
+    </div>
+
+  {% endunless %}
+
+{% endif %}

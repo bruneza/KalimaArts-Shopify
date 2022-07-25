@@ -1,0 +1,61 @@
+{% include 'multi-lang-source' %}
+
+{% if settings.currency_type != '3' or locale_selector %}
+  <div id="language-popup" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1" data-source="{{ settings.currency_type }}">
+    
+    <div class="modal-dialog fadeIn animated" style="width: 350px; margin: 0 calc((100% - 350px) / 2);">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <span class="language-close" title="{{'products.product.close_quick_shop' | t }}" data-dismiss="modal" aria-hidden="true">{%- render 'theme-icon', type: 'cancel-2' -%}</span>
+        </div>
+
+        <div class="modal-body">
+          <div class="language-inner source-{{ settings.currency_type }}">
+            {% if settings.currency_type != '3' %}
+              <div class="currency-position">
+                <h4>{{'general.text.currency'| t }}</h4>
+                {% include 'currencies-switcher' %}
+              </div>
+            {% endif %}
+
+            {% if locale_selector %}
+              <div class="translate-position">
+                <h4>{{'general.text.language'| t }}</h4>
+
+                {% if settings.m_lang_type == 'shopify-native' %}
+                  {% form 'localization', class: 'selectors-form', data-disclosure-form: '' %}
+                    <input type="hidden" class="lang_to" name="lang_to" value="{{ shop.url }}" />
+                    <div class="selectors-form__item">
+                      <div class="disclosure" data-disclosure-locale>
+                        <a class="disclosure_wrapper" href="javascript:;">
+                          <span class="disclosure_code">{{ form.current_locale.endonym_name }}</span>
+                          <span class="expand">{%- render 'theme-icon', type: 'angle-down' -%}</span>
+                        </a>
+                          
+                        <ul id="lang-list" class="disclosure-list" data-disclosure-list>
+                          {% for locale in form.available_locales %}
+                            <li class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}">
+                              <span class="disclosure-list__option{% if locale.primary %} disclosure-list__item--primary{% endif %}" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
+                                {{ locale.name }}
+                              </span>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                        <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}" data-disclosure-input />
+                      </div>
+                    </div>
+                  {%- endform -%}
+                {% endif %}
+
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+{% endif %}

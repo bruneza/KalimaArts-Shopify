@@ -1,0 +1,226 @@
+{% include 'products-listing-tabs-snippet' %}
+
+{% schema %}
+{
+  "name": "Products Listing Tabs",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Created by 'Products Listing Tabs' section"
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Section Label",
+      "default": "Products Listing Tabs"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_mobile",
+      "label": "Visibility: Hide for Mobile"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Section Layout Mode",
+      "default": "boxed",
+      "options": [
+        { "value": "boxed", "label": "Boxed" },
+        { "value": "full", "label": "Wide" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "padding_section",
+      "label": "Padding Section",
+      "default": "yes",
+      "options": [
+        { "value": "yes", "label": "Yes" },
+        { "value": "no", "label": "No" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "number_active",
+      "label": "Default active tab",
+      "min": 1,
+      "max": 10,
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "text",
+      "default": "Newarrivals"
+    },
+    {
+      "type": "header",
+      "content": "Block settings"
+    },
+    {
+      "type": "range",
+      "id": "limited",
+      "label": "Total items",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Number of items per row",
+      "info": "Only for Block Content is Product"
+    },
+    {
+      "type": "range",
+      "id": "item_per_row",
+      "label": "Desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "item_per_row_tablet",
+      "label": "Tablet",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "item_per_row_mobile",
+      "label": "Mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Heading",
+          "default": "Tab title"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection item"
+        }
+      ]
+    },
+    {
+      "type": "special-product",
+      "name": "Special product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Heading",
+          "default": "Tab title"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "header",
+          "content": "Special product"
+        },
+        {
+          "type": "select",
+          "id": "special_product_position",
+          "label": "Poisition",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ]
+        },
+        {
+          "id": "product",
+          "type": "product",
+          "label": "Product"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Product with image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Heading",
+          "default": "Tab title"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "header",
+          "content": "Block image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Poisition",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ]
+        },
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        },
+        {
+          "id": "image_size",
+          "type": "text",
+          "label": "image size (pixels)",
+          "default": "385x620"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products Listing Tabs",
+      "category": "Products Tabs",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

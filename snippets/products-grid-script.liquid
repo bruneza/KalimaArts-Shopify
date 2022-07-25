@@ -1,0 +1,77 @@
+<script>
+  jQuery(document).ready(function($) {
+    var _sections = new theme.Sections();
+    _sections.register('product-grid',function(){
+          
+      var _type = $('#product-grid-{{ section.id }} .product-grid-inner').attr('data-type');
+
+      if(_type == 'carousel'){
+        if($('#product-grid-{{ section.id }} .product-grid-content').hasClass('block-type-product-listing')){
+          var _item = $('.block-type-product-listing .product-grid-inner').attr('data-item-per-row');
+          
+          if( typeof _item == 'undefined' ){
+           	 _item = 2;
+          }
+          
+          jQuery("#product-grid-{{ section.id }} .product-listing-carousel").on('initialize.owl.carousel initialized.owl.carousel change.owl.carousel changed.owl.carousel', function(e) {
+              var current = e.relatedTarget.current()
+              var items = $(this).find('.owl-stage').children()
+              var add = e.type == 'changed' || e.type == 'initialized'
+
+              items.eq(e.relatedTarget.normalize(current )).toggleClass('current', add)
+            }).owlCarousel({
+              nav			: {{ _navigator }}
+              ,dots 		: {{ _paging }}
+              ,items		: _item
+              ,rtl			: jQuery('body').data('rtl')
+              ,margin		: {{ _padding }}
+              ,responsive : {
+                0:{
+                    items: 1
+                }
+                ,576:{
+                    items: 2
+                }
+                ,992:{
+                    items: _item
+                }                                                                
+              }
+              ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+          });
+        }
+      
+        else{
+          jQuery("#product-grid-{{ section.id }} .product-grid-carousel").on('initialize.owl.carousel initialized.owl.carousel change.owl.carousel changed.owl.carousel', function(e) {
+              var current = e.relatedTarget.current()
+              var items = $(this).find('.owl-stage').children()
+              var add = e.type == 'changed' || e.type == 'initialized'
+
+              items.eq(e.relatedTarget.normalize(current )).toggleClass('current', add)
+            }).owlCarousel({
+              nav			: {{ _navigator }}
+              ,dots 		: {{ _paging }}
+              ,items		: {{ _item_per_row }}
+              ,rtl			: jQuery('body').data('rtl')
+              ,margin		: {{ _padding }}
+              ,responsive 	: {
+                  0:{
+                      items: 1
+                  }
+                  ,375:{
+                      items: {{ _item_per_row_mobile }}
+                  }
+                  ,768:{
+                      items: {{ _item_per_row_tablet }}
+                  }
+                  ,1024:{
+                      items: {{ _item_per_row }}
+                  }                                                                
+              }
+              ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+          });
+        }
+      }              
+                       
+    });        
+  })
+</script>

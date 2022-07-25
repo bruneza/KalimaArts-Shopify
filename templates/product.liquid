@@ -1,0 +1,18 @@
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+{% assign _template = settings.product_template_default %}
+
+{% case _template  %}
+
+  {% when 'simple' %}
+    {% section 'product-template' %}
+  {% when 'extended' %}
+    {% section 'product-extended-template' %}
+  {% when 'bundle' %}
+    {% section 'product-bundle-template' %}
+  {% else %}
+    {% section 'product-redirect-template' %}
+
+{% endcase %}

@@ -1,0 +1,96 @@
+{% include 'policies-snippet' %}
+
+{% schema %}
+{
+  "name": "Policies",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Created by 'Policies' section"
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Section Label",
+      "default": "Policies"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "id": "cssclass",
+      "type": "text",
+      "label": "Extra CSS Class",
+      "default": "dashbuy-section"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_mobile",
+      "label": "Visibility: Hide for Mobile"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Section Layout Mode",
+      "default": "boxed",
+      "options": [
+        { "value": "boxed", "label": "Boxed" },
+        { "value": "full", "label": "Wide" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "image_svg",
+          "label": "SVG"
+        },
+        {
+          "type": "text",
+          "id": "image_size",
+          "label": "Image size (pixels)",
+          "default": "45x35",
+          "info": "Default is 45x35 pixels"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Policy's title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "subtitle",
+          "default": "Policy's subtitle"
+        }
+      ]
+    }
+    
+  ],
+  "presets": [
+    {
+      "name": "Policies",
+      "category": "Advanced layout",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

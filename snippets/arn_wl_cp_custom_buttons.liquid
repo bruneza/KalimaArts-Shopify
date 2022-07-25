@@ -1,0 +1,67 @@
+{% case type %}
+    {% when 'wl_add_btn' %}
+    <a data-arn-action="add" data-handle='{{ product_handle }}' class='{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.wishlist_add_class }} {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon.icon_id }} {% if shop.metafields.arena.wl_cp_settings.wishlist_settings.wishlist_enable == false %}disabled{% endif %}' href="javascript:;">
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon.height }}" class="arn_icon arn_icon-add-wishlist">
+            <use xlink:href="#arn_icon-add-wishlist"></use>
+        </svg>
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.add_class_icon.height }}" class="arn_icon arn_icon-preloader">
+            <use xlink:href="#arn_icon-preloader"></use>
+        </svg><span>{{ 'products.product.add_to_wishlist' | t }}</span>
+    </a>
+    {% when 'wl_show_btn' %}
+    <a data-arn-action="show" class='{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.wishlist_show_class }} {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.show_class_icon.icon_id }} {% if shop.metafields.arena.wl_cp_settings.wishlist_settings.wishlist_enable == false %}disabled{% endif %}' href="javascript:;">
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.show_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.show_class_icon.height }}" class="arn_icon arn_icon-show-wishlist">
+            <use xlink:href="#arn_icon-show-wishlist"></use>
+        </svg>
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.show_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.show_class_icon.height }}" class="arn_icon arn_icon-preloader">
+            <use xlink:href="#arn_icon-preloader"></use>
+        </svg>
+        {% if shop.metafields.arena.wl_cp_settings.general_settings.show_number_status == true %}
+        <span class="number">
+            <span class="n-item">0</span>
+        </span>
+        {% endif %}
+    </a>
+    {% when 'wl_remove-btn' %}
+    <a data-arn-action="remove" data-handle='{{ product_handle }}' class='{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.wishlist_remove_class }} {{ shop.metafields.arena.wl_cp_settings.wishlist_settings.remove_class_icon.icon_id }} {% if shop.metafields.arena.wl_cp_settings.wishlist_settings.wishlist_enable == false %}disabled{% endif %}' href="javascript:;">
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.remove_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.remove_class_icon.height }}" class="arn_icon arn_icon-remove-wishlist">
+            <use xlink:href="#arn_icon-remove-wishlist"></use>
+        </svg>
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.remove_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.wishlist_settings.remove_class_icon.height }}" class="arn_icon arn_icon-preloader">
+            <use xlink:href="#arn_icon-preloader"></use>
+        </svg>
+    </a>
+    {% when 'cp_add_btn' %}
+    <a data-arn-action="add" data-handle='{{ product_handle }}' class='{{ shop.metafields.arena.wl_cp_settings.compare_settings.compare_add_class }} {{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon.icon_id }} {% if shop.metafields.arena.wl_cp_settings.compare_settings.compare_enable == false %}disabled{% endif %}' href="javascript:;">
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon.height }}" class="arn_icon arn_icon-add-compare">
+            <use xlink:href="#arn_icon-add-compare"></use>
+        </svg>
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.compare_settings.add_class_icon.height }}" class="arn_icon arn_icon-preloader">
+            <use xlink:href="#arn_icon-preloader"></use>
+        </svg><span>{{ 'products.product.add_compare' | t }}</span>
+    </a>
+    {% when 'cp_show_btn' %}
+    <a data-arn-action="show" class='{{ shop.metafields.arena.wl_cp_settings.compare_settings.compare_show_class }} {{ shop.metafields.arena.wl_cp_settings.compare_settings.show_class_icon.icon_id }} {% if shop.metafields.arena.wl_cp_settings.compare_settings.compare_enable == false %}disabled{% endif %}' href="javascript:;">
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.compare_settings.show_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.compare_settings.show_class_icon.height }}" class="arn_icon arn_icon-show-compare">
+            <use xlink:href="#arn_icon-show-compare"></use>
+        </svg>
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.compare_settings.show_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.compare_settings.show_class_icon.height }}" class="arn_icon arn_icon-preloader">
+            <use xlink:href="#arn_icon-preloader"></use>
+        </svg>
+        {% if shop.metafields.arena.wl_cp_settings.general_settings.show_number_status == true %}
+        <span class="number">
+            <span class="n-item">0</span>
+        </span>
+        {% endif %}
+    </a>
+    {% when 'cp_remove_btn' %}
+    <a data-arn-action="remove" data-handle='{{ product_handle }}' class='{{ shop.metafields.arena.wl_cp_settings.compare_settings.compare_remove_class }} {{ shop.metafields.arena.wl_cp_settings.compare_settings.remove_class_icon.icon_id }} {% if shop.metafields.arena.wl_cp_settings.compare_settings.compare_enable == false %}disabled{% endif %}' href="javascript:;">
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.compare_settings.remove_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.compare_settings.remove_class_icon.height }}" class="arn_icon arn_icon-remove-compare">
+            <use xlink:href="#arn_icon-remove-compare"></use>
+        </svg>
+        <svg width="{{ shop.metafields.arena.wl_cp_settings.compare_settings.remove_class_icon.width }}" height="{{ shop.metafields.arena.wl_cp_settings.compare_settings.remove_class_icon.height }}" class="arn_icon arn_icon-preloader">
+            <use xlink:href="#arn_icon-preloader"></use>
+        </svg>
+    </a>
+{% endcase %}
+

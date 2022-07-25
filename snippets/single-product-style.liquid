@@ -1,0 +1,94 @@
+{%- case type -%}
+
+  {%- when '1' -%}
+    {% capture background_section %}
+      {% if _bg_style == 'color' %}
+        style="background: {{ _bg_color }};"
+      {% else %}
+        {% unless _bg_image == blank %}
+          {% if _lazyload %}
+            data-bgset = "{{ _bg_image | img_url: '1920x' }} 1920w"
+          {% else %}
+            style="background: url({{ _bg_image | img_url: '1920x' }});"
+          {% endif %}
+        {% endunless %}
+      {% endif %}
+    {% endcapture %}
+
+    <div class="single-product-{{ _type }}">
+      {% for block in section.blocks %}
+      {%- assign _product = block.settings.product -%}
+
+        {% unless _product == blank %}
+          {%- assign _text_1 = block.settings.text_1 -%}  
+          {%- assign _text_2 = block.settings.text_2 -%}  
+          {%- assign _text_3 = block.settings.text_3 -%}
+
+          <div class="sp-item sp-item-{{ block.id }}{% if _lazyload and _bg_style == 'image' %} lazyload{% endif %}" {{ background_section | strip }}>
+            {% if settings.left_column_style == 'none' and _layout == 'full' %}<div class="container">{% endif %}
+
+            {% assign product = all_products[_product] %}
+            {% include 'single-product-item' %}
+
+            <style type="text/css">
+              .single-product-list .sp-item-{{ block.id }} .text-1,
+              .single-product-list .sp-item-{{ block.id }} .text-2,
+              .single-product-list .sp-item-{{ block.id }} .text-3 { color: {{ block.settings.text_color }};}
+            </style>
+
+            {% if settings.left_column_style == 'none' and _layout == 'full' %}</div>{% endif %}
+          </div>
+
+        {% else %}
+          <div class="sp-item">
+            {{ emptyProduct01 }}
+          </div>
+
+        {% endunless %}
+
+      {% endfor %}
+    </div>
+
+  {%- when '2' -%}
+    <div class="single-product-{{ _type }}">
+      {% for block in section.blocks %}
+      {%- assign _product = block.settings.product -%}
+
+        {% unless _product == blank %}
+          <div class="sp-item sp-item-{{ block.id }}">
+            
+            {%- assign product = all_products[_product] -%}
+            {% include 'single-product-item' %}
+
+          </div>
+
+        {% else %}
+          {{ emptyProduct02 }}
+
+        {% endunless %}
+
+      {% endfor %}
+    </div>
+
+  {%- when '3' -%}
+    <div class="single-product-{{ _type }}{% if _type == 'row' %} row justify-content-center{% endif %}">
+      {% for block in section.blocks %}
+      {%- assign _product = block.settings.product -%}
+
+        {% unless _product == blank %}
+          <div class="sp-item{% if _type == 'row' %} col-md-6 col-sm-12 col-12{% endif %}">
+            
+            {%- assign product = all_products[_product] -%}
+            {% include 'single-product-item' %}
+
+          </div>
+
+        {% else %}
+          {{ emptyProduct02 }}
+
+        {% endunless %}
+
+      {% endfor %}
+    </div>
+
+{%- endcase -%}

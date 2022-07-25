@@ -1,0 +1,130 @@
+{% include 'nav-label' %}
+
+{% if _highlight_item %}
+  {% assign _highlight_vertical_menu = section.settings.vertical_nav_highlight_item | split: ';' | uniq %}
+  {% assign _work_handles = "" %}
+
+  {% for _handle in _highlight_vertical_menu %}
+      {% capture _striped_handle %}{{  _handle }}{% endcapture %}
+      {% if _work_handles == blank %}
+          {% assign _work_handles = _striped_handle %}
+      {% else %}
+          {% assign _work_handles = _work_handles | append: '[|||]' | append: _striped_handle %}
+      {% endif %}
+  {% endfor %}
+  {% assign _highlight_vertical_menu = _work_handles | split: '[|||]' %}
+
+{% endif %}
+
+{% assign submenu = l.title | handleize %}
+{% if linklists[submenu].links.size > 0 %}
+
+  {% if settings.use_super_megamenu == false %}
+    {% include 'vertical-dropdown-menu' %}
+
+  {% else %}
+	{% assign have_super_menu = false %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'mega-vertical-trigger' %}
+        {% assign super_menu_handle = block.settings.mega_navigation %}
+
+        {% if super_menu_handle == l.title %}
+          {% assign have_super_menu = true %}
+
+          {% if have_super_menu == true %}
+            {% assign number = forloop.index %}
+
+            <li id="{{ super_menu_handle | handleize }}" data-id="{{ super_menu_handle | handleize }}" class="dropdown mega-menu{% if l.active %} active{% endif %}{% if _highlight_item and _highlight_vertical_menu contains l.title %} highlight{% endif %}"{{ block.shopify_attributes }}>
+              <div class="dropdown-inner">
+                <a href="{{ l.url }}" class="dropdown-link">
+                  {% if section.settings.vertical_nav_linklist_icon %}
+                  	<img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ l.handle | append: '.png' | asset_url }}" alt="" />
+                  {% endif %}
+                  <span>{{ l.title }}</span>
+                  {% include 'menu-label' %}
+                </a>
+                <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+              </div>
+              <template class="temp-id">{% include 'vertical-mega-menu' %}</template>
+            </li>
+
+          {% break %}
+          {% endif %}
+
+        {% endif %}	
+
+      {% endif %}
+    {% endfor %}
+
+	{% unless have_super_menu == true %}
+      {% include 'vertical-dropdown-menu' %}
+	{% endunless %}  
+
+  {% endif %}
+
+{% else %}
+
+  {% if settings.use_super_megamenu == false %}
+    <li class="{% if l.active %}active{% endif %}{% if _highlight_item and _highlight_vertical_menu contains l.title %} highlight{% endif %}">
+      <a href="{{ l.url }}">
+        {% if section.settings.vertical_nav_linklist_icon %}
+          <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ l.handle | append: '.png' | asset_url }}" alt="" />
+        {% endif %}
+        <span>{{ l.title }}</span>   
+        {% include 'menu-label' %}
+      </a>
+    </li>
+
+  {% else %}
+
+	{% assign have_super_menu = false %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'mega-vertical-trigger' %}
+        {% assign super_menu_handle = block.settings.mega_navigation %}
+
+        {% if super_menu_handle == l.title %}
+          {% assign have_super_menu = true %}
+
+          {% if have_super_menu == true %}
+            {% assign number = forloop.index %}
+
+            <li id="{{ super_menu_handle | handleize }}" data-id="{{ super_menu_handle | handleize }}" class="dropdown mega-menu{% if l.active %} active{% endif %}{% if _highlight_item and _highlight_vertical_menu contains l.title %} highlight{% endif %}"{{ block.shopify_attributes }}>
+              <div class="dropdown-inner">
+                <a href="{{ l.url }}" class="dropdown-link">
+                  {% if section.settings.vertical_nav_linklist_icon %}
+                  	<img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ l.handle | append: '.png' | asset_url }}" alt="" />
+                  {% endif %}
+                  <span>{{ l.title }}</span>
+                  {% include 'menu-label' %}
+                </a>
+                <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+              </div>
+
+              <template class="temp-id">{% include 'vertical-mega-menu' %}</template>
+            </li>
+
+          {% break %}
+          {% endif %}
+
+        {% endif %}
+
+      {% endif %}
+    {% endfor %}
+
+	{% unless have_super_menu == true %}
+      <li class="{% if l.active %}active{% endif %}{% if _highlight_item and _highlight_vertical_menu contains l.title %} highlight{% endif %}">
+        <a href="{{ l.url }}">
+          {% if section.settings.vertical_nav_linklist_icon %}
+            <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ l.handle | append: '.png' | asset_url }}" alt="" />
+          {% endif %}
+          <span>{{ l.title }}</span>
+          {% include 'menu-label' %}
+        </a>
+      </li>
+	{% endunless %}
+
+  {% endif %}
+
+{% endif %}

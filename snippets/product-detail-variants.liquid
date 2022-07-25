@@ -1,0 +1,73 @@
+<div id="product-action-{{ product.id }}"  class="options">
+  {%- assign button_arr = settings.swatch_button | downcase | replace: ' ', '_' -%}
+  {%- assign color_arr  = settings.swatch_color  | downcase | replace: ' ', '_' -%}
+  {%- assign image_arr  = settings.swatch_image  | downcase | replace: ' ', '_' -%}
+  {%- assign swatch_styles = button_arr | append: ' , ' | append: color_arr | append: ' , ' | append: image_arr -%}
+
+  {%- for option in product.options -%}
+    {%- assign _option = option | downcase | truncatewords: 3, "" | replace: ' ', '_' -%}
+
+    {%- unless _option contains 'title' -%}
+
+      {%- if swatch_styles contains _option -%}
+        {%- liquid
+          assign is_color  = false
+          assign use_image = false
+          if image_arr contains _option
+          assign swatch_type = 'image'
+          assign swt_shape   = settings.image_swatch_shape
+          assign is_color    = true
+          assign use_image   = true
+
+          elsif color_arr contains _option
+          assign swatch_type = 'color'
+          assign swt_shape   = settings.color_swatch_shape
+          assign is_color    = true
+
+          else
+          assign swatch_type = 'button'
+          assign swt_shape   = settings.button_swatch_shape
+          endif 
+        -%}
+
+        {% include 'swatch' with option, is_color: is_color, use_image: use_image, swatch_type: swatch_type, swt_shape: swt_shape %}
+
+      {%- else -%}
+        <script>
+          jQuery(window).on('load', function(){
+            setTimeout(function(){
+              var _check_option = '{{_option}}';
+              $('.group-cw .selector-wrapper').each(function() {
+                var _current_option = $(this).find('label').html().toLowerCase().replaceAll(' ','_');
+                if(_check_option == _current_option){
+                  $(this).css('display','block');
+                }
+              });     
+            },300);
+          });
+        </script>
+      {%- endif -%}
+
+    {%- endunless -%}
+
+  {%- endfor -%}
+
+  <div class="variants-wrapper clearfix"> 
+    <select id="product-select-{{ product.id }}" name="id" style="display:none;">
+      {%- for variant in product.variants -%}
+
+      {%- if variant.available -%}
+      <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+
+      {%- else -%}
+      <option disabled="disabled">
+        {{ variant.title }} - {{'products.product.sold_out' | t }}
+      </option>
+
+      {%- endif -%}
+
+      {%- endfor -%}
+    </select>
+  </div>
+
+</div>

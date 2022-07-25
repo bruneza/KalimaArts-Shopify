@@ -1,0 +1,135 @@
+<div class="{{ _sb_class }}">
+  <div id="sidebar-blog" class="sidebar">
+    
+    {% for block in section.blocks %}
+    
+      {% case block.type %}
+  
+        {% when 'search' %}
+
+          <div class="sb-widget">
+            <div class="search-blog">
+
+              <form action="/search" method="get">
+                <input type="hidden" name="type" value="article" />
+                <input type="text" name="q" class="form-control"  placeholder="{{ block.settings.search_blog_placeholder }}" autocomplete="off" />
+                <button type="submit">{{ settings.search_font_icon }}</button>
+              </form>
+
+            </div>
+          </div>
+    
+    	{% when 'about' %}
+          <div class="sb-widget">
+            <div class="sb-about-blog">
+
+              {% unless block.settings.about_blog_title == blank %}
+                <h5 class="sb-title">{{ block.settings.about_blog_title }}</h5>
+              {% endunless %}
+
+              {% unless block.settings.about_blog_caption == blank %}
+              <div class="caption">{{ block.settings.about_blog_caption}}</div>
+              {% endunless %}
+
+            </div>
+          </div>
+
+        {% when 'categories' %}
+          <div class="sb-widget">
+            <div class="sb-menu">
+
+              {% unless block.settings.blog_categories_title == blank %}
+                <h5 class="sb-title">{{ block.settings.blog_categories_title }}</h5>
+              {% endunless %}
+
+              <ul class="blog-menu">
+                {% for l in linklists[block.settings.blog_categories_menu].links %}
+                  {% assign submenu = l.title | handleize %}
+
+                  {% if linklists[submenu].links.size > 0 %}
+                    {% include 'sb-dropdown-menu' %}
+                  {% else %}
+                    <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+                  {% endif %}
+
+                {% endfor %}
+              </ul>
+
+            </div>
+          </div>
+
+        {% when 'recent-posts' %}
+          <div class="sb-widget">
+            <div class="sb-blog-posts">
+
+              {% unless block.settings.sidebar_post_title == blank %}
+                <h5 class="sb-title">{{ block.settings.sidebar_post_title }}</h5>
+              {% endunless %}
+
+              {%- assign blog = blogs[block.settings.sidebar_post] -%}
+
+              {% unless blog.articles_count == 0 %}
+                <div class="post-list">
+
+                  {% for article in blog.articles limit: block.settings.sidebar_post_limit %}
+                    <div class="post-item">
+
+                      <div class="post-item-inner">
+                        {% if article.image %}
+                          <div class="post-image">
+                            <a href="{{ article.url }}">
+                              <img src="{{ article | img_url: '330x' }}" alt="Blog" />
+                            </a>
+                          </div>
+                        {% endif %}
+
+                        <div class="post-content">
+                          <div class="info">
+                            <h6><a href="{{ article.url }}">{{ article.title }}</a></h6>
+                          </div>
+
+                          <div class="meta-data">
+                            <span class="date">{{ article.published_at | date: "%d %b, %Y" }}</span>
+                          </div>
+                        </div>
+                      </div>         
+
+                    </div>
+                  {% endfor %}
+
+                </div>
+              {% endunless %}
+
+            </div>
+          </div>
+
+        {% when 'tags' %}
+          <div class="sb-widget">
+            <div class="sb-blog-tag">
+
+              {% unless block.settings.sidebar_tags_title == blank %}
+                <h5 lass="sb-title">{{ block.settings.sidebar_tags_title }}</h5>
+              {% endunless %}
+
+              <ul class="list-inline">
+                <li><a href="{{ blog.url }}">All</a></li>
+                {% for tag in blog.all_tags %}
+
+                  {% if current_tags contains tag %}
+                    <li class="active">{{ tag | link_to_remove_tag: tag }}</li>
+                  {% else %}
+                    <li>{{ tag | link_to_tag: tag }}</li>
+                  {% endif %}
+
+                {% endfor %}
+              </ul>
+
+            </div>
+          </div>
+    
+      {% endcase %}
+
+    {% endfor %}
+    
+  </div>
+</div>

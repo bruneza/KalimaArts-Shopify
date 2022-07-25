@@ -1,0 +1,45 @@
+<div id="sidebar" class="left-column-container {{ _sb_class }}">
+  
+  {% assign _sb_filters_style = section.settings.sb_filters_style %}
+  
+  {% if _sb_filters_position == 'sidebar' %}
+    <div class="f-close d-lg-none" title="Close">{%- render 'theme-icon', type: 'delete' -%}</div>
+  {% endif %}
+  
+  {% if _sb_filters == 'tags' %}
+    <div class="sb-widget filter-sidebar position-sidebar style-{{ _sb_filters_style }}">
+      <div class="sb-filter-wrapper">
+        {% include 'filter-tags' %}
+      </div>
+    </div>
+  {% endif %}
+  
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+  
+      {%- when 'collections' -%}
+        {%- include 'sidebar-snippet', type: 'list-collections' -%}
+  
+      {%- when 'heading_filter' -%}
+        <div class="sb-widget d-none d-lg-block">
+          <div class="sb-heading-filter">
+            {% assign _heading_filter = block.settings.heading_filter %}
+            {% unless _heading_filter == blank %}<h5 class="sb-title">{{ _heading_filter }}</h5>{% endunless %}
+          </div>
+        </div>
+  
+      {%- when 'filter' -%}
+        {% if _sb_filters_position == 'sidebar' and _sb_filters == 'groups' %}
+          {% include 'filter-sidebar' %}
+        {% endif %}
+  
+      {%- when 'banner' -%}
+        {%- include 'sidebar-snippet', type: 'banner' -%}
+  
+      {%- when 'products-listing' -%}
+        {%- include 'sidebar-snippet', type: 'products-listing' -%}
+  
+      {%- endcase -%}
+  {%- endfor -%}
+  
+</div>

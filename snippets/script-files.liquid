@@ -1,0 +1,9 @@
+<!--[if (gt IE 9)|!(IE)]><!--><script crossorigin="anonymous" src="{{ 'theme-sections.min.js' | asset_url  }}" defer="defer"></script>
+<!--[if lte IE 9]><script src="{{ 'theme-sections.min.js' | asset_url }}"></script><![endif]-->
+
+<script crossorigin="anonymous" src="{{ 'jquery.plugin.min.js' | asset_url }}" defer></script>
+
+{% if settings.ajax_search == 'default-theme' %}
+<script crossorigin="anonymous" src="{{ 'bc.ajax-search.js' | asset_url }}" defer></script>
+{% endif %}
+<script crossorigin="anonymous" src="{{ 'bc.script.js' | asset_url }}"></script>

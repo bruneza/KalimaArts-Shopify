@@ -1,0 +1,120 @@
+{% comment %}
+Read more here https://github.com/montalvomiguelo/starter-debut/blob/liquid-variables/src/snippets/liquid-variables.liquid
+This liquid part will be split into a snippet liquid-var{%endcomment%}
+
+{%- liquid
+    assign rgba-text-header-color-1         = settings.header_text_color| color_modify: 'alpha', 0.1
+    assign rgba-text-header-color-6         = settings.header_text_color| color_modify: 'alpha', 0.6
+    assign rgba-text-header-color-8         = settings.header_text_color| color_modify: 'alpha', 0.8
+    
+    assign rgba-nav-link-color-3            = settings.nav_link_color| color_modify: 'alpha', 0.3
+    assign rgba-nav-link-color-6            = settings.nav_link_color| color_modify: 'alpha', 0.6
+    assign rgba-main-color-text-1           = settings.main_text_color| color_modify: 'alpha', 0.1
+
+-%}
+
+<style>
+  :root {
+    --body-font-size:              {{ settings.body_font_size }}px; 
+    --size-h1:                     {{ settings.heading_size_1 }}px;
+    --size-h2:                     {{ settings.heading_size_2 }}px;
+    --size-h3:                     {{ settings.heading_size_3 }}px; 
+    --size-h4:                     {{ settings.heading_size_4 }}px;
+    --size-h5:                     {{ settings.heading_size_5 }}px;
+    --size-h6:                     {{ settings.heading_size_6 }}px;   
+    --top-font-size:               {{ settings.top_bar_size }}px;
+    --product-font-size:           {{ settings.product_title_size }}px;
+    --product-price-size:          {{ settings.product_price_size }}px;
+    --product-detail-title-size:   {{ settings.product_detail_title_size }}px;
+    --nav-font-size:               {{ settings.nav_size }}px;
+    --nav-sub-font-size:           {{ settings.nav_sub_size }}px;
+    --topbar-bg-color:             {{ settings.topbar_bg_color }};
+    --main-color:                  {{ settings.main_color }};
+    --main-color-text:             {{ settings.main_text_color }};
+    --header-backgound:            {{ settings.header_bg_color }};
+    --text-header-color:           {{ settings.header_text_color }};
+    --header-text-color-hover:     {{ settings.header_text_color_hover }};
+    --bg-number-icon:              {{ settings.bg_color_number_icon }};
+    --text-number-icon:            {{ settings.color_number_icon }};
+    --header-bg-mobile-color:      {{ settings.header_bg_mobile_color }};
+    --nav-link-color:              {{ settings.nav_link_color }}; 
+    --nav-link-hover-color:        {{ settings.nav_hover_color }};
+    --nav-dropdown-background:     {{ settings.dropdown_bg_color }}; 
+    --nav-dropdown-link-color:     {{ settings.dropdown_item_color }}; 
+    --nav-dropdown-link-hover-color: {{ settings.dropdown_item_color_hover }};
+    --border-main-nav:            {{ settings.nav_bg_nav_link_hover }};
+    --label-sale-color:           {{ settings.menu_sale_label_color }};
+    --label-sale-bg:              {{ settings.menu_sale_label_bg }};
+    --label-new-color:            {{ settings.menu_new_label_color }};
+    --label-new-bg:               {{ settings.menu_new_label_bg }};
+    --label-hot-color:            {{ settings.menu_hot_label_color }};
+    --label-hot-bg:               {{ settings.menu_hot_label_bg }};
+    --body-background-color:      {{ settings.body_bg }};
+    --body-second-color:          {{ settings.miscellaneous_color }};
+    --body-mode-color:            {{ settings.body_bg_color }};
+    --body-label-sale-color:      {{ settings.saleoff_color }}; 
+    --body-label-sale-background: {{ settings.saleoff_bg_color }}; 
+    --body-label-new-color:      {{ settings.lb_new_color }}; 
+    --body-label-new-background: {{ settings.lb_new_bg_color }};
+    --body-general-color:        {{ settings.body_general_color }}; 
+    --body-light-color:          {{ settings.body_light_color }}; 
+    --body-title-color:          {{ settings.body_title_color }}; 
+    --body-link-color:           {{ settings.body_link_color }}; 
+    --body-border-color:         {{ settings.body_border_color }}; 
+    --body-ratting-empty-color:  {{ settings.ratting_color_empty }};  
+    --body-title-product:        {{ settings.product_title_color }}; 
+    --body-price-color:          {{ settings.product_price_color }}; 
+    --body-price-sale-color:     {{ settings.product_sale_price_color }}; 
+    --body-price-sold-out-color: {{ settings.product_sold_out_price_color }}; 
+    --breadcrumb-height:         {{ settings.breadcrumb_height }}px;  
+    --breadcrumb-bg-color:       {{ settings.breadcrumb_bg_color }};
+    --color_swatch_width:        {{ settings.color_swatch_width }}px;
+    --color_swatch_height:       {{ settings.color_swatch_height }}px;
+    --image_swatch_width:        {{ settings.image_swatch_width }}px;
+    --image_swatch_height:       {{ settings.image_swatch_height }}px; 
+    --footer-background-color:   {{ settings.footer_bg }}; 
+    --footer-static-text-color:  {{ settings.footer_text_color }}; 
+    --footer-link-color:         {{ settings.footer_color }}; 
+    --footer-hover-color:        {{ settings.footer_color_hover }};
+    --footer-copyright-bg:       {{ settings.footer_bg_copyright }}; 
+    --footer-copyright-color:    {{ settings.footer_color_copyright }}; 
+    --button-btn1:               {{ settings.btn1_bg }};
+    --button-btn1-txt:           {{ settings.btn1_txt }}; 
+    --button-btn1-border:        {{ settings.btn1_border }}; 
+    --button-hover-btn1:         {{ settings.btn1_bg_hover }}; 
+    --button-hover-btn1-txt:     {{ settings.btn1_txt_hover }};
+    --button-hover-btn1-border:  {{ settings.btn1_border_hover }}; 
+    --button-btn2:               {{ settings.btn2_bg }}; 
+    --button-btn2-txt:           {{ settings.btn2_txt }}; 
+    --button-btn2-border:        {{ settings.btn2_border }}; 
+    --button-hover-btn2:         {{ settings.btn2_bg_hover }}; 
+    --button-hover-btn2-txt:     {{ settings.btn2_txt_hover }}; 
+    --button-hover-btn2-border:  {{ settings.btn2_border_hover }}; 
+
+    --bg-language-flag:  url({{'laguages_flag.png' | asset_url }});
+    --bg-icon-select:    url({{'bg_select.png' | asset_url }});
+    --bg-loading:        url({{'loading.gif' | asset_url }});
+    --bg-image-body:     url({{'body_bg_image.png' | asset_url }});
+    --bg-meta-product:   url({{'icon-360.png' | asset_url }});
+    --bg-password:       url({{'password-page-background.jpg' | asset_url }});
+  
+    --rgba-text-header-1:     {{rgba-text-header-color-1}};
+    --rgba-text-header-6:     {{rgba-text-header-color-6}};
+    --rgba-text-header-8:     {{rgba-text-header-color-8}};
+    --rgba-nav-link-color-3:  {{rgba-nav-link-color-3}};
+    --rgba-nav-link-color-6:  {{rgba-nav-link-color-6}};
+    --rgba-main-color-text-1: {{rgba-main-color-text-1}};
+    
+    --text-or: '{{ "general.text.or" | t }}';
+
+    --black:              #000000;
+    --white:              #ffffff;
+    --bg-other:           #bcbcbc;
+    --bg-deal-section:    #e6e6e6;
+    --text-deal-text:     #383838; 
+    --font-bold:          600;
+    
+    --bg-dark: #181818;
+    --color-dark: #d9d9d9;
+  }
+</style>

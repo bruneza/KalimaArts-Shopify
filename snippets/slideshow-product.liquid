@@ -1,0 +1,47 @@
+<div class="tab-wrapper">
+  <div class="nav-tab-wrapper">
+    <ul class="nav nav-tabs tab-heading" role="tablist">
+
+      {%- assign j = 0 -%}
+      {% for i in (1..6) %}
+        {%- assign _collection = 'collection_' | append: i -%}
+        {%- assign _coll = collections[block.settings[_collection]] -%} 
+
+        {% unless _coll == blank %}
+          {%- assign j = j | plus: 1 -%}
+          <li class="nav-item">
+            <a class="nav-link{% if j == 1 %} active{% endif %}{% if _lazyload %} lazyload{% endif %}" href="#slideshow-tabs-{{ section.id }}-{{ forloop.index }}" aria-controls="slideshow-tabs-{{ section.id }}-{{ forloop.index }}" role="tab" data-toggle="tab">
+              {{ _coll.title }}
+            </a>
+          </li>
+        {% endunless %}
+
+      {% endfor %}
+
+    </ul>
+  </div>
+
+  <div class="tab-content">
+    {%- assign k = 0 -%}
+
+    {% for i in (1..6) %}
+      {%- assign _collection = 'collection_' | append: i -%}
+      {%- assign _coll = collections[block.settings[_collection]] -%} 
+
+      {% unless _coll == blank %}
+        {%- assign k = k | plus: 1 -%}
+        <div role="tabpanel" class="{% if k == 1 %}show active {% endif %}tab-pane" id="slideshow-tabs-{{ section.id }}-{{ forloop.index }}">
+          <div class="slideshow-tabs-list">
+
+            {% for product in _coll.products limit: 10 %}
+            {% include 'product-item' %}
+            {% endfor %}
+
+          </div>
+        </div>
+      {% endunless %}
+
+    {% endfor %}
+  </div>
+
+</div>

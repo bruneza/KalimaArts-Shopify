@@ -1,0 +1,14 @@
+<div class="account-details">
+  <h2>{{'customer.account.details' | t }}</h2>
+
+  <div class="info">
+    <div class="author">{%- render 'theme-icon', type: 'user' -%}{{ customer.first_name }} {{customer.last_name }}</div>
+    <div class="email">{%- render 'theme-icon', type: 'mail-1' -%}{{ customer.email }}</div> 
+    {% if customer.default_address != nil %}
+    <p class="address">{%- render 'theme-icon', type: 'pin' -%} {{ customer.default_address.address1 }}{% if customer.default_address.city != empty and customer.default_address.city != blank %}, {{ customer.default_address.city}}{% endif %}, {% if customer.default_address.country != empty and customer.default_address.country != blank %} {{customer.default_address.country}}{% endif %}</p>
+    {% endif %}
+  </div>
+
+  <a href="{{ routes.account_addresses_url }}" class="btn btn-1">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+  <a href="{{ routes.account_logout_url }}" class="btn btn-2">{{ 'general.header.logout' | t }}</a>
+</div>

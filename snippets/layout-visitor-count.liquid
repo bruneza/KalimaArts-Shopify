@@ -1,0 +1,115 @@
+{% if _enable_visitor_count %}
+  {% assign _noti_position = settings.noti_position %}
+  {% assign _icon_user = settings.user_icon | img_url: '' %}
+  {% assign _text_popup = settings.text_popup %}
+
+  <div class="popup-sell-people {{_noti_position}} bottom-left" style="background-color: {{settings.notify_background_color_product}}">
+      <div class="img-user">
+        <img class="lazyload" data-src="{{ _icon_user }}" alt="User Image" />
+      </div>
+      <div class="text-detail">
+        <h6 class="sell-text"></h6>
+      </div>
+  </div>
+
+  <script type="text/javascript">
+
+          function setCookie(cname, cvalue, exdays) {
+              var d = new Date();
+              d.setTime(d.getTime() + (exdays*24*60*60*1000));
+              var expires = "expires="+ d.toUTCString();
+              document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+          };
+
+          function getCookie(name) {
+              var dc = document.cookie;
+              var prefix = name + "=";
+              var begin = dc.indexOf("; " + prefix);
+              if (begin == -1) {
+                  begin = dc.indexOf(prefix);
+                  if (begin != 0) return null;
+              }
+              else
+              {
+                  begin += 2;
+                  var end = document.cookie.indexOf(";", begin);
+                  if (end == -1) {
+                  end = dc.length;
+                  }
+              }
+              return decodeURI(dc.substring(begin + prefix.length, end));
+          };
+
+          function checkCookie($name) {
+              var popup = getCookie($name);
+              if (popup != "") {
+                  return popup;
+              } else {
+                  return false
+              }
+          };
+
+          // let _current_handle = '{{product.id}}';
+          let cookieName = `hidepopup`;
+
+          let notifySliderDelay = 4000;
+          let notifySliderHide = 9000;
+          let _hidepopup = checkCookie(cookieName);
+
+
+          let cookieHide = parseInt({{settings.visitor_count_hide}})/60/60/24;
+          let maxOri = Number('{{settings.visitor_count_max}}') || 999;
+          let minOri = Number('{{settings.visitor_count_min}}') || 99;
+          let percent = Number('{{settings.visitor_count_percent}}')/100;
+          let number_rd = (max,min)=>Math.floor(Math.random() * (max - min) ) + min;
+
+          setTimeout(function() {
+            jQuery('.popup-sell-people').fadeIn('slow', function() {
+              jQuery('.popup-sell-people').addClass('show');
+            });
+
+            let _number = number_rd(maxOri,minOri);          
+
+            if (_hidepopup != null) {
+              let arrayN =  _hidepopup.toString().split(',');
+              let arr_element = parseInt(arrayN.pop());
+
+              let max = Math.round(arr_element+(arr_element*percent));
+              let min = Math.round(arr_element-(arr_element*percent));
+
+              let rd = number_rd(max,min);
+
+              //console.log(`arr: ${_hidepopup} rd: ${rd} max: ${max} min: ${min} per: ${percent}`);
+              if (rd > maxOri) {
+                rd = maxOri;
+              }else if(rd < minOri){
+                rd = minOri;
+              }
+
+
+              $('.sell-text').html('<strong>'+rd+'</strong>'+' '+'{{_text_popup}}');
+              arrayN.push(rd);
+              document.cookie = `${cookieName}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+              setCookie(cookieName, arrayN, cookieHide);
+
+            } else{
+
+              $('.sell-text').html('<strong>'+_number+'</strong>'+' '+'{{_text_popup}}');
+              let _array_number = [];
+              _array_number.push(_number);
+              document.cookie = `${cookieName}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+              setCookie(cookieName, _array_number, cookieHide);
+            };
+
+          }, notifySliderDelay,);
+
+//           setTimeout(function() {
+//             jQuery('.popup-sell-people').fadeOut('slow', function() {
+//               jQuery('.popup-sell-people').remove();
+//             });
+//           }, notifySliderHide,);
+
+
+  </script>
+{% endif %}
+

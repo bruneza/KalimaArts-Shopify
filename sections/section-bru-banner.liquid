@@ -1,0 +1,159 @@
+{%- liquid
+  assign _image = section.settings.image 
+  assign _sectioncss = section.settings.cssclass
+  -%}
+
+
+<div class="banner-section {{ _sectioncss }}" style="background-image:url({{ _image | image_url: width: 1200, crop: 'center' }});">
+  <div class="bru-background-overlay"></div>
+  <div class="container bru-full-container">
+
+    <div class="banner-text">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign _header = block.settings.heading_text
+          assign _descr = block.settings.descr_text
+          assign _linkurl = block.settings.banner_action
+          assign _linktitle = block.settings.link_title
+          assign _blockcss = block.settings.block_css
+        -%}
+
+      <div class="{{ _blockcss }}">
+            {% unless _header == blank %}
+              <h4>{{ _header }}</h4>
+              {% endunless %}
+            {% unless _descr == blank %}
+              {{ _descr }}
+              {% endunless %}
+            {% unless _linkurl == blank %}
+              <a href="{{ _linkurl }}" class="button-link btn" role="button">
+                <span>{{ _linktitle }}</span>
+              </a>
+            {% endunless %}
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Header banner",
+  "class": "bru-banner-wrapper",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label",
+      "default": "Page Banner"
+    },
+    {
+      "type": "header",
+      "content": "Banner Layout"
+    },
+    {
+      "type": "text",
+      "id": "cssclass",
+      "label": "Extra CSS Class",
+      "default": "dashbuy-section"
+    },
+    {
+      "label": "Image",
+      "id": "image",
+      "type": "image_picker",
+      "info": "Image width is 1920 pixels"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Banner Header",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Title",
+          "default": "Banner Header",
+          "id": "heading_text"
+        },
+        {
+          "type": "header",
+          "content": "Heading Layout"
+        },
+        {
+          "type": "text",
+          "id": "block_css",
+          "label": "Heading CSS",
+          "default": "banner-text-item"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Banner Description",
+      "settings": [
+        {
+          "type": "html",
+          "id": "descr_text",
+          "label": "Banner Description",
+          "default": "<p>Description of banner</p>"
+        },
+        {
+          "type": "header",
+          "content": "Description Layout"
+        },
+        {
+          "type": "text",
+          "id": "block_css",
+          "label": "Heading CSS",
+          "default": "banner-text-item"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "name": "banner-action",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_title",
+          "label": "Link Title"
+        },
+        {
+          "type": "url",
+          "id": "banner_action",
+          "label": "Call to Action Button"
+        },
+        {
+          "type": "header",
+          "content": "Button Layout"
+        },
+        {
+          "type": "text",
+          "id": "block_css",
+          "label": "Heading CSS",
+          "default": "banner-text-item"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Banner",
+      "category": "Advanced layout",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "url"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

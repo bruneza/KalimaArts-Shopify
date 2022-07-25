@@ -1,0 +1,357 @@
+<style>
+  :root {
+    --body-cl: #333E48;
+    --body-link-color: #333E48;
+    --heading-cl: #333E48;
+    --input-bg-cl: #f0f2f5;
+    --border-radius: 42px;
+    --main-cl: #FED700;
+    --btn1-bg-color: #FED700;
+    --btn1-color: #333E48;
+    --btn1-border-color: #FED700; 
+    --btn1-hover-bg-color: #333E48;
+    --btn1-hover-color: #ffffff;
+    --btn1-hover-border-color: #333E48;  
+  }
+  @-webkit-keyframes hvr-icon-bob {
+    0%, to {
+      transform: translateY(-8px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hvr-icon-bob {
+    0%, to {
+      transform: translateY(-8px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  #verifyCode {
+    display: none;
+  }
+
+  #verifyCode:after {
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: -1;
+    visibility: hidden;
+    opacity: 0;
+    transition: .35s ease-in-out 0s;
+  }
+
+  #verifyCode:after, #verifyCode > div {
+    background: #fff;
+    position: fixed;
+    right: 0;
+  }
+
+  #verifyCode > div {
+    left: 50%;
+    top: 50%;
+    z-index: 995;
+    width: calc(100% - 30px);
+    max-width: 700px;
+    max-height: 95vh;
+    overflow: hidden;
+    overflow-y: auto;
+    transform: translate(-50%, -50.1%);
+    padding: 0;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  }
+
+  #verifyCode .dialog-body {
+    color: var(--body-cl);
+  }
+
+  #verifyCode .dialog-body > strong {
+    padding: 20px;
+    display: block;
+  }
+
+  @media (min-width: 992px) {
+    #verifyCode .dialog-body > strong {
+      padding: 20px 30px;
+    }
+  }
+
+  #verifyCode .dialog-body > p {
+    margin: 0;
+    padding: 0 20px 30px;
+  }
+
+  @media (min-width: 992px) {
+    #verifyCode .dialog-body > p {
+      padding: 0 30px 30px;
+    }
+  }
+
+  #verifyCode .line {
+    width: 100%;
+    height: 1px;
+    display: block;
+    background: #f0f2f5;
+  }
+
+  #verifyCode form {
+    padding: 20px;
+  }
+
+  @media (min-width: 992px) {
+    #verifyCode form {
+      padding: 20px 30px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #verifyCode form .verify-form-group:last-of-type {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  #verifyCode form .verify-form-group > a {
+    color: var(--body-link-color);
+    margin-bottom: 15px;
+    display: block;
+    font-weight: 400;
+  }
+
+  @media (min-width: 768px) {
+    #verifyCode form .verify-form-group > a {
+      margin-bottom: 0;
+      font-weight: 700;
+    }
+  }
+
+  #verifyCode form.fail-to-verify input[type=text] {
+    border: 1px solid red;
+  }
+
+  #verifyCode h1 {
+    font-size: 30px;
+    padding: 20px 20px 0;
+    font-weight: 600;
+    color: var(--heading-cl);
+  }
+
+  @media (min-width: 992px) {
+    #verifyCode h1 {
+      padding: 20px 30px 0;
+    }
+  }
+
+  #verifyCode p {
+    margin: 0 0 20px;
+  }
+
+  #verifyCode #verify-error {
+    color: red;
+  }
+
+  #verifyCode input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    height: 46px;
+    padding: 10px 25px;
+    background: var(--input-bg-cl);
+    border: 1px solid var(--input-bg-cl);
+    outline: none;
+    border-radius: var(--border-radius);
+  }
+
+  #verifyCode input[type=text]:focus {
+    box-shadow: inset 0 0 0 2px var(--main-cl);
+  }
+
+  #verifyCode input[type=submit] {
+    cursor: pointer;
+    height: 46px;
+    padding: 10px 25px;
+    background: var(--btn1-bg-color);
+    color: var(--btn1-color);
+    border: 1px solid var(--btn1-border-color);
+    font-weight: 600;
+    width: 100%;
+    outline: none;
+    border-radius: var(--border-radius);
+  }
+
+  @media (min-width: 768px) {
+    #verifyCode input[type=submit] {
+      width: auto;
+    }
+  }
+
+  #verifyCode input[type=submit]:focus {
+    box-shadow: none;
+  }
+
+  @media (min-width: 1025px) {
+    #verifyCode input[type=submit]:hover {
+      background: var(--btn1-hover-bg-color);
+      color: var(--btn1-hover-color);
+      border-color: var(--btn1-hover-border-color);
+    }
+  }
+
+  #verifyCode.is-open {
+    display: block;
+  }
+
+  #verifyCode.is-open:after {
+    visibility: visible;
+    opacity: 1;
+    z-index: 100;
+  }
+</style>
+
+<dialog id="verifyCode" class="modal-ui" aria-hidden="true">
+  <div role="dialog" aria-modal="true" aria-labelledby="verifyCode-title">
+    <div id="verifyCode-content">
+      <div class="dialog-body" data-notify-content>
+        <strong>Active theme purchase code</strong>
+        <span class="line"></span>
+        <h1>Add License Key/Purchase Code</h1>
+
+        <form action="/" id="verifyCodeForm" method="POST">
+          <p>Enter your purchase code and hit return/enter. Find out how to get your purchase code.</p>
+          <div class="verify-form-group">
+            <input type="text" name="pcode" placeholder="Purchase code (e.g. xxxxxxxxxx)" pattern="[(a-z0-9)]{8}-[(a-z0-9)]{4}-[(a-z0-9)]{4}-[(a-z0-9)]{4}-[(a-z0-9)]{12}">
+            <p id="verify-error" style="display: none;">Please try again!</p>
+          </div>
+
+          <div class="verify-form-group">
+            <a href="https://support.arenacommerce.com/support/solutions/articles/6000116407-how-to-find-your-themeforest-item-purchase-code">How to get License key?</a>
+            <input type="submit" value="Active License Key">
+          </div>
+        </form>
+        <p>A purchase code (license) is only valid for One Domain. Are you using this theme on a new domain? Purchase a new license here to get a new purchase code.</p>
+        <style>
+          body.not-verify{max-height: 100vh!important; overflow: hidden!important;}
+        </style>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  (function(){
+
+    const url = `https://xadmin.arenacommerce.com/api/bizZdvfoBMDgRWtur7SIdPJ1y8ZIeKj9/`;
+
+    let form = document.getElementById('verifyCodeForm');
+    let dialog = document.getElementById('verifyCode');
+    let errorText = document.getElementById('verify-error');
+
+    var _theme_name = 'Electro'
+
+    let rs = fetch(url+`get-active-code`, {
+      method: 'POST',
+      mode: 'cors',
+      header: {'Content-Type': 'application/json'},
+      body: JSON.stringify({shop: Shopify.shop})
+    });
+
+    rs.then(e=>e.json()).then(e=>{
+      let code_list = e.code_list;
+      let existPC = [...code_list.filter(i=>i.theme_name.toLowerCase().includes((_theme_name).toLowerCase()))]
+
+      !existPC.length && hideContent();
+    })
+    .catch(e=>{
+      hideContent();
+    })
+
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      form.querySelector('[name="pcode"]').checkValidity();
+
+      let key = form.querySelector('[name="pcode"]').value.trim();
+      hideContent();
+      _verify(key, form);
+    })
+
+    function hideContent(){
+      errorText.style.display = 'none';
+      form.classList.remove('fail-to-verify');
+
+      document.body.classList.add('not-verify');
+      dialog.classList.add('is-open');
+    }
+
+    function _failToVerify(e){
+      errorText.style.display = 'block';
+      errorText.textContent = e || 'Please try again!';
+      form.classList.add('fail-to-verify');
+    }
+
+    function _verify(key, form){
+      fetch(url + 'check-purchase-code/'+ key, {
+        method: 'GET',
+        mode: 'cors',
+        header: {'Content-Type': 'text/html'},
+      })
+      .then(e=>{
+        e.text().then(e=>{
+          let parser = new DOMParser();
+          let html = parser.parseFromString(e, "text/html")
+          let theme_name = html.getElementById('theme_name').textContent.toLowerCase().trim()
+          ,author = html.getElementById('author-name').textContent.trim()
+
+          if(!(author == 'arenacommerce' && theme_name.includes((_theme_name).toLowerCase()))){
+            _failToVerify('Your license key invalid, please try again!');
+            return;
+          }
+
+          let theme_id = html.querySelector(`[theme-id]`).getAttribute('theme-id')
+          ,sold_at = html.getElementById('sold_at').textContent.trim()
+          ,supported_until = html.getElementById('supported_until').textContent.trim()
+
+          ,data = {
+            shop: Shopify.shop
+            ,theme_id : theme_id
+            ,theme_name : theme_name
+            ,sold_at : sold_at
+            ,supported_until : supported_until
+          };
+
+
+          fetch(url+`active-code/${key}`, {
+            method: 'POST',
+            mode: 'cors',
+            header: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+          })
+          .then(e=>{
+            e.json().then(resp=>{
+              if(resp.status != 'success'){
+                _failToVerify(resp.msg);
+                return;
+              }
+              document.body.classList.remove('not-verify');
+              dialog.remove();
+            })
+          })
+          .catch(error=>{
+            console.log('Error', error);
+            _failToVerify(error);
+          })
+        })
+      })
+      .catch(error=>{
+        console.log('Error', error);
+        _failToVerify(error);
+      })
+    }
+  })();
+</script>

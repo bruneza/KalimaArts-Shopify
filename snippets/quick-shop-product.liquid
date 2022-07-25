@@ -1,0 +1,289 @@
+<div id="quick-shop-popup" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
+  <div class="modal-dialog fadeIn animated">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <span class="close" title="{{'products.product.close_quick_shop' | t }}" data-dismiss="modal" aria-hidden="true">
+          {%- render 'theme-icon', type: 'close' -%}
+        </span>
+      </div>
+
+      <div class="modal-body">
+
+          <div class="product-image">
+            <div id="qs-product-image" class="product-image-inner"></div>
+          </div>
+
+          <div class="product-info">
+            
+            <div id="qs-product-author"></div>
+            
+            <h2 id="qs-product-title">Sample Product</h2>
+            
+            <div id="qs-rating"></div>
+            <div id="qs-product-price" class="detail-price"></div>
+
+            <div id="qs-action-wrapper">
+
+              <form action="/cart/add" method="post" class="variants" id="qs-product-action" enctype="multipart/form-data">
+
+                <div id="qs-product-variants" class="variants-wrapper"></div>
+                
+                <div id="qs-description"></div>
+                
+                <div class="quantity-product qs-quantity-product">
+                  <label>{{ 'products.product.quantity' | t }}</label>
+                  <div class="quantity qs-quantity"></div>
+                </div>
+
+                <div class="qs-product-button">
+                  <div class="qs-action">
+                    <button id="qs-add-cart" class="btn btn-1 add-to-cart" type="submit" name="add"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 68 64"><path d="M2.24 0.576c3.52-0.704 7.168 0.192 10.24 1.792 2.624 1.344 4.224 4.096 5.056 6.848 0.96 3.008 1.344 6.144 1.92 9.216 0.96 5.056 2.304 10.048 3.072 15.104 0.384 2.048 0.704 4.224 2.112 5.888 1.408 1.6 3.776 1.664 5.824 1.728 5.376 0 10.816-0.256 16.192 0.128 1.344 0.064 2.88 0 3.648-1.344 3.52-5.312 6.464-11.008 9.28-16.768 0.576-1.152 1.28-2.368 2.56-2.816 1.344-0.448 3.008-0.256 4.032 0.768 1.152 1.28 1.344 3.2 0.704 4.736-2.688 5.376-5.184 10.816-8.512 15.872-1.472 2.176-3.008 4.544-5.184 6.144-1.792 1.28-4.096 0.832-6.144 0.768-6.272-0.064-12.544 0.384-18.752 0-4.16-0.32-8.256-2.368-10.624-5.888-1.728-2.752-2.368-6.080-3.008-9.216-1.28-6.784-2.624-13.504-3.904-20.288-0.384-1.6-0.896-3.392-2.304-4.352-2.24-1.6-5.376-0.256-7.552-1.984-1.344-0.96-0.704-2.688-0.832-4.096-0.128-1.216 1.152-1.984 2.176-2.24zM34.432 4.928c-0.064-1.216 1.408-1.536 2.368-1.792 2.048-0.32 4.608-0.384 6.208 1.152 0.448 3.776 0.64 7.616 0.768 11.392 1.92 0.128 3.84-0.256 5.76-0.064 0.704 0.064 1.536 0.512 1.472 1.344-0.32 1.472-1.472 2.56-2.368 3.712-2.688 3.456-5.76 6.528-8.832 9.536-0.448 0.448-1.024 0.704-1.6 0.448-1.216-0.512-1.984-1.728-2.88-2.688-2.112-2.304-4.224-4.544-6.144-6.912-0.96-1.216-2.176-2.24-2.624-3.712-0.256-0.832 0.512-1.6 1.344-1.664 1.92-0.256 3.84 0.128 5.76 0 0.256-3.584 0.384-7.168 0.768-10.752zM25.28 51.584c2.432-0.704 5.184 0 6.784 1.856 2.368 2.624 1.984 7.232-0.96 9.216-3.136 2.304-8.448 1.216-9.92-2.56-1.664-3.328 0.64-7.616 4.096-8.512zM45.376 53.504c2.432-2.88 7.36-2.944 9.856-0.128 2.112 2.304 2.048 6.208-0.064 8.512-1.216 1.28-2.944 2.048-4.672 2.112h-0.128c-1.856-0.064-3.776-0.832-4.928-2.24-2.048-2.304-2.112-6.016-0.064-8.256z"></path></svg>{{'products.product.add_to_cart' | t }}</button>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  jQuery(document).ready(function($) {
+    
+    $('#quick-shop-popup').on( 'shown.bs.modal', function () {
+      
+      $('#quick-shop-popup', function() {
+
+        jQuery("#gallery-qs-image").length && jQuery('#gallery-qs-image').owlCarousel({
+            nav       : true
+            ,dots     : false
+            ,items    : 1
+            ,rtl      : jQuery('body').data('rtl')
+            ,navText : ['<span class="button-prev"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M16.128 42.88q1.664 1.664 0 3.072-1.664 1.664-3.072 0l-12.288-12.416q-1.536-1.536 0-3.2l12.288-12.416q1.408-1.664 3.072 0 1.664 1.408 0 3.072l-9.984 11.008z"></path></svg></span>', '<span class="button-next"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 17 64"><path d="M0.832 42.88l10.112-10.88-10.112-11.008q-1.664-1.664 0-3.072 1.664-1.664 3.072 0l12.288 12.416q1.536 1.664 0 3.2l-12.288 12.416q-1.408 1.664-3.072 0-1.664-1.408 0-3.072z"></path></svg></span>']
+        });
+      });
+      
+    });
+
+    //Fix page content slight move
+    $('#quick-shop-popup').on( 'hidden.bs.modal', function () {
+      AT_Main.fixReturnScroll();      
+    });
+    
+    var productQty = $ ('.qs-quantity')
+        ,productImage = $('#qs-product-image')
+        ,productRating = $('#qs-rating')
+        ,productTitle = $('#qs-product-title')
+        ,productDescription = $('#qs-description')
+        ,productAuthor = $('#qs-product-author')
+        ,productVariantWrapper = $('#qs-product-variants')
+        ,productPrice = $('#qs-product-price')
+        ,productAddCart = $('#qs-add-cart')
+        ,shopUri = '{{ shop.secure_url }}'
+        ,defaultImg = 'cdn.shopify.com/s/files/1/1953/5823/t/2/assets/default-image.jpg'  ;
+    
+    $('body').on('click', '.quick_shop:not(.unavailable)', function(event){
+      
+      AT_Main.fixNoScroll();
+      
+      var $this = $(this);
+          
+      jQuery.getJSON('/products/'+ $(this).data('handle')+'.js', function(product) {
+        
+        var productSelect = product
+        ,productSelectID = productSelect.id
+        ,productUri = shopUri + '/products/' + productSelect.handle ;
+      
+        // Update add cart button
+        productAddCart.data('product-id', productSelectID);
+
+        // Update product quantity
+
+        productQty.html('<input type="text" id="qs-quantity" class="'+ productSelect.handle +'item-quantity" name="quantity" value="1" /><span class="qty-wrapper"><span class="qty-inner qs-qty-inner"><span class="qty-up" title="Increase" data-src="#qs-quantity"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 37 64"><path d="M35.2 28.8q1.92 0 1.92 3.2t-1.92 3.2h-13.44v13.44q0 1.92-3.2 1.92t-3.2-1.92v-13.44h-13.44q-1.92 0-1.92-3.2t1.92-3.2h13.44v-13.44q0-1.92 3.2-1.92t3.2 1.92v13.44h13.44z"></path></svg></span><span class="qty-down" title="Decrease" data-src="#qs-quantity"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 37 64"><path d="M35.2 28.8q1.92 0 1.92 3.2t-1.92 3.2h-33.28q-1.92 0-1.92-3.2t1.92-3.2h33.28z"></path></svg></span></span></span>')
+
+        $(".qs-quantity .qty-inner .qty-up").on("click", function() {
+          var oldValue = $("#qs-quantity").val(),
+              newVal = 1;
+          newVal = parseInt(oldValue) + 1;
+          $("#qs-quantity").val(newVal);
+        });
+        
+        $(".qs-quantity .qty-inner .qty-down").on("click", function() {
+          var oldValue = $("#qs-quantity").val();
+          if(oldValue > 1){
+            newVal = 1;
+            newVal = parseInt(oldValue) - 1;
+            $("#qs-quantity").val(newVal);
+          }
+        });
+
+        // Update product image
+        productImage.html('');
+        var qs_images = productSelect.images;
+
+        productImage.append('<div id="gallery-qs-image" class="gallery-thumb-img"></div>');
+
+        if(qs_images.length >= 1){
+          $.each(qs_images, function(index, value) {
+            productImage.find('#gallery-qs-image').append('<div><img class="zoom-image" src="'+ Shopify.resizeImage(value, '495x') + '" alt="" /></div>');
+          });
+
+        }
+        else{
+          productImage.html('<img src="//cdn.shopify.com/s/files/1/0892/3278/t/4/assets/default-image.jpg?15574560408292301814" alt="" />');
+        }
+
+        // Update product description
+        var $prod = $this.closest(".product-wrapper");
+        productRating.html($prod.find(".product-review").html());
+        productDescription.html($prod.find(".product-des-list").html());
+
+        // Update product title
+        productTitle.html($prod.find(".product-name").html());
+
+        // Update product author
+        productAuthor.html($prod.find(".product-vendor").html());
+
+        // Produc variants
+        var productVariants = productSelect.variants;
+        var productVariantsCount = productVariants.length;
+
+        productPrice.html('');
+        productVariantWrapper.html('');
+        productAddCart.removeAttr('disabled').fadeTo(200,1);
+
+        if (productVariantsCount > 1) {
+
+          // Show Variants
+          productVariantWrapper.show();
+
+          // Variants element
+          var productVariantElement = $('<select>',{ 'id': ('#quick-shop-variants-' + productSelectID) , 'name': 'id'});
+          var productVariantOptions = '';
+
+          for (var i=0; i < productVariantsCount; i++) {
+            productVariantOptions += '<option value="'+ productVariants[i].id +'">'+ productVariants[i].title +'</option>'
+          };
+
+          // Add variants element on page
+          productVariantElement.append(productVariantOptions);
+          productVariantWrapper.append(productVariantElement);
+
+          // Bind variants to option_selection JS
+          new Shopify.OptionSelectors(('#quick-shop-variants-' + productSelectID), { product: productSelect, onVariantSelected: selectQSOptionCallback });
+
+          // Add label if only one product option
+          if (productSelect.options.length == 1){
+            $('#qs-product-action .selector-wrapper:eq(0)').prepend('<label>'+ productSelect.options[0].name +'</label>');
+          }
+
+          // Select first variant on page
+          var found_one_in_stock = false;
+          for (var i=0; i < productSelect.variants.length; i++) {
+
+            var variant = productSelect.variants[i];
+            if(variant.available && found_one_in_stock == false) {
+
+              found_one_in_stock = true;
+              for (var j=0; j < variant.options.length; j++){
+
+                $('#qs-product-variants .single-option-selector:eq('+ j +')').val(variant.options[j]).trigger('change');
+
+              }
+            }
+          }
+
+        } else {
+
+          // Hide unnecessary variants
+          productVariantWrapper.hide();
+
+          // Build variants element
+          var productVariantElement = $('<select>',{ 'id': ('#quick-shop-variants-' + productSelectID) , 'name': 'id'});
+          var productVariantOptions = '';
+
+          for (var i=0; i < productVariantsCount; i++) {
+            productVariantOptions += '<option value="'+ productVariants[i].id +'">'+ productVariants[i].title +'</option>'
+          };
+
+          // Add variants element on page
+          productVariantElement.append(productVariantOptions);
+          productVariantWrapper.append(productVariantElement);
+
+
+          // Update the add button to variant id
+          productAddCart.data('variant-id', productVariants[0].id);
+
+          // Check product is on sale
+          if ( productVariants[0].compare_at_price > 0 && productVariants[0].compare_at_price > productVariants[0].price ) {
+            productPrice.html('<span class="price-sale">'+ Shopify.formatMoney(productVariants[0].price, '{{shop.money_format}}') +'</span>' + '<del class="price-compare">'+ Shopify.formatMoney(productVariants[0].compare_at_price, '{{shop.money_format}}') + '</del>');
+          } else {
+            productPrice.html('<span class="price">'+ Shopify.formatMoney(productVariants[0].price, '{{shop.money_format}}') + '</span>' );
+          }                                                                 
+
+          if (productSelect.available) {
+            productAddCart.removeAttr('disabled').fadeTo(200,1);
+            productAddCart.html('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 68 64"><path d="M2.24 0.576c3.52-0.704 7.168 0.192 10.24 1.792 2.624 1.344 4.224 4.096 5.056 6.848 0.96 3.008 1.344 6.144 1.92 9.216 0.96 5.056 2.304 10.048 3.072 15.104 0.384 2.048 0.704 4.224 2.112 5.888 1.408 1.6 3.776 1.664 5.824 1.728 5.376 0 10.816-0.256 16.192 0.128 1.344 0.064 2.88 0 3.648-1.344 3.52-5.312 6.464-11.008 9.28-16.768 0.576-1.152 1.28-2.368 2.56-2.816 1.344-0.448 3.008-0.256 4.032 0.768 1.152 1.28 1.344 3.2 0.704 4.736-2.688 5.376-5.184 10.816-8.512 15.872-1.472 2.176-3.008 4.544-5.184 6.144-1.792 1.28-4.096 0.832-6.144 0.768-6.272-0.064-12.544 0.384-18.752 0-4.16-0.32-8.256-2.368-10.624-5.888-1.728-2.752-2.368-6.080-3.008-9.216-1.28-6.784-2.624-13.504-3.904-20.288-0.384-1.6-0.896-3.392-2.304-4.352-2.24-1.6-5.376-0.256-7.552-1.984-1.344-0.96-0.704-2.688-0.832-4.096-0.128-1.216 1.152-1.984 2.176-2.24zM34.432 4.928c-0.064-1.216 1.408-1.536 2.368-1.792 2.048-0.32 4.608-0.384 6.208 1.152 0.448 3.776 0.64 7.616 0.768 11.392 1.92 0.128 3.84-0.256 5.76-0.064 0.704 0.064 1.536 0.512 1.472 1.344-0.32 1.472-1.472 2.56-2.368 3.712-2.688 3.456-5.76 6.528-8.832 9.536-0.448 0.448-1.024 0.704-1.6 0.448-1.216-0.512-1.984-1.728-2.88-2.688-2.112-2.304-4.224-4.544-6.144-6.912-0.96-1.216-2.176-2.24-2.624-3.712-0.256-0.832 0.512-1.6 1.344-1.664 1.92-0.256 3.84 0.128 5.76 0 0.256-3.584 0.384-7.168 0.768-10.752zM25.28 51.584c2.432-0.704 5.184 0 6.784 1.856 2.368 2.624 1.984 7.232-0.96 9.216-3.136 2.304-8.448 1.216-9.92-2.56-1.664-3.328 0.64-7.616 4.096-8.512zM45.376 53.504c2.432-2.88 7.36-2.944 9.856-0.128 2.112 2.304 2.048 6.208-0.064 8.512-1.216 1.28-2.944 2.048-4.672 2.112h-0.128c-1.856-0.064-3.776-0.832-4.928-2.24-2.048-2.304-2.112-6.016-0.064-8.256z"></path></svg>{{ "products.product.add_to_cart" | t }}');
+
+            // selected an invalid or out of stock variant 
+          } else {
+
+            // disabled variant doesn't exist
+            productAddCart.attr('disabled', 'disabled').fadeTo(200,0.5);
+
+            var message = variant ? "Sold Out" : "Sold Out";    
+            productAddCart.html(message);
+
+          }
+
+        }
+
+        {% if settings.currency_type == '2' %}
+          currenciesCallbackSpecial('#quick-shop-popup span.money');
+        {% endif %}
+
+        });
+      });   
+          
+      // selectQSOptionCallback
+      var selectQSOptionCallback = function(variant, selector) {
+      
+      // selected a valid and in stock variant
+      if (variant && variant.available) {
+        
+        productAddCart.data('variant-id', variant.id);
+        productAddCart.removeAttr('disabled').fadeTo(200,1);
+        productAddCart.html('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 68 64"><path d="M2.24 0.576c3.52-0.704 7.168 0.192 10.24 1.792 2.624 1.344 4.224 4.096 5.056 6.848 0.96 3.008 1.344 6.144 1.92 9.216 0.96 5.056 2.304 10.048 3.072 15.104 0.384 2.048 0.704 4.224 2.112 5.888 1.408 1.6 3.776 1.664 5.824 1.728 5.376 0 10.816-0.256 16.192 0.128 1.344 0.064 2.88 0 3.648-1.344 3.52-5.312 6.464-11.008 9.28-16.768 0.576-1.152 1.28-2.368 2.56-2.816 1.344-0.448 3.008-0.256 4.032 0.768 1.152 1.28 1.344 3.2 0.704 4.736-2.688 5.376-5.184 10.816-8.512 15.872-1.472 2.176-3.008 4.544-5.184 6.144-1.792 1.28-4.096 0.832-6.144 0.768-6.272-0.064-12.544 0.384-18.752 0-4.16-0.32-8.256-2.368-10.624-5.888-1.728-2.752-2.368-6.080-3.008-9.216-1.28-6.784-2.624-13.504-3.904-20.288-0.384-1.6-0.896-3.392-2.304-4.352-2.24-1.6-5.376-0.256-7.552-1.984-1.344-0.96-0.704-2.688-0.832-4.096-0.128-1.216 1.152-1.984 2.176-2.24zM34.432 4.928c-0.064-1.216 1.408-1.536 2.368-1.792 2.048-0.32 4.608-0.384 6.208 1.152 0.448 3.776 0.64 7.616 0.768 11.392 1.92 0.128 3.84-0.256 5.76-0.064 0.704 0.064 1.536 0.512 1.472 1.344-0.32 1.472-1.472 2.56-2.368 3.712-2.688 3.456-5.76 6.528-8.832 9.536-0.448 0.448-1.024 0.704-1.6 0.448-1.216-0.512-1.984-1.728-2.88-2.688-2.112-2.304-4.224-4.544-6.144-6.912-0.96-1.216-2.176-2.24-2.624-3.712-0.256-0.832 0.512-1.6 1.344-1.664 1.92-0.256 3.84 0.128 5.76 0 0.256-3.584 0.384-7.168 0.768-10.752zM25.28 51.584c2.432-0.704 5.184 0 6.784 1.856 2.368 2.624 1.984 7.232-0.96 9.216-3.136 2.304-8.448 1.216-9.92-2.56-1.664-3.328 0.64-7.616 4.096-8.512zM45.376 53.504c2.432-2.88 7.36-2.944 9.856-0.128 2.112 2.304 2.048 6.208-0.064 8.512-1.216 1.28-2.944 2.048-4.672 2.112h-0.128c-1.856-0.064-3.776-0.832-4.928-2.24-2.048-2.304-2.112-6.016-0.064-8.256z"></path></svg>{{ "products.product.add_to_cart" | t }}');
+        
+        // selected an invalid or out of stock variant 
+      } else {
+        
+        // disabled variant doesn't exist
+        productAddCart.attr('disabled', 'disabled').fadeTo(200,0.5);
+                                       
+        var message = variant ? "Sold Out" : "Sold Out";    
+        productAddCart.html(message);
+        
+      }
+        
+      // check if variant is on sale
+      if ( variant.compare_at_price > 0 && variant.compare_at_price > variant.price ) {
+          productPrice.html('<span class="price-sale">'+ Shopify.formatMoney(variant.price, '{{shop.money_format}}') +'</span>' + '<del class="price-compare">'+ Shopify.formatMoney(variant.compare_at_price, '{{shop.money_format}}') + '</del>');
+      } else {
+          productPrice.html('<span class="price">'+ Shopify.formatMoney(variant.price, '{{shop.money_format}}') + '</span>' );
+      };
+      
+      {% if settings.currency_type == '2' %}
+        currenciesCallbackSpecial('#quick-shop-popup span.money');
+      {% endif %}
+    }
+            
+  });
+</script>

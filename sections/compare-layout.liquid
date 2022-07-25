@@ -1,0 +1,332 @@
+{%- assign listSearch = search.terms | split: ',' -%} 
+{%- assign listKey = search.terms | split: '_' -%} 
+{%- assign sizeKey = listKey | size -%} 
+{%- assign key = listKey | slice: 1,sizeKey -%} 
+
+
+{%- assign size = search.terms | split: ',' | size | minus: 1 -%} 
+{%- assign listItems = listSearch | slice: 0,size -%} 
+{%- assign noProducts = true -%} 
+{%- capture compareProperties -%} 
+
+{%- for p in listItems -%} 
+{%- assign product = all_products[p] -%} 
+{%- if product == blank -%}
+{%- continue -%}{%- endif -%} {%- assign noProducts = false -%} 
+{%- for cf in
+product.metafields.arena_cp -%}|{{- cf.first -}}
+{%- endfor -%} 
+{%- endfor -%} 
+{%- endcapture -%} 
+{%- assign compareProperties = compareProperties | remove_first: '|' | split: '|' | uniq -%}
+
+
+
+{% for item in shop.metafields.arena.wl_cp_settings.compare_settings.compare_options2  %}
+	{% if item.key == key[0] %}
+    {%- assign keyCollection = forloop.index0 -%} 
+    {% endif %}
+ {% if item.key == 'all' %}
+    {%- assign keyCollectionAll = forloop.index0 -%} 
+    {% endif %}
+{%- endfor -%}     
+
+
+<div class="">
+    {%- if noProducts -%}
+    <p>No product to compare</p>
+    {%- else -%} {%- capture listProducts -%}
+    <div class="row">
+        {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if product == blank
+        -%}{%- continue -%}{%- endif -%}
+
+        <div class="col-6">
+            <ul>
+                <li>
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                </li>
+                <li>{{ product.price | money }}</li>
+
+                {%- assign metafield = product.metafields | map: 'arena' -%} {%- for cf in
+                compareProperties -%} {%- assign arena = product.metafields.arena_cp[cf] -%}
+                <li>{{ arena | escape }}</li>
+                {%- endfor -%}
+            </ul>
+        </div>
+        {%- endfor -%}
+    </div>
+    {%- endcapture -%} {%- comment -%}-------------------------------
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="compare-properties">
+                    <ul>
+                        <li>Title</li>
+                        <li>Price</li>
+                        {%- for cf in compareProperties -%}
+                        <li>{{ cf }}</li>
+                        {%- endfor -%}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="compare-items">{{ listProducts }}</div>
+            </div>
+        </div>
+    </div>
+    {%- endcomment-%} {%- comment -%} {%- assign compareProperties = 'Title,Price' | split: ',' |
+    concat: compareProperties -%} {%- endcomment-%}
+    <div class="product-comparison-template-wrapper" id="product-compare">
+        <table class="table table-bordered product_comparison_template">
+         	
+            <tbody>
+                <tr>
+                    <td class="heading-col feature-availability">Product</td>
+                    {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if
+                    product == blank -%}{%- continue -%}{%- endif -%}
+                    <td class="product-col comparison_availability product-{{ product.id }}">
+                        <div class="comparison_product">
+                            <div class="product-info">
+                                <div class="remove">
+                                    {% render 'arn_wl_cp_buttons', type: 'cp_remove_btn',
+                                    product_handle: product.handle %}
+                                </div>
+                                <div class="wishlist">
+                                    {% render 'arn_wl_cp_buttons', type: 'wl_add_btn',
+                                    product_handle: product.handle %}
+                                </div>
+                                <div class="product-image-block">
+                                    <a
+                                        class="product_image"
+                                        href="{{ product.url }}"
+                                        title="{{ product.title }}"
+                                    >
+                                        <img
+                                            class="img-responsive cmp-product-image"
+                                            src="{{ product | img_url }}"
+                                            alt="{{ product.title }}"
+                                        />
+                                    </a>
+                                    <div class="label-box">
+                                        {{ product.sale_label }} {{ product.new_label }}
+                                    </div>
+                                </div>
+                                <h5 class="product-name">
+                                    <a
+                                        class="product-title"
+                                        href="{{ product.url }}"
+                                        title="{{ product.title }}"
+                                        >{{ product.title }}</a
+                                    >
+                                </h5>
+                                <div class="product-price">
+                                    <span class="price">{{
+                                        product.selected_or_first_available_variant.price | money
+                                    }}</span>
+                                </div>
+                            </div>
+                            <div class="comparison_product_infos">
+                                <div class="clearfix">
+                                    <div class="button-container">
+                                        <a
+                                            class="button lnk_view btn view-btn"
+                                            href="{{ product.url }}"
+                                            title="View Detail"
+                                        >
+                                            <span>View Detail</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    {%- endfor -%}
+                </tr>
+               {% for item in shop.metafields.arena.wl_cp_settings.compare_settings.compare_options %}
+
+              
+                
+              {% if item == 'availability'  %}
+              <tr class="availability">
+                <td class="heading-col feature-availability">
+                  <strong>{{ item }}</strong>
+                </td>
+                 {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if
+                    product == blank -%}{%- continue -%}{%- endif -%}
+                <td class="product-col comparison_availability product-{{product.id}}">{%if product.available == true %}<span>In Stock</span>{%else%}<span>out Stock</span>{%endif%}</td>
+                {% endfor %} 
+              </tr>
+              {% endif %}     
+              
+              {% if item == 'options' %}
+              <tr class="options">
+                <td class="heading-col feature-options">
+                  <strong>{{ item }}</strong>
+                </td>
+                 {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if
+                    product == blank -%}{%- continue -%}{%- endif -%}
+               
+                {% capture output %}
+                 {% assign op1_value = "" %}
+		        {% assign op2_value = "" %}
+		        {% assign op3_value = "" %}
+                  {% if product.options.size > 0 %}
+					{% for variant in product.variants %}
+				        {% assign op1_value_arr = op1_value | split: '[---w3---]' %}
+				        {% assign op2_value_arr = op2_value | split: '[---w3---]' %}
+				        {% assign op3_value_arr = op3_value | split: '[---w3---]' %}
+				        {% if variant.option1 != blank %}
+				        	{%  unless op1_value_arr contains variant.option1 %}
+				        		{% assign op1_value = op1_value | append: variant.option1 | append: '[---w3---]' %}
+				        	{% endunless %}
+				        {% endif %}
+				        {% if variant.option2 != blank %}
+				        	{%  unless op2_value_arr contains variant.option2 %}
+				        		{% assign op2_value = op2_value | append: variant.option2 | append: '[---w3---]' %}
+				        	{% endunless %}
+				        {% endif %}
+				        {% if variant.option3 != blank %}
+				        	{%  unless op3_value_arr contains variant.option3 %}
+				        		{% assign op3_value = op3_value | append: variant.option3 | append: '[---w3---]' %}
+				        	{% endunless %}
+				        {% endif %}				        				        
+					{% endfor %}
+				    {% assign op1_value_arr = op1_value | split: '[---w3---]' %}
+				    {% assign op2_value_arr = op2_value | split: '[---w3---]' %}
+				    {% assign op3_value_arr = op3_value | split: '[---w3---]' %}
+
+				{% endif %}
+                {% endcapture %} 
+                <td class="product-col comparison_options product-{{product.id}}">
+                  {% for option in product.options %}
+                  {% assign _valKey = "option" | append: forloop.index | strip %}                  
+                  {% assign index = forloop.index %}
+				
+                  {% if index == 1 %}
+                  {% assign _valLen = op1_value_arr  | size | plus: 0 %}                  
+                  {% assign op = op1_value_arr  %}
+                  {% elsif index == 2 %}
+                  {% assign _valLen = op2_value_arr  | size | plus: 0 %}                  
+                  {% assign op = op2_value_arr  %}
+                  {% else %}
+                   {% assign _valLen = op3_value_arr  | size | plus: 0 %}                  
+                  {% assign op = op3_value_arr  %}
+                  {% endif %}
+                  
+                  {% if _valLen > 0 and option != 'Title' %}
+                  <div>
+                    <strong>{{ option }}: </strong>
+                    {% for _val in op %}
+                    <span>
+                      {% assign index = forloop.index | plus: 0 %}
+                      {% if forloop.index < _valLen %}
+                      {{_val}}, 
+                      {% else %} 
+                      {{_val}}
+                      {% endif %}
+                    </span>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </td>
+        		{% endfor %} 
+              </tr>
+              {% endif %} 
+              
+              {% if item == 'collection' %}
+              <tr class="collection">
+                <td class="heading-col feature-collection"> 
+                  <strong>{{ item }}</strong></td>
+                   {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if
+                    product == blank -%}{%- continue -%}{%- endif -%}
+                <td class="product-col comparison_collection product-{{product.id}}">
+                  {% if product.collections.size > 0 %}
+                  {% for collection in product.collections %}
+                  <a href="{{collection.handle}}" >
+                    {{collection.title}}
+                    <span class="separator">,&nbsp;</span>
+                  </a>
+                  {% endfor %}
+                  {% endif %}
+                </td>
+                {% endfor %}
+              </tr>
+              {% endif %}
+              
+              {% if  item == 'vendor'  %}
+              <tr class="vendor">
+                <td class="heading-col feature-vendor"> <strong>{{ item }}</strong></td>
+                {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if
+                    product == blank -%}{%- continue -%}{%- endif -%}
+                <td class="product-col comparison_vendor product-{{product.id}}">{{product.vendor}}</td>
+                {% endfor %}
+              </tr>
+              {% endif %}
+              
+              {%- endfor -%}
+                {% for item in shop.metafields.arena.wl_cp_settings.compare_settings.compare_options2[keyCollection].data
+                %} {%- for cf in compareProperties -%} {% if item == cf %}
+                <tr>
+                     <td class="heading-col feature-availability">
+                      {%- assign option = cf | split: "__" | first -%} 
+                        <strong>{{ option | replace: "_", " " }}</strong>
+                    </td>
+                    {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if
+                    product == blank -%}{%- continue -%}{%- endif -%}
+
+                    <td class="product-col comparison_availability product-{{ product.id }}">
+                        {%- case cf -%} {%- when 'Title' -%}{{ product.title }} {%- when 'Price'
+                        -%}{{ product.selected_or_first_available_variant.price | money }}
+                        {%- else -%} {%- assign arena = product.metafields.arena_cp[cf] -%}
+                        {{- arena | escape -}}
+                        {%- endcase -%}
+                    </td>
+                    {%- endfor -%}
+                </tr>
+                {% endif %} {% endfor %}{%- endfor -%}
+              
+               {% for item in shop.metafields.arena.wl_cp_settings.compare_settings.compare_options2[keyCollectionAll].data
+                %} {%- for cf in compareProperties -%} {% if item == cf %}
+                <tr>
+                     <td class="heading-col feature-availability">
+                      {%- assign option = cf | split: "__" | first -%} 
+                        <strong>{{ option | replace: "_", " " }}</strong>
+                    </td>
+                    {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if
+                    product == blank -%}{%- continue -%}{%- endif -%}
+
+                    <td class="product-col comparison_availability product-{{ product.id }}">
+                        {%- case cf -%} {%- when 'Title' -%}{{ product.title }} {%- when 'Price'
+                        -%}{{ product.selected_or_first_available_variant.price | money }}
+                        {%- else -%} {%- assign arena = product.metafields.arena_cp[cf] -%}
+                        {{- arena | escape -}}
+                        {%- endcase -%}
+                    </td>
+                    {%- endfor -%}
+                </tr>
+                {% endif %} {% endfor %}{%- endfor -%}
+            </tbody>
+        </table>
+
+    </div>
+
+    {%- comment -%}------------------------------- {%- for cf in compareProperties -%}
+    <div class="row" style="border-bottom: 1px solid #888; margin-top: 15px">
+        <div class="col-4">{{ cf }}</div>
+
+        {%- for p in listItems -%} {%- assign product = all_products[p] -%} {%- if product == blank
+        -%}{%- continue -%}{%- endif -%}
+
+        <div class="col-4">
+            {%- case cf -%} {%- when 'Title' -%}{{ product.title }} {%- when 'Price' -%}{{
+                product.selected_or_first_available_variant.price | money
+            }}
+            {%- else -%} {%- assign arena = product.metafields.arena[cf] -%}
+            {{- arena | escape -}}
+            {%- endcase -%}
+        </div>
+        {%- endfor -%}
+    </div>
+    {%- endfor -%} {%- endcomment-%} {%- endif -%}
+</div>

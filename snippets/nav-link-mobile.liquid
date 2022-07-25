@@ -1,0 +1,113 @@
+{% include 'nav-label' %}
+
+{% assign submenu = l.title | handleize %}
+{% if linklists[submenu].links.size > 0 %}
+
+  {% if settings.use_super_megamenu == false %}
+    {% include 'dropdown-menu-mobile' %}
+
+  {% else %}
+	 {% assign have_super_menu = false %}
+
+    {% for block in section.blocks %}
+        {% assign super_menu_handle = block.settings.mega_navigation %}
+
+        {% if super_menu_handle == l.title %}
+          {% assign have_super_menu = true %}
+
+          {% if have_super_menu == true %}
+            {% assign number = forloop.index | plus: 1 %}
+
+            <li class="dropdown mega-menu">
+              <div class="dropdown-inner">
+                <a href="{{ l.url }}" class="dropdown-link">
+                  <span>{{ l.title }}</span>
+                  {% include 'menu-label' %}
+                </a>
+                <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+              </div>
+              {% case block.type %}
+                {% when 'mega-menu-trigger' %}
+                  <template class="temp-id">{% include 'horizontal-mega-menu-mobile' %}</template>
+                {% when 'mega-menu-tab' %}
+                  <template class="temp-id">{% include 'horizontal-mega-menu-mobile-02' %}</template>
+                {% when 'mega-vertical-trigger' %}
+                  <template class="temp-id">{% include 'vertical-mega-menu-mobile' %}</template>
+                {% else %}
+              {% endcase %}
+            </li>
+
+          	{% break %}
+          {% endif %}
+
+        {% endif %}
+
+    {% endfor %}
+
+	{% unless have_super_menu == true %}
+      {% include 'dropdown-menu-mobile' %}
+	{% endunless %}  
+
+  {% endif %}
+
+{% else %}
+
+  {% if settings.use_super_megamenu == false %}
+    <li class="{% if l.active %}active{% endif %}">
+      <a href="{{ l.url }}">
+        <span>{{ l.title }}</span>
+        {% include 'menu-label' %}
+      </a>
+    </li>
+
+  {% else %}
+
+	{% assign have_super_menu = false %}
+
+    {% for block in section.blocks %}
+        {% assign super_menu_handle = block.settings.mega_navigation %}
+
+        {% if super_menu_handle == l.title %}
+          {% assign have_super_menu = true %}
+
+          {% if have_super_menu == true %}
+            {% assign number = forloop.index | plus: 1 %}
+
+            <li class="dropdown mega-menu">
+              <div class="dropdown-inner">
+                <a href="{{ l.url }}" class="dropdown-link">
+                  <span>{{ l.title }}</span>
+                  {% include 'menu-label' %}
+                </a>
+                <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+              </div>
+              {% case block.type %}
+                {% when 'mega-menu-trigger' %}
+                  <template class="temp-id">{% include 'horizontal-mega-menu-mobile' %}</template>
+                {% when 'mega-menu-tab' %}
+                  <template class="temp-id">{% include 'horizontal-mega-menu-mobile-02' %}</template>
+                {% when 'mega-vertical-trigger' %}
+                  <template class="temp-id">{% include 'vertical-mega-menu-mobile' %}</template>
+                {% else %}
+              {% endcase %}
+            </li>
+
+          	{% break %}
+          {% endif %}
+
+        {% endif %}
+
+    {% endfor %}
+
+	{% unless have_super_menu == true %}
+      <li class="{% if l.active %}active{% endif %}">
+        <a href="{{ l.url }}">
+          <span>{{ l.title }}</span>
+          {% include 'menu-label' %}
+        </a>
+      </li>
+	{% endunless %}
+
+  {% endif %}
+
+{% endif %}

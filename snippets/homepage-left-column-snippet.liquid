@@ -1,0 +1,46 @@
+<div class="left-column-container{% if settings.left_column_style == 'full-slideshow' %} left-margin-top{% endif %}">
+  {% assign _lazyload = section.settings.lazyload %}
+  
+  {% if settings.left_column_style == 'normal-slideshow'  %}
+    <div class="sb-widget">
+      <div class="sb-vertical-menu">
+        <nav class="navbar vertical-navbar">
+          <div class="collapse navbar-collapse">
+          </div>
+        </nav>
+
+      </div>
+    </div>
+  
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        var _vertical_html = $('.fix-vertical-left-column');
+        var _vertical_left_column_html = $('.sb-vertical-menu .navbar-collapse');
+        _vertical_left_column_html.html(_vertical_html);
+        $('.sb-vertical-menu .fix-vertical-left-column').removeClass('hide');
+      });
+    </script>
+  {% endif %}
+  
+  {%- for block in section.blocks -%}
+    {% case block.type %}
+
+      {%- when 'banner' -%}
+        {%- include 'sidebar-snippet', type: 'banner' -%}
+  
+      {%- when 'products-listing' -%}
+  		  {%- include 'sidebar-snippet', type: 'products-listing' -%}
+  
+      {%- when 'service' -%}
+  		  {%- include 'sidebar-snippet', type: 'service' -%}
+  
+      {%- when 'products-grid' -%}
+        {%- include 'sidebar-snippet', type: 'products-grid' -%}
+  
+      {%- when 'blog' -%}
+  		  {%- include 'sidebar-snippet', type: 'blog-post' -%}
+
+    {% endcase %}
+  {%- endfor -%}
+
+</div>

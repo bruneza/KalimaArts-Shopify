@@ -1,0 +1,25 @@
+<ul class="widget-social-icons list-inline">
+  
+  {% for i in (1..8) %}
+  {% assign _type = 'social_icon_type_' | append: i %}
+  
+  {% unless settings[_type] == 'none' %}
+    {% assign _font_icon = 'social_font_icon_' | append: i %}
+    {% assign _image = 'social_icon_' | append: i %}
+    {% assign _title = 'social_icon_title_' | append: i %}
+    {% assign _link = 'social_icon_link_' | append: i %}
+  
+    <li>
+      <a target="_blank" rel="noopener" href="{{ settings[_link] }}" title="{{ settings[_title] }}">
+        {% if settings[_type] == 'font-icon' %}
+          {{ settings[_font_icon] }}
+        {% else %}
+          <img src="{{ settings[_image] | img_url: '20x' }}" alt="Social" />
+        {% endif %}
+      </a>
+    </li>
+  {% endunless %}
+  
+  {% endfor %}
+
+</ul>

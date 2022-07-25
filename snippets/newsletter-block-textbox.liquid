@@ -1,0 +1,106 @@
+<div class="text-box position-{{ _text_box_position }}" style="{% if _text_box_backgound == 'color' %}background-color: {{ _text_box_bg_color }}{% else %}background-image:url({{ _text_box_bg_image | img_url: _text_box_bg_size }};{% endif %}">
+  
+  {% for block in section.blocks %}
+
+    {% unless block.type == 'image' %}
+      <div class="text-box-content block-{{ block.type }}">
+    
+        {% case block.type %}
+
+                  {% when 'text' %}
+                    {%- assign _text = block.settings.text -%}
+                    {%- assign _color = block.settings.color -%}
+                    {%- assign _font_size = block.settings.font_size -%}
+                    {%- assign _bold_text = block.settings.bold_text -%}
+
+                    {% unless _text == blank %}
+                      <div class="text bold-text-{{ _bold_text }}" style="font-size: {{ _font_size }}px; color: {{ _color }};">{{ _text }}</div>
+                    {% endunless %}
+
+                  {% when 'form' %}
+                    {%- assign _form_action = block.settings.mailing_form_action -%}
+                    {%- assign _placeholder = block.settings.placeholder -%}
+                    {%- assign _button_text = block.settings.button_text -%}
+                    {%- assign _button_position = block.settings.button_position -%}
+
+                    <div class="box button-position-{{ _button_position }} newsletter-block--form-type" data-form-type="{{ block.settings.email_type }}">
+                      {% if block.settings.email_type == 'mailchimp' %}
+                        <form id="mc-form" action="{{ _form_action }}" method="get" name="mc-embedded-subscribe-form" target="_blank" rel="noopener">
+                          <input required type="email" id="mc-email" class="input-block-level" name="EMAIL" placeholder="{{ _placeholder }}" required />
+                          <button type="submit" id="mc-button" class="btn btn-1">{{ _button_text }}</button>
+                        </form>
+
+                      {% else %}
+                        {%- assign klaviyo_url = block.settings.mailing_form_action -%}
+                        {%- assign klaviyo_id  = frm_action | split: 'g=' | last -%}
+
+                        <form action="{{ klaviyo_url }}" class="form-inline form-subscribe klaviyo_styling" target="_blank" novalidate="novalidate" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="GET">
+                          <input type="hidden" name="g" value="{{klaviyo_id}}">
+                          <input required type="email" class="form-control" value="" name="email" class="contact_email" placeholder="{{ _placeholder }}">
+                          <button type="submit" id="mc-button" class="btn btn-1" name="subscribe">{{ _button_text }}</button>
+                        </form>
+                        <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+               
+                      {% endif %}
+                    </div>
+
+                  {% when 'countdown' %}
+                    {%- assign _expire = block.settings.expire -%}
+                    {%- assign _dueDate = _expire | split: '/' -%}
+                    {%- assign _background = block.settings.bg_color -%}
+                    {%- assign _color = block.settings.color -%}
+                    {%- assign _text = block.settings.text -%}
+
+                    {% unless _expire == blank %}
+                      <div class="box-countdown" style="background: {{ _background}};">
+                        <div class="countdown-content" style="color: {{ _color  }};">
+                          {% unless _text == blank %}<div class="offer-text">{{ _text }}</div>{% endunless %}
+                          <div class="popup-countdown"></div>
+                        </div>
+                      </div> 
+
+                      <script type="text/javascript">
+                        jQuery(document).ready(function($){
+
+                          var currentDate = new Date();
+                          var dueDate = new Date( {{ _dueDate[2] }}, {{ _dueDate[0] | plus:0 }} - 1, {{ _dueDate[1] | plus:0 }} );
+
+                          if(currentDate < dueDate){
+                            $('.popup-countdown').countdown({until: dueDate, format: 'DHMS', padZeroes: true});
+                          }
+                          else{
+                            $('.popup-countdown').parent().hide();
+                          }
+
+                        });
+                      </script>
+                    {% endunless %}
+
+                  {% when 'coupon' %}
+                    {%- assign _image = block.settings.image -%}
+                    {%- assign _image_size = block.settings.image_size -%}
+
+                    <div class="coupon-placeholder block-{{block.type}}"{{block.shopify_attributes}}>
+                      {% unless _image == blank %}
+                        <div class="coupon-image">
+                          {% include 'image-lazysize' with image: _image, image_size: _image_size, image_class: '', image_alt: 'Image' %}
+                        </div>
+                      {% endunless %}
+                    </div>
+
+                  {% when 'social' %}
+                    {%- assign _border_top = block.settings.border_top -%}
+
+                    <div class="widget-social border-top-{{ _border_top }}">
+                      {% include 'social-media-icons' %}
+                    </div>
+
+                  {% else %}
+
+        {% endcase %}
+        
+      </div>
+    {% endunless %}
+
+  {% endfor %}
+</div>

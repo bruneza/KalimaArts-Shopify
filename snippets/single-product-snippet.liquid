@@ -1,0 +1,78 @@
+{% include 'single-product-config' %}
+
+<div id="single-product-{{ section.id }}" class="single-product-section{% if _hide_mobile %} d-none d-md-block{% endif %} layout-{{_layout }}" data-section-type="single-product" data-section-id="{{ section.id }}">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+  
+    {% include 'heading-block' %}
+
+    <div class="single-product-list single-product-{{ section.id }} style-{{ _style }}" data-type="{{ _type }}">
+      {% if section.blocks.size > 0 %}
+
+        {% if _style == 1 %}
+          {%- include 'single-product-style', type: '1' -%}
+
+        {% elsif _style == 2 %}
+          {%- include 'single-product-style', type: '2' -%}
+
+        {% else %}
+          {%- include 'single-product-style', type: '3' -%}
+        {% endif %}
+
+      {% else %}
+        {{ emptyProduct01 }}
+
+      {% endif %}
+    </div>
+
+    <script>
+      jQuery(document).ready(function($) {
+          
+        var _sections = new theme.Sections();
+        _sections.register('single-product',function(){
+            
+          var _type = $('#single-product-{{ section.id }} .home-banner-items').attr('data-type');
+
+          {% if _style == 3 or _style == 4 %}
+          
+          	jQuery(".single-product-{{ section.id }} .single-product-carousel").on('initialize.owl.carousel initialized.owl.carousel change.owl.carousel changed.owl.carousel', function(e) {
+                var current = e.relatedTarget.current()
+                var items = $(this).find('.owl-stage').children()
+                var add = e.type == 'changed' || e.type == 'initialized'
+
+                items.eq(e.relatedTarget.normalize(current )).toggleClass('current', add)
+            }).owlCarousel({
+                nav		: false
+                ,dots 	: true
+                ,loop	: false
+                ,items	: 2
+                ,rtl	: jQuery('body').data('rtl')
+                ,margin	: 20
+                ,responsive : {
+                  0:{
+                    items: 1
+                  }
+                  ,992:{
+                    items: 2
+                  }                                                                
+                }
+            });
+          
+          {% else %}
+
+            jQuery(".single-product-{{ section.id }} .single-product-carousel").length && jQuery('.single-product-{{ section.id }} .single-product-carousel').owlCarousel({
+                 nav	: false
+                 ,dots 	: true
+                 ,loop	: false
+                 ,items	: 1
+                 ,rtl	: jQuery('body').data('rtl')
+            });
+          
+          {% endif %}
+      
+        });
+
+      });
+    </script>
+
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

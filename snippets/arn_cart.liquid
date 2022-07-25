@@ -1,0 +1,415 @@
+<div class="wl-cart-drawer">
+  <div class="section_content-overlay" data-close-cart data-parent="#sidebarDrawer"></div>
+  <a href="" class="cartShopping-close" data-close-cart data-parent="#cartShopping"></a>
+  <form id="myForm" accept-charset="UTF-8" enctype="multipart/form-data" novalidate="novalidate">
+    <div class="wl-cart-head text-center">
+      <h3>
+        <a href="javascript:void(0);">
+          {{ 'wishlist' | t }}
+          <span class="number_wl" data-cart-count></span>
+        </a>
+      </h3>
+      <a href="javascript:void(0)" class="closebtn">
+        <svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.3805 16.895L2.9182 2.43267C2.6584 2.17286 2.55963 1.92523 2.67128 1.81358L3.71333 0.77153C3.82498 0.659881 4.07262 0.758651 4.33242 1.01845L18.8813 15.5674C19.1411 15.8272 19.2399 16.0748 19.1283 16.1865L18.0862 17.2285C17.9252 17.2163 17.6403 17.1548 17.3805 16.895Z" fill="{{ stroke }}"/>
+          <path d="M4.41928 16.895L18.8816 2.43267C19.1414 2.17286 19.2402 1.92523 19.1285 1.81358L18.0865 0.77153C17.9748 0.659881 17.7272 0.758651 17.4674 1.01845L2.91847 15.5674C2.65866 15.8272 2.55989 16.0748 2.67154 16.1865L3.7136 17.2285C3.87463 17.2163 4.15948 17.1548 4.41928 16.895Z" fill="{{ stroke }}"/></svg>
+      </a>
+    </div>
+
+    <div class="wl-cart-body">
+      <div class="wl-cart-body-inner animation-fade" data-cart-body>
+        {%- if productList.items.size == 0 -%}
+        <span class="text">{{wishlist_translate.t_empty }}</span>
+        {%- else -%}
+        <h3 id="arn-share-head">Share Wishlist</h3>
+        <ul id="arn-share-list">
+          <li>
+            <a href="javascript:void(0);" class="arn-button-share resp-sharing-button__link" title="Share on Facebook" data-arn-share-service="facebook">
+              <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
+                <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                  <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                    <g>
+                      <path d="M18.768,7.465H14.5V5.56c0-0.896,0.594-1.105,1.012-1.105s2.988,0,2.988,0V0.513L14.171,0.5C10.244,0.5,9.5,3.438,9.5,5.32 v2.145h-3v4h3c0,5.212,0,12,0,12h5c0,0,0-6.85,0-12h3.851L18.768,7.465z"></path>
+                    </g>
+                  </svg>
+                </div>
+                <span>Facebook</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" class="arn-button-share resp-sharing-button__link" title="Share on Pinterest" data-arn-share-service="pinterest">
+              <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--large">
+                <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                  <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                    <path d="M12.137,0.5C5.86,0.5,2.695,5,2.695,8.752c0,2.272,0.8 ,4.295,2.705,5.047c0.303,0.124,0.574,0.004,0.661-0.33 c0.062-0.231,0.206-0.816,0.271-1.061c0.088-0.331,0.055-0.446-0.19-0.736c-0.532-0.626-0.872-1.439-0.872-2.59 c0-3.339,2.498-6.328,6.505-6.328c3.548,0,5.497,2.168,5.497,5.063c0,3.809-1.687,7.024-4.189,7.024 c-1.382,0-2.416-1.142-2.085-2.545c0.397-1.675,1.167-3.479,1.167-4.688c0-1.081-0.58-1.983-1.782-1.983 c-1.413,0-2.548,1.461-2.548,3.42c0,1.247,0.422,2.09,0.422,2.09s-1.445,6.126-1.699,7.199c-0.505,2.137-0.076,4.756-0.04,5.02 c0.021,0.157,0.224,0.195,0.314,0.078c0.13-0.171,1.813-2.25,2.385-4.325c0.162-0.589,0.929-3.632,0.929-3.632 c0.459,0.876,1.801,1.646,3.228,1.646c4.247,0,7.128-3.871,7.128-9.053C20.5,4.15,17.182,0.5,12.137,0.5z"></path>
+                  </svg>
+                </div>
+                <span>Pinterest</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" class="arn-button-share resp-sharing-button__link" title="Share on Twitter" data-arn-share-service="twitter">
+              <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large">
+                <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                  <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                    <g>
+                      <path d="M23.444,4.834c-0.814,0.363-1.5,0.375-2.228,0.016c0.938-0.562,0.981-0.957,1.32-2.019c-0.878,0.521-1.851,0.9-2.886,1.104 C18.823,3.053,17.642,2.5,16.335,2.5c-2.51,0-4.544,2.036-4.544,4.544c0,0.356,0.04,0.703,0.117,1.036 C8.132,7.891,4.783,6.082,2.542,3.332C2.151,4.003,1.927,4.784,1.927,5.617c0,1.577,0.803,2.967,2.021,3.782 C3.203,9.375,2.503,9.171,1.891,8.831C1.89,8.85,1.89,8.868,1.89,8.888c0,2.202,1.566,4.038,3.646,4.456 c-0.666,0.181-1.368,0.209-2.053,0.079c0.579,1.804,2.257,3.118,4.245,3.155C5.783,18.102,3.372,18.737,1,18.459 C3.012,19.748,5.399,20.5,7.966,20.5c8.358,0,12.928-6.924,12.928-12.929c0-0.198-0.003-0.393-0.012-0.588 C21.769,6.343,22.835,5.746,23.444,4.834z"></path>
+                    </g>
+                  </svg>
+                </div>
+                <span>Twitter</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" class="arn-button-share resp-sharing-button__link" title="Share via Email" data-arn-share-service="email">
+              <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--large">
+                <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                  <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                    <path d="M22,4H2C0.897,4,0,4.897,0,6v12c0,1.103,0.897,2,2,2h20c1.103,0,2-0.897,2-2V6C24,4.897,23.103,4,22,4z M7.248,14.434 l-3.5,2C3.67,16.479,3.584,16.5,3.5,16.5c-0.174,0-0.342-0.09-0.435-0.252c-0.137-0.239-0.054-0.545,0.186-0.682l3.5-2 c0.24-0.137,0.545-0.054,0.682,0.186C7.571,13.992,7.488,14.297,7.248,14.434z M12,14.5c-0.094,0-0.189-0.026-0.271-0.08l-8.5-5.5 C2.997,8.77,2.93,8.46,3.081,8.229c0.15-0.23,0.459-0.298,0.691-0.147L12,13.405l8.229-5.324c0.232-0.15,0.542-0.084,0.691,0.147 c0.15,0.232,0.083,0.542-0.148,0.691l-8.5,5.5C12.189,14.474,12.095,14.5,12,14.5z M20.934,16.248 C20.842,16.41,20.673,16.5,20.5,16.5c-0.084,0-0.169-0.021-0.248-0.065l-3.5-2c-0.24-0.137-0.323-0.442-0.186-0.682 s0.443-0.322,0.682-0.186l3.5,2C20.988,15.703,21.071,16.009,20.934,16.248z"></path>
+                  </svg>
+                </div>
+                <span>Email</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);"  class="arn-button-share resp-sharing-button__link" title="Share via link" data-arn-share-service="link">
+              <div class="resp-sharing-button resp-sharing-button--link resp-sharing-button--large">
+                <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                  <svg version="1.1" xmlns="https://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+                    <path d="M459.654,233.373l-90.531,90.5c-49.969,50-131.031,50-181,0c-7.875-7.844-14.031-16.688-19.438-25.813
+                             l42.063-42.063c2-2.016,4.469-3.172,6.828-4.531c2.906,9.938,7.984,19.344,15.797,27.156c24.953,24.969,65.563,24.938,90.5,0
+                             l90.5-90.5c24.969-24.969,24.969-65.563,0-90.516c-24.938-24.953-65.531-24.953-90.5,0l-32.188,32.219
+                             c-26.109-10.172-54.25-12.906-81.641-8.891l68.578-68.578c50-49.984,131.031-49.984,181.031,0
+                             C509.623,102.342,509.623,183.389,459.654,233.373z M220.326,382.186l-32.203,32.219c-24.953,24.938-65.563,24.938-90.516,0
+                             c-24.953-24.969-24.953-65.563,0-90.531l90.516-90.5c24.969-24.969,65.547-24.969,90.5,0c7.797,7.797,12.875,17.203,15.813,27.125
+                             c2.375-1.375,4.813-2.5,6.813-4.5l42.063-42.047c-5.375-9.156-11.563-17.969-19.438-25.828c-49.969-49.984-131.031-49.984-181.016,0
+                             l-90.5,90.5c-49.984,50-49.984,131.031,0,181.031c49.984,49.969,131.031,49.969,181.016,0l68.594-68.594
+                             C274.561,395.092,246.42,392.342,220.326,382.186z"></path>
+                  </svg>
+                </div>
+                <span>E-Mail</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+        {%- if plan == "free" or allow_multiple == false  -%}
+        <div class="arn-wl-tooltip">  
+          	<div class="arn-canvas-add-new-list disable">
+             {% else %}
+             <div class="arn-canvas-add-new-list">
+               {% endif %}
+            <a href="javascript:void(0);" class="arn-button-add-list resp-sharing-button__link" title="Add new list">
+              <div class="resp-sharing-button resp-sharing-button--add-list resp-sharing-button--large">
+                <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                  <svg height="426.66667pt" viewBox="0 0 426.66667 426.66667" width="426.66667pt" xmlns="http://www.w3.org/2000/svg"><path d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0"></path></svg>
+                </div>
+                <span>Add a new list</span>
+              </div>
+            </a>
+          </div>
+         {%- if plan == "free" -%}
+          <span class="tooltiptext">Only accept to create one list</span>
+        </div>
+        {% endif %}
+        <div id="arn-share-link-text"><span class="arn-text"></span><a href="javascript:void(0);" class="arn-clipboard" data-clipboard-target="#arn-share-link-text .arn-text">copy link</a></div>
+        <div class="arn-custom-list arn_pending">
+          
+          {%- if listCustomerWishlist.list.length == 0 -%}
+          	 <p style="text-align:center">{{wishlist_translate.t_empty }}</p>
+          {% endif %}
+          
+          {% for item in listCustomerWishlist.list %}
+          {%- if item.product.length == 0 -%}
+               <div class="arn-fave-list arn-fave-empty-list active" data-id={{item.id}}>
+          {% else %}
+          <div class="arn-fave-list active" data-id={{item.id}}>
+			{% endif %}
+            <div class="arn-fave-list-header">
+              <div class="arn-fave-list-header-title">
+                <i class="arn-fave-header-button" data-event="click" data-action="collapseList"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="8.25" viewBox="0 0 14 8.25"><path id="round-keyboard_arrow_down-24px" d="M8.553,9.364l4.861,4.861,4.861-4.861a1.249,1.249,0,1,1,1.766,1.766l-5.75,5.75a1.248,1.248,0,0,1-1.766,0l-5.75-5.75a1.248,1.248,0,0,1,0-1.766A1.274,1.274,0,0,1,8.553,9.364Z" transform="translate(-6.407 -8.997)" fill="#505050"></path></svg></i>
+                <div class="arn-fave-result">
+                  <span class="arn-fave-result-board arn-fave-action" data-event="click" data-action="collapseList" data-count="1">{{item.title}}</span>
+                  <span class="arn-fave-result-board-count">{{item.count}}</span>
+                </div>
+                <input class="arn-fave-list-title"  type="text" name="list_title[]" placeholder="Untitled List" data-event="blur" data-action="editList">
+              </div>
+              <div class="arn-dropdown arn-dropdown-fave-options"><a class="arn-dropdown-toggle" data-event="click" data-action="collapseOptions" data-toggle="arn-dropdown" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="4" viewBox="0 0 16 4"><path id="Path_2" data-name="Path 2" d="M6,10a2,2,0,1,0,2,2A2.006,2.006,0,0,0,6,10Zm12,0a2,2,0,1,0,2,2A2.006,2.006,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2.006,2.006,0,0,0,12,10Z" transform="translate(-4 -10)" fill="#505050"></path></svg></a><ul class="arn-dropdown-menu" role="menu" aria-labelledby="dLabel"><li class="arn-fave-action arn-rename" data-event="click" data-action="focusList"><span>Edit name</span></li>
+                {%- if plan != "free" -%}
+                <li class="arn-fave-action arn-modal-share" data-event="click" data-action="focusList"><span>Share</span></li>
+                 {% endif %}
+                <li class="arn-fave-action arn-modal-delete" data-event="click" data-action="showRemoveListModal"><span>Delete</span></li></ul></div>
+                    
+              <div class="arn-dropdown share-dropdown">
+                <a
+                   class="arn-dropdown-toggle"
+                   data-toggle="arn-dropdown"
+                   href="javascript:void(0);"
+                   ></a>
+                <div class="arn-dropdown-menu">
+                  <ul
+                      id="arn-share-list"
+                      role="menu"
+                      aria-labelledby="dLabel"
+                      >
+                    <li>
+                      <a
+                         href="javascript:void(0);"
+                         class="arn-button-share resp-sharing-button__link"
+                         title="Share on Facebook"
+                         data-arn-share-service="facebook"
+                         >
+                        <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
+                          <div
+                               aria-hidden="true"
+                               class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                               >
+                            <svg
+                                 version="1.1"
+                                 x="0px"
+                                 y="0px"
+                                 width="24px"
+                                 height="24px"
+                                 viewBox="0 0 24 24"
+                                 enable-background="new 0 0 24 24"
+                                 xml:space="preserve"
+                                 >
+                              <g>
+                                <path d="M18.768,7.465H14.5V5.56c0-0.896,0.594-1.105,1.012-1.105s2.988,0,2.988,0V0.513L14.171,0.5C10.244,0.5,9.5,3.438,9.5,5.32 v2.145h-3v4h3c0,5.212,0,12,0,12h5c0,0,0-6.85,0-12h3.851L18.768,7.465z"></path>
+                              </g>
+                            </svg>
+                          </div>
+                          <span>Facebook</span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                         href="javascript:void(0);"
+                         class="arn-button-share resp-sharing-button__link"
+                         title="Share on Pinterest"
+                         data-arn-share-service="pinterest"
+                         >
+                        <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--large">
+                          <div
+                               aria-hidden="true"
+                               class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                               >
+                            <svg
+                                 version="1.1"
+                                 x="0px"
+                                 y="0px"
+                                 width="24px"
+                                 height="24px"
+                                 viewBox="0 0 24 24"
+                                 enable-background="new 0 0 24 24"
+                                 xml:space="preserve"
+                                 >
+                              <path d="M12.137,0.5C5.86,0.5,2.695,5,2.695,8.752c0,2.272,0.8 ,4.295,2.705,5.047c0.303,0.124,0.574,0.004,0.661-0.33 c0.062-0.231,0.206-0.816,0.271-1.061c0.088-0.331,0.055-0.446-0.19-0.736c-0.532-0.626-0.872-1.439-0.872-2.59 c0-3.339,2.498-6.328,6.505-6.328c3.548,0,5.497,2.168,5.497,5.063c0,3.809-1.687,7.024-4.189,7.024 c-1.382,0-2.416-1.142-2.085-2.545c0.397-1.675,1.167-3.479,1.167-4.688c0-1.081-0.58-1.983-1.782-1.983 c-1.413,0-2.548,1.461-2.548,3.42c0,1.247,0.422,2.09,0.422,2.09s-1.445,6.126-1.699,7.199c-0.505,2.137-0.076,4.756-0.04,5.02 c0.021,0.157,0.224,0.195,0.314,0.078c0.13-0.171,1.813-2.25,2.385-4.325c0.162-0.589,0.929-3.632,0.929-3.632 c0.459,0.876,1.801,1.646,3.228,1.646c4.247,0,7.128-3.871,7.128-9.053C20.5,4.15,17.182,0.5,12.137,0.5z"></path>
+                            </svg>
+                          </div>
+                          <span>Pinterest</span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                         href="javascript:void(0);"
+                         class="arn-button-share resp-sharing-button__link"
+                         title="Share on Twitter"
+                         data-arn-share-service="twitter"
+                         >
+                        <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large">
+                          <div
+                               aria-hidden="true"
+                               class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                               >
+                            <svg
+                                 version="1.1"
+                                 x="0px"
+                                 y="0px"
+                                 width="24px"
+                                 height="24px"
+                                 viewBox="0 0 24 24"
+                                 enable-background="new 0 0 24 24"
+                                 xml:space="preserve"
+                                 >
+                              <g>
+                                <path d="M23.444,4.834c-0.814,0.363-1.5,0.375-2.228,0.016c0.938-0.562,0.981-0.957,1.32-2.019c-0.878,0.521-1.851,0.9-2.886,1.104 C18.823,3.053,17.642,2.5,16.335,2.5c-2.51,0-4.544,2.036-4.544,4.544c0,0.356,0.04,0.703,0.117,1.036 C8.132,7.891,4.783,6.082,2.542,3.332C2.151,4.003,1.927,4.784,1.927,5.617c0,1.577,0.803,2.967,2.021,3.782 C3.203,9.375,2.503,9.171,1.891,8.831C1.89,8.85,1.89,8.868,1.89,8.888c0,2.202,1.566,4.038,3.646,4.456 c-0.666,0.181-1.368,0.209-2.053,0.079c0.579,1.804,2.257,3.118,4.245,3.155C5.783,18.102,3.372,18.737,1,18.459 C3.012,19.748,5.399,20.5,7.966,20.5c8.358,0,12.928-6.924,12.928-12.929c0-0.198-0.003-0.393-0.012-0.588 C21.769,6.343,22.835,5.746,23.444,4.834z"></path>
+                              </g>
+                            </svg>
+                          </div>
+                          <span>Twitter</span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                         href="javascript:void(0);"
+                         class="arn-button-share resp-sharing-button__link"
+                         title="Share via Email"
+                         data-arn-share-service="email"
+                         >
+                        <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--large">
+                          <div
+                               aria-hidden="true"
+                               class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                               >
+                            <svg
+                                 version="1.1"
+                                 x="0px"
+                                 y="0px"
+                                 width="24px"
+                                 height="24px"
+                                 viewBox="0 0 24 24"
+                                 enable-background="new 0 0 24 24"
+                                 xml:space="preserve"
+                                 >
+                              <path d="M22,4H2C0.897,4,0,4.897,0,6v12c0,1.103,0.897,2,2,2h20c1.103,0,2-0.897,2-2V6C24,4.897,23.103,4,22,4z M7.248,14.434 l-3.5,2C3.67,16.479,3.584,16.5,3.5,16.5c-0.174,0-0.342-0.09-0.435-0.252c-0.137-0.239-0.054-0.545,0.186-0.682l3.5-2 c0.24-0.137,0.545-0.054,0.682,0.186C7.571,13.992,7.488,14.297,7.248,14.434z M12,14.5c-0.094,0-0.189-0.026-0.271-0.08l-8.5-5.5 C2.997,8.77,2.93,8.46,3.081,8.229c0.15-0.23,0.459-0.298,0.691-0.147L12,13.405l8.229-5.324c0.232-0.15,0.542-0.084,0.691,0.147 c0.15,0.232,0.083,0.542-0.148,0.691l-8.5,5.5C12.189,14.474,12.095,14.5,12,14.5z M20.934,16.248 C20.842,16.41,20.673,16.5,20.5,16.5c-0.084,0-0.169-0.021-0.248-0.065l-3.5-2c-0.24-0.137-0.323-0.442-0.186-0.682 s0.443-0.322,0.682-0.186l3.5,2C20.988,15.703,21.071,16.009,20.934,16.248z"></path>
+                            </svg>
+                          </div>
+                          <span>Email</span>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                         href="javascript:void(0);"
+                         class="arn-button-share resp-sharing-button__link"
+                         title="Share via link"
+                         data-arn-share-service="link"
+                         >
+                        <div class="resp-sharing-button resp-sharing-button--link resp-sharing-button--large">
+                          <div
+                               aria-hidden="true"
+                               class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                               >
+                            <svg
+                                 version="1.1"
+                                 xmlns="https://www.w3.org/2000/svg"
+                                 width="512"
+                                 height="512"
+                                 viewBox="0 0 512 512"
+                                 >
+                              <path
+                                    d="M459.654,233.373l-90.531,90.5c-49.969,50-131.031,50-181,0c-7.875-7.844-14.031-16.688-19.438-25.813
+                                       l42.063-42.063c2-2.016,4.469-3.172,6.828-4.531c2.906,9.938,7.984,19.344,15.797,27.156c24.953,24.969,65.563,24.938,90.5,0
+                                       l90.5-90.5c24.969-24.969,24.969-65.563,0-90.516c-24.938-24.953-65.531-24.953-90.5,0l-32.188,32.219
+                                       c-26.109-10.172-54.25-12.906-81.641-8.891l68.578-68.578c50-49.984,131.031-49.984,181.031,0
+                                       C509.623,102.342,509.623,183.389,459.654,233.373z M220.326,382.186l-32.203,32.219c-24.953,24.938-65.563,24.938-90.516,0
+                                       c-24.953-24.969-24.953-65.563,0-90.531l90.516-90.5c24.969-24.969,65.547-24.969,90.5,0c7.797,7.797,12.875,17.203,15.813,27.125
+                                       c2.375-1.375,4.813-2.5,6.813-4.5l42.063-42.047c-5.375-9.156-11.563-17.969-19.438-25.828c-49.969-49.984-131.031-49.984-181.016,0
+                                       l-90.5,90.5c-49.984,50-49.984,131.031,0,181.031c49.984,49.969,131.031,49.969,181.016,0l68.594-68.594
+                                       C274.561,395.092,246.42,392.342,220.326,382.186z"
+                                    ></path>
+                            </svg>
+                          </div>
+                          <span>E-Mail</span>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                  <div id="arn-share-link-text-modal"  style="margin-bottom: 20px;margin-top: 10px;"><span class="arn-text"></span><br><button class="arn-clipboard" type="button" data-clipboard-target="#arn-share-link-text .arn-text">copy link</button></div>
+                </div>
+              </div>
+       
+              <i class="arn-icon-pen arn-fave-action arn-hide" data-event="click" data-action="focusList"></i>
+            </div>
+            <div class="arn-fave-list-delete-modal" style="display:none;"><div class="delete-text">Delete this list?</div><div class="arn-btn-wrap"><div class="arn-btn arn-cancel arn-fave-action" data-event="click" data-action="hideRemoveListModal">cancel</div><div class="arn-btn arn-delete arn-fave-action" data-event="click" data-action="removeList">Delete</div></div></div>
+            <div class="arn-fave-list-container">
+              {%- if item.product.length == 0 -%}
+              <p style="text-align:center">This list is empty</p>
+              {% else %}
+			{% for product in item.product %}
+              <div class="cart-item-block animation-fade-index-{{productList.items.size}} wishlist-item"  data-line-item>
+                <div class="row no-gutters wishlist-content">
+                  <div class="col-3 wishlist-image">
+                    <div class="featured_product__item-image">
+                      <a href="{{product.uri | within: collection }}">
+                        <span class="image__style" style="display: block;position: relative">
+                          <img class="overlay-ui w-100 h-100" src="{{product.featured_image}}" alt="" data-item-image>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-9 wishlist-info">
+                    <div class="featured_product__item-info" style="margin-left: 1rem">
+                      <h6>
+                        <a href="{{product.uri | within: collection }}" data-item-url>
+                          <span class="product-title" data-item-title>{{product.title}}</span>
+                        </a>
+                      </h6>
+
+                      <div class="product-qty product-cart">
+                        <div class="qty-wrapper" data-quantity>
+                          <div class="qty-select">
+                            <a href="javascript:void(0);" class="qty-minus-wl">-</a>
+                            <input type="text" class="input_quantity" name="quantity" value="1" pattern="[0-9]+" min="1"/>
+                            <a href="javascript:void(0);" class="qty-plus-wl">+</a>
+                          </div>
+                        </div>
+                      </div>
+                      {% if product.available %} 
+                      {% if product.variants.size == 1 %}
+                      {% for variant in product.variants %}
+                      <input class="input_id" name="id" value="{{ variant.id }}" type="hidden">
+                      {% endfor%}
+                      {% else %}
+                      <span>{{wishlist_translate.t_variant}}</span>
+                      <select class="input_id" name="id">
+                        {% for variant in product.variants %}
+                        {% if variant.available %}
+                        <option value="{{ variant.id }}">{{ variant.title }}</option>
+                        {% endif %}
+                        {% endfor%}
+                      </select>
+                      {% endif %}
+                      <p class="instock">{{ wishlist_translate.t_instock }}</p>
+                      {% else %}
+                      <p class="outstock">{{ wishlist_translate.t_outstock }}</p>
+                      {% endif %}
+                      <div class="price">{{ product.price }}</div>
+                      <div class="general-button">
+                        {% if product.available %} 
+                        <button data-handle="{{product.handle}}" type="submit"  name="add" class="{{addToCartClass}}">{{wishlist_translate.t_add}}</button>
+                        {% endif %}
+                        <a href="javascript:void(0);" class="wl-remove-item" data-handle="{{product.handle}}">{{wishlist_translate.t_remove}}</a>
+                      </div>
+
+                    </div>
+                  </div>
+                   {%- if plan != "free" -%}
+                  <div class="show-move" style="position: absolute; right: 3%;">
+                      <a href="javascript:void(0);" data-handle="ariel-triangle-top" class="view-btn arn-move">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="4" viewBox="0 0 16 4"><path id="Path_2" data-name="Path 2" d="M6,10a2,2,0,1,0,2,2A2.006,2.006,0,0,0,6,10Zm12,0a2,2,0,1,0,2,2A2.006,2.006,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2.006,2.006,0,0,0,12,10Z" transform="translate(-4 -10)" fill="#505050"></path></svg>
+                      </a><ul class="arn-fave-item__edit-list" data-handle="{{product.handle}}" style="display: none;right: 0;">
+                      {% for itemMove in listCustomerWishlist.list %}
+                      {%- if item.id == itemMove.id -%}
+                      <li data-id={{itemMove.id}} class="arn-selected-fave-item">{{itemMove.title}}</li>
+                       {% else %}
+                      <li data-id={{itemMove.id}}>{{itemMove.title}}</li>
+                      {%- endif -%}
+                      {% endfor%}
+                     </ul>
+                  </div>
+                   {%- endif -%}
+                </div>
+              </div>
+               {% endfor%}
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- endfor -%}
+          {%- endif -%}
+
+        </div>
+      </div>
+      </form>
+    </div>
+  <div class="bg">
+    <div class="loader"></div>
+  </div>
+

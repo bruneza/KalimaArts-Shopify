@@ -1,0 +1,20 @@
+{%- assign _header_style = settings.header_style -%}
+
+{%- case _header_style -%}
+  {% when 1 %}
+    {% section 'header-style-1' %}
+  {% when 2 %}
+    {% section 'header-style-2' %}
+  {% when 3 %}
+    {% section 'header-style-3' %}
+  {% when 4 %}
+    {% section 'header-style-4' %}
+  {% when 5 %}
+    {% section 'header-style-5' %}
+  {% when 6 %}
+    {% section 'header-style-6' %}
+  {% when 7 %}
+    {% section 'header-style-7' %}
+  {% else %}
+    {% section 'header-style-8' %}
+{%- endcase -%}

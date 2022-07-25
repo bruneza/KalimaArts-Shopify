@@ -1,0 +1,40 @@
+<div class="product-wrapper">
+
+  <div class="product-head"> 
+    <div class="product-image">
+
+      <div class="image product-ratio-{{ settings.collections_product_ratio }}">
+        {% assign _special_text = block.settings.product_special_text %}
+        {% unless _special_text == blank %}
+          <span class="special-offer-text">{{ _special_text }}</span>
+        {% endunless %}
+          
+        <a href="{{ product.url }}">
+          {% include 'product-image-lazysize' with image: product.featured_image, image_size: '450x', image_class: '', image_alt: product.title %}
+        </a>
+
+        {% if product.variants.first.price < product.variants.first.compare_at_price %}
+        <span class="special-product-label">
+          <span class="text">{{ 'products.big_product.text_save' | t }}</span>
+          {% assign _percent_off = product.variants.first.compare_at_price | minus : product.variants.first.price %}
+          {% capture _percent %}{{ _percent_off | times:100.00  | divided_by: product.variants.first.compare_at_price | round }}{% endcapture %}
+          <span class="percent">{{ _percent | append: '%' }}</span>
+        </span>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+
+  <div class="product-content">
+    <div class="pc-inner">
+      <h5 class="product-name"><a href="{{ product.url }}">{{ product.title }}</a></h5>
+
+      {% include 'product-price' %} 
+      {% include 'single-product-stock' %}
+      {% include 'single-product-deal' %}
+
+    </div>
+  </div>
+
+</div>

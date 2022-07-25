@@ -1,0 +1,226 @@
+{%- liquid
+  assign country = country | downcase
+-%}
+{%- case country -%}
+  {%- when "canada" -%}ca
+  {%- when "united states" -%}us
+  {%- when "france" -%}fr
+  {%- when "united kingdom" -%}gb
+  {%- when "afghanistan" -%}af
+  {%- when "åland islands" -%}ax
+  {%- when "albania" -%}al
+  {%- when "algeria" -%}dz
+  {%- when "andorra" -%}ad
+  {%- when "angola" -%}ao
+  {%- when "anguilla" -%}ai
+  {%- when "antigua &amp; barbuda" -%}ag
+  {%- when "argentina" -%}ar
+  {%- when "armenia" -%}am
+  {%- when "aruba" -%}aw
+  {%- when "ascension island" -%}sh {%- break -%}
+  {%- when "australia" -%}au
+  {%- when "austria" -%}at
+  {%- when "azerbaijan" -%}az
+  {%- when "bahamas" -%}bs
+  {%- when "bangladesh" -%}bd
+  {%- when "barbados" -%}bb
+  {%- when "belgium" -%}be
+  {%- when "belize" -%}bz
+  {%- when "benin" -%}bj
+  {%- when "bermuda" -%}bm
+  {%- when "bolivia" -%}bo
+  {%- when "bosnia &amp; herzegovina" -%}ba
+  {%- when "botswana" -%}bw
+  {%- when "bouvet island" -%}bv
+  {%- when "brazil" -%}br
+  {%- when "british indian ocean territory" -%}io
+  {%- when "british virgin islands" -%}vg
+  {%- when "brunei" -%}bn
+  {%- when "bulgaria" -%}bg
+  {%- when "burkina faso" -%}bf
+  {%- when "burundi" -%}bi
+  {%- when "cambodia" -%}kh
+  {%- when "cameroon" -%}cm
+  {%- when "cape verde" -%}cv
+  {%- when "caribbean netherlands" -%}nl
+  {%- when "cayman islands" -%}ky
+  {%- when "central african republic" -%}cf
+  {%- when "chad" -%}td
+  {%- when "chile" -%}cl
+  {%- when "china" -%}cn
+  {%- when "christmas island" -%}cx
+  {%- when "cocos (keeling) islands" -%}cc
+  {%- when "colombia" -%}co
+  {%- when "comoros" -%}km
+  {%- when "congo - brazzaville" -%}cg
+  {%- when "congo - kinshasa" -%}cd
+  {%- when "cook islands" -%}ck
+  {%- when "costa rica" -%}cr
+  {%- when "côte d’ivoire" -%}ci
+  {%- when "croatia" -%}hr
+  {%- when "curaçao" -%}cw
+  {%- when "cyprus" -%}cy
+  {%- when "czech republic" -%}cz
+  {%- when "denmark" -%}dk
+  {%- when "djibouti" -%}dj
+  {%- when "dominica" -%}dm
+  {%- when "dominican republic" -%}do
+  {%- when "ecuador" -%}ec
+  {%- when "egypt" -%}eg
+  {%- when "el salvador" -%}sv
+  {%- when "equatorial guinea" -%}gq
+  {%- when "estonia" -%}ee
+  {%- when "ethiopia" -%}et
+  {%- when "falkland islands" -%}fk
+  {%- when "faroe islands" -%}fo
+  {%- when "fiji" -%}fj
+  {%- when "finland" -%}fi
+  {%- when "french guiana" -%}gf
+  {%- when "french polynesia" -%}pf
+  {%- when "french southern territories" -%}tf
+  {%- when "gabon" -%}ga
+  {%- when "gambia" -%}gm
+  {%- when "georgia" -%}ge
+  {%- when "germany" -%}de
+  {%- when "gibraltar" -%}
+  {%- when "greece" -%}gi
+  {%- when "greenland" -%}gl
+  {%- when "grenada" -%}gd
+  {%- when "guadeloupe" -%}gp
+  {%- when "guatemala" -%}gt
+  {%- when "guernsey" -%}gg
+  {%- when "guinea" -%}gn
+  {%- when "guinea-bissau" -%}gw
+  {%- when "guyana" -%}gy
+  {%- when "haiti" -%}ht
+  {%- when "heard &amp; mcdonald islands" -%}hm
+  {%- when "honduras" -%}hn
+  {%- when "hong kong sar china" -%}hk
+  {%- when "hungary" -%}hu
+  {%- when "iceland" -%}is
+  {%- when "india" -%}in
+  {%- when "indonesia" -%}id
+  {%- when "ireland" -%}ie
+  {%- when "isle of man" -%}im
+  {%- when "israel" -%}il
+  {%- when "italy" -%}it
+  {%- when "jamaica" -%}jm
+  {%- when "japan" -%}jp
+  {%- when "kazakhstan" -%}kz
+  {%- when "kenya" -%}ke
+  {%- when "kosovo" -%}xk
+  {%- when "kyrgyzstan" -%}kg
+  {%- when "laos" -%}la
+  {%- when "latvia" -%}lv
+  {%- when "lebanon" -%}lb
+  {%- when "lesotho" -%}ls
+  {%- when "liberia" -%}lr
+  {%- when "liechtenstein" -%}li
+  {%- when "lithuania" -%}lt
+  {%- when "luxembourg" -%}lu
+  {%- when "macau sar china" -%}mo
+  {%- when "macedonia" -%}mk
+  {%- when "malawi" -%}mw
+  {%- when "malaysia" -%}my
+  {%- when "maldives" -%}mv
+  {%- when "mali" -%}ml
+  {%- when "malta" -%}mt
+  {%- when "martinique" -%}mq
+  {%- when "mauritius" -%}mu
+  {%- when "mayotte" -%}yt
+  {%- when "mexico" -%}mx
+  {%- when "moldova" -%}md
+  {%- when "monaco" -%}mc
+  {%- when "mongolia" -%}mn
+  {%- when "montenegro" -%}me
+  {%- when "montserrat" -%}ms
+  {%- when "morocco" -%}ma
+  {%- when "mozambique" -%}mz
+  {%- when "myanmar (burma)" -%}mm
+  {%- when "namibia" -%}na
+  {%- when "nauru" -%}nr
+  {%- when "nepal" -%}np
+  {%- when "netherlands" -%}nl
+  {%- when "netherlands antilles" -%}an
+  {%- when "new caledonia" -%}nc
+  {%- when "new zealand" -%}nz
+  {%- when "nicaragua" -%}ni
+  {%- when "niger" -%}ne
+  {%- when "nigeria" -%}ng
+  {%- when "niue" -%}nu
+  {%- when "norfolk island" -%}nf
+  {%- when "norway" -%}no
+  {%- when "pakistan" -%}pk
+  {%- when "palestinian territories" -%}ps
+  {%- when "panama" -%}pa
+  {%- when "papua new guinea" -%}pg
+  {%- when "paraguay" -%}py
+  {%- when "peru" -%}pe
+  {%- when "philippines" -%}ph
+  {%- when "pitcairn islands" -%}pn
+  {%- when "poland" -%}pl
+  {%- when "portugal" -%}pt
+  {%- when "qatar" -%}qa
+  {%- when "réunion" -%}re
+  {%- when "romania" -%}ro
+  {%- when "russia" -%}ru
+  {%- when "rwanda" -%}rw
+  {%- when "saint martin" -%}mf
+  {%- when "samoa" -%}ws
+  {%- when "san marino" -%}sm
+  {%- when "são tomé &amp; príncipe" -%}st
+  {%- when "saudi arabia" -%}sa
+  {%- when "senegal" -%}sn
+  {%- when "serbia" -%}rs
+  {%- when "seychelles" -%}sc
+  {%- when "sierra leone" -%}sl
+  {%- when "singapore" -%}sg
+  {%- when "slovakia" -%}sk
+  {%- when "slovenia" -%}si
+  {%- when "solomon islands" -%}sb
+  {%- when "south africa" -%}za
+  {%- when "south georgia &amp; south sandwich islands" -%}gs
+  {%- when "south korea" -%}kr
+  {%- when "spain" -%}es
+  {%- when "sri lanka" -%}lk
+  {%- when "st. barthélemy" -%}bl
+  {%- when "st. helena" -%}sh {%- break -%}
+  {%- when "st. kitts &amp; nevis" -%}kn
+  {%- when "st. lucia" -%}lc
+  {%- when "st. martin" -%}mf
+  {%- when "st. pierre &amp; miquelon" -%}pm
+  {%- when "st. vincent &amp; grenadines" -%}vc
+  {%- when "suriname" -%}sr
+  {%- when "svalbard &amp; jan mayen" -%}sj
+  {%- when "swaziland" -%}sz
+  {%- when "sweden" -%}se
+  {%- when "switzerland" -%}ch
+  {%- when "taiwan" -%}Taiwan
+  {%- when "tajikistan" -%}tj
+  {%- when "tanzania" -%}tz
+  {%- when "thailand" -%}th
+  {%- when "timor-leste" -%}tl
+  {%- when "togo" -%}tg
+  {%- when "tokelau" -%}tk
+  {%- when "tonga" -%}to
+  {%- when "trinidad &amp; tobago" -%}tt
+  {%- when "tristan da cunha" -%}sh {%- break -%}
+  {%- when "turkey" -%}tr
+  {%- when "turks &amp; caicos islands" -%}tc
+  {%- when "tuvalu" -%}tv
+  {%- when "u.s. outlying islands" -%}um
+  {%- when "uganda" -%}ug
+  {%- when "ukraine" -%}ua
+  {%- when "united arab emirates" -%}ae
+  {%- when "uruguay" -%}uy
+  {%- when "uzbekistan" -%}uz
+  {%- when "vanuatu" -%}vu
+  {%- when "vatican city" -%}va
+  {%- when "venezuela" -%}ve
+  {%- when "vietnam" -%}vn
+  {%- when "wallis &amp; futuna" -%}wf
+  {%- when "western sahara" -%}eh
+  {%- when "yemen" -%}ye
+  {%- when "zambia" -%}zm
+  {%- when "zimbabwe" -%}zw
+{%- endcase -%}

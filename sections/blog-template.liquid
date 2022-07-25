@@ -1,0 +1,225 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+
+{%- assign _layout = section.settings.layout -%}
+
+{% if _layout == 'none-sidebar' %}
+  {%- assign _main_class = "col-12" -%}
+{% else %}
+  {%- assign _sb_class = "col-lg-3 col-md-12 d-none d-lg-block" -%}
+  {%- assign _main_class = "col-lg-9 col-md-12 col-sm-12 col-12" -%}
+{% endif %}
+
+<div class="page-blog blog-v1 layout-{{ _layout }}">
+  <div class="container">
+    <div class="row">
+
+      {% if _layout == 'left-sidebar' %}
+        {% include 'sidebar-blog' %}
+      {% endif %}
+
+      <div class="{{ _main_class }}">
+
+        {% paginate blog.articles by section.settings.blog_pagination_limit %}
+
+          {% if blog.articles.size > 0 %}
+
+            <div id="col-main" class="page-blog-content">
+              {% for article in blog.articles %}
+
+                <article class="post-item">
+                  <div class="post-item-inner">
+
+                    {% if article.image %}
+                      <div class="post-image">
+                        <a href="{{ article.url }}">
+                          <img src="{{ article | img_url: '1170x' }}" alt="Blog" />
+                        </a>
+                      </div>
+                    {% endif %}
+
+                    <div class="post-content">
+                      <h3 class="post-title"><a href="{{article.url}}">{{ article.title }}</a></h3>
+                      
+                      <div class="post-info">
+                        <ul class="list-inline">
+                          <li>
+                            <span class="post-t">
+                              {% for tag in blog.tags %}
+                                <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag.title }}{% unless forloop.last %},{% endunless %}</a>
+                              {% endfor %}
+                            </span>
+                          </li>
+                          <li><span class="post-date">{{ article.created_at | date: "%d %b, %Y" }}</span></li>
+                          <li><span class="post-author">{{ 'blogs.article.posted_by' | t }} {{ article.author | escape }}</span></li>
+                        </ul>
+                      </div>
+                      
+                      {% unless article.excerpt == blank %}<div class="post-des">{{ article.excerpt }}</div>{% endunless %}
+                      
+                      <div class="post-button">
+                        <a class="btn btn-2 read-more" href="{{article.url}}">{{ 'blogs.article.read_more' | t }}</a>
+                        <span class="post-comment"><span class="demo-icon">
+                          <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="comment" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-comment fa-w-16 fa-2x"><path fill="currentColor" d="M256 64c123.5 0 224 79 224 176S379.5 416 256 416c-28.3 0-56.3-4.3-83.2-12.8l-15.2-4.8-13 9.2c-23 16.3-58.5 35.3-102.6 39.6 12-15.1 29.8-40.4 40.8-69.6l7.1-18.7-13.7-14.6C47.3 313.7 32 277.6 32 240c0-97 100.5-176 224-176m0-32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26 3.8 8.8 12.4 14.5 22 14.5 61.5 0 110-25.7 139.1-46.3 29 9.1 60.2 14.3 93 14.3 141.4 0 256-93.1 256-208S397.4 32 256 32z" class=""></path></svg>
+                        </span>{{ article.comments_count }}</span>
+                      </div>
+                    </div>
+
+                  </div>         
+                </article>
+
+              {% endfor %}
+
+            </div>
+
+            {% include 'pagination' %}
+
+          {% else %}
+
+            <p>{{'blogs.article.no_acticles' | t }}</p>
+
+          {% endif %}
+
+        {% endpaginate %}
+
+      </div>
+
+      {% if _layout == 'right-sidebar' %}
+        {% include 'sidebar-blog' %}
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Blog pages",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "breadcrumb_image",
+        "label": "Breadcrumb image"
+      },
+      {
+        "type": "range",
+        "id": "blog_pagination_limit",
+        "label": "Number of articles per page",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Section Layout Mode",
+        "options": [
+          {
+            "value": "left-sidebar",
+            "label": "Left sidebar"
+          },
+          {
+            "value": "right-sidebar",
+            "label": "Right sidebar"
+          },
+          {
+            "value": "none-sidebar",
+            "label": "None sidebar"
+          }
+        ],
+        "default": "right-sidebar"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "search",
+        "name": "Sidebar Search",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "search_blog_placeholder",
+            "label": "Placeholder",
+            "default": "Enter Keywords..."
+          }
+        ]
+      },
+      {
+        "type": "about",
+        "name": "Sidebar About",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "about_blog_title",
+            "label": "Heading",
+            "default": "About"
+          },
+          {
+            "type": "textarea",
+            "id": "about_blog_caption",
+            "label": "Caption"
+          }
+        ]
+      },
+      {
+        "type": "categories",
+        "name": "Sidebar Categories",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "blog_categories_title",
+            "label": "Heading",
+            "default": "Categories"
+          },
+          {
+            "type": "link_list",
+            "id": "blog_categories_menu",
+            "label": "Menu item"
+          }
+        ]
+      },
+      {
+        "type": "recent-posts",
+        "name": "Sidebar recent posts",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "sidebar_post_title",
+            "label": "Heading",
+            "default": "Recent posts"
+          },
+          {
+            "type": "blog",
+            "id": "sidebar_post",
+            "label": "Blog item"
+          },
+          {
+            "type": "range",
+            "id": "sidebar_post_limit",
+            "label": "Total items",
+            "min": 1,
+            "max": 6,
+            "step": 1,
+            "default": 3
+          }
+        ]
+      },
+      {
+        "type": "tags",
+        "name": "Sidebar Blog Tags",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "sidebar_tags_title",
+            "label": "Heading",
+            "default": "Tags"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

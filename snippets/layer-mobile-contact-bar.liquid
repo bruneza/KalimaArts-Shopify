@@ -1,0 +1,54 @@
+{% if section.settings.enable_header_contact_mobile %}
+  {%- assign _header_phone_number = section.settings.header_phone_number -%}
+  {%- assign _header_email = section.settings.header_email -%}
+  {%- assign _header_store_info = section.settings.header_store_info -%}
+  {%- assign _header_directions = section.settings.header_directions -%}
+
+  <ul class="mobile-contact-bar list-inline">
+
+    {% unless _header_phone_number == blank %}
+      <li class="contactbar-item">
+        <a class="contactbar-item-link" href="tel:{{ _header_phone_number }}">
+          {%- render 'theme-icon', type: 'phone' -%}
+          <span>{{ 'general.header.mobile_contact_bar.call' | t }}</span>
+        </a>
+      </li>
+    {% endunless %}
+
+    {% unless _header_email == blank %}
+      <li class="contactbar-item">
+        <a class="contactbar-item-link" href="mailto:{{ _header_email }}">
+          {%- render 'theme-icon', type: 'mail-1' -%}
+          <span>{{ 'general.header.mobile_contact_bar.contact' | t }}</span>
+        </a>
+      </li>
+    {% endunless %}
+
+    {% unless _header_store_info == blank %}
+      <li class="contactbar-item ci-store-info">
+        <a class="contactbar-item-link" href="javascript:;">
+          {%- render 'theme-icon', type: 'globe-1' -%}
+          <span>{{ 'general.header.mobile_contact_bar.store_info' | t }}</span>
+        </a>
+      </li>
+    {% endunless %}
+
+    {% unless _header_directions == blank %}
+      <li class="contactbar-item">
+        <a class="contactbar-item-link" href="{{ _header_directions }}">
+          {%- render 'theme-icon', type: 'marker' -%}
+          <span>{{ 'general.header.mobile_contact_bar.directions' | t }}</span>
+        </a>
+      </li>
+    {% endunless %}
+
+  </ul>
+
+  {% unless _header_store_info == blank %}
+    <div class="contactbar-info">
+      <span class="contactbar-info-close">{%- render 'theme-icon', type: 'cancel-2' -%}</span>
+      {{ _header_store_info }}
+    </div>
+  {% endunless %}
+
+{% endif %}

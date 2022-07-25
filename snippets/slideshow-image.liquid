@@ -1,0 +1,83 @@
+{%- assign _image = block.settings.image -%}
+{%- assign _image_mobile = block.settings.mobile_image -%}
+
+{%- assign _image_layer = block.settings.image_layer -%}
+{%- assign _image_horizontal_position = block.settings.image_horizontal_position -%}
+{%- assign _image_vertical_position = block.settings.image_vertical_position -%}
+{%- assign _image_layer_animation = block.settings.image_layer_animation -%}
+{%- assign _image_layer_delay = block.settings.image_layer_delay -%}
+
+{% unless _image == blank %}
+
+  <div class="swiper-slide swiper-slide-{{ block.id }}">
+    <a href="{{ link }}">
+      {% include 'image-slideshow-lazysize' with image:_image_mobile, image_class: 'img-mobile', image_size: '1080x' %}
+      {% include 'image-slideshow-lazysize' with image:_image, image_class: 'img-desk', image_size: '1920x' %}
+    </a>  
+    
+    <div class="swiper-content {{ textAlign }} slide-{{ forloop.index }} container">
+      {% if _has_text %}
+
+        <div class="container-box" style="top: {{ position }}%; left: {{ horizontal_position }}%;transform: translate(-{{ horizontal_position }}%, -{{ position }}%);">
+
+          {% unless headingText == blank %}<div class="heading bold-{{ headingBoldText }}">{{ headingText }}</div>{% endunless %}
+
+          {% unless subheadingText == blank %}<div class="subheading bold-{{ subheadingBoldText }}">{{ subheadingText }}</div>{% endunless %}
+
+          {% unless captionText == blank %}<div class="cation bold-{{ captionBoldText }}">{{ captionText }}</div>{% endunless %}
+
+          {% unless buttonText == blank %}
+            <div class="caption-link">
+              <a class="slider-button btn btn-1" href="{{ link }}">{{ buttonText }}</a>                
+            </div>
+          {% endunless %}
+
+          {% include 'slideshow-css' %}
+
+        </div> 
+      {% endif %}
+
+      {% unless _image_layer == blank %}
+        {% if block.settings.image_layer_size == blank %}
+          {%- assign _image_layer_size = '520x' -%}
+        {% else %}
+          {%- assign _image_layer_size = block.settings.image_layer_size  -%}
+        {% endif %}
+      
+      	{%- assign _image_width= _image_layer_size | split: "x" | first  %}
+      	{%- assign _image_width_ipad = _image_width | divided_by: 100 | times: 80  %}
+      
+        <div class="image-layer-box" style="top: {{ _image_vertical_position }}%; left: {{ _image_horizontal_position }}%; transform: translate(-{{ _image_horizontal_position  }}%, -{{ _image_vertical_position }}%);">
+          <div class="image-layer-slide">
+            <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ _image_layer | img_url: _image_layer_size }}" alt=""/>
+          </div>
+        </div>
+
+        <style type="text/css">
+          .swiper-slide-{{ block.id }}.swiper-slide-active .image-layer-slide {
+            -webkit-animation-name: {{ _image_layer_animation }}; animation-name: {{ _image_layer_animation }}; -webkit-animation-delay: {{ _image_layer_delay }}s; animation-delay: {{ _image_layer_delay }}s;
+          } 
+          @media (min-width: 1025px) {
+            .swiper-slide-{{ block.id }}.swiper-slide-active .image-layer-box{
+              width: {{ _image_width }}px;                    
+            }
+          }
+          @media (min-width: 768px) and (max-width: 1024px) {
+            .swiper-slide-{{ block.id }}.swiper-slide-active .image-layer-box{
+              width: {{ _image_width_ipad }}px;                    
+            }
+          }
+        </style>
+      {% endunless %}
+
+    </div> 
+
+  </div>
+
+{% else %}
+
+  <div class="swiper-slide no-image">
+    <a href="{{ link }}">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</a>
+  </div>
+
+{% endunless %}

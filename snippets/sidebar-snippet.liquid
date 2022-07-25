@@ -1,0 +1,320 @@
+{%- case type -%}
+	{%- when 'banner' -%}
+		{%- assign _image = block.settings.image -%}
+		{%- assign _link = block.settings.link -%}
+
+		<div class="sb-widget d-none d-lg-block">
+		  <div class="sb-banner">
+
+		    {%- unless _image == blank -%}
+		      <a href="{{ _link }}">
+		        {% include 'image-lazysize' with image: _image, image_size: '330x', image_class: '', image_alt: 'Banner' %}
+		      </a>
+
+		    {%- else -%}
+		      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+
+		    {%- endunless -%}
+
+		  </div>
+		</div>
+
+	{%- when 'products-listing' -%}
+		{%- assign _listing_col = block.settings.sb_latest_product_col -%}
+		{%- assign _listing_collection = collections[_listing_col] -%}
+		{%- assign _limit = block.settings.sb_latest_product_limit -%}
+		{%- assign _listing_title = block.settings.sb_latest_product_title -%}
+
+		{%- unless _listing_col == blank -%}
+			<div class="sb-widget d-none d-lg-block">
+			  <div class="sb-product">
+
+			    {%- unless _listing_title == blank -%}<h5 class="sb-title">{{ _listing_title }}</h5>{%- endunless -%}
+
+			    <div class="sb-product-list sb-product-carousel">
+			      {%- for product in _listing_collection.products limit: _limit -%}
+			      {%- capture mod -%}{{ forloop.index | modulo: 4 }}{%- endcapture -%}
+
+			      {%- if mod == '1' -%}
+			      <div class="latest-product-item">
+			        {%- endif -%}
+
+			        {%- include 'products-listing-item' -%}
+
+			        {%- if mod == '0' or forloop.last -%}
+			      </div>
+			      {%- endif -%}
+
+			      {%- endfor -%}
+			    </div>
+
+			  </div>
+			</div>
+		{%- endunless -%}
+
+	{%- when 'service' -%}
+		<div class="sb-widget">
+		  <div class="sb-service">
+
+		    {% for i in (1..5) %}
+		      {% assign show = 'enable_sb_services_' | append: i %}
+
+		      {% if block.settings[show] %}
+		        {% assign icon = 'sb_services_icon_' | append: i %}
+		        {% assign title = 'sb_services_title_' | append: i %}
+		        {% assign caption = 'sb_services_caption_' | append: i %}
+
+		        <div class="sb-service-item">
+		          <ul class="list-si">
+		            {% unless block.settings[icon] == blank %}
+		              <li class="icon">{{ block.settings[icon] }}</li>
+		            {% endunless %}
+
+		            <li class="text">
+		              {% unless block.settings[title] == blank %}<span class="text-1">{{ block.settings[title] }}</span><br />{% endunless %}
+		              {% unless block.settings[caption] == blank %}<span class="text-2">{{ block.settings[caption] }}</span>{% endunless %}
+		            </li>
+		          </ul>
+		        </div>
+		      {% endif %}
+
+		    {% endfor %}
+
+		  </div>
+		</div>
+
+	{%- when 'products-grid' -%}
+		{%- assign _grid_col = block.settings.grid_collection -%}
+		{%- assign _grid_collection = collections[_grid_col] -%}
+		{%- assign _limit = block.settings.grid_limited_item -%}
+		{%- assign _grid_title = block.settings.grid_title -%}
+
+		{%- unless _grid_col == blank -%}
+		  <div class="sb-widget">
+		    <div class="sb-product">
+
+		      {%- unless _grid_title == blank -%}<h5 class="sb-title">{{ _grid_title }}</h5>{%- endunless -%}
+
+		      <div class="sb-product-grid">
+		        {%- for product in _grid_collection.products limit: _limit -%}
+		          <div class="sb-grid-item">
+
+		            <div class="product-image product-ratio-{{ settings.collections_product_ratio }}">
+		              <a href="{{ product.url | within: collection }}">
+		                {% include 'product-image-lazysize' with image: product.featured_image, image_size: '330x', image_class: '', image_alt: product.title %}
+		              </a>  
+		            </div>
+
+		            <div class="product-content">
+		              <div class="product-content-inner">
+		                <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+		                {% include 'product-price' %}
+		              </div>
+		            </div>
+
+		          </div>
+		        {%- endfor -%}
+		      </div>
+
+		    </div>
+		  </div>
+		{%- endunless -%}
+
+	{%- when 'blog-post' -%}
+		{%- assign _blog = blogs[block.settings.blog] -%}
+		{%- assign _limit = block.settings.blog_limited_item -%}
+		{%- assign _blog_title = block.settings.blog_title -%}
+
+		{%- unless block.settings.blog == blank -%}
+		  <div class="sb-widget">
+		    <div class="sb-blog">
+
+		      {%- unless _blog_title == blank -%}<h5 class="sb-title">{{ _blog_title }}</h5>{%- endunless -%}
+
+		      <div class="sb-blog-grid">
+		        {%- for article in _blog.articles limit: _limit -%}
+
+		          <div class="post-item">
+		            <div class="post-item-inner">
+		              {%- if article.image -%}
+		                <div class="post-image">
+		                  <a href="{{ article.url }}">
+		                    {% include 'image-lazysize' with image: article.image, image_size: '330x', image_class: '', image_alt: 'Banner' %}       
+		                  </a>
+		                </div>
+		              {%- endif -%}
+
+		              <div class="post-content">
+		                <div class="meta-data">
+		                  <span class="date">{{ article.published_at | date: "%d %b, %Y" }}</span>
+		                </div>
+
+		                <div class="info">
+		                  <h6><a href="{{ article.url }}">{{ article.title }}</a></h6>
+		                </div>
+		              </div>
+		            </div>         
+		          </div>
+
+		        {%- endfor -%}
+		      </div>
+
+		    </div>
+		  </div>
+		{%- endunless -%}
+
+	{%- when 'list-collections' -%}
+		<div class="sb-widget d-none d-lg-block">
+		  <div class="sb-menu">
+
+		    {% assign _heading = block.settings.heading %}
+		    {% unless _heading == blank %}<h5 class="sb-title">{{ _heading }}</h5>{% endunless %}
+
+		    <ul class="categories-menu">
+		      {% if block.settings.display_type == 'all' %}
+		        {% for collection in collections %}
+
+		          <li>
+		            {% unless block.settings.icon == 'none' %}
+		              {% assign col_handle = collection.handle %}
+
+		              <span class="icon{% if _lazyload %} lazyload waiting{% endif %}">
+		                {% if block.settings.icon == 'collection-image' %}
+		                  <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ collection.image.src | collection_img_url: 'icon' }}" alt="{{ collection.title | escape }}" />
+
+		                {% elsif block.settings.icon == 'upload-svg' %}
+		                  <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ col_handle | append: '.svg' | asset_url }}" alt="" />
+
+		                {% else %}
+		                  {% assign col_handle = collection.handle %}
+		                  <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ col_handle | append: '.png' | asset_url }}" alt="" />
+
+		                {% endif %}
+		              </span>
+		            
+		            {% endunless %}
+
+		            <a href="{{ collection.url }}">{{ collection.title }}</a>
+		          </li>
+
+		        {% endfor %}
+
+		      {% elsif block.settings.display_type == 'selected'  %}
+		        {% for i in (1..12) %}
+		          {% assign _col = 'collection_' | append : i %}
+
+		          {% unless block.settings[_col] == blank %}
+		            {% assign _collection = collections[block.settings[_col]] %}
+
+		            <li>
+		              {% unless block.settings.icon == 'none' %}
+		                {% assign col_handle = _collection.handle %}
+
+		                <span class="icon{% if _lazyload %} lazyload waiting{% endif %}">
+		                  {% if block.settings.icon == 'collection-image' %}
+		                    <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ _collection.image.src | collection_img_url: 'icon' }}" alt="{{ _collection.title | escape }}" />
+
+		                  {% elsif block.settings.icon == 'upload-setting' %}
+		                    {% assign _image = 'image_' | append : i %}
+		                    {% unless block.settings[_image] == blank %}
+		                      <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ block.settings[_image] | img_url: '25x' }}" alt="" />
+		                    {% endunless %}
+
+		                  {% elsif block.settings.icon == 'upload-svg' %}
+		                    <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ col_handle | append: '.svg' | asset_url }}" alt="" />
+
+		                  {% else %}
+		                    <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ col_handle | append: '.png' | asset_url }}" alt="" />
+
+		                  {% endif %}
+		                </span>
+		              {% endunless %}
+
+		              <a href="{{ _collection.url }}">{{ _collection.title }}</a>
+		            </li>
+
+		          {% endunless %}
+
+		        {% endfor %}
+
+		      {% else %}
+		        {% assign _sb_collection_metafield = collection.metafields.c_f.sidebarcollection %}
+		        
+		        {% if _sb_collection_metafield == blank %}
+		          {% for l in linklists[block.settings.menu_item].links %}
+		            {% assign submenu = l.title | handleize %}
+
+		            {% if linklists[submenu].links.size > 0 %}
+		              {% include 'sb-dropdown-menu' %}
+
+		            {% else %}
+		              <li class="{% if l.active %}active{% endif %}">
+		                {% unless block.settings.icon == 'none' %}
+		                  <span class="icon{% if _lazyload %} lazyload waiting{% endif %}">
+		                    {% if block.settings.icon == 'upload-svg' %}
+		                      <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ submenu | append: '.svg' | asset_url }}" alt="" />
+		                    {% elsif block.settings.icon == 'upload' %}
+		                      <img {% if _lazyload %}class="lazyload" data-{% endif %}src = "{{ submenu | append: '.png' | asset_url }}" alt="" />
+		                    {% endif %}
+		                  </span>
+		                {% endunless %}
+		                <a href="{{ l.url }}">{{ l.title }}</a>
+		              </li>
+
+		            {% endif %}
+
+		          {% endfor %}
+
+		          <style type="text/css" media="screen">
+		            .left-column-container .sb-widget .categories-menu > li{
+		              display: none;
+		            }
+		            .left-column-container .sb-widget .categories-menu.all-clear > li.s-open,
+		            .left-column-container .sb-widget .categories-menu.all-clear > li.active{
+		              display: block !important;
+		            }
+		          </style>
+
+		          <script type="text/javascript">
+		            jQuery(document).ready(function($) {
+		              var _check_li_active = false;
+		              jQuery('.left-column-container .sb-widget .categories-menu > li').each(function() {
+		                if($(this).hasClass('active')){
+		                  _check_li_active = true;
+		                  $('.categories-menu').addClass('all-clear');
+		                  return false;
+		                }
+		              });
+
+		              if(!_check_li_active){
+		                $('.categories-menu > li').css( "display", "block" );
+		              }
+		            })
+		          </script>
+
+		        {% else %}
+		          {% for l in linklists[_sb_collection_metafield].links %}
+		            {% assign submenu = l.title | handleize %}
+
+		            {% if linklists[submenu].links.size > 0 %}
+		              {% include 'sb-dropdown-menu' %}
+
+		            {% else %}
+		              <li class="{% if l.active %}active{% endif %}">    
+		                <a href="{{ l.url }}">{{ l.title }}</a>
+		              </li>
+
+		            {% endif %}
+
+		          {% endfor %}
+		        {% endif %}
+
+		      {% endif %}
+		    </ul>
+
+		  </div>
+		</div>
+
+	{%- else -%}
+
+{%- endcase -%}

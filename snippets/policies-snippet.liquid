@@ -1,0 +1,75 @@
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _layout = section.settings.layout -%}
+{%- assign _css_class = section.settings.cssclass -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+<div class="policies-wrapper{% if _hide_mobile %} d-none d-md-block{% endif %} {% unless _css_class == blank %} {{ _css_class }} {% endunless %}">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+
+      <div class="policies-content">
+        <div class="policy-list">
+
+          {% if section.blocks.size > 0 %}
+
+            {% for block in section.blocks %}
+
+            <div class="policy-item">
+
+            {% if block.settings.image_svg != blank %}
+              {%- assign _image_svg = block.settings.image_svg -%}
+              <div class="image"> 
+                {{ _image_svg }}
+              </div>
+            {% else %}
+              {% unless block.settings.image == blank %}
+                {%- assign _image = block.settings.image -%}
+                {%- assign _image_size = block.settings.image_size -%}
+                
+                <div class="image">
+                  {% include 'image-lazysize' with image: _image, image_size: _image_size, image_class: '', image_alt: 'Banner' %}
+                </div>     
+              {% else %}
+                <div class="image">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+
+              {% endunless %}
+            {% endif %}
+
+              <div class="text">
+                {% unless block.settings.title == blank %}<h6>{{ block.settings.title }}</h6>{% endunless %}
+                {% unless block.settings.subtitle == blank %}<span>{{ block.settings.subtitle }}</span>{% endunless %}
+              </div>
+
+            </div>
+
+            {% endfor %}
+
+          {% else %}
+            {% for i in (1..5) %}
+              <div class="policy-item">
+                <div class="image">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+
+                <div class="text">
+                  <h6>{{ 'homepage.onboarding.policy_title' | t }}</h6>
+                  <span>{{ 'homepage.onboarding.policy_subtitle' | t }}</span>
+                </div>
+
+              </div>
+            {% endfor %}
+
+          {% endif %}
+
+        </div>
+      </div>
+
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

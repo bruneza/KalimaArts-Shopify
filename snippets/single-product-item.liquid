@@ -1,0 +1,134 @@
+{% if _style == 1 %}
+  <div class="text-box">
+    {% unless _text_1 == blank %}<div class="text-1">{{ _text_1 }}</div>{% endunless %}
+    {% unless _text_2 == blank %}<div class="text-2">{{ _text_2 }}</div>{% endunless %}
+    {% unless _text_3 == blank %}<div class="text-3">{{ _text_3 }}</div>{% endunless %}
+  </div>
+
+  <div class="product-wrapper">
+    <div class="product-wrapper-inner">
+      
+      <div class="product-head">
+        <div class="product-image">
+          <div class="image product-ratio-{{ settings.collections_product_ratio }}">
+            <a href="{{ product.url }}">
+              {% include 'product-image-lazysize' with image: product.featured_image, image_size: '450x', image_class: '', image_alt: product.title %}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-content">
+        <div class="pc-inner">
+          <h5 class="product-name"><a href="{{ product.url }}">{{ product.title }}</a></h5>
+
+          {% include 'product-price' %}
+          {% include 'single-product-deal' %}
+          {% include 'single-product-stock' %}
+
+          {% if block.settings.buy_now %}
+            <a class="btn btn-1 btn-buy-now" href="{{ product.url }}">{{ 'products.big_product.buy_now' | t }}</a>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% else %}
+
+  <div class="product-wrapper">
+    <div class="row">
+
+      <div class="product-head col-lg-6 col-md-12 col-sm-12"> 
+        <div class="product-image">
+          
+          {% if _style == 2 %}
+          
+            <div class="product-image">
+              {% capture number_of_images %}{{ product.images | size }}{% endcapture %}
+              {% assign number_images = number_of_images | plus:0 %}
+ 
+              <div class="wrap-image">
+                <div class="image product-ratio-{{ settings.collections_product_ratio }}">
+                  <a href="{{ product.url }}">
+                    {% include 'product-image-lazysize' with image: product.featured_image, image_size: '450x', image_class: 'change-image', image_alt: product.title %}
+                  </a>
+                  
+                  {% if product.variants.first.price < product.variants.first.compare_at_price %}
+                    <span class="special-product-label">
+                      <span class="text">{{ 'products.big_product.text_save' | t }}</span>
+                      {% assign _percent_off = product.variants.first.compare_at_price | minus : product.variants.first.price %}
+                      <span class="percent">{{ _percent_off | times:100.00  | divided_by: product.variants.first.compare_at_price | round }}%</span>
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+
+              {% if number_images > 1 %}
+                <div class="wrap-thumb-image">
+                  {% for image in product.images limit: 4 %}
+                  <div class="thumb-image product-ratio-{{ settings.collections_product_ratio }}">
+                    {% include 'product-change-image-lazysize' with image: image, image_size: '70x', image_class: '', image_alt: product.title, data-swatch-image: image %}
+                  </div>
+                  {% endfor %}
+                </div>
+              
+                <script type="text/javascript">
+                  jQuery(document).ready(function($) {
+                    $('.sp-item-{{ block.id }} .wrap-thumb-image .thumb-image img').on('click', function(e){
+                      var imgUrl = $(this).data("swatch-image"),
+                      parent = $(this).parents('.product-wrapper'),
+                      imgElem = parent.find('.product-image img.change-image');
+
+                      if(imgElem.hasClass('lazyloaded')){
+                        imgElem.attr('data-srcset',$(this).attr('data-srcset'));
+                        imgElem.attr('srcset',$(this).attr('srcset'));
+                      }
+                      else{
+                        imgElem.attr('src', imgUrl);
+                      }
+                    
+                    });
+                  });
+                </script> 
+              {% endif %}
+            </div>
+          
+          {% else %}
+          
+            <div class="image product-ratio-{{ settings.collections_product_ratio }}">
+              <a href="{{ product.url }}">
+                {% include 'product-image-lazysize' with image: product.featured_image, image_size: '450x', image_class: '', image_alt: product.title %}
+              </a>
+
+              {% if product.variants.first.price < product.variants.first.compare_at_price %}
+              <span class="special-product-label">
+                <span class="text">{{ 'products.big_product.text_save' | t }}</span>
+                {% assign _percent_off = product.variants.first.compare_at_price | minus : product.variants.first.price %}
+                <span class="percent">{{ _percent_off | times:100.00  | divided_by: product.variants.first.compare_at_price | round }}%</span>
+              </span>
+              {% endif %}
+            </div>
+
+          {% endif %}
+          
+        </div>
+      </div>
+
+      <div class="product-content col-lg-6 col-md-12 col-sm-12">
+        <div class="pc-inner">
+          <h5 class="product-name"><a href="{{ product.url }}">{{ product.title }}</a></h5>
+
+          {% include 'product-price' %} 
+          {% include 'single-product-stock' %}
+          {% include 'single-product-deal' %}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+{% endif %}

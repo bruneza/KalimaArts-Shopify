@@ -1,0 +1,39 @@
+{% if _sb_filters_position == 'sidebar' %}
+  <h5 class="sb-title">{{ 'collections.general.filter' | t }}</h5>
+{% endif %}
+
+<div class="sb-tag">
+  <ul class="list-unstyled sb-filter-tag">
+
+    {% unless current_tags %}
+      <li class="active first"><span>All Items</span></li>
+
+    {% else %}
+      {% if collection.handle %}
+        {% capture collection_url %}{{ collection.url }}{% unless collection.sort_by == blank %}?sort_by={{ collection.sort_by }}{% endunless %}{% endcapture %}
+      {% endif %}
+
+      <li class="first">
+        <a href="{{ collection_url }}"><span>All Items</span></a>
+      </li>
+
+    {% endunless %}
+
+    {% for tag in collection.all_tags %}
+      {% if current_tags contains tag %}
+        <li class="active{% if forloop.length == forloop.index %} last{% endif %}">
+          <span>{{ tag }}</span>
+        </li>
+
+      {% else %}
+        <li {% if forloop.length == forloop.index %}class="last"{% endif %}>
+          <a href="{{ collection.url }}/{{ tag | handle }}">
+            <span>{{ tag }}</span>
+          </a>
+        </li>
+
+      {% endif %}
+    {% endfor %}
+
+  </ul>     
+</div>

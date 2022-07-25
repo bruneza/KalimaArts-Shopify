@@ -1,0 +1,49 @@
+{% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
+{% if shop.customer_accounts_enabled %}
+    {% assign _account_icon_type = settings.account_icon_type %}
+    {% assign _account_font_icon = settings.account_font_icon %}
+    {% assign _account_icon = settings.account_icon %}
+
+    <li class="customer-account{% if _lazyload and _account_icon_type == 'image' %} lazyload waiting{% endif %}">
+      {% if customer %}
+
+        <a href="{{ routes.account_url }}" title="{{ 'general.header.my_account' | t }}">
+          {% if _account_icon_type == 'font-icon' %}
+            {{ _account_font_icon }}
+
+          {% else %}
+            <img {% if _lazyload %}class="lazyload"
+                 data-srcset="{{ _account_icon | img_url: '20x'}} 1x, {{ _account_icon | img_url: '40x'}} 2x"
+                 {% else %}src="{{ _account_icon | img_url: '20x'}}"{% endif %}
+                 alt="Account" />
+
+          {% endif %}
+          {{ 'general.header.my_account' | t }}
+        </a>
+        <span class="customer-or">{{ 'customer.general.or' | t }}</span>
+        <a href="{{ routes.account_logout_url }}" title="{{ 'general.header.logout' | t }}"><span>{{ 'general.header.logout' | t }}</span></a>
+
+      {% else %}
+        <a href="{{ routes.account_register_url }}" title="{{ 'general.header.register' | t }}">
+          {% if _account_icon_type == 'font-icon' %}
+            {{ _account_font_icon }}
+
+          {% else %}
+            <img {% if _lazyload %}class="lazyload"
+                 data-srcset="{{ _account_icon | img_url: '20x'}} 1x, {{ _account_icon | img_url: '40x'}} 2x"
+                 {% else %}src="{{ _account_icon | img_url: '20x'}}"{% endif %}
+                 alt="Account" />
+
+          {% endif %}
+          {{ 'general.header.register' | t }}
+        </a>
+        <span class="customer-or">{{ 'customer.general.or' | t }}</span>
+        <a href="{{ routes.account_login_url }}" title="{{ 'general.header.login' | t }}">{{ 'general.header.login' | t }}</a>
+
+      {% endif %}
+
+    </li>
+
+{% endif %}    
+
+

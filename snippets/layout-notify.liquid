@@ -1,0 +1,198 @@
+{% assign words = settings.sell_country | split: ';' %}
+{% assign times = settings.sell_time | split: ';' %}
+{% assign _text_time = settings.sell_time_text | split: ';' %}
+{% assign _sell_text_1 = "products.fomo_popups.text_someone_in" | t %}
+{% assign _sell_text_2 = settings.sell_text2 | split: ';' %}
+{% assign _notify_location = settings.notify_location %}
+
+<script crossorigin="anonymous" src="{{ 'jquery.notify-crs.min.js' | asset_url  }}" defer></script>
+
+{% if settings.noti_product_collection != blank %}
+  {% assign _nofi_collection = collections[settings.noti_product_collection] %}
+{% else %}
+  {% assign _nofi_collection = collections['all'] %}
+{% endif %}
+
+{% if _nofi_collection and _nofi_collection.all_products_count > 1 %}
+    <div id="country-target" class="d-none"></div>
+
+    <script type="text/javascript">
+      var aNotify = [];
+      $(document).ready( function() {
+        var index = 0;
+        {% for nprod in _nofi_collection.products %}
+
+          {% unless nprod.handle == product.handle %}
+              $.notify.addStyle('notifStyle' + index, {
+                html:
+                  '<div>' +
+                    '<div class="noti-product-item">' +
+                      '<div class="content-img">' +
+                		'<span class="close-noti" title="Close">{%- render 'theme-icon', type: 'cancel-2' -%}</span>' +
+                        '<a  class="image-notify" href="{{ nprod.url | within: _nofi_collection }}" title="{{ nprod.featured_image.alt | escape }}">' +
+                          '<img class="lazyload" data-src="{{ nprod.featured_image | product_img_url: '100x' }}" alt="{{ nprod.featured_image.alt | escape }}" />' +
+                        '</a>' +
+                      '</div>' +
+                      '<div class="notify-detail">' +
+                        '<div class="product">' +
+                          '<h6 class="country_text"></h6>'+
+                          '<h5 class="product-name"><a href="{{ nprod.url | within: _nofi_collection }}" title="{{ nprod.featured_image.alt | escape }}"><span data-notify-html="title"/></a></h5>' +
+                          '<h6 class="sell-time"></h6>'+
+                          '</div>' +
+                        '</div>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div',
+                classes: {   
+                  base: {
+                    'opacity': '1',
+                    'width': '400px',
+                    'background': '{{settings.notify_background_color}}',
+                    'padding': '0'
+                  }
+                }
+              });
+        
+              aNotify[index] = {
+                sStyle: 'notifStyle' + index,
+                title: "{{ nprod.title | replace: '"', '&quot;' }}",
+                button: 'Check it now!'
+              };
+              index += 1;
+          {% endunless %}
+        {% endfor %}
+        
+        {% if _nofi_collection and _nofi_collection.products_count > 1 %}
+          var notifySliderDelay = 15000;
+          jQuery.ajax({
+              url: 'https://get.geojs.io/v1/ip/geo.js',
+              type: 'POST',
+              dataType: 'jsonp',
+              success: function(location) {
+              setInterval(function() {
+                var _number_style = Math.floor(Math.random()*2);
+                var array = [];
+                var time = [];
+                var text = [];
+                var sell1 = [];
+                var sell2 = [];
+
+                var html = '<select class="crs-country" data-region-id="list-state" data-default-value="' + location.country + '"></select>' + '<select id="list-state"></select>';
+                document.getElementById('country-target').innerHTML = html;
+                window.crs.init();
+                var optionValues = [];
+                $('#list-state option').each(function() {
+                    optionValues.push($(this).val());
+                });
+                optionValues.sort(function() {return 0.5 - Math.random();});
+                var arrayLength = optionValues.length;
+
+                {% for word in words %}
+                  array.push('{{word | remove:" "}}');
+                  var i = {{forloop.index}};
+                {% endfor %}
+
+                {% for time in times %}
+                  time.push('{{time | remove:" "}}');
+                  var number = {{forloop.index}};
+                {% endfor %}
+
+                {% for text in _text_time %}
+                  text.push('{{text | remove:""}}')
+                  var _count = {{forloop.index}};
+                {% endfor %}
+
+                {% for text in _sell_text_1 %}
+                  sell1.push('{{text | remove:""}}')
+                  var _count_sell_1 = 1;
+                {% endfor %}
+
+                 {% for text in _sell_text_2 %}
+                  sell2.push('{{text | remove:""}}')
+                  var _count_sell_2 = {{forloop.index}};
+                {% endfor %}
+
+                var randChoose = aNotify[Math.round(Math.random() * (aNotify.length - 1))];
+                var timerandom = Math.floor(Math.random()*number);
+                var textrandom = Math.floor(Math.random()*_count);
+                var sellrandom1 = Math.floor(Math.random()*_count_sell_1);
+                var sellrandom2 = Math.floor(Math.random()*_count_sell_2);
+                
+                {% if _notify_location == '3' %}
+                  if (_number_style == 0) {
+                    var randomnumber = Math.floor(Math.random()*arrayLength);
+                  } else {
+                    var randomnumber = Math.floor(Math.random()*i);
+                  }
+                
+                {% elsif _notify_location == '1'%}
+                  var randomnumber = Math.floor(Math.random()*arrayLength);
+                
+                {% else %}
+                  var randomnumber = Math.floor(Math.random()*i);
+                
+                {% endif %}
+                
+                $.notify({
+                  title: randChoose.title,
+                  button: randChoose.button
+                }, { 
+                  style: randChoose.sStyle,
+                  autoHide: true,
+                  autoHideDelay: 7000,
+                  clickToHide: false,
+                  globalPosition: '{{settings.noti_product_position}}',
+                  hideAnimation: 'fadeOut',
+                  showAnimation: 'fadeIn',
+                  showDuration:400,
+                  hideDuration:800,
+                  className: '{{settings.noti_product_position}}'  
+                });
+                
+                {% if _notify_location == '3' %}
+                  if (_number_style == 0){
+                    $('.country_text').html(sell1[sellrandom1]+' '+ optionValues[randomnumber] + ' ' + sell2[sellrandom2]);
+                  } else {
+                    $('.country_text').html(sell1[sellrandom1]+' '+ array[randomnumber] + ' ' + sell2[sellrandom2]);
+                  }
+                
+                {% elsif _notify_location == '1'%}
+                  $('.country_text').html(sell1[sellrandom1]+' '+ optionValues[randomnumber] + ' ' + sell2[sellrandom2]);
+                 
+                {% else %}
+                    $('.country_text').html(sell1[sellrandom1]+' '+ array[randomnumber] + ' ' + sell2[sellrandom2]);
+                
+                {% endif %}
+                
+                if (time[timerandom] == '1'){
+                  text[textrandom] = text[textrandom].replace('hours','hour');
+                  text[textrandom] = text[textrandom].replace('days','day');
+                  text[textrandom] = text[textrandom].replace('weeks','week');
+                  text[textrandom] = text[textrandom].replace('months','month');
+                  text[textrandom] = text[textrandom].replace('years','year');
+                }
+                
+                $('.sell-time').html(time[timerandom]+' '+ text[textrandom]);
+                
+                {% if settings.hide_notify_mobile %}
+                  $('.notifyjs-corner').addClass('d-none d-md-block');
+                {% endif %}
+              }, notifySliderDelay,);
+            }
+          });
+
+        {% endif %}
+      });
+       
+      if ($.cookie('hide-noti') == "yes") {
+        $("body").addClass("hide-noti");
+      }
+
+      jQuery("body").on("click", ".close-noti", function() {
+        $.cookie('hide-noti','yes', {expires: 1, path: '/'});
+        $("body").addClass("hide-noti");
+      });
+      
+    </script>
+
+{% endif %}

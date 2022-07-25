@@ -1,0 +1,18 @@
+<li class="dropdown{% if l.active %} active{% endif %}{% if _highlight_item and _highlight_vertical_menu contains l.title %} highlight{% endif %}">
+  <div class="dropdown-inner">
+    <a href="{{ l.url }}" class="dropdown-link">
+      {% if section.settings.vertical_nav_linklist_icon %}
+        <img {% if _lazyload %}class="lazyload" data-{% endif %}src="{{ l.handle | append: '.png' | asset_url }}" alt="" />
+      {% endif %}
+      <span>{{ l.title }}</span>
+      {% include 'menu-label' %}
+    </a>
+    <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+  </div>
+
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+      {% include 'nav-sub-link' %}
+    {% endfor %}
+  </ul>
+</li>

@@ -1,0 +1,13 @@
+{% assign locale_selector = false %}
+
+{% unless settings.m_lang_type == 'disable' %}
+  {% if settings.m_lang_type == 'shopify-native' %}
+    {%- if shop.published_locales.size > 1 -%}
+      {%- assign locale_selector = true -%}
+    {%- endif -%}
+  {% else %}
+    {% unless settings.api_translate == blank %}
+      {%- assign locale_selector = true -%}
+    {% endunless %}
+  {% endif %}
+{% endunless %}

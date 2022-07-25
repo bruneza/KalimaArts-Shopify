@@ -1,0 +1,56 @@
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _layout = section.settings.layout -%}
+{%- assign _type = section.settings.type -%}
+{%- assign _style = section.settings.style -%}
+
+{%- assign _bg_style = section.settings.bg_style -%}
+{%- assign _bg_color = section.settings.bg_color -%}
+{%- assign _bg_image = section.settings.bg_image -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'full-width' -%}
+{% endif %}
+
+{% capture emptyProduct01 %}
+  <div class="sp-item">
+    <div class="text-box">
+      <div class="text-1">LIMITED</div>
+      <div class="text-2">WEEK DEAL</div>
+      <div class="text-3">HURRY UP BEFORE OFFER WILL END</div>      
+    </div>
+
+    <div class="product-wrapper">
+      <div class="product-head">
+        <div class="product-image">
+          {{ 'product-1' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endcapture %}
+
+{% capture emptyProduct02 %}
+  <div class="sp-item{% if _type == 'row' %} col-md-6 col-sm-12 col-12{% endif %}">
+    <div class="product-wrapper">
+      <div class="row">
+
+        <div class="product-head col-lg-6 col-md-12 col-sm-12">
+          <div class="product-image">
+            {{ 'product-1' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        </div>
+
+        <div class="product-content col-lg-6 col-md-12 col-sm-12">
+          <div class="pc-inner">
+            <h5 class="product-name">{{ 'homepage.onboarding.product_title' | t }}</h5>
+            <div class="product-price"><span class="price">{{ 1999 | money }}</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endcapture %}

@@ -1,0 +1,36 @@
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _layout = section.settings.layout -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+<div class="popular-search-wrapper{% if _hide_mobile %} d-none d-md-block{% endif %}">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+
+      {% include 'heading-block' %}
+
+      <div class="popular-search-content">
+        <ul class="popular-search-list">
+
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+              {% unless block.settings.title == blank %}
+                <li class="item"><a href="{{ block.settings.link }}">{{ block.settings.title }}</a></li>
+              {% endunless %}
+            {% endfor %}
+
+          {% else %}
+            {% for i in (1..5) %}
+              <li class="item"><a href="javascript:;">{{ homepage.onboarding.popular_search_key }}</a></li>
+            {% endfor %}
+          {% endif %}
+
+        </ul>
+      </div>
+
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

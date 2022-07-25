@@ -1,0 +1,226 @@
+{% assign manually_width = block.settings.manually_width %}
+{% assign min_height = block.settings.mega_menu_min_height %}
+{% assign menu_bg = block.settings.mega_menu_bg %}
+{% assign menu_bg_img = block.settings.mega_menu_bg_img %}
+{% assign menu_bg_img_size = block.settings.mega_menu_bg_img_size %}
+{% assign menu_bg_color = block.settings.mega_menu_bg_color %}
+{% assign menu_bg_position = block.settings.mega_menu_bg_position %}
+
+{% if menu_bg == 'bg_image' %}
+  {% if _lazyload %}
+    {% capture background %}{{ menu_bg_img | img_url: menu_bg_img_size }}{% endcapture %}
+  {% else %}
+    {% capture background %}url({{ menu_bg_img | img_url: menu_bg_img_size }}) no-repeat bottom {{ menu_bg_position }} #fff{% endcapture %}
+  {% endif %}
+{% else %}
+  {% capture background %}{{ menu_bg_color }}{% endcapture %}
+{% endif %}
+
+<div class="dropdown-menu{% if _lazyload and menu_bg == 'bg_image'%} lazyload{% endif %}" 
+     {% if _lazyload and menu_bg == 'bg_image' %} data-bgset="{{ background }}" style="min-height: {{ min_height }}px; background-repeat: no-repeat; background-position: bottom {{ menu_bg_position }};"
+     {% else %} style="min-height: {{ min_height }}px; background: {{ background }};"{% endif %}>
+  
+  	<div class="back-prev-menu"><span class="expand back">{%- render 'theme-icon', type: 'icon-back' -%}<span>Back</span></span></div>
+    {% assign _index = forloop.index %}
+    {% assign _i = 0 %}
+  
+    {% for block in section.blocks offset: _index %}
+      {% if block.type == 'mega-vertical-menu' and _i < 3 %}
+        {% assign _index = _index | plus: 1 %}
+        {% assign _i = _i | plus: 1 %}
+
+        {% for block in section.blocks offset: _index %}
+          {% if block.type == 'mega-vertical-column' %}
+            {% assign _index = _index | plus: 1 %}
+            {% assign mCol = block.settings.mega_menu_col %}
+
+            {% unless mCol == 'none' %}
+              {% assign mColWidth = block.settings.mega_menu_width_col %}
+              {% assign mColTitle = block.settings.mega_menu_title_col %}
+              {% assign mEnableColTitle = block.settings.mega_menu_image_title_col %}
+              {% assign mColLink = block.settings.mega_menu_link_col %}
+
+              {% case mCol %}
+
+                {% when 'menu' %}
+                  {% assign mColLL = block.settings.mega_menu_ll_col %} 
+
+                    <div class="dropdown mega-sub-link{% if mColTitle == blank %} no-title-0{% endif %}">
+                      <div class="dropdown-inner">
+                        <a href="{{ mColLink }}"{% if mEnableColTitle %} class="d-lg-none"{% endif %}>
+                          <span>{{ mColTitle }}</span>
+                        </a>
+
+                        <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+                      </div>
+                      
+                      <ul class="dropdown-menu dropdown-menu-sub">
+                        <li class="back-prev-menu"><span class="expand back">{%- render 'theme-icon', type: 'icon-back' -%}<span>Back</span></span></li>
+                        
+                        {% for l in linklists[mColLL].links %}
+                          <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                  {% when 'multi-menu' %}
+                    {% assign mColLL = block.settings.mega_menu_ll_col %}
+                  
+                    <div class="dropdown mega-sub-link">
+                      <div class="dropdown-inner">
+                        <a href="{{ mColLink }}"{% if mEnableColTitle %} class="d-lg-none"{% endif %}>
+                          <span>{{ mColTitle }}</span>
+                        </a>
+
+                        <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+                      </div>
+
+                      <ul class="dropdown-menu dropdown-menu-sub">
+                        <li class="back-prev-menu"><span class="expand back">{%- render 'theme-icon', type: 'icon-back' -%}<span>Back</span></span></li>
+                        {% for ml in linklists[mColLL].links %}
+                          {% assign submenu = ml.title | handleize %}
+
+                          {% if linklists[submenu].links.size > 0 %}
+                            <div class="dropdown mega-sub-link">
+                              <div class="dropdown-inner">
+                                <a href="{{ ml.url }}" class="dropdown-link">
+                                  <span>{{ ml.title }}</span>
+                                </a>
+
+                                <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+                              </div>
+
+                              <ul class="dropdown-menu dropdown-menu-sub">
+                                <li class="back-prev-menu"><span class="expand back">{%- render 'theme-icon', type: 'icon-back' -%}<span>Back</span></span></li>
+
+                                {% for l in linklists[submenu].links %}
+                                <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+
+                          {% else %}
+                            <div class="mega-sub-link"><a href="{{ ml.url }}"><span>{{ ml.title }}</span></a></div>
+                          {% endif %}
+
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                  {% when 'product' %}
+                    <div class="dropdown mega-sub-link{% if mColTitle == blank %} no-title-0{% endif %}">
+                      <div class="dropdown-inner">
+                        <a href="{{ mColLink }}"{% if mEnableColTitle %} class="d-lg-none"{% endif %}>
+                          <span>{{ mColTitle }}</span>
+                        </a>
+
+                        <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+                      </div>
+                      
+                      <ul class="dropdown-menu dropdown-menu-sub fix{% if mColTitle == blank %} no-title-1{% endif %}">
+                        <li class="back-prev-menu"><span class="expand back">{%- render 'theme-icon', type: 'icon-back' -%}<span>Back</span></span></li>
+                        
+                        {% assign mHandle = block.settings.mega_menu_product_col %}
+
+                        {% unless mHandle == blank %}
+                          {% assign prod = all_products[mHandle] %}
+                          <li class="bp-item">
+                            {% include 'menu-product-item' %}
+                          </li>
+                        {% endunless %}
+                        
+                      </ul>
+                    </div>
+
+                  {% when 'collection' %}
+                    {% assign mColCollection = block.settings.mega_menu_collection_col %}
+                    {% assign _mCollection = collections[mColCollection] %}
+                    {% assign _mCollectionLimit = block.settings.mega_menu_collection_limit_col %}
+                  
+                    <div class="dropdown mega-sub-link{% if mColTitle == blank %} no-title-0{% endif %}">
+                      <div class="dropdown-inner">
+                        <a href="{{ mColLink }}"{% if mEnableColTitle %} class="d-lg-none"{% endif %}>
+                          <span>{{ mColTitle }}</span>
+                        </a>
+                        <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>   
+                      </div>
+
+                      <ul class="dropdown-menu dropdown-menu-sub menu-proudct-carousel">
+                        {% for product in _mCollection.products limit: _mCollectionLimit %} 
+                          <li>{% include 'product-item' %}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                  {% when 'menu-product' %}
+                    {% assign mColLL = block.settings.mega_menu_ll_col %}
+
+                    <div class="dropdown mega-sub-link{% if mColTitle == blank %} no-title-0{% endif %}">
+                      <div class="dropdown-inner">
+                        <a href="{{ mColLink }}"{% if mEnableColTitle %} class="d-lg-none"{% endif %}>
+                          <span>{{ mColTitle }}</span>
+                        </a>
+
+                        <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+                      </div>
+
+                      <ul class="dropdown-menu dropdown-menu-sub">
+                        <li class="back-prev-menu"><span class="expand back">{%- render 'theme-icon', type: 'icon-back' -%}<span>Back</span></span></li>
+                        
+                        {% for l in linklists[mColLL].links %}
+                          <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+                        {% endfor %}
+                        
+                        {% assign mHandle = block.settings.mega_menu_product_col %}
+
+                        {% unless mHandle == blank %}
+                          {% assign prod = all_products[mHandle] %}
+                          <li class="bp-item bp-item-2">
+                            {% include 'menu-product-item' %}
+                          </li>
+                        {% endunless %}
+
+                      </ul>
+                    </div>
+
+                  {% else %}
+                    <div class="dropdown mega-sub-link banners{% if mColTitle == blank %} no-title-2{% endif %}">
+                      <div class="dropdown-inner">
+                        <a href="{{ mColLink }}"{% if mEnableColTitle %} class="d-lg-none"{% endif %}>
+                          <span>{{ mColTitle }}</span>
+                        </a>
+
+                        <span class="expand">{%- render 'theme-icon', type: 'angle-right' -%}</span>
+                      </div>
+                      
+                      <ul class="dropdown-menu dropdown-menu-sub">  
+                        {% assign mColImage = block.settings.mega_menu_image_col %}
+                        {% assign mColImageSize = block.settings.mega_menu_image_size_col %}
+                        {% assign mColImageLink = block.settings.mega_menu_image_link_col %}
+                        
+                        <li class="back-prev-menu"><span class="expand back">{%- render 'theme-icon', type: 'icon-back' -%}<span>Back</span></span></li>
+       
+                        <li>
+                          <a href="{{ mColImageLink }}">
+                            {% include 'image-lazysize' with image: mColImage, image_size: mColImageSize, image_class: '', image_alt: 'Banner' %}
+                          </a>
+                        </li>
+                      </ul>
+                      
+                    </div>  
+
+              {% endcase %}
+            {% endunless %}
+
+          {% else %}
+              {% break %}
+          {% endif %}
+        {% endfor %}
+
+      {% elsif block.type == 'mega-vertical-column' %}
+      {% else %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+</div>

@@ -1,0 +1,6 @@
+{% capture _menu_label %}
+  {%  if _sale_handles contains l.title %}{{_sale_menu_html}}{% endif %}
+  {%  if _new_handles contains l.title %}{{_new_menu_html}}{% endif %}
+  {%  if _hot_handles contains l.title %}{{_hot_menu_html}}{% endif %}
+{% endcapture %}
+{% if _menu_label != blank %}<span class="labels-wrapper">{{_menu_label}}</span>{% endif %}

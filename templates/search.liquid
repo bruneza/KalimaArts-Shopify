@@ -1,0 +1,53 @@
+{% unless settings.breadcrumb_styles == 'none' %}{% include 'breadcrumb' %}{% endunless %}
+
+<div class="container">
+  <div id="col-main" class="page-search">
+    
+    {% if search.results_count == 0 or search.performed == false %}
+      <h4 class="title">{{ 'search.general.heading' | t: count: search.results_count }}: {{ 'search.general.results_with_count' | t: terms: search.terms, count: search.results_count }}</h4>
+
+      <form class="search-form" action="/search">
+        <input type="hidden" name="type" value="product" />
+        <input type="hidden" name="options[prefix]" value="last" />
+        <input type="text" name="q" class="search_box" placeholder="{{settings.search_placeholder}}" value="{{ search.terms }}" />
+
+        <button type="submit" class="search-submit" title="Search">
+          {% if settings.search_icon_type == 'font-icon' %}
+            {{ settings.search_font_icon }}
+          {% else %}
+            <img src="{{ settings.search_icon | img_url: '20x' }}" alt="Search" />
+          {% endif %}
+        </button>
+      </form>
+    
+    {% else %}
+      {% if search.performed %}
+        {% paginate search.results by 16 %}
+
+        <h4 class="title">{{ 'search.general.heading' | t: count: search.results_count }}: {{ 'search.general.results_with_count' | t: terms: search.terms, count: search.results_count }}</h4>
+
+        <div class="cata-product cp-grid">
+          {% for product in search.results %}
+            {% if product.object_type == 'product' %}
+              <div class="product-grid-item">
+                {% include 'product-item' %}
+              </div>
+            {% else %}
+              <div class="article-grid-item">
+                {% include 'article-result' %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+
+        {% endpaginate %}
+      {% endif %}
+    
+    {% endif %}
+    
+  </div>
+</div>

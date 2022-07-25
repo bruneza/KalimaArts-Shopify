@@ -1,0 +1,197 @@
+{% include 'seperator-snippet' %}
+
+{% schema %}
+{
+  "name": "Separator",
+  "max_blocks": 1,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Seperator Section use to create spacing between sections and add headings to the sections"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label",
+      "default": "Separator"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_mobile",
+      "label": "Visibility: Hide for Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin_top",
+      "label": "Show Top Margin"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin_bot",
+      "label": "Show Bottom Margin"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spacing",
+      "name": "Spacing"
+      },
+      {
+      "type": "heading",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "content_hwline_heading_text",
+          "label": "Text",
+          "default": "Heading"
+        },
+        {
+          "type": "color",
+          "id": "content_hwline_heading_color",
+          "label": "Color",
+          "default": "#222222"
+        },
+        {
+          "type": "range",
+          "id": "content_hwline_heading_size",
+          "label": "Font size",
+          "min": 10,
+          "max": 80,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "header",
+          "content": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "content_hwline_subheading_text",
+          "label": "Text",
+          "default": "Subheading"
+        },
+        {
+          "type": "color",
+          "id": "content_hwline_subheading_color",
+          "label": "Color",
+          "default": "#222222"
+        },
+        {
+          "type": "range",
+          "id": "content_hwline_subheading_size",
+          "label": "Font size",
+          "min": 10,
+          "max": 80,
+          "unit": "px",
+          "default": 20
+        }
+      ]
+    },
+    {
+      "type": "heading_with_line",
+      "name": "Text with line",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "content_hwline_heading_text",
+          "label": "Text",
+          "default": "Heading"
+        },
+        {
+          "type": "color",
+          "id": "content_hwline_heading_color",
+          "label": "Color",
+          "default": "#222222"
+        },
+        {
+          "type": "range",
+          "id": "content_hwline_heading_size",
+          "label": "Font size",
+          "min": 10,
+          "max": 80,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "header",
+          "content": "Line"
+        },
+        {
+          "type": "select",
+          "id": "content_hwline_style",
+          "label": "Style",
+          "options": [
+            { "value": "solid", "label": "Solid" },
+            { "value": "dashed ", "label": "Dashed " },
+            { "value": "dotted", "label": "Dotted" }
+          ],
+          "default": "solid"
+        },
+        {
+          "type": "select",
+          "id": "content_hwline_position",
+          "label": "Position",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "center ", "label": "Center " },
+            { "value": "bottom", "label": "Bottom" },
+            { "value": "side-line", "label": "2-Side" },
+            { "value": "top_bottom", "label": "Top & Bottom" },
+            { "value": "left-line", "label": "Left" },
+            { "value": "right-line ", "label": "Right " }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "header",
+          "content": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "content_hwline_subheading_text",
+          "label": "Text",
+          "default": "Subheading"
+        },
+        {
+          "type": "color",
+          "id": "content_hwline_subheading_color",
+          "label": "Color",
+          "default": "#222222"
+        },
+        {
+          "type": "range",
+          "id": "content_hwline_subheading_size",
+          "label": "Font size",
+          "min": 10,
+          "max": 80,
+          "unit": "px",
+          "default": 20
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Separator",
+    "category": "Separator"
+  }]
+}
+{% endschema %}

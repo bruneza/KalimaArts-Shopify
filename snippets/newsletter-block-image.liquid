@@ -1,0 +1,14 @@
+{% for block in section.blocks %}
+  {% if block.type == 'image' %}
+
+    {%- assign _image = block.settings.image -%}
+    {%- assign _image_size = block.settings.image_size -%}
+
+    <div class="block-image image-position-{{ _text_box_position }}">
+      {% include 'image-lazysize' with image: _image, image_size: _image_size, image_class: '', image_alt: 'Image' %}
+    </div>
+
+  {% break %}
+
+  {% endif %}
+{% endfor %}

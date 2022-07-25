@@ -1,0 +1,182 @@
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _layout = section.settings.layout -%}
+{%- assign _background = section.settings.bg_color -%}
+{%- assign _border = section.settings.border -%}
+{%- assign _display_type = section.settings.display_type -%}
+{%- assign _menu_item = section.settings.menu_item -%}
+
+{% if _layout == 'boxed' %}
+  {%- assign _layout_class = 'container' -%}
+{% else %}
+  {%- assign _layout_class = 'container-fluid' -%}
+{% endif %}
+
+{%- assign _item_per_row = section.settings.item_per_row -%}
+{%- assign _item_per_row_tablet = section.settings.item_per_row_tablet -%}
+{%- assign _item_per_row_mobile = section.settings.item_per_row_mobile -%}
+
+{% case _item_per_row %}
+  {% when 2 %}
+    {%- assign _desktop_class = "col-xl-6 col-lg-6" -%}
+	{%- assign _image_size = "300x" -%}
+  {% when 3 %}
+    {%- assign _desktop_class = "col-xl-4 col-lg-4" -%}
+    {%- assign _image_size = "180x" -%}
+  {% when 4 %}
+    {%- assign _desktop_class = "col-xl-3 col-lg-3" -%}
+    {%- assign _image_size = "150x" -%}
+  {% else %}
+	{%- assign _desktop_class = "col-fix-5" -%}
+	{%- assign _image_size = "120x" -%}
+{% endcase %}
+
+{% case _item_per_row_tablet %}
+  {% when 2 %}
+    {%- assign _tablet_class = "col-md-6" -%}
+  {% when 3 %}
+    {%- assign _tablet_class = "col-md-4" -%}
+  {% when 4 %}
+    {%- assign _tablet_class = "col-md-3" -%}
+{% endcase %}
+
+{% case _item_per_row_mobile %}
+  {% when 1 %}
+    {%- assign _mobile_class = "col-sm-12 col-12" -%}
+  {% when 2 %}
+    {%- assign _mobile_class = "col-sm-6 col-6" -%}
+  {% else%}
+    {%- assign _mobile_class = "col-sm-4 col-6" -%}
+{% endcase %}
+
+{% capture emptyCollection %}
+  <div class="collection-item {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}">
+    <div class="category text-center">
+      <div class="category-image">
+        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+
+      <h6>{{ 'homepage.onboarding.collection_title' | t }}</h6>
+    </div>
+  </div>
+{% endcapture %}
+
+<div id="list-collection-{{ section.id }}" class="list-collection-section{% if _hide_mobile %} d-none d-md-block{% endif %} layout-{{_layout }}" style="background: {{ _background }};">
+  {% if settings.left_column_style == 'none' %}<div class="{{ _layout_class }}">{% endif %}
+  
+  {% include 'heading-snippet' %}
+  
+  {% if section.blocks.size > 0 %}
+    <div class="list-collection row border-{{ _border }}">
+
+      {% if section.settings.display_type == 'all' %}
+
+        {% for collection in collections %}
+          <div class="collection-item {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}">
+            <div class="item">
+              
+              <div class="image">
+                <a href="{{ collection.url }}">
+                  {% include 'image-lazysize' with image: collection.image, image_size: _image_size, image_class: '', image_alt: collection.title %}  
+                </a>
+              </div>
+
+              <div class="text-box">
+                <h6><a href="{{ collection.url }}">{{ collection.title }}</a></h6>
+
+                {% unless _menu_item == blank %}
+                  {% for sub in linklists[_menu_item].links %}
+
+                  {% if collection.title == sub.title %}
+                    {% assign subcol = sub.title | handleize %}
+
+                    {% if linklists[subcol].links.size > 0 %}
+
+                      <ul class="sub-collections">
+                        {% for subcol_item in linklists[subcol].links %}
+                          <li><a href="{{ subcol_item.url }}">{{ subcol_item.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+
+                    {% endif %}
+
+                  {% endif %}
+
+                  {% endfor %}
+                {% endunless %}
+
+              </div>
+              
+            </div>
+          </div>
+        {% endfor %}
+
+      {% else %}
+
+        {% for block in section.blocks %}
+          {%- assign _collection = block.settings.collection -%}
+          {%- assign collection = collections[_collection] -%}
+
+            {% unless _collection == blank %}
+              <div class="collection-item {{ _desktop_class }} {{ _tablet_class }} {{ _mobile_class }}">
+                <div class="item">
+                  
+                  <div class="image">
+                    <a href="{{ collection.url }}">
+                      {% include 'image-lazysize' with image: collection.image, image_size: _image_size, image_class: '', image_alt: collection.title %}  
+                    </a>
+                  </div>
+
+                  <div class="text-box">
+                    <h6><a href="{{ collection.url }}">{{ collection.title }}</a></h6>
+
+                    {% unless _menu_item == blank %}
+                      {% for sub in linklists[_menu_item].links %}
+
+                      {% if collection.title == sub.title %}
+                        {% assign subcol = sub.title | handleize %}
+
+                        {% if linklists[subcol].links.size > 0 %}
+
+                          <ul class="sub-collections">
+                            {% for subcol_item in linklists[subcol].links %}
+                              <li><a href="{{ subcol_item.url }}">{{ subcol_item.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+
+                        {% endif %}
+
+                      {% endif %}
+
+                      {% endfor %}
+                    {% endunless %}
+
+                  </div>
+
+                </div>
+              </div>
+
+            {% else %}
+              {{ emptyCollection }}
+
+            {% endunless %}
+
+        {% endfor %}
+
+      {% endif %}
+
+    </div>
+  
+  {% else %}
+  
+    <div class="list-collection row">
+      {% for i in (1.._item_per_row) %}
+        {{ emptyCollection }}
+      {% endfor %}
+    </div>
+  
+  {% endif %}
+  
+  {% if settings.left_column_style == 'none' %}</div>{% endif %}
+</div>

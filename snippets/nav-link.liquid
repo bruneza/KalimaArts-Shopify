@@ -1,0 +1,129 @@
+{% include 'nav-label' %}
+
+{% if _highlight_item %}
+  {% assign _highlight_menu = section.settings.nav_highlight_item | split: ';' | uniq %}
+  {% assign _work_handles = "" %}
+
+  {% for _handle in _highlight_menu %}
+      {% capture _striped_handle %}{{  _handle }}{% endcapture %}
+      {% if _work_handles == blank %}
+          {% assign _work_handles = _striped_handle %}
+      {% else %}
+          {% assign _work_handles = _work_handles | append: '[|||]' | append: _striped_handle %}
+      {% endif %}
+  {% endfor %}
+  {% assign _highlight_menu = _work_handles | split: '[|||]' %}
+{% endif %}
+
+{% assign submenu = l.title | handleize %}
+{% if linklists[submenu].links.size > 0 %}
+
+  {% if settings.use_super_megamenu == false %}
+    {% include 'dropdown-menu' %}
+
+  {% else %}
+    {% assign have_super_menu = false %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'mega-menu-trigger' or block.type == 'mega-menu-tab' %}
+      	{% assign super_menu_handle = block.settings.mega_navigation %}
+
+        {% if super_menu_handle == l.title %}
+          {% assign have_super_menu = true %}
+
+          {% if have_super_menu == true %}
+            {% assign number = forloop.index | plus: 1 %}
+
+            <li id="{{ super_menu_handle | handleize }}" data-id="{{ super_menu_handle | handleize }}" class="dropdown mega-menu{% if l.active %} active{% endif %}{% if _highlight_item and _highlight_menu contains l.title %} highlight{% endif %}"{{ block.shopify_attributes }}>
+              <div class="dropdown-inner">
+                <a href="{{ l.url }}" class="dropdown-link">
+                  <span>{{ l.title }}</span>
+                  {% include 'menu-label' %}
+                </a>
+                <span class="expand">{%- render 'theme-icon', type: 'angle-down' -%}</span>
+              </div>
+
+              {% if block.type == 'mega-menu-trigger' %}
+                <template class="temp-id">{% include 'horizontal-mega-menu' %}</template>
+              {% elsif block.type == 'mega-menu-tab' %}
+                <template class="temp-id">{% include 'horizontal-mega-menu-02' %}</template>
+              {% else %}
+              {% endif %}
+            </li>
+
+          {% break %}
+          {% endif %}
+
+        {% endif %}					
+
+      {% endif %}
+    {% endfor %}
+
+	{% unless have_super_menu == true %}
+      {% include 'dropdown-menu' %}
+	{% endunless %}  
+
+  {% endif %}
+
+{% else %}
+
+  {% if settings.use_super_megamenu == false %}
+    <li class="{% if l.active %}active{% endif %}{% if _highlight_item and _highlight_menu contains l.title %} highlight{% endif %}">
+      <a href="{{ l.url }}">
+        <span>{{ l.title }}</span>
+        {% include 'menu-label' %}
+      </a>
+    </li>
+
+  {% else %}
+
+	{% assign have_super_menu = false %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'mega-menu-trigger' or block.type == 'mega-menu-tab' %}
+        {% assign super_menu_handle = block.settings.mega_navigation %}
+
+        {% if super_menu_handle == l.title %}
+          {% assign have_super_menu = true %}
+
+          {% if have_super_menu == true %}
+            {% assign number = forloop.index | plus: 1 %}
+
+            <li id="{{ super_menu_handle | handleize }}" data-id="{{ super_menu_handle | handleize }}" class="dropdown mega-menu {% if l.active %} active{% endif %}{% if _highlight_item and _highlight_menu contains l.title %} highlight{% endif %}"{{ block.shopify_attributes }}>
+              <div class="dropdown-inner">
+
+                <a href="{{ l.url }}" class="dropdown-link">
+                  <span>{{ l.title }}</span>
+                  {% include 'menu-label' %}
+                </a>
+                <span class="expand">{%- render 'theme-icon', type: 'angle-down' -%}</span>
+              </div>
+
+              {% if block.type == 'mega-menu-trigger' %}
+                <template class="temp-id">{% include 'horizontal-mega-menu' %}</template>
+              {% elsif block.type == 'mega-menu-tab' %}
+                <template class="temp-id">{% include 'horizontal-mega-menu-02' %}</template>
+              {% else %}
+              {% endif %}
+            </li>
+
+          {% break %}
+          {% endif %}
+
+        {% endif %}
+
+      {% endif %}
+    {% endfor %}
+
+	{% unless have_super_menu == true %}
+      <li class="{% if l.active %}active{% endif %}{% if _highlight_item and _highlight_menu contains l.title %} highlight{% endif %}">
+        <a href="{{ l.url }}">
+          <span>{{ l.title }}</span>
+          {% include 'menu-label' %}
+        </a>
+      </li>
+	{% endunless %}
+
+  {% endif %}
+
+{% endif %}

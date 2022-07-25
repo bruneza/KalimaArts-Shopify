@@ -1,0 +1,248 @@
+{%- assign _show_slideshow = section.settings.show_slideshow -%}
+{%- assign _hide_mobile = section.settings.hide_mobile -%}
+{%- assign _slideshow_height = section.settings.slideshow_height -%}
+{%- assign _lazyload = settings.use_lazyload -%}
+{%- assign _layout = section.settings.layout -%}
+{%- assign _background_color = section.settings.background -%}
+
+{%- assign _autoplay = section.settings.autoplay -%}
+{%- assign _autoplay_speed = section.settings.autoplay_speed | time: 1000 -%}
+{%- assign _animation = section.settings.animation -%}
+
+{%- assign _navigator = section.settings.navigator -%}
+{%- assign _paging = section.settings.paging -%}
+
+{% unless settings.left_column_style == 'none' %}
+  {%- assign _have_left_column = true -%}
+{% else %}
+  {%- assign _have_left_column = false -%}
+{% endunless %}
+
+{% capture emptyImage %}
+  <div class="image no-image">
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  </div>
+{% endcapture %}
+
+{% if _show_slideshow %}
+<div class="slideshow-01 slideshow-catalog-wrapper{% if section.settings.enable_three_banner %} sidebar-banner{% endif %}" data-section-type="slideshow" data-section-id="{{ section.id }}">
+  <div class="bc-wrapper {{ _slideshow_height }} {{ _layout }}{% if _hide_mobile %} d-none d-md-block{% endif %}" style="background-color: {{ _background_color }};">
+      
+    <div class="bc-home-slideshow{% if section.settings.fix_text_box_position %} fix-textbox{% endif %}">
+      {% if section.blocks.size > 0 %}
+        <div class="home-slideshow-wrapper home-slideshow-wrapper-{{ section.id }} swiper-container swiper-container-1" data-autoplay="{{ _autoplay }}" data-time="{{ _autoplay_speed }}" data-animation="{{ _animation }}">
+          <div class="home-slideshow swiper-wrapper">
+
+            {% for block in section.blocks %}
+                {%- assign link = block.settings.link -%}
+                {%- assign textAlign = block.settings.alignment -%}
+                {%- assign position = block.settings.position -%}
+                {%- assign horizontal_position = block.settings.horizontal_position -%}
+            
+                {%- assign headingText = block.settings.heading -%}
+                {%- assign headingBoldText = block.settings.heading_bold -%}
+                {%- assign headingAnimation = block.settings.heading_animation -%}
+                {%- assign headingAnimationDelay = block.settings.heading_animation_delay -%}
+                {%- assign headingColor = block.settings.heading_color -%}
+                {%- assign headingSize = block.settings.heading_size -%}
+            
+                {%- assign subheadingText = block.settings.subheading -%}
+                {%- assign subheadingBoldText = block.settings.subheading_bold -%}
+                {%- assign subheadingAnimation = block.settings.subheading_animation -%}
+                {%- assign subheadingAnimationDelay = block.settings.subheading_animation_delay -%}
+                {%- assign subheadingColor = block.settings.subheading_color -%}
+                {%- assign subheadingSize = block.settings.subheading_size -%}
+            
+                {%- assign captionText = block.settings.caption -%}
+                {%- assign captionBoldText = block.settings.caption_bold -%}
+                {%- assign captionAnimation = block.settings.caption_animation -%}
+                {%- assign captionAnimationDelay = block.settings.caption_animation_delay -%}
+                {%- assign captionColor = block.settings.caption_color -%}
+                {%- assign captionSize = block.settings.caption_size -%}
+            
+                {%- assign buttonText = block.settings.button_text -%}              
+                {%- assign buttonAnimation = block.settings.button_animation -%}
+                {%- assign buttonAnimationDelay = block.settings.button_animation_delay -%}
+                {%- assign image_width = '[1024, 1366, 1920, 2048]' -%}
+            
+                {% if headingText == blank  and subheadingText == blank  and captionText == blank  and buttonText == blank %}
+                  {%- assign _has_text = false -%}
+                {% else %}
+                  {%- assign _has_text = true -%}
+                {% endif %}
+
+                {% unless block.type == 'product' %}
+                  {% if block.type == 'image'  %}
+                    {% include 'slideshow-image' %}
+
+                  {% else %}
+                    {% include 'slideshow-video' %}
+
+                  {% endif %}  
+                {% endunless %}
+
+            {% endfor %}
+
+          </div>
+
+          {% for block in section.blocks %}
+            {% if block.type == 'product' %}
+              {% include 'slideshow-product' %}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="btn-pagination">
+          {% if _paging %}
+            <div class="swiper-pagination swiper-pagination-01 swiper-pagination-white"></div>
+          {% endif %}
+
+          {% if _navigator %}
+            <div class="swiper-button-next swiper-button-next-01 swiper-button-white">
+              {%- render 'theme-icon', type: 'left-open-mini' -%}
+            </div>
+            <div class="swiper-button-prev swiper-button-prev-01 swiper-button-white">
+              {%- render 'theme-icon', type: 'right-open-mini' -%}
+            </div>
+          {% endif %}
+        </div>
+
+        <script>
+          jQuery(document).ready(function($) {
+            
+            var _sections = new theme.Sections();
+            _sections.register('slideshow',function(){
+              if(jQuery('.slideshow-01 .home-slideshow-wrapper-{{ section.id }}').length){
+                jQuery('.slideshow-01 .home-slideshow-wrapper-{{ section.id }}').each(function(index,value){
+
+                  let _delay_time = jQuery(value).data('time') * 1000;
+                  let _animation = jQuery(value).data('animation');
+
+                  let swiper = new Swiper('.swiper-container-1', {
+                    {% if _autoplay %}
+                      autoplay: {
+                        delay: _delay_time,
+                        disableOnInteraction: false,
+                      },
+                    {% endif %}
+                    loop: true,
+                    pagination: {
+                      el: '.swiper-pagination-01',
+                      clickable: true
+                    },
+                    navigation: {
+                      nextEl: '.swiper-button-next-01',
+                      prevEl: '.swiper-button-prev-01',
+                    },
+                    spaceBetween: 0,
+                    effect: _animation,
+                    {% case section.settings.animation %}
+                      {% when 'cube' %}
+                        cubeEffect: {
+                          slideShadows: false
+                        },
+                      {% when 'coverflow' %}
+                        coverflowEffect: {
+                          rotate: 30,
+                          slideShadows: false
+                        },
+                      {% when 'flip' %}
+                        flipEffect: {
+                          rotate: 30,
+                          slideShadows: false
+                        },
+                      {% else %}
+                    {% endcase %}
+                    setWrapperSize: false,
+                    on: {
+                      imagesReady: function (swiper) {
+                        $('.home-slideshow').find('.swiper-slide').each(function(){
+                          let _this = $(this);
+                          _this.find('.video-slide').show();
+                          
+                          if (!_this.find('.video-slide').data('full-height')) {
+                            _this.find('.video-slide video').css({
+                            });
+                          }
+                          else{
+                            _this.find('.video-slide video').css({
+                              left: '50%',
+                              top: '50%',
+                              transform: 'translate(-50%, -50%)'
+                            });
+                          }
+                        });
+                      } 
+                    }
+                  });
+                });
+              }
+            });
+            
+          });
+        </script>
+
+      {% else %}
+
+        <div class="home-slideshow-wrapper swiper-container">
+          <div class="home-slideshow swiper-wrapper">
+
+            <div class="swiper-slide">
+              {{ emptyImage }}
+            </div>
+
+          </div>
+        </div>
+
+      {% endif %}
+    </div>
+    
+    <style>
+      @media (min-width: 1200px) {
+        .fix-height .bc-home-slideshow {
+          height: {{ section.settings.manually_height }}px;
+        }
+      }
+    </style>
+
+    {% if section.settings.enable_three_banner %}
+      {%- assign _three_banner_style = section.settings.three_banner_style -%}
+      {%- assign _bg_color = section.settings.three_image_bg_color -%}
+      <div class="bc-three-banner style-{{ _three_banner_style }}">
+
+        {% for i in (1..3) %}
+          {%- assign _three_image = 'three_image_' | append: i -%}
+
+          {% unless section.settings[_three_image] == blank %}
+            {%- assign _three_text = 'three_text_' | append: i -%}
+            {%- assign _three_button = 'three_button_' | append: i -%}
+            {%- assign _three_link = 'three_link_' | append: i -%}
+
+            <div class="bc-item">
+              <div class="bc-item-inner" style="background: {{ _bg_color  }};">
+                <div class="bc-item-left">
+                  <a href="{{ section.settings[_three_link] }}">
+                    <img src="{{ section.settings[_three_image] | img_url: '140x' }}'" alt="Banner" />
+                  </a>
+                </div>
+
+                <div class="bc-item-body">
+                  {% unless section.settings[_three_text] == blank %}
+                    <div class="bc-item-text"><a href="{{ section.settings[_three_link] }}">{{ section.settings[_three_text] }}</a></div>
+                  {% endunless %}
+                  {% unless section.settings[_three_button] == blank %}
+                    <a class="bc-item-" href="{{ section.settings[_three_link] }}">{{ section.settings[_three_button] }}</a>
+                  {% endunless %}
+                </div>
+              </div>
+            </div>
+            
+          {% endunless %}
+        {% endfor %}
+
+      </div>
+    {% endif %}
+    
+  </div>
+</div>
+{% endif %}
